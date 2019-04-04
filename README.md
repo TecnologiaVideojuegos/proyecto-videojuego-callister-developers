@@ -10,3 +10,4 @@
     - 27/03 Subida de achivos que compondran el esqueleto del videojuego
     - 28/03 Adición del documento de diseño al documento "Story Board" facilmente accesible a traves del esquema que documento
     - 31/03 Adición de Sprites de "Pantalla de Batalla" de Personaje Principal
+    - 04/04 Adición de varios mapas
