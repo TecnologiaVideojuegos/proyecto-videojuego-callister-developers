@@ -196,9 +196,6 @@
   <object id="458" gid="846" x="44" y="396" width="32" height="32"/>
   <object id="459" gid="829" x="212" y="467" width="32" height="32"/>
   <object id="461" gid="684" x="228" y="477" width="32" height="32"/>
-  <object id="466" x="320" y="378" width="65" height="59">
-   <ellipse/>
-  </object>
   <object id="483" gid="2551" x="147.25" y="323.977" width="32" height="32" rotation="-291.498"/>
   <object id="484" gid="2551" x="206.25" y="224.977" width="32" height="32" rotation="-291.498"/>
   <object id="485" gid="2551" x="179.25" y="287.977" width="32" height="32" rotation="-291.498"/>
@@ -223,8 +220,8 @@
   <object id="508" gid="215" x="175" y="286" width="32" height="32"/>
   <object id="509" gid="215" x="59" y="297" width="32" height="32"/>
   <object id="510" gid="215" x="62" y="180" width="32" height="32"/>
-  <object id="511" gid="215" x="311" y="439" width="32" height="32"/>
-  <object id="512" gid="215" x="329" y="432" width="32" height="32"/>
+  <object id="511" gid="215" x="326" y="436" width="32" height="32"/>
+  <object id="512" gid="215" x="315" y="427" width="32" height="32"/>
   <object id="513" gid="215" x="422" y="109" width="32" height="32"/>
   <object id="514" gid="215" x="422" y="109" width="32" height="32"/>
   <object id="515" gid="215" x="438" y="144" width="32" height="32"/>
@@ -271,7 +268,7 @@
   <object id="563" gid="829" x="408" y="341" width="32" height="32"/>
   <object id="564" gid="828" x="378" y="341" width="32" height="32"/>
   <object id="565" gid="827" x="354" y="341" width="32" height="32"/>
-  <object id="566" gid="812" x="390" y="356" width="32" height="32"/>
+  <object id="566" gid="812" x="313" y="438" width="32" height="32"/>
   <object id="567" gid="753" x="60" y="89" width="32" height="32"/>
   <object id="568" gid="753" x="65" y="105" width="32" height="32"/>
   <object id="569" gid="753" x="85" y="87" width="32" height="32"/>
