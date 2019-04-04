@@ -114,12 +114,6 @@
   <object id="216" gid="600" x="107" y="290" width="32" height="32"/>
   <object id="217" gid="2265" x="230" y="76" width="32" height="32"/>
   <object id="219" gid="2216" x="157" y="200" width="32" height="32"/>
-  <object id="224" x="0" y="122">
-   <polygon points="0,0 72,-30 82,-57 226,-58 243,-52 261,-58 263,-66 264,-76 289,-75 292,-58 305,-46 320,-52 320,4 286,5 254,24 256,93 302,120 298,155 264,182 257,195 320,197 319,-124 -1,-122"/>
-  </object>
-  <object id="225" x="7" y="139">
-   <polygon points="0,0 88,3 92,24 60,28 59,76 30,96 31,124 43,137 64,124 78,121 94,137 120,121 147,130 162,132 171,142 173,167 80,181 -8,179 -9,-1"/>
-  </object>
  </objectgroup>
  <objectgroup id="3" name="Capa de Objetos 2">
   <object id="66" gid="1850" x="89" y="304" width="32" height="32" rotation="6"/>
@@ -150,8 +144,5 @@
   <object id="211" gid="417" x="290" y="170" width="32" height="32"/>
   <object id="220" gid="2200" x="4" y="161" width="25" height="27"/>
   <object id="222" gid="2199" x="5.18041" y="190.506" width="32" height="32" rotation="-22.1177"/>
-  <object id="227" x="165" y="172">
-   <polygon points="0,0 -5,17 8,25 20,16 20,-2"/>
-  </object>
  </objectgroup>
 </map>

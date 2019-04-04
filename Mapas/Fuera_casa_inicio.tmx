@@ -199,15 +199,6 @@
   <object id="466" x="320" y="378" width="65" height="59">
    <ellipse/>
   </object>
-  <object id="480" x="320" y="231">
-   <polygon points="0,0 159,58 160,-230 64,-231 70,-141 132,-91 115,-69 14,-38"/>
-  </object>
-  <object id="481" x="246" y="159">
-   <polygon points="0,0 -59,-18 -133,-15 -244,41 -245,-160 -183,-160 73,-159 70,-124 50,-121 11,-92 -27,-73 -43,-89 -25,-104 -25,-135 -117,-147 -213,-133 -229,-59 -186,-33 -147,-40 -71,-46 -25,-38 11,-26 12,-7 9,0"/>
-  </object>
-  <object id="482" x="268" y="477">
-   <polygon points="0,0 -15,-29 -40,-41 -56,-67 -116,-127 -236,-124 -269,-94 -268,1"/>
-  </object>
   <object id="483" gid="2551" x="147.25" y="323.977" width="32" height="32" rotation="-291.498"/>
   <object id="484" gid="2551" x="206.25" y="224.977" width="32" height="32" rotation="-291.498"/>
   <object id="485" gid="2551" x="179.25" y="287.977" width="32" height="32" rotation="-291.498"/>
@@ -328,21 +319,6 @@
   <object id="611" gid="753" x="-2" y="122" width="32" height="32"/>
   <object id="612" gid="753" x="-8" y="145" width="32" height="32"/>
   <object id="613" gid="753" x="-8" y="152" width="32" height="32"/>
-  <object id="614" x="66" y="122">
-   <polygon points="0,0 59,-40 84,-109 -42,-89 -61,-13"/>
-  </object>
-  <object id="615" x="131" y="214">
-   <polygon points="0,0 46,10 70,-2 64,-23 1,-31"/>
-  </object>
-  <object id="616" x="71" y="258">
-   <polygon points="0,0 -10,26 15,37 56,14 54,-21"/>
-  </object>
-  <object id="617" x="189" y="373">
-   <polygon points="0,0 19,27 63,21 86,2 60,-29 19,-24"/>
-  </object>
-  <object id="618" x="359" y="329">
-   <polygon points="0,0 32,27 62,25 78,0 63,-23 7,-20"/>
-  </object>
   <object id="619" gid="938" x="114" y="441" width="32" height="32"/>
   <object id="620" gid="938" x="114" y="441" width="32" height="32"/>
  </objectgroup>
