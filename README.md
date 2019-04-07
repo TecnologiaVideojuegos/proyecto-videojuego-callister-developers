@@ -2,6 +2,7 @@
 ## By Callister Developers
 
 ### **Registro de cambios:**
+    - 07/04 Adición de menú principal y POO de items y estados 
     - 13/03 Adición de README.md, LICENSE, .gitignore
     - 15/03 Adición de prototipo de Personaje Principal
     - 16/03 Adición de StoryBoard prototipo
