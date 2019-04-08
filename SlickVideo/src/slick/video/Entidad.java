@@ -67,16 +67,12 @@ public class Entidad {
         animacion.draw(posicion.getX(), posicion.getY(), 34,52);
         //animacion.getImage(0).draw(10*32, 10*32);
         }
-        
         //animacion.getImage(animacion.getFrameCount()-1).draw(posicion.getX(), posicion.getY());
-        
     }
     
      
     
      public void actualizar(Input entrada,boolean[]paredes ) throws SlickException{
-//        
-//        
 //        boolean t=true;
 //        int[] a={0, 0};
 //        if(entrada.isKeyDown(Input.KEY_UP)){
@@ -88,10 +84,7 @@ public class Entidad {
 //            }else{
 //                velocidad=new Vector(new Punto(0, -300));
 //            }
-//            
 //            animacion=arriba;
-//           
-//     
 //     }else if(entrada.isKeyDown(Input.KEY_DOWN)){
 //         
 //        if (paredes[2]){
@@ -137,9 +130,7 @@ public class Entidad {
 //            
 //            }
 //
-//        //animacion.addFrame(sprite.getSprite(estadoSprite[aux], direccion), 150);
-//                    
-//                    
+//        //animacion.addFrame(sprite.getSprite(estadoSprite[aux], direccion), 150);          
         }
      
      
@@ -176,19 +167,19 @@ public class Entidad {
     
     public void genHitPerades(){
         
-        hitParedes[0]=new Rectangle(posicion.getX(),posicion.getY()-2, 34, 2);
-        hitParedes[1]=new Rectangle(posicion.getX()+34,posicion.getY(), 2, 52);
-        hitParedes[2]=new Rectangle(posicion.getX(),posicion.getY()+52, 34, 2);
-        hitParedes[3]=new Rectangle(posicion.getX()-2,posicion.getY(), 2, 52);
+        hitParedes[0]=new Rectangle(posicion.getX(),posicion.getY(), 31, 2);
+        hitParedes[1]=new Rectangle(posicion.getX()+31,posicion.getY(), 2, 52/2);
+        hitParedes[2]=new Rectangle(posicion.getX(),posicion.getY()+52, 31, 2);
+        hitParedes[3]=new Rectangle(2+posicion.getX(),posicion.getY(), 2, 52/2);
         
     }
     
     
     public void acHitPar(){
-        hitParedes[0].setLocation(posicion.getX(),posicion.getY()-2);
-        hitParedes[1].setLocation(posicion.getX()+34,posicion.getY());
+        hitParedes[0].setLocation(posicion.getX(),posicion.getY()-2+52/2);
+        hitParedes[1].setLocation(posicion.getX()+29,posicion.getY()+52/2);
         hitParedes[2].setLocation(posicion.getX(),posicion.getY()+52);
-        hitParedes[3].setLocation(posicion.getX()-2,posicion.getY());
+        hitParedes[3].setLocation(posicion.getX(),posicion.getY()+52/2);
     }
     
     public Rectangle[] getHitParedes() {

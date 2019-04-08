@@ -1,5 +1,6 @@
 package slick.video;
 
+import MenuPrincipal.m2;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -24,6 +25,7 @@ public class Principal extends StateBasedGame{
     @Override
     public void initStatesList(GameContainer gc) throws SlickException {
         this.addState(new Juego());
+        this.addState(new m2());
     }
     
 }

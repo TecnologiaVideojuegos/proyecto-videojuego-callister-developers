@@ -7,6 +7,7 @@ package slick.video;
 
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 
 /**
  *
@@ -14,11 +15,12 @@ import org.newdawn.slick.SlickException;
  */
 public class Protagonista extends Entidad{
     
-
+    private static Protagonista Lucia=null;
     
     
 public Protagonista(float x, float y, String ruta) throws SlickException {
     super(x, y, ruta);
+    Lucia=this;
 }
 
     
@@ -94,4 +96,14 @@ public void actualizar(Input entrada,boolean[]paredes ) throws SlickException{
         
  
     }
+
+
+    public static Protagonista getProta(){
+        return Lucia;
+    }
+
+
+
+
+
 }

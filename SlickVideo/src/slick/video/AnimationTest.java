@@ -1,5 +1,6 @@
 package slick.video;
 
+import java.util.ArrayList;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -18,6 +19,7 @@ import org.newdawn.slick.SpriteSheet;
 public class AnimationTest extends BasicGame {
 	/** The animation loaded */
 	private Animation animation;
+        private ArrayList<Animation> moverse;
 	/** The limited animation loaded */
 	private Animation limited;
 	/** The manual update animation loaded */
@@ -42,21 +44,29 @@ public class AnimationTest extends BasicGame {
 	public void init(GameContainer container) throws SlickException {
 		this.container = container;
 		
-		SpriteSheet sheet = new SpriteSheet("C:\\Users\\victo\\Desktop\\Pruebas\\Lucia.png", 34, 52);
+		SpriteSheet sheet = new SpriteSheet("resources/Kato2.png",54 , 54);
 		animation = new Animation();
-		for (int i=0;i<4;i++) {
-                    for (int j=0;j<3;j++){
-			animation.addFrame(sheet.getSprite(j,i), 150);
-                    }
-		}
+                moverse=new ArrayList();
+		moverse.add(new Animation());
+                moverse.add(new Animation());
+                moverse.add(new Animation());
+                moverse.add(new Animation());
+                for (int j=0;j<7;j++){
+                    moverse.get(0).addFrame(sheet.getSprite(j,0), 125);
+                }
+                
+		for (int j=0;j<3;j++){
+                    moverse.get(1).addFrame(sheet.getSprite(j,1), 150);
+                }
+
 		limited = new Animation();
 		for (int i=0;i<3;i++) {
-			limited.addFrame(sheet.getSprite(i,0), 150);
+			moverse.get(2).addFrame(sheet.getSprite(i,2), 150);
 		}
 		limited.stopAt(7);
 		manual = new Animation(false);
-		for (int i=0;i<3;i++) {
-			manual.addFrame(sheet.getSprite(i,0), 150);
+		for (int i=0;i<7;i++) {
+			moverse.get(3).addFrame(sheet.getSprite(i,0), 125);
 		}
 		pingPong = new Animation(sheet, 0,0,2,0,true,150,true);
 		pingPong.setPingPong(true);
@@ -67,11 +77,13 @@ public class AnimationTest extends BasicGame {
 	 * @see org.newdawn.slick.BasicGame#render(org.newdawn.slick.GameContainer, org.newdawn.slick.Graphics)
 	 */
 	public void render(GameContainer container, Graphics g) {
-		g.drawString("Space to restart() animation", 100, 50);
-		g.drawString("Til Limited animation: "+start, 100, 500);
-		g.drawString("Hold 1 to move the manually animated", 100, 70);
-		g.drawString("PingPong Frame:"+pingPong.getFrame(), 600, 70);
-		
+//		g.drawString("Space to restart() animation", 100, 50);
+//		g.drawString("Til Limited animation: "+start, 100, 500);
+//		g.drawString("Hold 1 to move the manually animated", 100, 70);
+//		g.drawString("PingPong Frame:"+pingPong.getFrame(), 600, 70);
+		for(int i=0;i<4;i++){
+                    moverse.get(i).draw(54*4*i, 0, 54*4, 54*4);
+                }
 		g.scale(-1,1);
 		//animation.draw();
 		animation.draw(-32*4, 32*4, 34,52);

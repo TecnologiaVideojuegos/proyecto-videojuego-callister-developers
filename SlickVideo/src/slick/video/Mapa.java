@@ -82,7 +82,7 @@ public class Mapa extends TiledMap {
                        int[] coord={j+x/32,i+y/32};
                        paredes.add(coord);
                        
-                       System.out.println("Pared"+ " detectadada en "+paredes.get(paredes.size()-1)[0] + " "+paredes.get(paredes.size()-1)[1]);
+                       //System.out.println("Pared"+ " detectadada en "+paredes.get(paredes.size()-1)[0] + " "+paredes.get(paredes.size()-1)[1]);
                    }//else System.out.println("Pared no detectada en "+j + " "+i);   
                
             }

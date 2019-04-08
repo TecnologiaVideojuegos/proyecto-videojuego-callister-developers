@@ -5,6 +5,7 @@
  */
 package slick.video;
 
+import MenuPrincipal.MenuPrincipal;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -28,7 +29,8 @@ public class Juego extends BasicGameState{
     private float rendery;
     private float posinix;
     private float posiniy;
-    
+    private MenuPrincipal menu;
+    private boolean m;
     
     
     public Juego() {
@@ -38,7 +40,7 @@ public class Juego extends BasicGameState{
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-        mapa=new Mapa("resources/Pruebas_Tuto.tmx", "/resources");
+        mapa=new Mapa("resources/Mapas/PRUEBA.tmx", "/resources/Mapas");
         posinix=32*9+3;
         posiniy=32*9+3;
         lucia=new Protagonista(posinix, posiniy, "resources/Lucia.png");
@@ -48,34 +50,49 @@ public class Juego extends BasicGameState{
         renderx=0;
         rendery=0;
         this.entrada = gc.getInput();
-        
+        menu=new MenuPrincipal();
+        m=false;
+        System.out.println("init");
         
     }   
 
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-        int objectLayer=mapa.getLayerIndex("Objetos");
-        mapa.getTileId(0, 0, objectLayer);//ID de el objeto
-        int[] a=new int[4]; 
-        lucia.update(delta, entrada, colisionPared(lucia));
-        renderx=posinix-lucia.getPosicion().getX();
-        rendery=posiniy-lucia.getPosicion().getY();
-        mapa.moverParedes(0,0);
+        if(m){
+           
+           updateMenu(gc);
+        }else{
+            
+            int objectLayer=mapa.getLayerIndex("Objetos");
+            mapa.getTileId(0, 0, objectLayer);//ID de el objeto
+            int[] a=new int[4]; 
+            lucia.update(delta, entrada, colisionPared(lucia));
+            renderx=posinix-lucia.getPosicion().getX();
+            rendery=posiniy-lucia.getPosicion().getY();
+            mapa.moverParedes(0,0);
+            inputs(entrada, sbg);
+            
+        }
     }
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
-        
-        grphcs.translate(renderx,rendery);
-        mapa.render(0, 0);
-        lucia.draw();
-        grphcs.draw(lucia.getHitbox());
-        for(int i=0;i<mapa.getHitBoxes().size()-1;i++){
+        if(m){
+            menu.render();
+        }else{
+            grphcs.translate(renderx,rendery);
+            mapa.render(0, 0);
+            lucia.draw();
+//        grphcs.draw(lucia.getHitbox());
+        for(int i=0;i<mapa.getHitBoxes().size();i++){
             grphcs.draw(mapa.getHitBoxes().get(i));
         }
         for(int i=0;i<4;i++){
             grphcs.draw(lucia.getHitParedes()[i]);
         }
+        }
+        
+        
     }
 
     @Override
@@ -130,8 +147,19 @@ public class Juego extends BasicGameState{
         
         return pasar;
     }
+    
+    private void inputs(Input input, StateBasedGame sbg){
+        if(input.isKeyPressed(Input.KEY_M)){
+            //m=true;
+            sbg.enterState(1);
+            sbg.getState(1);
+        }
+    }
    
-
+    private void updateMenu(GameContainer gc) throws SlickException{
+        menu.update(gc); 
+        m=menu.accion(entrada);
+    }
     
     
 }
