@@ -3,14 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/victo/Desktop/Pruebas/Slick%20Video/src/slick/video/Punto.java</file>
-            <file>file:/C:/Users/victo/Desktop/Pruebas/Slick%20Video/src/slick/video/Vector.java</file>
-            <file>file:/C:/Users/victo/Desktop/Pruebas/Slick%20Video/src/slick/video/Entidad.java</file>
-            <file>file:/C:/Users/victo/Desktop/Pruebas/Slick%20Video/src/slick/video/Protagonista.java</file>
-            <file>file:/C:/Users/victo/Desktop/Pruebas/Slick%20Video/src/slick/video/Mapa.java</file>
-            <file>file:/C:/Users/victo/Desktop/Pruebas/Slick%20Video/src/slick/video/Juego.java</file>
-            <file>file:/C:/Users/victo/Desktop/Pruebas/Slick%20Video/src/slick/video/AnimationTest.java</file>
-            <file>file:/C:/Users/victo/Desktop/Pruebas/Slick%20Video/src/slick/video/Principal.java</file>
+            <file>file:/C:/Users/victo/Desktop/Pruebas/SlickVideo/src/MenuPrincipal/res/Inventario.png</file>
+            <file>file:/C:/Users/victo/Desktop/Pruebas/SlickVideo/src/slick/video/Principal.java</file>
+            <file>file:/C:/Users/victo/Desktop/Pruebas/SlickVideo/src/MenuPrincipal/MenuPrincipal.java</file>
+            <file>file:/C:/Users/victo/Desktop/Pruebas/SlickVideo/src/slick/video/Entidad.java</file>
+            <file>file:/C:/Users/victo/Desktop/Pruebas/SlickVideo/src/MenuPrincipal/res/cursor.png</file>
+            <file>file:/C:/Users/victo/Desktop/Pruebas/SlickVideo/src/MenuPrincipal/res/Fabricacion.png</file>
+            <file>file:/C:/Users/victo/Desktop/Pruebas/SlickVideo/src/itemsjuego/Main.java</file>
+            <file>file:/C:/Users/victo/Desktop/Pruebas/SlickVideo/src/MenuPrincipal/res/Equipo.png</file>
+            <file>file:/C:/Users/victo/Desktop/Pruebas/SlickVideo/src/slick/video/Protagonista.java</file>
+            <file>file:/C:/Users/victo/Desktop/Pruebas/SlickVideo/src/slick/video/AnimationTest.java</file>
+            <file>file:/C:/Users/victo/Desktop/Pruebas/SlickVideo/src/itemsjuego/Objeto.java</file>
+            <file>file:/C:/Users/victo/Desktop/Pruebas/SlickVideo/src/MenuPrincipal/res/Salir.png</file>
+            <file>file:/C:/Users/victo/Desktop/Pruebas/SlickVideo/src/MenuPrincipal/res/fondo.jpg</file>
+            <file>file:/C:/Users/victo/Desktop/Pruebas/SlickVideo/src/slick/video/Juego.java</file>
+            <file>file:/C:/Users/victo/Desktop/Pruebas/SlickVideo/src/MenuPrincipal/res/fondo.png</file>
+            <file>file:/C:/Users/victo/Desktop/Pruebas/SlickVideo/src/MenuPrincipal/m2.java</file>
+            <file>file:/C:/Users/victo/Desktop/Pruebas/SlickVideo/src/slick/video/Mapa.java</file>
+            <file>file:/C:/Users/victo/Desktop/Pruebas/SlickVideo/src/itemsjuego/Pociones.java</file>
+            <file>file:/C:/Users/victo/Desktop/Pruebas/SlickVideo/src/MenuPrincipal/Punto.java</file>
         </group>
     </open-files>
 </project-private>
