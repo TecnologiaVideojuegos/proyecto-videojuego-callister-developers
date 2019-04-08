@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="1">
+ <tileset firstgid="1" source="ChaosChild.tsx"/>
+ <layer id="1" name="Capa de Patrones 1" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3DAQkAAAwDoD3d+jdajoOCvaSqqqqqqqqqqqr6/ACcP/PyECcAAA==
+  </data>
+ </layer>
+ <layer id="3" name="Objetos" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3PQQqAIBAFUMEjpl2k7Py1cBFT1CqQeA8+M3xdaEoAAAAA8D81pzT31DDjHruRtOM9W08LM+6xG8mU71Ne+jLYP5Z8zZqfz853AAAAAPjWDhLRyNsQJwAA
+  </data>
+ </layer>
+ <layer id="5" name="Ventanas" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3KsQ0AIAzAMMoA/z8Jb/BApU4gBnuM0hoAAAAAwBs78r6ifn4ye95Hrx8AAAAA7jkJCDAlECcAAA==
+  </data>
+ </layer>
+ <layer id="4" name="Puerta" width="50" height="50">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACu3PAQkAMAwEsYf5lzWorJoYlI5EwV0CAAAAADCjznTBG/eTDwAAAIDtGiHMVZsQJwAA
+  </data>
+ </layer>
+</map>
