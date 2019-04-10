@@ -1,9 +1,0 @@
-Franja horizontal: 
-	anchura: 327px 357px
-	separacion 1 px 
-Franga superior:
-	altura: 0 px a 327 px
-	anchura: 132px a 174 px
-Franga inferior:
-	altura: 357px a 684px
-	anchura: 132px a 174 px
