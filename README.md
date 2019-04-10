@@ -12,3 +12,4 @@
     - 28/03 Adición del documento de diseño al documento "Story Board" facilmente accesible a traves del esquema que documento
     - 31/03 Adición de Sprites de "Pantalla de Batalla" de Personaje Principal
     - 04/04 Adición de varios mapas
+    - 10/04 Subido el esqueleto del codigo, la clase entidad y el movimiento del protagonista, añadida nueva historia, y algunos datos de combate
