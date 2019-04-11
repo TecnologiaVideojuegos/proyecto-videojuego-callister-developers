@@ -61,7 +61,7 @@ public class Juego extends BasicGameState{
         Lucia.draw();
         geobro.draw();
         for(int i=0;i<4;i++){
-            grphcs.draw(geobro.getHitParedes()[i]);
+            grphcs.draw(Lucia.getHitParedes()[i]);
         }
         for(int i=0;i<mapa.getHitBoxes().size();i++){
             grphcs.draw(mapa.getHitBoxes().get(i));

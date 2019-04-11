@@ -5,14 +5,25 @@
  */
 package itemsjuego;
 
+import org.newdawn.slick.Image;
+
 /**
  *
  * @author ceals
  */
 public abstract class Objeto {
     
+    private Image imagen;
+
+    public Objeto(Image imagen) {
+        this.imagen = imagen;
+    }
+    
+    
     
     public void verImagen(){
         
     }
+    
+    
 }

@@ -11,4 +11,11 @@ package entidades;
  */
 public class Aliado {
     
+    
+    public void cMana(int m){
+        
+    }
+    public void cVida(int v){
+        
+    }
 }

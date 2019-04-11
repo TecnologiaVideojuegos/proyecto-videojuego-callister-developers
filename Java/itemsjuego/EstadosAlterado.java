@@ -1,8 +1,11 @@
 package itemsjuego;
 
+import org.newdawn.slick.Image;
+
 public class EstadosAlterado extends Objeto {
     protected String estado;
-    public EstadosAlterado(String estado){
+    public EstadosAlterado(String estado, Image imagen){
+        super(imagen);
         this.estado=estado;
     }
 

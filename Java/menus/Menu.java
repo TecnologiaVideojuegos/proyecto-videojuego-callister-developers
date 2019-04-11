@@ -8,6 +8,7 @@ package menus;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import chaoschild.Punto;
+import entidades.Lucia;
 
 
 
@@ -21,6 +22,7 @@ public class Menu extends BasicGameState {
     private int indicador;
     private Punto p;
     private Punto renderMenu;
+    private Lucia Lucia;
     
     
     @Override
@@ -30,6 +32,7 @@ public class Menu extends BasicGameState {
 
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException {
+        this.Lucia=Lucia.getLucia();
         fondo=new Image("resources/Menus/fondo.jpg");
         botonInventario=new Image("resources/Menus/inventario.png");
         botonEquipo=new Image("resources/Menus/Equipo.png");
@@ -57,6 +60,11 @@ public class Menu extends BasicGameState {
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         
         Input entrada=container.getInput();
+        cEntrada(entrada, game);
+        
+    }
+    
+    public void cEntrada(Input entrada, StateBasedGame game){
         if (entrada.isKeyPressed(Input.KEY_S)){
             if(indicador!=3){
                 p.setY(p.getY()+70);
@@ -87,5 +95,6 @@ public class Menu extends BasicGameState {
             
         }
     }
+    
     }
     

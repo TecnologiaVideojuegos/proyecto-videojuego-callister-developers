@@ -8,6 +8,7 @@ package entidades;
 import chaoschild.Punto;
 import chaoschild.Vector;
 import itemsjuego.Objeto;
+import itemsjuego.PocionVPequeña;
 import java.util.ArrayList;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
@@ -25,6 +26,7 @@ public class Lucia extends Entidad{
     private int ancho, alto;
     public Lucia(int x, int y) throws SlickException {
         super("resources/Personajes/Lucia/Lucia.png", 52, 34, 4);
+        
         ancho=34;
         alto=54;
         super.setPosicion(new Punto(x, y));
@@ -32,6 +34,7 @@ public class Lucia extends Entidad{
         int[] frames={3,3,3,3};
         super.animaciones(frames);
         inventario=new ArrayList();
+        inventario.add(new PocionVPequeña());
     }
     
     
