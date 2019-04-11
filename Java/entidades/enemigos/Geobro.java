@@ -18,7 +18,7 @@ public class Geobro extends Enemigo{
         super("resources/Enemigos/Geobro/Geobro.png", 54, 54, 4);
         
         super.setPosicion(new Punto(x,y));
-        super.genHitboxes(new Punto(super.getPosicion().getX()+2, super.getPosicion().getY()+(52-24)), 24, 24);
+        super.genHitboxes(new Punto(super.getPosicion().getX()+9, super.getPosicion().getY()+(30)), 54-18, 24);
         int[] frames={4,4,4,4};
         super.animaciones(frames);
     }
