@@ -160,7 +160,9 @@ public class Entidad {
         return velocidad;
     }
     
-    
+    public Entidad getEnt(){
+        return this;
+    }
     
     }
     

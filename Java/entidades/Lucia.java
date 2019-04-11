@@ -87,4 +87,9 @@ public class Lucia extends Entidad{
         
     }
     
+    @Override
+    public Punto getPosicion(){
+        return super.getPosicion();
+    }
+    
 }

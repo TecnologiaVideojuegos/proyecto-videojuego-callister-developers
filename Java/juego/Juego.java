@@ -5,7 +5,9 @@
  */
 package juego;
 
+import entidades.Entidad;
 import entidades.Lucia;
+import entidades.enemigos.Geobro;
 import mapas.Mapa;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -30,6 +32,7 @@ public class Juego extends BasicGameState{
     private float rendery;
     private float posinix;
     private float posiniy;
+    private Geobro geobro;
     
     @Override
     public int getID() {
@@ -47,19 +50,22 @@ public class Juego extends BasicGameState{
         posiniy=Lucia.getPosicion().getY();
         renderx=0;
         rendery=0;
+        geobro=new Geobro(250, 250);
     }
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
+        
         grphcs.translate(renderx, rendery);
         mapa.render(0,0);
         Lucia.draw();
-//        for(int i=0;i<4;i++){
-//            grphcs.draw(Lucia.getHitParedes()[i]);
-//        }
-//        for(int i=0;i<mapa.getHitBoxes().size();i++){
-//            grphcs.draw(mapa.getHitBoxes().get(i));
-//        }
+        geobro.draw();
+        for(int i=0;i<4;i++){
+            grphcs.draw(geobro.getHitParedes()[i]);
+        }
+        for(int i=0;i<mapa.getHitBoxes().size();i++){
+            grphcs.draw(mapa.getHitBoxes().get(i));
+        }
         
     }
 
@@ -70,11 +76,12 @@ public class Juego extends BasicGameState{
         }
         comprobarInputs(gc,sbg);
         boolean[] pas={false};
-        Lucia.actualizar(gc.getInput(),colisionPared());
-        Lucia.update(i);
+        Lucia.actualizar(gc.getInput(),colisionPared(Lucia));
+        geobro.actualizar(colisionPared(geobro));
         renderx=posinix-Lucia.getPosicion().getX();
         rendery=posiniy-Lucia.getPosicion().getY();
-        
+        geobro.update(i);
+        Lucia.update(i);
     }
    
     
@@ -87,9 +94,9 @@ public class Juego extends BasicGameState{
         }
     }
     
-    public boolean[] colisionPared() throws SlickException{
-        Lucia lucia=Lucia.getLucia();
-        Rectangle[] hitbox=lucia.getHitParedes();
+    public boolean[] colisionPared(Entidad e) throws SlickException{
+        
+        Rectangle[] hitbox=e.getHitParedes();
         boolean[] pasar={true, true, true, true};
         
         for(int i =0;i<mapa.getHitBoxes().size();i++){
