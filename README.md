@@ -13,3 +13,4 @@
     - 31/03 Adición de Sprites de "Pantalla de Batalla" de Personaje Principal
     - 04/04 Adición de varios mapas
     - 10/04 Subido el esqueleto del codigo, la clase entidad y el movimiento del protagonista, añadida nueva historia, y algunos datos de combate
+    - 15/04 Adición de Sprites de pantalla de batalla, y modificación de "Lore e historia"
