@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="15" height="15" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="1">
+ <tileset firstgid="1" source="2.tsx"/>
+ <layer id="6" name="Puerta" width="15" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgIA5wAzEPkWpHwSiAgZlAPAuIZw+0QwYxAABaAgjyhAMAAA==
+  </data>
+ </layer>
+ <layer id="1" name="Background" width="15" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACi3LVXcOAAAA0E/3dI6JiZnOqZk8mB6HTXc3U9NtpjamO4/u7h42HVPjn7gP38N9vLkCgUBu8pCXfOSnAAUpRGGKUJRihFCcEpSkFKUpQ1nKUZ4KVKQSoVSmCmFUpRrVqUE4NalFbeoQQV0iqUd9GtCQRjSmCU1pRnNa0JIoWtGaNrSlHdG0J4YOdKQTnelC1+DpRnd6EEtPetGbPvSlH/2JYwADg3cQg4kngSEMZRjDGcFIRjGaMYxlHOOZwEQmMZkpTGUa05nBTGYxmznMZR6JzGcBC1nEYpJYwlKWsZwVrGQVq1nDWtaxng1sJJlNpLCZLWxlG9tJJY0d7CSdXexmD3vZx34OcJBDHOYIRznGcU5wklOc5iZnOMs5znOBi1ziMle4yjWucyP4bnGbO9zlHvd5wEMe8ZgnPOUZz3nBS16RwWve8JZMsnjHez7wkU985gtf+cZ3svnBT37xmz/k8Jd//Af69ngDhAMAAA==
+  </data>
+ </layer>
+ <layer id="2" name="ObjColisionables" width="15" height="15">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACp3OS0tCQRjG8ckSNOhmQQWVFZQLu1qtMk1rp/YVbFOt2nkJal3fooVFil2oRakZ2CJIXdSii+an6S8caBr0cPCBH4d5z/MO0yaEMKEdHTCLv1hgRac060I3etCLPtjQjwGpN4ghDEuzEYxiDHaMYwKTUmcK03CI/3FiBrOYwzwWsAgXlrCMFdE4q3BjDR54sQ4f/NjAZpPdegIIIoQtnZ7RhLHdYL6DXew12dvXuTOCKGKI40D6d4gjg287xonBbis5Vc4JnOFcO18giRSySOMSV7jGjda7xZ1y1z0ekNF2c3hEHk9Sr4BnZfcFr9pe/VtECWWl94Z3ZfaBT3zhGxVU8YOa0M8vygpwNYQDAAA=
+  </data>
+ </layer>
+</map>
