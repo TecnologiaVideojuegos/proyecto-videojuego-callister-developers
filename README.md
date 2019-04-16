@@ -14,4 +14,4 @@
     - 04/04 Adición de varios mapas
     - 10/04 Subido el esqueleto del codigo, la clase entidad y el movimiento del protagonista, añadida nueva historia, y algunos datos de combate
     - 15/04 Adición de Sprites de pantalla de batalla, de mapa "Antes_Cueva_Inicio", y modificación de "Lore e historia"
-    - 16/04 Adicion de mapa "Cueva_inicio"
+    - 16/04 Adicion de mapas "Cueva_inicio", "Mirador_ciudad" y mejora de mapas anteriores
