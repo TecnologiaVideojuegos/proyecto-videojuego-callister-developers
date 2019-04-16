@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="1">
+ <tileset firstgid="1" source="Mirador_ciudad.tsx"/>
+ <layer id="4" name="Background" width="30" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAChXVg7IYBgAAwRfbtm3btm3baGzbtm3btm2zQRsn3c7cfsMFCggICEwQghKM4IQgJKEITRjCEo7wRCAikYhMFKISjejEICaxiE0c4hKP+CQgIYlITBKSkozkpCAlqUhNGtKSjvRkICOZyEwWspKN7OQgJ7nITR7yko/8FKAghShMEYpSjOKUoCSlKE0ZylKO8lSgIpWoTBWqUo3q1KAmtahNHepSj/o0oCGNaEwTmtKM5rSgJa1oTRva0o72dKAjnehMF7rSje78RQ960ove9KEv/ejPAAYyiMEMYSjDGM4IRjKK0YxhLOMYzwQmMonJTGEq05jODGYyi9nMYS7zmM8CFrKIxSxhKctYzgpWsorVrGEt61jPBjayic1sYSvb2M4OdrKL3exhL/vYzwEOcojDHOEoxzjOCU5yitOc4SznOM8FLnKJy1zhKte4zg1ucovb3OEu97jPAx7yiMc84SnPeM4LXvKK17zhLe94z9984COf+Mw//MsXvvKN7/zgJ7/4zR8CAonABCEowQhOCEISitCEISzhCE8EIhKJyEQhKtGITgxiEovYxCEu8YhPAhKSiMQkISnJSE4KUpKK1KQhLelITwYykonMZCEr2chODnKSi9zkIS/5yE8BClKIwhShKMUoTglKUorSlKEs5ShPBSpSicpUoSrVqE4NalKL2tShLvWoTwMa0ojGNKEpzWhOC1rSita0oS3taE8HOtKJznShK93ozl/0oCe96E0f+tKP/gxgIIMYzBCGMozhjGAkoxjNGMYyjvFMYCKTmMwUpjKN6cxgJrOYzRzmMo/5LGAhi1jMEpayjOWsYCWrWM0a1rKO9WxgI5vYzBa2so3t7GAnu9jNHvayj/0c4CCHOMwRjnKM45zgJKc4zRnOco7zXOAil7jMFa5yjevc4Ca3uM0d7nKP+zzgIY94zBOe8oznvOAlr3jNG97yjvf8zQc+8onP/MO/fOEr3/jOD37yi9/84f/xByIwQQhKMIITgpCEIjRhCEs4whOBiEQiMlGISjSiE4OYxCI2cYhLPOKTgIQkIjFJSEoykpOClKQiNWlISzrSk4GMZCIzWchKNrKTg5zkIjd5yEs+8lOAghSiMEUoSjGKU4KSlKI0ZShLOcpTgYpUojJVqEo1qlODmvwHOY6quGAJAAA=
+  </data>
+ </layer>
+ <layer id="5" name="ObjColisionables" width="30" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACpXVVWxQVwAG4BYvWqAUirtTpLh7cbcp7s7ccLe5427bkA13d3d3d3f4WFiykO2BP+fLkXtu/uS+3MCAgIAoRCUa0YlBTGIRRGziEJd4xCcBwSQkEYkJIQmhJCUZYSQnBSlJRWrSkJZ0pCcDGclEZrKQlWxkJwc5yUU4uclDXvIRQX4KUJBCFKYIRSlGcUpQklKUpgxlKUd5KlCRSCpRmSpUpRrVqUFNalGbOtSlHvVpQEMa8QZv8hZv8w7v0pgmNKUZzWlBS1rRmja0pR3t6UBHOtGZLnSlG+/xPh/wIR/xMZ/wKZ/xOV/QnR70pBe96UNf+tGfAQxkEIMZwlCGMZwv+Yqv+YZv+Y7v+YEf+Ymf+YVfGcFIRjGaMYxlHOOZwEQmMZkpTGUa05nBb/zOH8xkFrOZw5/8xVzmMZ8FLGQRi1nCUpaxnBWsZBWrWcNa1rGeDWxkE5vZwla2sZ0d7GQXu9nDXvaxnwMc5BCHOcJRjnGcE5zkFKc5w1nOcZ4LXOQSl7nCVa5xnRvc5Ba3ucNd7nGfBzzkEY95wlOeERBoEIWoRCM6MYhJLIKITRziEo/4JCCYhCQiMSEkIZSkJCMsMODvpDCnJBWpSUNa0pGeDGQkE5nJQlaykZ0c5CQX4eQmD3nJRwT5KUBBCr3sLfJyfjWlnJemDGUpR3kqUJFIKlGZKlSlGtWpQU1qUZs61KXe/3T9Vxq724SmNKM5LWhJK1rThra0oz0d6EgnOtOFrnR7jd4X6e5+D3rSi970oS/96M8ABjKIwQxhKMMY/pp9/2SE90YyitGMYSzjGM8EJjKJyUxhKtOYzoxXemfaz2I2c/71bK71POazgIUsYjFLWMoylrOClaxiNWtYyzrWs4GNbGIzW9jKNrazg53sYjd72Ms+9nOAgxziMEc4yjGOc4KTnOI0ZzjLOc5zgYtc4jJXuMo1rnODm9ziNne4yz3u84CHPOIxT3jKsxffy48/kChEJRrRiUFMYhFEbOIQl3jEJwHBJCQRiQkhCaEkJRlhJCcFKUlFatKQlnSkJwMZyURmspCVbGQnBznJRTi5yUNe8hFBfgpQkEIUpghFKUZxSlCSUpSmDGUpR3kqUJFIKlGZKlSlGtWpQU1qUZs61KUe9WlAQxrxHM0pbxhgCQAA
+  </data>
+ </layer>
+ <layer id="6" name="Puerta" width="30" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjYBSMglEwCogH/YwDY+9aPPZuAcptHSB3jYJRgA0AAKY6JtNgCQAA
+  </data>
+ </layer>
+</map>
