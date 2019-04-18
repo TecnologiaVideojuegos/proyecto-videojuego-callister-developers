@@ -63,6 +63,10 @@ public class Entidad {
        
     }
     
+    public void drawCombate(){
+        animacion.draw(posicion.getX(), posicion.getY());
+    }
+    
     public void spriteMov(int direccion, int numFrames){//Direccion: 0 arriba, 1 derecha, 2 abajo, 3 izq
         Animation aux =new Animation(); 
         for (int j=0;j<numFrames;j++){
@@ -163,6 +167,44 @@ public class Entidad {
     public Entidad getEnt(){
         return this;
     }
+    
+    
+    public void spriteMov(int direccion, int numFrames, int espacio){//Direccion: 0 arriba, 1 derecha, 2 abajo, 3 izq
+        Animation aux =new Animation(); 
+        for (int j=0;j<numFrames;j++){
+            aux.addFrame(sprite.getSprite(j,direccion), espacio);
+        }
+        direcciones[direccion]=new Animation();
+        direcciones[direccion]=aux;
+    }
+    
+    public void animaciones(int[] frames, int[] espacios){//Frames es un array con el numero de frames en cada animacion
+        int a=direcciones.length;
+        
+        for(int i=0;i<a;i++){
+            try{
+                spriteMov(i,frames[i], espacios[i]);
+            }catch(Exception e){
+                System.out.println(this+" : Asignando más animaciones de las que le han sido asignadas a la entidad. "+e);
+            }
+            
+        }
+    }
+    
+    public void animaciones(int[] frames, int espacios){//Frames es un array con el numero de frames en cada animacion
+        int a=direcciones.length;
+        
+        for(int i=0;i<a;i++){
+            try{
+                spriteMov(i,frames[i], espacios);
+            }catch(Exception e){
+                System.out.println(this+" : Asignando más animaciones de las que le han sido asignadas a la entidad. "+e);
+            }
+            
+        }
+    }
+    
+    
     
     }
     

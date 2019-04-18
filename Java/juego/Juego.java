@@ -9,6 +9,7 @@ import entidades.Entidad;
 import entidades.Lucia;
 import entidades.enemigos.Geobro;
 import mapas.Mapa;
+import musica.GestorMusica;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -17,6 +18,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.CombinedTransition;
 
 
 /**
@@ -26,7 +28,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class Juego extends BasicGameState{
     
     private Mapa mapa;
-    private Music music;
+    private GestorMusica music;
     private Lucia Lucia;
     private float renderx;
     private float rendery;
@@ -42,9 +44,9 @@ public class Juego extends BasicGameState{
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         
-        music  = new Music("resources/backround2.ogg");
+        music=GestorMusica.getGestor();
         music.play();
-        mapa=new Mapa("resources/Mapas/PRUEBA.tmx", "/resources/Mapas");
+        mapa=new Mapa("resources/Mapas/Antes_Cueva_Inicio/Antes_Cueva_inicio.tmx", "/resources/Mapas/Antes_Cueva_Inicio");
         Lucia=Lucia.getLucia();
         posinix=Lucia.getPosicion().getX();
         posiniy=Lucia.getPosicion().getY();
@@ -66,6 +68,12 @@ public class Juego extends BasicGameState{
         for(int i=0;i<mapa.getHitBoxes().size();i++){
             grphcs.draw(mapa.getHitBoxes().get(i));
         }
+        try{
+            mapa.render(0, 0, mapa.getLayerIndex("Puente"));
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
         
     }
 
@@ -91,6 +99,9 @@ public class Juego extends BasicGameState{
         if(input.isKeyPressed(Input.KEY_M)){
             music.pause();
             sbg.enterState(1);
+        }
+        if(input.isKeyPressed(Input.KEY_C)){
+            combate(sbg);
         }
     }
     
@@ -130,6 +141,11 @@ public class Juego extends BasicGameState{
         return pasar;
     }
     
-    
+    public void combate(StateBasedGame sbg){
+        music.cambiarM(1);
+        music.play();
+        sbg.enterState(2);
+        Lucia.combatir();
+    }
     
 }

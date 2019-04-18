@@ -8,6 +8,7 @@ package entidades.enemigos;
 import chaoschild.Punto;
 import chaoschild.Vector;
 import entidades.Entidad;
+import entidades.EntidadCombate;
 import static entidades.Lucia.getLucia;
 import static java.lang.Math.abs;
 import static java.lang.Math.abs;
@@ -19,12 +20,15 @@ import org.newdawn.slick.SlickException;
  *
  * @author victo
  */
-public class Enemigo extends Entidad{
+public class Enemigo extends EntidadCombate{
 
-    public Enemigo(String ruta, int h, int w, int numAnimaciones) throws SlickException {
-        super(ruta, h, w, numAnimaciones);
-
+    public Enemigo(String ruta, String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames) throws SlickException {
+        super(ruta, rutaC, h, w, numAnimaciones, numC, frames);
     }
+
+    
+    
+    
     
     
     public Vector calcRuta() throws SlickException{
@@ -123,4 +127,10 @@ public class Enemigo extends Entidad{
     public void actualizar(boolean[] pasar) throws SlickException{
         ia(pasar, calcRuta());
     }
+    
+    public void setPosCom(Punto p){
+        setPosCombate(p);
+    }
+    
+    
 }

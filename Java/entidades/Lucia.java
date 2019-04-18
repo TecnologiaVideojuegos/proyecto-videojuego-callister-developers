@@ -18,15 +18,14 @@ import org.newdawn.slick.geom.Rectangle;
  *
  * @author victo
  */
-public class Lucia extends Entidad{
+public class Lucia extends EntidadCombate{
     
     private static Lucia Lucia=null;
     private ArrayList<Objeto> inventario;
-    
     private int ancho, alto;
+    
     public Lucia(int x, int y) throws SlickException {
-        super("resources/Personajes/Lucia/Lucia.png", 52, 34, 4);
-        
+        super("resources/Personajes/Lucia/Lucia.png","resources/Pantalla de Batalla/Lucia/Batalla_Lucia.png", 52, 34, 4, 5,new int[] {3,2,2,2});
         ancho=34;
         alto=54;
         super.setPosicion(new Punto(x, y));
@@ -35,9 +34,14 @@ public class Lucia extends Entidad{
         super.animaciones(frames);
         inventario=new ArrayList();
         inventario.add(new PocionVPequeña());
+        setPosCombate(new Punto(500, 300));
+        
+        
+        
+        
     }
-    
-    
+       
+
     public static Lucia getLucia() throws SlickException{
         if(Lucia==null){
             Lucia=new Lucia(300, 300);
@@ -94,5 +98,7 @@ public class Lucia extends Entidad{
     public Punto getPosicion(){
         return super.getPosicion();
     }
+    
+    
     
 }
