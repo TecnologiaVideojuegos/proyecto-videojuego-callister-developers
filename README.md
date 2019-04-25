@@ -16,3 +16,4 @@
     - 15/04 Adición de Sprites de pantalla de batalla, de mapa "Antes_Cueva_Inicio", y modificación de "Lore e historia"
     - 16/04 Adicion de mapas "Cueva_inicio", "Mirador_ciudad" y mejora de mapas anteriores
     - 18/04 añadido mapa "Ciudad_ciudad"
+    - 25/04 Añadido paquete mapas en carpeta Java
