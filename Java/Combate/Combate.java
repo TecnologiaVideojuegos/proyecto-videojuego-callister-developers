@@ -6,6 +6,7 @@
 package Combate;
 
 import chaoschild.Punto;
+import entidades.EntidadCombate;
 import entidades.Lucia;
 import entidades.enemigos.Enemigo;
 import entidades.enemigos.Geobro;
@@ -34,38 +35,66 @@ public class Combate extends BasicGameState{
     private Lucia lucia;
     private ArrayList<Enemigo> enemigos;
     private Punto enem;
+    private MenuCombate menu;
+    private Magia rendm;
+    private int mid1;
+    private int ID;
+    private ArrayList<Accion> turno;
 
+    public Combate(int ID) {
+        this.ID = ID;
+    }
+
+    
+    
+    
+    
     @Override
     public int getID() {
-         return 2;
+         return ID;
     }
+    
+    
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-        enem=new Punto(150, 150);
+        enem=new Punto(150, 180);
         musica=GestorMusica.getGestor();
         fondo=new Image("resources/Mapas/Cueva_inicio/Cueva_inicio.png");
         lucia=Lucia.getLucia();
         enemigos=new ArrayList();
-        enemigos.add(new Geobro(0,0));
-        enemigos.get(0).setPosCom(enem);
-        enemigos.get(0).combatir();
+        genEnemigos(new Geobro(0,0), 3);
+        
+        menu=new MenuCombate(enemigos);
         }
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         
         fondo.draw();
-        
         lucia.draw();
         enemigosRender();
+        equipoRender();
+        menu.render(grphcs);
+        try{
+                rendm.draw();
+            
+            if(rendm.getAnim().isStopped()){
+                rendm=null;
+            }
+            
+        }catch(Exception e){}
+        
+                
         
         
-        }
+        
+    }
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         comprobarInputs(gc, sbg);
+        menu.update(gc.getInput());
         
     }
     
@@ -76,7 +105,18 @@ public class Combate extends BasicGameState{
         if(input.isKeyPressed(Input.KEY_C)){
              
              volverMapa(sbg);
+             
         }
+        if(input.isKeyPressed(Input.KEY_Q)){
+             
+             Lucia.getLucia().setAnimacionCombate(2);
+             rendm=lucia.getMagias().get(0);
+             rendm.daño(lucia, enemigos.get(0));
+             System.out.println(enemigos.get(0).getPosCombate());
+             
+        }
+        
+        
     }
      
     public void volverMapa(StateBasedGame sbg) throws SlickException{
@@ -91,8 +131,37 @@ public class Combate extends BasicGameState{
     public void enemigosRender(){
         for (int i=0;i<enemigos.size();i++){
             enemigos.get(i).draw();
+            
         }
     }
+    public void equipoRender(){
+        for (int i=0;i<lucia.getEquipo().size();i++){
+            lucia.getEquipo().get(i).draw();
+        }
+    }
+    
+    
+    private void genEnemigos(Enemigo e, int a) throws SlickException{
+        if (a!=1){
+        
+            enem.setY((360-64)/a);
+            
+            
+        }
+        enemigos.add(e); 
+        for(int i=1;i<a;i++){
+            enemigos.add(new Geobro(0,0));
+            
+        }
+        for(int i=0;i<enemigos.size();i++){
+            enemigos.get(i).setPosCombate(new Punto(enem.getX()+10*i, enem.getY()+80*i));
+            enemigos.get(i).combatir();
+            System.out.println(i);
+        }
+        
+    }
+    
+    
     
     
 }
