@@ -15,11 +15,12 @@ import org.newdawn.slick.SlickException;
 public class Geobro extends Enemigo{
     
     public Geobro(int x, int y) throws SlickException {
-        super("resources/Enemigos/Geobro/Geobro.png","resources/Pantalla de Batalla/Geobro/Pantalla de batalla Geobro.png", 54, 54, 4, 2, new int[]{4,3});
+        super("resources/Enemigos/Geobro/Geobro.png","resources/Pantalla de Batalla/Geobro/Pantalla de batalla Geobro.png", 54, 54, 4, 3, new int[]{4,3,3}, "Geobro");
         super.setPosicion(new Punto(x,y));
         super.genHitboxes(new Punto(super.getPosicion().getX()+9, super.getPosicion().getY()+(30)), 54-18, 24);
         int[] frames={4,4,4,4};
         super.animaciones(frames);
+        
         
     }
     

@@ -5,6 +5,7 @@
  */
 package entidades;
 
+import Combate.MagiaAgua1;
 import chaoschild.Punto;
 import chaoschild.Vector;
 import itemsjuego.Objeto;
@@ -18,14 +19,16 @@ import org.newdawn.slick.geom.Rectangle;
  *
  * @author victo
  */
-public class Lucia extends EntidadCombate{
+public class Lucia extends Aliado{
     
     private static Lucia Lucia=null;
     private ArrayList<Objeto> inventario;
+    private ArrayList<Aliado> equipo;
     private int ancho, alto;
     
     public Lucia(int x, int y) throws SlickException {
-        super("resources/Personajes/Lucia/Lucia.png","resources/Pantalla de Batalla/Lucia/Batalla_Lucia.png", 52, 34, 4, 5,new int[] {3,2,2,2});
+        super("resources/Personajes/Lucia/Lucia.png","resources/Pantalla de Batalla/Lucia/Batalla_Lucia.png", 52, 34, 4, 4,new int[] {3,2,2,2}, "Lucia");
+        equipo= new ArrayList();
         ancho=34;
         alto=54;
         super.setPosicion(new Punto(x, y));
@@ -34,8 +37,9 @@ public class Lucia extends EntidadCombate{
         super.animaciones(frames);
         inventario=new ArrayList();
         inventario.add(new PocionVPequeña());
-        setPosCombate(new Punto(500, 300));
-        
+        setPosCombate(new Punto(500, 200));
+        equipo.add(new Kato(getPosCombate().getX()-64, getPosCombate().getY()));
+        aprenderMagia(new MagiaAgua1());
         
         
         
@@ -44,7 +48,7 @@ public class Lucia extends EntidadCombate{
 
     public static Lucia getLucia() throws SlickException{
         if(Lucia==null){
-            Lucia=new Lucia(300, 300);
+            Lucia=new Lucia(640, 640);
         }
         return Lucia;
     }
@@ -99,6 +103,17 @@ public class Lucia extends EntidadCombate{
         return super.getPosicion();
     }
     
+    public ArrayList<Aliado> getEquipo(){
+        return equipo;
+    }
     
+    public ArrayList<String> getMagiasStrg(){
+        ArrayList<String> a=new ArrayList();
+        for(int i=0;i<getMagias().size();i++){
+            a.add(getMagias().get(i).toString());
+            
+        }
+        return a;
+    }
     
 }

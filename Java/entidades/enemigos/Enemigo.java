@@ -22,8 +22,8 @@ import org.newdawn.slick.SlickException;
  */
 public class Enemigo extends EntidadCombate{
 
-    public Enemigo(String ruta, String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames) throws SlickException {
-        super(ruta, rutaC, h, w, numAnimaciones, numC, frames);
+    public Enemigo(String ruta, String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre) throws SlickException {
+        super(ruta, rutaC, h, w, numAnimaciones, numC, frames, nombre);
     }
 
     
@@ -128,9 +128,7 @@ public class Enemigo extends EntidadCombate{
         ia(pasar, calcRuta());
     }
     
-    public void setPosCom(Punto p){
-        setPosCombate(p);
-    }
+    
     
     
 }

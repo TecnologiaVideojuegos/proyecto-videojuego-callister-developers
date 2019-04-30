@@ -27,8 +27,9 @@ public class Entidad {
     private int w,h,wh,hh,wp,hp;
     private Rectangle[] hitParedes;
     private boolean par;
+    private String nombre;
     
-    public Entidad(String ruta, int h, int w, int numAnimaciones) throws SlickException{
+    public Entidad(String ruta, int h, int w, int numAnimaciones, String nombre) throws SlickException{
         direcciones=new Animation[numAnimaciones];
 
         velocidad=new Vector(new Punto (0, 0));
@@ -38,6 +39,7 @@ public class Entidad {
         hitbox=new Rectangle(0,0,0,0);
         hitParedes=new Rectangle[4];
         par=false;
+        this.nombre=nombre;
     }
     
     public void update(int delta) throws SlickException{
@@ -83,23 +85,15 @@ public class Entidad {
             try{
                 spriteMov(i,frames[i]);
             }catch(Exception e){
-                System.out.println(this+" : Asignando más animaciones de las que le han sido asignadas a la entidad. "+e);
+                System.out.println(this+" Animaciones sin espacio : Asignando más animaciones de las que le han sido asignadas a la entidad. "+e);
             }
             
         }
     }
     
     public void setAnimacion(int a){
-        switch(a){
-            case 0: animacion=direcciones[0];
-            break;        
-            case 1: animacion=direcciones[1];
-            break;
-            case 2: animacion=direcciones[2];
-            break;        
-            case 3: animacion=direcciones[3];
-            break;
-        }
+       animacion=direcciones[a];
+        
                 
     }
     
@@ -169,39 +163,56 @@ public class Entidad {
     }
     
     
-    public void spriteMov(int direccion, int numFrames, int espacio){//Direccion: 0 arriba, 1 derecha, 2 abajo, 3 izq
+    public void spriteMov(int direccion, int numFrames, int espacio, boolean limited){//Direccion: 0 arriba, 1 derecha, 2 abajo, 3 izq
         Animation aux =new Animation(); 
         for (int j=0;j<numFrames;j++){
             aux.addFrame(sprite.getSprite(j,direccion), espacio);
         }
+        aux.setLooping(limited);
         direcciones[direccion]=new Animation();
         direcciones[direccion]=aux;
     }
     
-    public void animaciones(int[] frames, int[] espacios){//Frames es un array con el numero de frames en cada animacion
+    public void animaciones(int[] frames, int[] espacios, boolean[] limited){//Frames es un array con el numero de frames en cada animacion
         int a=direcciones.length;
         
         for(int i=0;i<a;i++){
             try{
-                spriteMov(i,frames[i], espacios[i]);
+                spriteMov(i,frames[i], espacios[i], limited[i]);
             }catch(Exception e){
-                System.out.println(this+" : Asignando más animaciones de las que le han sido asignadas a la entidad. "+e);
+                System.out.println(this+" Animaciones1 : Asignando más animaciones de las que le han sido asignadas a la entidad. "+e);
             }
             
         }
     }
     
-    public void animaciones(int[] frames, int espacios){//Frames es un array con el numero de frames en cada animacion
+    public void animaciones(int[] frames, int espacios, boolean[] limited){//Frames es un array con el numero de frames en cada animacion
         int a=direcciones.length;
         
         for(int i=0;i<a;i++){
             try{
-                spriteMov(i,frames[i], espacios);
+                spriteMov(i,frames[i], espacios, limited[i]);
             }catch(Exception e){
-                System.out.println(this+" : Asignando más animaciones de las que le han sido asignadas a la entidad. "+e);
+                System.out.println(nombre+" Animaciones2 : Asignando más animaciones de las que le han sido asignadas a la entidad. "+e);
             }
             
         }
+    }
+    
+    public String getNombre(){
+        return nombre;
+    }
+    
+    public void setNombre(String n){
+        nombre = n;
+    }
+    
+    public String toString(){
+        return nombre;
+    }
+
+    public Animation getAnimacion() {
+        return animacion;
     }
     
     
