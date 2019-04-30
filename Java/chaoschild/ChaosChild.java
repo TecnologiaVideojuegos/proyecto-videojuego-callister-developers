@@ -32,9 +32,9 @@ public class ChaosChild extends StateBasedGame{
 
     @Override
     public void initStatesList(GameContainer gc) throws SlickException {
-        this.addState(new Juego());
+        this.addState(new Juego(this));
         this.addState(new Menu());
-        this.addState(new Combate());
+        
     }
     
 }
