@@ -5,6 +5,8 @@
  */
 package juego;
 
+import Combate.Combate;
+import chaoschild.ChaosChild;
 import entidades.Entidad;
 import entidades.Lucia;
 import entidades.enemigos.Geobro;
@@ -35,21 +37,31 @@ public class Juego extends BasicGameState{
     private float posinix;
     private float posiniy;
     private Geobro geobro;
+    private ChaosChild chaos;
+    //private Mundo mundo;
     
     @Override
     public int getID() {
         return 0;
     }
 
+    
+    public Juego(ChaosChild chaos) {
+        this.chaos=chaos;
+    }
+
+    
+    
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-        
+        //mundo=new Mundo();
         music=GestorMusica.getGestor();
         music.play();
-        mapa=new Mapa("resources/Mapas/Antes_Cueva_Inicio/Antes_Cueva_inicio.tmx", "/resources/Mapas/Antes_Cueva_Inicio");
-        Lucia=Lucia.getLucia();
-        posinix=Lucia.getPosicion().getX();
-        posiniy=Lucia.getPosicion().getY();
+        //mapa=mundo.getMapaCargado();
+        mapa=new Mapa("resources/Mapas/Ciudad_ciudad/Ciudad_ciudad.tmx", "/resources/Mapas/Ciudad_ciudad");
+        Lucia=Lucia.getLucia(); 
+        posiniy=gc.getHeight()/2;
+        posinix=gc.getWidth()/2;
         renderx=0;
         rendery=0;
         geobro=new Geobro(250, 250);
@@ -71,7 +83,7 @@ public class Juego extends BasicGameState{
         try{
             mapa.render(0, 0, mapa.getLayerIndex("Puente"));
         }catch(Exception e){
-            System.out.println(e);
+            
         }
         
         
@@ -82,6 +94,7 @@ public class Juego extends BasicGameState{
         if(!music.playing()){
             music.resume();
         }
+        //mapa=mundo.getMapaCargado();
         comprobarInputs(gc,sbg);
         boolean[] pas={false};
         Lucia.actualizar(gc.getInput(),colisionPared(Lucia));
@@ -94,14 +107,14 @@ public class Juego extends BasicGameState{
    
     
     
-    public void comprobarInputs(GameContainer gc, StateBasedGame sbg){
+    public void comprobarInputs(GameContainer gc, StateBasedGame sbg) throws SlickException{
         Input input=gc.getInput();
         if(input.isKeyPressed(Input.KEY_M)){
             music.pause();
             sbg.enterState(1);
         }
         if(input.isKeyPressed(Input.KEY_C)){
-            combate(sbg);
+            combate(sbg, gc);
         }
     }
     
@@ -141,7 +154,9 @@ public class Juego extends BasicGameState{
         return pasar;
     }
     
-    public void combate(StateBasedGame sbg){
+    public void combate(StateBasedGame sbg, GameContainer gc) throws SlickException{
+        sbg.addState(new Combate(2));
+        sbg.getState(2).init(gc, sbg);
         music.cambiarM(1);
         music.play();
         sbg.enterState(2);
