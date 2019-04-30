@@ -17,3 +17,4 @@
     - 16/04 Adicion de mapas "Cueva_inicio", "Mirador_ciudad" y mejora de mapas anteriores
     - 18/04 añadido mapa "Ciudad_ciudad"
     - 25/04 Añadido paquete mapas en carpeta Java
+    - 30/04 Añadido el avance en el sistema de combate
