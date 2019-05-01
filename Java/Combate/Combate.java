@@ -6,11 +6,14 @@
 package Combate;
 
 import chaoschild.Punto;
+import entidades.Aliado;
 import entidades.EntidadCombate;
 import entidades.Lucia;
 import entidades.enemigos.Enemigo;
 import entidades.enemigos.Geobro;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import musica.GestorMusica;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -40,6 +43,10 @@ public class Combate extends BasicGameState{
     private int mid1;
     private int ID;
     private ArrayList<Accion> turno;
+    private StateBasedGame sgb;
+    private int estado;
+    private boolean atacando;
+
 
     public Combate(int ID) {
         this.ID = ID;
@@ -64,37 +71,55 @@ public class Combate extends BasicGameState{
         lucia=Lucia.getLucia();
         enemigos=new ArrayList();
         genEnemigos(new Geobro(0,0), 3);
-        
-        menu=new MenuCombate(enemigos);
+        this.sgb=sbg;
+        atacando=false;
+        menu=new MenuCombate(enemigos,this);
         }
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
-        
         fondo.draw();
         lucia.draw();
-        enemigosRender();
-        equipoRender();
-        menu.render(grphcs);
-        try{
-                rendm.draw();
-            
-            if(rendm.getAnim().isStopped()){
-                rendm=null;
-            }
-            
-        }catch(Exception e){}
-        
+        enemigosRender(grphcs);
+        equipoRender(grphcs);
+        switch(estado){
+            case 0:
+                    menu.render(grphcs);
+                break;
+            case 1:
+                   if(!atacando){
+                       turno.get(0).actionCalc();
+                       atacando=true;
+                       comprobarDebilitados();
+                   }
+                   if(turno.get(0).comprobar()){
+                       turno.remove(0);
+                       atacando=false;
+                   }
+                   if(turno.isEmpty()){
+                       estado=0;
+                       menu.setAcciones(0);
+                       
+                   }
                 
+                
+                break;
+        }
         
-        
-        
+         
     }
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
         comprobarInputs(gc, sbg);
-        menu.update(gc.getInput());
+        try {
+            if(estado==0){
+                menu.update(gc.getInput());
+            }
+            
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Combate.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     
@@ -104,7 +129,7 @@ public class Combate extends BasicGameState{
         
         if(input.isKeyPressed(Input.KEY_C)){
              
-             volverMapa(sbg);
+             volverMapa1();
              
         }
         if(input.isKeyPressed(Input.KEY_Q)){
@@ -128,15 +153,14 @@ public class Combate extends BasicGameState{
          
     }
     
-    public void enemigosRender(){
+    public void enemigosRender(Graphics g){
         for (int i=0;i<enemigos.size();i++){
-            enemigos.get(i).draw();
-            
+            enemigos.get(i).draw(g);   
         }
     }
-    public void equipoRender(){
+    public void equipoRender(Graphics g){
         for (int i=0;i<lucia.getEquipo().size();i++){
-            lucia.getEquipo().get(i).draw();
+            lucia.getEquipo().get(i).draw(g);
         }
     }
     
@@ -154,14 +178,38 @@ public class Combate extends BasicGameState{
             
         }
         for(int i=0;i<enemigos.size();i++){
-            enemigos.get(i).setPosCombate(new Punto(enem.getX()+10*i, enem.getY()+80*i));
+            enemigos.get(i).setPosCombate(new Punto(enem.getX()+10*i, enem.getY()+85*i));
             enemigos.get(i).combatir();
             System.out.println(i);
         }
         
     }
+
+    public void volverMapa1() throws SlickException {
+        volverMapa(sgb);
+    }
     
+    public void añadirTurno(Accion a){
+        turno.add(a);
+    }
+
+    public void setTurno(ArrayList<Accion> turno) {
+        this.turno = turno;
+    }
     
+    public void cambiarEstado(int a){
+        estado=a;
+    }
     
-    
+    public void comprobarDebilitados(){
+        ArrayList<Enemigo> a=new ArrayList();
+        for(int i=0;i<enemigos.size();i++){
+            if(enemigos.get(i).getMultiplicadores()[0]==0){
+                a.add(enemigos.get(i));
+            }
+        }
+        for(int i=0;i<a.size();i++){
+            enemigos.remove(a.get(i));
+        }
+    }
 }

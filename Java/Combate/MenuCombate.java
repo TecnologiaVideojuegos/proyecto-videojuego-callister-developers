@@ -11,9 +11,8 @@ import entidades.EntidadCombate;
 import entidades.Lucia;
 import entidades.enemigos.Enemigo;
 import java.util.ArrayList;
-import org.lwjgl.util.mapped.MappedHelper;
 import org.newdawn.slick.Animation;
-import org.newdawn.slick.GameContainer;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
@@ -38,12 +37,18 @@ public class MenuCombate {
     private ArrayList<Enemigo> enemigos;
     private Animation selector;
     private int selmenu;
-    private int Alsel;
     private Graphics g;
     private int menumodo;
-    
+    private Combate combat;
+    private int action, indice;
+    private EntidadCombate atacante, defensor;
+    private ArrayList<Accion> turnos;
+    private int acciones;
+    private Aliado selected;
+            
 
-    public MenuCombate(ArrayList<Enemigo> enemigos) throws SlickException {
+
+    public MenuCombate(ArrayList<Enemigo> enemigos, Combate combat) throws SlickException {
         this.menu = new Image("resources/Menus/Combate.png");
         puntero=new Image("resources/Menus/PunteroMenu.png");
         p= new Punto(0, 640-200);
@@ -64,8 +69,11 @@ public class MenuCombate {
         selector.addFrame(sprite.getSprite(0, 1), 300);
         psel=renderSelector(Lucia.getLucia());
         selmenu=0;
-        Alsel=0;
         menumodo=0;
+        this.combat=combat;
+        turnos=new ArrayList();
+        acciones=0;
+        selected=Lucia.getLucia().getEquipo().get(0);
         
     }
     
@@ -79,10 +87,11 @@ public class MenuCombate {
        
     }
     
+
     public void update(Input entrada) throws SlickException, InterruptedException{
         
         if (entrada.isKeyPressed(Input.KEY_S)){
-            System.out.println(indicepuntero);;
+            System.out.println(indicepuntero);
             switch(selmenu){
                 case 0:
                     System.out.println("case 0");
@@ -102,7 +111,7 @@ public class MenuCombate {
                     }
                     break;
                 case 1:
-                    System.out.println("case 1");
+                    
                     if(indicepuntero!=enemigos.size()-1){
                         indicepuntero++;
                         
@@ -110,6 +119,17 @@ public class MenuCombate {
                         indicepuntero=0;
                     }
                     psel=renderSelector(enemigos.get(indicepuntero));
+                                   
+                    break;
+                case 2:
+                   
+                    if(indicepuntero!= Lucia.getLucia().getEquipo().size()-1){
+                        indicepuntero++;
+                        
+                    }else{
+                        indicepuntero=0;
+                    }
+                    psel=renderSelector(selected);
                                    
                     break;
                 
@@ -145,6 +165,18 @@ public class MenuCombate {
                                    
                     
                     break;
+                case 3:
+                    if(indicepuntero!=0){
+                        indicepuntero--;
+                        
+                        
+                    }else{
+                        indicepuntero=Lucia.getLucia().getEquipo().size()-1;
+                    }
+                    psel=renderSelector(Lucia.getLucia().getEquipo().get(indicepuntero));
+                                   
+                    
+                    break;
                 
             }
             sonidos.get(0).play(1, (float) 0.2);
@@ -153,21 +185,34 @@ public class MenuCombate {
                 sonidos.get(1).play(1, (float) 0.2);
                 if(selmenu==0){
                     selecionMenu(menumodo, indicepuntero);
-                 }
-                 else{ 
-                     if(selmenu==1){
-                     
-                     pmenu= new Punto(p.getX()+450, p.getY()+10);
-                     psel=renderSelector(Lucia.getLucia());
-                     
-                     selmenu=0;
-                     indicepuntero=0;
-                     escondidos=0;
-                     
                     
-                 }
                 }
+                else{ 
+                    if(selmenu==1||selmenu==2){
+                        turnos.add(new Accion(action, indice, selected, enemigos.get(indicepuntero)));
+                        selmenu=0;
+                        menumodo=0;
+                        indicepuntero=0;
+                        escondidos=0;
+                        pmenu= new Punto(p.getX()+450, p.getY()+10);
+                        aa();
+                        acciones++;
+                        try{
+                             selected=Lucia.getLucia().getEquipo().get(acciones);
+                        }catch(Exception e){
+                            
+                        }
+                       
+                        psel=renderSelector(selected);
+                        
+                        if(acciones==Lucia.getLucia().getEquipo().size()){
+                            combat.setTurno(turnos);
+                            combat.cambiarEstado(1);
+                        }
+
+                    }
                 }
+            }
         
         } 
   
@@ -182,6 +227,7 @@ public class MenuCombate {
         
         for(int i=0;i<nR;i++){
             g.drawString(menu.get(i+escondidos), paux.getX()+20, paux.getY()+i*20);
+
         }
         
     }
@@ -202,55 +248,103 @@ public class MenuCombate {
     
         
     private void cambiarEstadoMenu(int a) throws SlickException{
+        
+        
         switch (a){
-            case 0: 
+            case 0:
                 selmenu=1;
-                menumodo=0;
-                indicepuntero=0;
-                pmenu= new Punto(p.getX()+450, p.getY()+10);
-                psel=renderSelector(enemigos.get(0));
-               break; 
-            case 1: 
-                menuss=Lucia.getLucia().getMagiasStrg();
-                menuss.add("Atás");
-                System.out.println(menuss.size());
-                
-                if(menumodo!=1){
-                    menumodo=1;
-                    selmenu=0;
-                    indicepuntero=0;
-                    escondidos=0;
-                }
-                
+                psel=renderSelector(enemigos.get(0));  
+                System.out.println("Modo 0");
+                break;
+            case 1:
+                System.out.println("Modo 1");
+                menumodo=1;
                 pmenu= new Punto(p.getX()+450, p.getY()+10);
                 indicepuntero=0;
-            }
+                escondidos=0;
+                cambiaMenu(Lucia.getLucia().getMagiasStrg());
+                break;
+            case 2:
+                menumodo=2;
+                pmenu= new Punto(p.getX()+450, p.getY()+10);
+                indicepuntero=0;
+                escondidos=0;
+                cambiaMenu(Lucia.getLucia().getInvStrg());
+                break;
+            case 3:
+                combat.volverMapa1();
+                break;
+        }
+
         
             
 
         }
 
-    private void rendermenu(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
     
     private void selecionMenu(int modo, int sel) throws SlickException{
         switch(modo){
             case 0: 
                 cambiarEstadoMenu(sel);
+                indicepuntero=0;
+                action=0;
                 break;
             case 1:
-                
                 if(sel==menuss.size()-1){
                     pmenu= new Punto(p.getX()+450, p.getY()+10);
                     indicepuntero=0;
                     escondidos=0;
                     selmenu=0;
                     aa();
+                    menumodo=0;
+                }else{
+                    selmenu=1;
+                    psel=renderSelector(enemigos.get(0)); 
+                    action=1;
                 }
+                    //selmenu=1;
                 break;
+            case 2:
+                if(sel==menuss.size()-1){
+                    pmenu= new Punto(p.getX()+450, p.getY()+10);
+                    indicepuntero=0;
+                    escondidos=0;
+                    selmenu=0;
+                    aa();
+                    menumodo=0;
+                }else{
+                    selmenu=2;
+                    psel=renderSelector(selected);
+                    action=2;
+                }
+                    //selmenu=1;
+                break;
+            case 5:
+               // selmenu=0;
+                
+                break;
+                
         }
         
+        
         }
+            public void cambiaMenu(ArrayList<String> a){
+            a.add("Atrás");
+            menuss=a;
+            for(int i=0;i<a.size();i++){
+                System.out.println(menuss);
+            }
+            System.out.println("Cambio de Menu");
+        }
+
+    public void setAcciones(int acciones) throws SlickException {
+        this.acciones = acciones;
+        selected=Lucia.getLucia().getEquipo().get(acciones);
+        psel=renderSelector(selected);
+        
+    }
+            
+            
     }
 
