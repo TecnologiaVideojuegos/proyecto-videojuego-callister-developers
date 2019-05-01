@@ -9,7 +9,11 @@ import Combate.Elemento;
 import Combate.Magia;
 import chaoschild.Punto;
 import java.util.ArrayList;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.ShapeFill;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 
 /**
  *
@@ -19,10 +23,11 @@ public class EntidadCombate extends Entidad{
     private Entidad combate;
     private boolean lucha;
     ArrayList<Magia> magias;
-    private int HP, MP, STR , INT, AGI, HIT, DEF, lvl;//vALOR
-    private int AHP, AMP, MSTR , MINT, MAGI, MHIT, MDEF;//mULTIPLICADOR
-    private int BHP, BMP, BSTR , BINT, BAGI, BHIT, BDEF;//bASE
-    private int nivel, EXPN, EXPA;
+    private int EXPN, EXPA, LVL;
+    private int[] est;
+    private int[] estb;
+    private int[] multiplicadores;
+    private int[] luest;
     
     
     
@@ -33,6 +38,10 @@ public class EntidadCombate extends Entidad{
         lucha=false;
         setAnimacionCombate(0);
         magias=new ArrayList();
+        est=new int[8];
+        multiplicadores=new int [8];
+        estb=new int [8];
+        luest=new int[8];
         
     }
     public EntidadCombate(String ruta,String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre, int a) throws SlickException {
@@ -50,7 +59,23 @@ public class EntidadCombate extends Entidad{
             if(combate.getAnimacion().isStopped()){
                 combate.getAnimacion().restart();
                 combate.setAnimacion(0);
+                
             }
+            combate.drawCombate();
+        }
+        else super.draw();
+    }
+    public void draw(Graphics g){
+        if (lucha){
+            if(combate.getAnimacion().isStopped()){
+                combate.getAnimacion().restart();
+                combate.setAnimacion(0);
+                
+                
+            }
+            g.draw(new Rectangle( combate.getPosicion().getX()+5, combate.getPosicion().getY()+64, 65,20));
+            g.drawString(multiplicadores[0]+"/"+est[0], combate.getPosicion().getX()+5, combate.getPosicion().getY()+64);
+            
             combate.drawCombate();
         }
         else super.draw();
@@ -78,88 +103,19 @@ public class EntidadCombate extends Entidad{
     public void setAnimacionCombate(int i){
         combate.setAnimacion(i);
     }
-
-    public int getHP() {
-        return HP;
-    }
-
-    public int getMP() {
-        return MP;
-    }
-
-    public int getSTR() {
-        return STR;
-    }
-
-    public int getINT() {
-        return INT;
-    }
-
-    public int getAGI() {
-        return AGI;
-    }
-
-    public int getHIT() {
-        return HIT;
-    }
-
-    public int getAHP() {
-        return AHP;
-    }
-
-    public int getAMP() {
-        return AMP;
-    }
-
-    public int getMSTR() {
-        return MSTR;
-    }
-
-    public int getMAGI() {
-        return MAGI;
-    }
-
-    public int getMHIT() {
-        return MHIT;
-    }
-
-    public void setMP(int MP) {
-        this.MP = MP;
-    }
-
-    public void setAHP(int AHP) {
-        this.AHP = AHP;
-    }
-
-    public void setAMP(int AMP) {
-        this.AMP = AMP;
-    }
-
-    public void setMSTR(int MSTR) {
-        this.MSTR = MSTR;
-    }
-
-    public void setMINT(int MINT) {
-        this.MINT = MINT;
-    }
-
-    public void setMAGI(int MAGI) {
-        this.MAGI = MAGI;
-    }
-
-    public void setMHIT(int MHIT) {
-        this.MHIT = MHIT;
-    }
     
-
     public void recivirDañoFisico(int dmg, Elemento elem){
-        AHP=(int)((double)dmg+0.7*(double)DEF);
+        multiplicadores[0]=multiplicadores[0]-(int)((double)dmg+0.7*(double)est[3]);
+        if(multiplicadores[0]<0){
+            multiplicadores[0]=0;
+        }
+        combate.setAnimacion(2);
     }
     
     public int ataqueBasico(){
         int dmg;
-        int DMG=(int) (0.9*HIT+(0.9*lvl*10*0.3));
-        dmg=(int) (0.5*STR+DMG);
+        int DMG=(int) (0.9*est[5]+(0.9*LVL*10*0.3));
+        dmg=(int) (0.5*est[2]+DMG);
         combate.setAnimacion(1);
         return dmg;
     }
@@ -181,6 +137,33 @@ public class EntidadCombate extends Entidad{
         return magias;
     }
     
+    public void estadisticasb(int [] a){
+        for(int i=0;i<estb.length;i++){
+            estb[i]=a[i];
+        }
+        LVL=a[8];
+        for(int i=9;i<estb.length+9;i++){
+            luest[i-9]=a[i];
+        }
+        calcEst();
+    }
     
+        public void calcEst(){
+            for(int i=0;i<est.length;i++){
+                est[i]=estb[i]+luest[i]+LVL;
+                multiplicadores[i]=1;
+            }
+            multiplicadores[0]=est[0];
+            multiplicadores[1]=est[1];
+        }
     
+        public int getAnimId(){
+            return combate.getAnimid();
+        }
+
+    public int[] getMultiplicadores() {
+        return multiplicadores;
+    }
+        
+        
 }

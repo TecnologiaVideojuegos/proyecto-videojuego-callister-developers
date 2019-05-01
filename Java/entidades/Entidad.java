@@ -28,6 +28,7 @@ public class Entidad {
     private Rectangle[] hitParedes;
     private boolean par;
     private String nombre;
+    private int animid;
     
     public Entidad(String ruta, int h, int w, int numAnimaciones, String nombre) throws SlickException{
         direcciones=new Animation[numAnimaciones];
@@ -40,6 +41,7 @@ public class Entidad {
         hitParedes=new Rectangle[4];
         par=false;
         this.nombre=nombre;
+        animid=0;
     }
     
     public void update(int delta) throws SlickException{
@@ -93,8 +95,7 @@ public class Entidad {
     
     public void setAnimacion(int a){
        animacion=direcciones[a];
-        
-                
+       animid=a;   
     }
     
     public void genHitboxes(Punto p, int wi,int hi){
@@ -214,6 +215,11 @@ public class Entidad {
     public Animation getAnimacion() {
         return animacion;
     }
+
+    public int getAnimid() {
+        return animid;
+    }
+    
     
     
     

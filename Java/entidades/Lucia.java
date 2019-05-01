@@ -38,8 +38,10 @@ public class Lucia extends Aliado{
         inventario=new ArrayList();
         inventario.add(new PocionVPequeña());
         setPosCombate(new Punto(500, 200));
+        equipo.add(this);
         equipo.add(new Kato(getPosCombate().getX()-64, getPosCombate().getY()));
         aprenderMagia(new MagiaAgua1());
+        estadisticasb(new int[]{80, 60, 80, 0, 0, 0, 0, 0, 0, 20, 5, 10, 10, 20, 0, 0, 20, 18});
         
         
         
@@ -115,5 +117,15 @@ public class Lucia extends Aliado{
         }
         return a;
     }
+    public ArrayList<String> getInvStrg(){
+        ArrayList<String> a=new ArrayList();
+        for(int i=0;i<inventario.size();i++){
+            a.add(inventario.get(i).toString());
+            
+        }
+        return a;
+    }
+    
+    
     
 }
