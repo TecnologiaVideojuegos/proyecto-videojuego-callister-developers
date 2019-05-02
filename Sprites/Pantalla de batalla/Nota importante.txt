@@ -1,0 +1,10 @@
+Orden:
+-Transformacion
+-Movimiento estatico
+-Ataque basico
+- Recibir daño
+** NOTA **
+Debido a la falta de espacio no puede realizar bien
+la animacion del ataque basico, por ello en combate
+si es posible se debe avanzar a ragebbit por cada
+Sprite para que la animacion quede mejor.
