@@ -1,0 +1,21 @@
+(Se comienza a contar apartir de 0)
+Serie movimiento abajo:
+	Anchura: x(0-57) incluido
+	Altura: y(0-52) incluido
+	Sepracion: x = 29 ultimos pixeles del sprite, x= 30 primeros pixeles del siguiente sprite
+Serie movimiento derecha:
+	Anchura: x(0-100) incluido
+	Altura: y(53-100) incluido
+	Sepracion: x = 51 ultimos pixeles del sprite, x= 52 primeros pixeles del siguiente sprite 
+Serie movimiento izquierda:
+	Anchura: x(0-100) incluido
+	Altura: y(101-147) incluido
+	Sepracion: x = 51 ultimos pixeles del sprite, x= 52 primeros pixeles del siguiente sprite 
+Serie movimiento arriba:
+	Anchura: x(0-57) incluido
+	Altura: y(148-200) incluido
+	Sepracion: x = 29 ultimos pixeles del sprite, x= 30 primeros pixeles del siguiente sprite 
+Sprite movimiento estatico:
+	Anchura: x(0-32)
+	Altura: y(201-241)
+	
