@@ -13,6 +13,7 @@ import itemsjuego.PocionVPequeña;
 import java.util.ArrayList;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Rectangle;
 
 /**
@@ -25,6 +26,7 @@ public class Lucia extends Aliado{
     private ArrayList<Objeto> inventario;
     private ArrayList<Aliado> equipo;
     private int ancho, alto;
+    private Sound caminar;
     
     public Lucia(int x, int y) throws SlickException {
         super("resources/Personajes/Lucia/Lucia.png","resources/Pantalla de Batalla/Lucia/Batalla_Lucia.png", 52, 34, 4, 4,new int[] {3,2,2,2}, "Lucia");
@@ -42,6 +44,9 @@ public class Lucia extends Aliado{
         equipo.add(new Kato(getPosCombate().getX()-64, getPosCombate().getY()));
         aprenderMagia(new MagiaAgua1());
         estadisticasb(new int[]{80, 60, 80, 0, 0, 0, 0, 0, 0, 20, 5, 10, 10, 20, 0, 0, 20, 18});
+        caminar=new Sound("resources/sonido/paso.ogg");
+        caminar.loop();
+        caminar.stop();
         
         
         
@@ -58,8 +63,16 @@ public class Lucia extends Aliado{
     
     public void actualizar(Input entrada, boolean[] pasar){
         
+        
+        if(getVelocidad().getX()!=0||getVelocidad().getY()!=0){
+            if(!caminar.playing()){
+                caminar.play(1, (float) 0.09);
+            }
+        }else caminar.stop();
+        
+        
         if(entrada.isKeyDown(Input.KEY_W)){
-           
+            
             if(pasar[0]){
                 super.movAr(150);
             }else{
@@ -68,6 +81,7 @@ public class Lucia extends Aliado{
 
         }
         if(entrada.isKeyDown(Input.KEY_A)){
+            
             if(pasar[3]){
                 super.movI(150);
             }else{
@@ -109,14 +123,7 @@ public class Lucia extends Aliado{
         return equipo;
     }
     
-    public ArrayList<String> getMagiasStrg(){
-        ArrayList<String> a=new ArrayList();
-        for(int i=0;i<getMagias().size();i++){
-            a.add(getMagias().get(i).toString());
-            
-        }
-        return a;
-    }
+    
     public ArrayList<String> getInvStrg(){
         ArrayList<String> a=new ArrayList();
         for(int i=0;i<inventario.size();i++){

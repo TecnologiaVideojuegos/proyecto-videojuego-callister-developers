@@ -13,6 +13,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.ShapeFill;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Rectangle;
 
 /**
@@ -28,6 +29,8 @@ public class EntidadCombate extends Entidad{
     private int[] estb;
     private int[] multiplicadores;
     private int[] luest;
+    private Sound daño;
+    private Sound dañar;
     
     
     
@@ -42,6 +45,8 @@ public class EntidadCombate extends Entidad{
         multiplicadores=new int [8];
         estb=new int [8];
         luest=new int[8];
+        daño=new Sound("resources/sonido/HitDamage.ogg");
+        dañar=new Sound("resources/sonido/combate/fisica_flecha_o_lanzar.ogg");
         
     }
     public EntidadCombate(String ruta,String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre, int a) throws SlickException {
@@ -110,6 +115,7 @@ public class EntidadCombate extends Entidad{
             multiplicadores[0]=0;
         }
         combate.setAnimacion(2);
+        daño.play(1, (float) 0.1);
     }
     
     public int ataqueBasico(){
@@ -117,6 +123,7 @@ public class EntidadCombate extends Entidad{
         int DMG=(int) (0.9*est[5]+(0.9*LVL*10*0.3));
         dmg=(int) (0.5*est[2]+DMG);
         combate.setAnimacion(1);
+        dañar.play(1, (float) 0.1);
         return dmg;
     }
     
@@ -164,6 +171,45 @@ public class EntidadCombate extends Entidad{
     public int[] getMultiplicadores() {
         return multiplicadores;
     }
+
+    public Sound getDañado() {
+        return daño;
+    }
+
+    public Sound getDañar() {
+        return dañar;
+    }
+
+    public void setDañar(Sound dañar) {
+        this.dañar = dañar;
+    }
         
-        
+    public int hacerMagia(int indice, EntidadCombate objetivo){
+        setAnimacionCombate(2);
+        int da=magias.get(indice).usar(this, objetivo);
+        return da;
+    }
+    
+    public boolean drawMag(int a){
+        boolean b;
+        magias.get(a).draw();
+        if(magias.get(a).getAnim().isStopped()){
+            b=true;
+            
+        }else b=false;
+        return b;
+    }
+
+    public int[] getEst() {
+        return est;
+    }
+    
+    public ArrayList<String> getMagiasStrg(){
+        ArrayList<String> a=new ArrayList();
+        for(int i=0;i<getMagias().size();i++){
+            a.add(getMagias().get(i).toString());
+            
+        }
+        return a;
+    }
 }
