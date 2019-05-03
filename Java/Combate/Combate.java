@@ -88,21 +88,23 @@ public class Combate extends BasicGameState{
                 break;
             case 1:
                    if(!atacando){
+                       System.out.println("Atacando");
                        turno.get(0).actionCalc();
-                       atacando=true;
-                       comprobarDebilitados();
+                       atacando=true;  
                    }
                    if(turno.get(0).comprobar()){
                        turno.remove(0);
                        atacando=false;
+                       if(comprobarDebilitados()){
+                           turno.get(0).setDefensor(enemigos.get(0));
+                       }
                    }
                    if(turno.isEmpty()){
                        estado=0;
                        menu.setAcciones(0);
                        
+                       
                    }
-                
-                
                 break;
         }
         
@@ -132,14 +134,7 @@ public class Combate extends BasicGameState{
              volverMapa1();
              
         }
-        if(input.isKeyPressed(Input.KEY_Q)){
-             
-             Lucia.getLucia().setAnimacionCombate(2);
-             rendm=lucia.getMagias().get(0);
-             rendm.daño(lucia, enemigos.get(0));
-             System.out.println(enemigos.get(0).getPosCombate());
-             
-        }
+        
         
         
     }
@@ -201,15 +196,18 @@ public class Combate extends BasicGameState{
         estado=a;
     }
     
-    public void comprobarDebilitados(){
+    public boolean comprobarDebilitados(){
+        boolean b=false;
         ArrayList<Enemigo> a=new ArrayList();
         for(int i=0;i<enemigos.size();i++){
             if(enemigos.get(i).getMultiplicadores()[0]==0){
                 a.add(enemigos.get(i));
+                b=true;
             }
         }
         for(int i=0;i<a.size();i++){
             enemigos.remove(a.get(i));
         }
+        return b;
     }
 }

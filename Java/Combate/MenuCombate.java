@@ -262,7 +262,7 @@ public class MenuCombate {
                 pmenu= new Punto(p.getX()+450, p.getY()+10);
                 indicepuntero=0;
                 escondidos=0;
-                cambiaMenu(Lucia.getLucia().getMagiasStrg());
+                cambiaMenu(selected.getMagiasStrg());
                 break;
             case 2:
                 menumodo=2;

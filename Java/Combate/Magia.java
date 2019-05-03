@@ -26,8 +26,9 @@ public class Magia{
     private Punto posicion;
     private String nombre;
     private Sound sonido;
+    private int tipo;
 
-    public Magia(int coste, int daño, Elemento elemento, String ruta, int fps, String n, String musica) throws SlickException {
+    public Magia(int coste, int daño, Elemento elemento, String ruta, int fps, String n, String musica, int tipo) throws SlickException {
         this.coste = coste;
         this.daño = daño;
         this.elemento = elemento;
@@ -37,7 +38,7 @@ public class Magia{
         setAnim(fps);
         nombre=n;
         sonido=new Sound(musica);
-        
+        this.tipo=tipo;
         
         
     }
@@ -53,10 +54,14 @@ public class Magia{
     }
     
     public void draw(){
-        anim.draw(posicion.getX(), posicion.getY());
-        if(!sonido.playing()){
-            sonido.play((float) 1.01, (float) 0.5);
-        }   
+        if(!anim.isStopped()){
+            anim.draw(posicion.getX(), posicion.getY());
+            if(!sonido.playing()){
+                sonido.play((float) 1.01, (float) 0.5);
+            } 
+        }
+        
+          
     }
 
     public int getCoste() {
@@ -75,10 +80,12 @@ public class Magia{
         return anim;
     }
 
-    public void daño(EntidadCombate usa,EntidadCombate recive){
+    public int usar(EntidadCombate usa,EntidadCombate recive){
+        int dam;
         anim.restart();
         posicion=recive.getPosCombate();
-        
+        dam=usa.getEst()[5]+daño;
+        return dam;
     }
     
     @Override
@@ -87,7 +94,13 @@ public class Magia{
     }
             
     
-    
+    public void setPosicion(EntidadCombate e){
+        posicion=e.getPosCombate();
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
     
     
    

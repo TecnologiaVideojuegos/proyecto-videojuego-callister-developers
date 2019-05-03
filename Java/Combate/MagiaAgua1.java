@@ -5,6 +5,7 @@
  */
 package Combate;
 
+import entidades.EntidadCombate;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
@@ -16,7 +17,7 @@ import org.newdawn.slick.SpriteSheet;
 public class MagiaAgua1 extends Magia{
     
     public MagiaAgua1() throws SlickException {
-        super(5, 5, new Elemento(), "resources/Magia/AguaGimp.png", 100, "Burbuja","resources/sonido/combate/Magia/magic_agua.ogg" );
+        super(5, 5, new Elemento(), "resources/Magia/AguaGimp.png", 100, "Burbuja","resources/sonido/combate/Magia/magic_agua.ogg", 0 );
     }
     
     
