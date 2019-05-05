@@ -9,6 +9,7 @@ package chaoschild;
 import Combate.Combate;
 import juego.Juego;
 import menus.Menu;
+import menus.EstadoInventario;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -34,6 +35,7 @@ public class ChaosChild extends StateBasedGame{
     public void initStatesList(GameContainer gc) throws SlickException {
         this.addState(new Juego(this));
         this.addState(new Menu());
+        this.addState(new EstadoInventario());
         
     }
     
