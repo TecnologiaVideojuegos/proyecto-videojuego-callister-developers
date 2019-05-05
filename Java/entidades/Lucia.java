@@ -8,6 +8,7 @@ package entidades;
 import Combate.MagiaAgua1;
 import chaoschild.Punto;
 import chaoschild.Vector;
+import itemsjuego.Inventario;
 import itemsjuego.Objeto;
 import itemsjuego.PocionVPequeña;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class Lucia extends Aliado{
     
     private static Lucia Lucia=null;
     private ArrayList<Objeto> inventario;
+    private Inventario intven;
     private ArrayList<Aliado> equipo;
     private int ancho, alto;
     private Sound caminar;
@@ -47,8 +49,8 @@ public class Lucia extends Aliado{
         caminar=new Sound("resources/sonido/paso.ogg");
         caminar.loop();
         caminar.stop();
-        
-        
+        intven=new Inventario();
+        intven.add(new PocionVPequeña());
         
     }
        
@@ -131,6 +133,10 @@ public class Lucia extends Aliado{
             
         }
         return a;
+    }
+
+    public Inventario getIntven() {
+        return intven;
     }
     
     

@@ -56,6 +56,27 @@ public class EntidadCombate extends Entidad{
         lucha=false;
         magias=new ArrayList();
         setAnimacionCombate(0);
+         est=new int[8];
+        multiplicadores=new int [8];
+        estb=new int [8];
+        luest=new int[8];
+        daño=new Sound("resources/sonido/HitDamage.ogg");
+        dañar=new Sound("resources/sonido/combate/fisica_flecha_o_lanzar.ogg");
+        
+    }
+    public EntidadCombate(String ruta,String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre, int wc, int hc) throws SlickException {
+        super(ruta, h, w, numAnimaciones, nombre);
+        combate=new Entidad(rutaC, hc, wc, numC, nombre+" de Combate");
+        combate.animaciones(frames, 250, genLimited(numC));
+        lucha=false;
+        magias=new ArrayList();
+        setAnimacionCombate(0);
+         est=new int[8];
+        multiplicadores=new int [8];
+        estb=new int [8];
+        luest=new int[8];
+        daño=new Sound("resources/sonido/HitDamage.ogg");
+        dañar=new Sound("resources/sonido/combate/fisica_flecha_o_lanzar.ogg");
         
     }
     
@@ -70,8 +91,9 @@ public class EntidadCombate extends Entidad{
         }
         else super.draw();
     }
-    public void draw(Graphics g){
-        if (lucha){
+    
+    public void drawC(Graphics g){
+
             if(combate.getAnimacion().isStopped()){
                 combate.getAnimacion().restart();
                 combate.setAnimacion(0);
@@ -82,9 +104,10 @@ public class EntidadCombate extends Entidad{
             g.drawString(multiplicadores[0]+"/"+est[0], combate.getPosicion().getX()+5, combate.getPosicion().getY()+64);
             
             combate.drawCombate();
-        }
-        else super.draw();
+        
+       
     }
+    
 
     public void setLucha(boolean lucha) {
         this.lucha = lucha;
