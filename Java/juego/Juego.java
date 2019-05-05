@@ -10,6 +10,7 @@ import chaoschild.ChaosChild;
 import entidades.Entidad;
 import entidades.Lucia;
 import entidades.enemigos.Geobro;
+import entidades.enemigos.Ragebbit;
 import mapas.Mapa;
 import musica.GestorMusica;
 import org.newdawn.slick.GameContainer;
@@ -21,6 +22,8 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.CombinedTransition;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 
 /**
@@ -36,7 +39,7 @@ public class Juego extends BasicGameState{
     private float rendery;
     private float posinix;
     private float posiniy;
-    private Geobro geobro;
+    private Ragebbit ragebit;
     private ChaosChild chaos;
     //private Mundo mundo;
     
@@ -64,7 +67,7 @@ public class Juego extends BasicGameState{
         posinix=gc.getWidth()/2;
         renderx=0;
         rendery=0;
-        geobro=new Geobro(250, 250);
+        ragebit=new Ragebbit((int)Lucia.getPosicion().getX(), (int)Lucia.getPosicion().getY());
     }
 
     @Override
@@ -72,14 +75,14 @@ public class Juego extends BasicGameState{
         
         grphcs.translate(renderx, rendery);
         mapa.render(0,0);
-        Lucia.draw();
-        geobro.draw();
+        Lucia.draw(); 
+        ragebit.draw();
         for(int i=0;i<4;i++){
-            grphcs.draw(Lucia.getHitParedes()[i]);
+            grphcs.draw(ragebit.getHitParedes()[i]);
         }
-        for(int i=0;i<mapa.getHitBoxes().size();i++){
-            grphcs.draw(mapa.getHitBoxes().get(i));
-        }
+//        for(int i=0;i<mapa.getHitBoxes().size();i++){
+//            grphcs.draw(mapa.getHitBoxes().get(i));
+//        }
         try{
             mapa.render(0, 0, mapa.getLayerIndex("Puente"));
         }catch(Exception e){
@@ -94,15 +97,16 @@ public class Juego extends BasicGameState{
         if(!music.playing()){
             music.resume();
         }
+        ragebit.actualizar(colisionPared(ragebit), i);
         //mapa=mundo.getMapaCargado();
         comprobarInputs(gc,sbg);
         boolean[] pas={false};
         Lucia.actualizar(gc.getInput(),colisionPared(Lucia));
-        geobro.actualizar(colisionPared(geobro));
+        
         renderx=posinix-Lucia.getPosicion().getX();
         rendery=posiniy-Lucia.getPosicion().getY();
-        geobro.update(i);
         Lucia.update(i);
+        
     }
    
     
@@ -159,7 +163,7 @@ public class Juego extends BasicGameState{
         sbg.getState(2).init(gc, sbg);
         music.cambiarM(1);
         music.play();
-        sbg.enterState(2);
+        sbg.enterState(2, new FadeOutTransition(),new FadeInTransition());
         Lucia.combatir();
     }
     
