@@ -93,17 +93,26 @@ public class Combate extends BasicGameState{
                        atacando=true;  
                    }
                    if(turno.get(0).comprobar()){
-                       turno.remove(0);
-                       atacando=false;
-                       if(comprobarDebilitados()){
-                           turno.get(0).setDefensor(enemigos.get(0));
-                       }
+                        turno.remove(0);
+                        atacando=false;
+                        if(comprobarDebilitados()){
+                           if(enemigos.isEmpty()){
+                               turno.clear();
+                               volverMapa1();
+                           } else{
+                               try{
+                                   turno.get(0).setDefensor(enemigos.get(0));
+                               }catch(Exception e){}
+                                   
+                              
+                               
+                           }
+                           
+                        }
                    }
                    if(turno.isEmpty()){
                        estado=0;
                        menu.setAcciones(0);
-                       
-                       
                    }
                 break;
         }
@@ -150,12 +159,12 @@ public class Combate extends BasicGameState{
     
     public void enemigosRender(Graphics g){
         for (int i=0;i<enemigos.size();i++){
-            enemigos.get(i).draw(g);   
+            enemigos.get(i).drawC(g);   
         }
     }
     public void equipoRender(Graphics g){
         for (int i=0;i<lucia.getEquipo().size();i++){
-            lucia.getEquipo().get(i).draw(g);
+            lucia.getEquipo().get(i).drawC(g);
         }
     }
     

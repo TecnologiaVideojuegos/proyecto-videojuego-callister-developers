@@ -62,6 +62,7 @@ public class MenuCombate {
         sonidos=new ArrayList();
         sonidos.add(new Sound("resources/sonido/combate/menu_selec.ogg"));
         sonidos.add(new Sound("resources/sonido/combate/menu_confir.ogg"));
+        sonidos.add(new Sound("resources/sonido/combate/menu_cance.ogg"));
         this.enemigos=enemigos;
         SpriteSheet sprite=new SpriteSheet("resources/Menus/Selector.png", 64, 64);
         selector=new Animation();
@@ -129,7 +130,7 @@ public class MenuCombate {
                     }else{
                         indicepuntero=0;
                     }
-                    psel=renderSelector(selected);
+                    psel=renderSelector(Lucia.getLucia().getEquipo().get(indicepuntero));
                                    
                     break;
                 
@@ -165,7 +166,7 @@ public class MenuCombate {
                                    
                     
                     break;
-                case 3:
+                case 2:
                     if(indicepuntero!=0){
                         indicepuntero--;
                         
@@ -188,8 +189,31 @@ public class MenuCombate {
                     
                 }
                 else{ 
-                    if(selmenu==1||selmenu==2){
+                    if(selmenu==1){
                         turnos.add(new Accion(action, indice, selected, enemigos.get(indicepuntero)));
+                        selmenu=0;
+                        menumodo=0;
+                        indicepuntero=0;
+                        escondidos=0;
+                        pmenu= new Punto(p.getX()+450, p.getY()+10);
+                        aa();
+                        acciones++;
+                        try{
+                             selected=Lucia.getLucia().getEquipo().get(acciones);
+                        }catch(Exception e){
+                            
+                        }
+                       
+                        psel=renderSelector(selected);
+                        
+                        if(acciones==Lucia.getLucia().getEquipo().size()){
+                            combat.setTurno(turnos);
+                            combat.cambiarEstado(1);
+                        }
+
+                    }
+                    else if(selmenu==2){
+                        turnos.add(new Accion(action, indice, selected, Lucia.getLucia().getEquipo().get(indicepuntero)));
                         selmenu=0;
                         menumodo=0;
                         indicepuntero=0;
@@ -213,9 +237,55 @@ public class MenuCombate {
                     }
                 }
             }
+            if (entrada.isKeyPressed(Input.KEY_B)){
+                if(selmenu!=0){
+                    switch(action){
+                        case(0):
+                            pmenu= new Punto(p.getX()+450, p.getY()+10);
+                            indicepuntero=0;
+                            escondidos=0;
+                            selmenu=0;
+                            aa();
+                            menumodo=0;
+                            sonidos.get(2).play(1, (float) 0.2);
+                            break;
+                        case(1):
+                            pmenu= new Punto(p.getX()+450, p.getY()+10);
+                            indicepuntero=0;
+                            escondidos=0;
+                            selmenu=0;
+                            rendMenus(selected.getMagiasStrg());
+                            menumodo=1;
+                            sonidos.get(2).play(1, (float) 0.2);
+                            break;
+                        case(2):
+                            pmenu= new Punto(p.getX()+450, p.getY()+10);
+                            indicepuntero=2;
+                            escondidos=0;
+                            selmenu=0;
+                            rendMenus(Lucia.getLucia().getMagiasStrg());;
+                            menumodo=2;
+                            sonidos.get(2).play(1, (float) 0.2);
+                            break;
+                        
+                    }
+                
+                psel=renderSelector(selected);
+            }else{
+                if(menumodo!=0){
+                    pmenu= new Punto(p.getX()+450, p.getY()+10);
+                    indicepuntero=0;
+                    escondidos=0;
+                    selmenu=0;
+                    aa();
+                    menumodo=0;
+                    System.out.println(selected);
+                    sonidos.get(2).play(1, (float) 0.2);
+                }
+            }
         
         } 
-  
+    }
 
         
     
@@ -298,6 +368,7 @@ public class MenuCombate {
                     selmenu=0;
                     aa();
                     menumodo=0;
+                    sonidos.get(2).play(1, (float) 0.2);
                 }else{
                     selmenu=1;
                     psel=renderSelector(enemigos.get(0)); 
@@ -313,6 +384,7 @@ public class MenuCombate {
                     selmenu=0;
                     aa();
                     menumodo=0;
+                    sonidos.get(2).play(1, (float) 0.2);
                 }else{
                     selmenu=2;
                     psel=renderSelector(selected);
