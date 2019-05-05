@@ -54,6 +54,7 @@ public class Menu extends BasicGameState {
         botonSalir.draw(renderMenu.getX(),renderMenu.getY()+70*3);
         punteroInventario.draw(p.getX(),p.getY());
         
+        
     }
 
     @Override
@@ -65,6 +66,7 @@ public class Menu extends BasicGameState {
     }
     
     public void cEntrada(Input entrada, StateBasedGame game){
+        
         if (entrada.isKeyPressed(Input.KEY_S)){
             if(indicador!=3){
                 p.setY(p.getY()+70);
@@ -84,15 +86,23 @@ public class Menu extends BasicGameState {
                 indicador=3;
             }
         }
+        
         if(entrada.isKeyPressed(Input.KEY_M)){
             
             game.enterState(0);
         }
-        if(entrada.isKeyPressed(Input.KEY_SPACE)&& indicador==3){
-            
-            game.enterState(0);
-            
-            
+        
+        if(entrada.isKeyPressed(Input.KEY_SPACE)){
+            System.out.println(indicador);
+            switch (indicador){
+                case 0:
+                    game.enterState(3);
+                    break;
+                case 3:
+                    game.enterState(0);
+                    break;
+            }
+              
         }
     }
     
