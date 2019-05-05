@@ -9,7 +9,7 @@ public abstract class Pociones extends Objeto {
     
     
     public Pociones(String tipo, Image imagen){
-        super(imagen);
+        super(imagen,"Pocion");
         this.tipo=tipo;
     }
     
