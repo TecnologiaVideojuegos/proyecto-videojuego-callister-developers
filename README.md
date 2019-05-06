@@ -19,3 +19,4 @@
     - 25/04 Añadido paquete mapas en carpeta Java
     - 30/04 Añadido el avance en el sistema de combate
     - 05/05 Añadidas pruebas de inventario
+    - 06/05 Desarrollo inventario y pociones
