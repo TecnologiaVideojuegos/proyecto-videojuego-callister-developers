@@ -12,8 +12,8 @@ import java.util.ArrayList;
  * @author victo
  */
 public class Inventario {
-    private ArrayList<Objeto> items;
-    private ArrayList<Integer> numi;
+    public ArrayList<Objeto> items;
+    public ArrayList<Integer> numi;
 
     public Inventario() {
         this.items = new ArrayList();
