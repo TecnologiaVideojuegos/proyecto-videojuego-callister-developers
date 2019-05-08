@@ -6,6 +6,10 @@
 package Combate;
 
 import entidades.EntidadCombate;
+import entidades.Lucia;
+import itemsjuego.Inventario;
+import itemsjuego.Objeto;
+import org.newdawn.slick.SlickException;
 
 /**
  *
@@ -13,7 +17,7 @@ import entidades.EntidadCombate;
  */
 public class Accion {
     private int action, indice;
-    
+    private Inventario inventario;
     private EntidadCombate atacante, defensor;
     private int anima, animd;
     private int daño;
@@ -21,8 +25,9 @@ public class Accion {
     private boolean reciviendodaño;
     private Magia mag;
     private boolean mg;
+    private Objeto ob;
 
-    public Accion(int action, int indice, EntidadCombate atacante, EntidadCombate defensor) {
+    public Accion(int action, int indice, EntidadCombate atacante, EntidadCombate defensor) throws SlickException {
         this.action = action;
         this.indice = indice;
         this.atacante = atacante;
@@ -32,10 +37,26 @@ public class Accion {
         reciviendodaño=false;
         mag=null;
         mg=true;
+        inventario=Lucia.getLucia().getIntven();
+
+    }
+    public Accion(int action, Objeto objeto, EntidadCombate atacante, EntidadCombate defensor) throws SlickException {
+        this.action = action;
+        this.indice = indice;
+        this.atacante = atacante;
+        this.defensor = defensor;
+        anima=0;
+        animd=0;
+        reciviendodaño=false;
+        mag=null;
+        mg=true;
+        inventario=Lucia.getLucia().getIntven();
+        ob=objeto;
+        
     }
     
     
-    public boolean comprobar(){
+    public boolean comprobar() throws SlickException{
         boolean a= false;
         if(anima!=atacante.getAnimId()){
             switch(action){
@@ -45,25 +66,32 @@ public class Accion {
                 case 1:
                     a=magia();
                 break;
+                case 2:
+                    a=objeto();   
+                break;
             }
       
         }
         return a;
     }
     
-    public void actionCalc(){
+    public void actionCalc() throws SlickException{
         switch(action){
-            case 0:
-                
+            case 0: 
                 daño=atacante.ataqueBasico();
                 anima=atacante.getAnimId();
-                
                 break;
             case 1: 
                 System.out.println("Magia");
                 daño=atacante.hacerMagia(indice, defensor);
                 anima=atacante.getAnimId();
+                break;
+            case 2:
                 
+                atacante.usarObjeto();
+                anima=atacante.getAnimId();
+                ob.restart();
+                //Lucia.getLucia().getIntven().get(indice).restart();
                 break;
         }
     }
@@ -73,6 +101,7 @@ public class Accion {
     }
 
     public void setDefensor(EntidadCombate defensor) {
+        System.out.println("Defensor de "+atacante+" Cambiado a "+ defensor);
         this.defensor = defensor;
     }
 
@@ -110,7 +139,33 @@ public class Accion {
             a=true;
             reciviendodaño=false;
         }
-        
         return a;
     }
+    
+    private boolean objeto(){
+        boolean a = false;
+
+        if(ob.draw((int) defensor.getPosCombate().getX(), (int) defensor.getPosCombate().getY())){
+            a=true;
+            ob.usar(defensor);
+
+        }
+        
+        return a;
+         
+    }
+    
+    public String toString(){
+        String a=atacante+" usó ";
+        String b="ataque básico en ";
+        String c=defensor+".";
+        if(action==1){
+            b=atacante.getMagias().get(indice)+" en ";
+        }
+        if(action==2){
+            b=ob.toString()+" en ";
+        }
+        return a+b+c;
+    }
+    
 }

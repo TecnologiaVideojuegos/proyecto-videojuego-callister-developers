@@ -45,6 +45,7 @@ public class MenuCombate {
     private ArrayList<Accion> turnos;
     private int acciones;
     private Aliado selected;
+    private IACombate ia;
             
 
 
@@ -52,7 +53,7 @@ public class MenuCombate {
         this.menu = new Image("resources/Menus/Combate.png");
         puntero=new Image("resources/Menus/PunteroMenu.png");
         p= new Punto(0, 640-200);
-        pmenu= new Punto(p.getX()+450, p.getY()+10);
+        pmenu= new Punto(p.getX()+10, p.getY()+10);
         paux = new Punto(pmenu.getX(), pmenu.getY());
         estadomenu=0;
         menusp=new String[]{"Atacar","Magia","Objeto", "Huir"};
@@ -75,6 +76,7 @@ public class MenuCombate {
         turnos=new ArrayList();
         acciones=0;
         selected=Lucia.getLucia().getEquipo().get(0);
+        ia=new IACombate(enemigos);
         
     }
     
@@ -84,7 +86,7 @@ public class MenuCombate {
         puntero.draw(pmenu.getX(), pmenu.getY());
         rendMenus(menuss);
         selector.draw(psel.getX(), psel.getY(),128,128);
-        
+
        
     }
     
@@ -92,10 +94,10 @@ public class MenuCombate {
     public void update(Input entrada) throws SlickException, InterruptedException{
         
         if (entrada.isKeyPressed(Input.KEY_S)){
-            System.out.println(indicepuntero);
+
             switch(selmenu){
                 case 0:
-                    System.out.println("case 0");
+                    
                     if(indicepuntero!=menuss.size()-1){
                         if(indicepuntero!=escondidos+nR-1){
                             pmenu.setY(pmenu.getY()+20);
@@ -183,7 +185,10 @@ public class MenuCombate {
             sonidos.get(0).play(1, (float) 0.2);
         }
          if (entrada.isKeyPressed(Input.KEY_SPACE)){
-                sonidos.get(1).play(1, (float) 0.2);
+             if(indicepuntero!=menuss.size()-1){
+                 sonidos.get(1).play(1, (float) 0.2);
+             }else sonidos.get(2).play(1, (float) 0.2);
+                
                 if(selmenu==0){
                     selecionMenu(menumodo, indicepuntero);
                     
@@ -191,11 +196,12 @@ public class MenuCombate {
                 else{ 
                     if(selmenu==1){
                         turnos.add(new Accion(action, indice, selected, enemigos.get(indicepuntero)));
+                        indice=0;
                         selmenu=0;
                         menumodo=0;
                         indicepuntero=0;
                         escondidos=0;
-                        pmenu= new Punto(p.getX()+450, p.getY()+10);
+                        pmenu= new Punto(p.getX()+10, p.getY()+10);
                         aa();
                         acciones++;
                         try{
@@ -208,17 +214,23 @@ public class MenuCombate {
                         
                         if(acciones==Lucia.getLucia().getEquipo().size()){
                             combat.setTurno(turnos);
+                            ia.setEnemigos(enemigos);
+                            combat.añadirTurnos(ia.getAcciones());
+                            combat.ordenarTurnos(); 
                             combat.cambiarEstado(1);
                         }
 
                     }
                     else if(selmenu==2){
-                        turnos.add(new Accion(action, indice, selected, Lucia.getLucia().getEquipo().get(indicepuntero)));
+                        if(action==2){
+                            turnos.add(new Accion(action, Lucia.getLucia().getIntven().remove(indice), selected, Lucia.getLucia().getEquipo().get(indicepuntero)));
+                        }else turnos.add(new Accion(action, indice, selected, Lucia.getLucia().getEquipo().get(indicepuntero)));
+                        indice=0;
                         selmenu=0;
                         menumodo=0;
                         indicepuntero=0;
                         escondidos=0;
-                        pmenu= new Punto(p.getX()+450, p.getY()+10);
+                        pmenu= new Punto(p.getX()+10, p.getY()+10);
                         aa();
                         acciones++;
                         try{
@@ -231,6 +243,9 @@ public class MenuCombate {
                         
                         if(acciones==Lucia.getLucia().getEquipo().size()){
                             combat.setTurno(turnos);
+                            ia.setEnemigos(enemigos);
+                            combat.añadirTurnos(ia.getAcciones());
+                            combat.ordenarTurnos();
                             combat.cambiarEstado(1);
                         }
 
@@ -238,10 +253,11 @@ public class MenuCombate {
                 }
             }
             if (entrada.isKeyPressed(Input.KEY_B)){
+                sonidos.get(0).stop();
                 if(selmenu!=0){
                     switch(action){
                         case(0):
-                            pmenu= new Punto(p.getX()+450, p.getY()+10);
+                            pmenu= new Punto(p.getX()+10, p.getY()+10);
                             indicepuntero=0;
                             escondidos=0;
                             selmenu=0;
@@ -250,21 +266,23 @@ public class MenuCombate {
                             sonidos.get(2).play(1, (float) 0.2);
                             break;
                         case(1):
-                            pmenu= new Punto(p.getX()+450, p.getY()+10);
+                            pmenu= new Punto(p.getX()+10, p.getY()+10);
                             indicepuntero=0;
                             escondidos=0;
                             selmenu=0;
                             rendMenus(selected.getMagiasStrg());
                             menumodo=1;
+                            
                             sonidos.get(2).play(1, (float) 0.2);
                             break;
                         case(2):
-                            pmenu= new Punto(p.getX()+450, p.getY()+10);
-                            indicepuntero=2;
+                            pmenu= new Punto(p.getX()+10, p.getY()+10);
+                            indicepuntero=0;
                             escondidos=0;
                             selmenu=0;
                             rendMenus(Lucia.getLucia().getMagiasStrg());;
                             menumodo=2;
+                            
                             sonidos.get(2).play(1, (float) 0.2);
                             break;
                         
@@ -273,13 +291,13 @@ public class MenuCombate {
                 psel=renderSelector(selected);
             }else{
                 if(menumodo!=0){
-                    pmenu= new Punto(p.getX()+450, p.getY()+10);
+                    pmenu= new Punto(p.getX()+10, p.getY()+10);
                     indicepuntero=0;
                     escondidos=0;
                     selmenu=0;
                     aa();
                     menumodo=0;
-                    System.out.println(selected);
+                    
                     sonidos.get(2).play(1, (float) 0.2);
                 }
             }
@@ -324,22 +342,20 @@ public class MenuCombate {
             case 0:
                 selmenu=1;
                 psel=renderSelector(enemigos.get(0));  
-                System.out.println("Modo 0");
                 break;
             case 1:
-                System.out.println("Modo 1");
                 menumodo=1;
-                pmenu= new Punto(p.getX()+450, p.getY()+10);
+                pmenu= new Punto(p.getX()+10, p.getY()+10);
                 indicepuntero=0;
                 escondidos=0;
                 cambiaMenu(selected.getMagiasStrg());
                 break;
             case 2:
                 menumodo=2;
-                pmenu= new Punto(p.getX()+450, p.getY()+10);
+                pmenu= new Punto(p.getX()+10, p.getY()+10);
                 indicepuntero=0;
                 escondidos=0;
-                cambiaMenu(Lucia.getLucia().getInvStrg());
+                cambiaMenu(Lucia.getLucia().getIntven().getInvString());
                 break;
             case 3:
                 combat.volverMapa1();
@@ -362,15 +378,18 @@ public class MenuCombate {
                 break;
             case 1:
                 if(sel==menuss.size()-1){
-                    pmenu= new Punto(p.getX()+450, p.getY()+10);
+                    pmenu= new Punto(p.getX()+10, p.getY()+10);
                     indicepuntero=0;
                     escondidos=0;
                     selmenu=0;
                     aa();
                     menumodo=0;
-                    sonidos.get(2).play(1, (float) 0.2);
+                    
                 }else{
                     selmenu=1;
+                    indice=indicepuntero;   
+                    indicepuntero=0;
+                    
                     psel=renderSelector(enemigos.get(0)); 
                     action=1;
                 }
@@ -378,17 +397,19 @@ public class MenuCombate {
                 break;
             case 2:
                 if(sel==menuss.size()-1){
-                    pmenu= new Punto(p.getX()+450, p.getY()+10);
+                    pmenu= new Punto(p.getX()+10, p.getY()+10);
                     indicepuntero=0;
                     escondidos=0;
                     selmenu=0;
                     aa();
                     menumodo=0;
-                    sonidos.get(2).play(1, (float) 0.2);
+                    
                 }else{
                     selmenu=2;
-                    psel=renderSelector(selected);
+                    psel=renderSelector(Lucia.getLucia());
                     action=2;
+                    indice=indicepuntero;
+                    indicepuntero=0;
                 }
                     //selmenu=1;
                 break;
@@ -401,13 +422,10 @@ public class MenuCombate {
         
         
         }
-            public void cambiaMenu(ArrayList<String> a){
+        public void cambiaMenu(ArrayList<String> a){
             a.add("Atrás");
             menuss=a;
-            for(int i=0;i<a.size();i++){
-                System.out.println(menuss);
-            }
-            System.out.println("Cambio de Menu");
+            
         }
 
     public void setAcciones(int acciones) throws SlickException {

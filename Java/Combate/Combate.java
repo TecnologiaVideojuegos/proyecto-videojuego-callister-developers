@@ -34,7 +34,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 public class Combate extends BasicGameState{
     
     private GestorMusica musica;
-    private Image fondo;
+    private Image fondo, comv;
     private Lucia lucia;
     private ArrayList<Enemigo> enemigos;
     private Punto enem;
@@ -74,12 +74,14 @@ public class Combate extends BasicGameState{
         this.sgb=sbg;
         atacando=false;
         menu=new MenuCombate(enemigos,this);
+        comv=new Image("resources/Menus/Dialogos.jpg");
         }
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         fondo.draw();
         lucia.draw();
+
         enemigosRender(grphcs);
         equipoRender(grphcs);
         switch(estado){
@@ -87,8 +89,10 @@ public class Combate extends BasicGameState{
                     menu.render(grphcs);
                 break;
             case 1:
+                   comv.draw(0, 640-comv.getHeight());
+                   grphcs.drawString(turno.get(0).toString(), 200, 640-comv.getHeight()+50);
                    if(!atacando){
-                       System.out.println("Atacando");
+
                        turno.get(0).actionCalc();
                        atacando=true;  
                    }
@@ -101,7 +105,10 @@ public class Combate extends BasicGameState{
                                volverMapa1();
                            } else{
                                try{
-                                   turno.get(0).setDefensor(enemigos.get(0));
+                                   if(lucia.getEquipo().contains(turno.get(0).getAtacante())){
+                                       turno.get(0).setDefensor(enemigos.get(0));
+                                   }
+                                   
                                }catch(Exception e){}
                                    
                               
@@ -113,8 +120,9 @@ public class Combate extends BasicGameState{
                    if(turno.isEmpty()){
                        estado=0;
                        menu.setAcciones(0);
-                   }
+                   } 
                 break;
+                
         }
         
          
@@ -171,20 +179,15 @@ public class Combate extends BasicGameState{
     
     private void genEnemigos(Enemigo e, int a) throws SlickException{
         if (a!=1){
-        
-            enem.setY((360-64)/a);
-            
-            
+            enem.setY((360-64)/a); 
         }
         enemigos.add(e); 
         for(int i=1;i<a;i++){
-            enemigos.add(new Geobro(0,0));
-            
+            enemigos.add(new Geobro(0,0));    
         }
         for(int i=0;i<enemigos.size();i++){
             enemigos.get(i).setPosCombate(new Punto(enem.getX()+10*i, enem.getY()+85*i));
             enemigos.get(i).combatir();
-            System.out.println(i);
         }
         
     }
@@ -197,7 +200,7 @@ public class Combate extends BasicGameState{
         turno.add(a);
     }
 
-    public void setTurno(ArrayList<Accion> turno) {
+    public void setTurno(ArrayList<Accion> turno) throws SlickException {
         this.turno = turno;
     }
     
@@ -208,6 +211,7 @@ public class Combate extends BasicGameState{
     public boolean comprobarDebilitados(){
         boolean b=false;
         ArrayList<Enemigo> a=new ArrayList();
+        EntidadCombate e;
         for(int i=0;i<enemigos.size();i++){
             if(enemigos.get(i).getMultiplicadores()[0]==0){
                 a.add(enemigos.get(i));
@@ -215,8 +219,37 @@ public class Combate extends BasicGameState{
             }
         }
         for(int i=0;i<a.size();i++){
-            enemigos.remove(a.get(i));
+            e=a.get(i);
+            for(int j=0;j<turno.size();j++){
+                if(turno.get(j).getAtacante().equals(e)){
+                    turno.remove(j);
+                }
+            }
+            enemigos.remove(e);
+            
         }
         return b;
+    }
+    
+    public void añadirTurnos(ArrayList<Accion> a){
+        for (int i = 0; i < a.size(); i++) {
+            turno.add(a.get(i));  
+        }
+        
+    }
+    
+    public void ordenarTurnos(){
+        ArrayList<Accion> aux=new ArrayList();
+        int mayor=0;
+        while(!turno.isEmpty()){
+            for(int i=0;i<turno.size();i++){
+                if(turno.get(mayor).getAtacante().getEst()[7]*turno.get(mayor).getAtacante().getMultiplicadores()[7]<turno.get(i).getAtacante().getEst()[7]*turno.get(i).getAtacante().getMultiplicadores()[7]){
+                    mayor=i;
+                }
+            }
+            aux.add(turno.remove(mayor));
+            mayor=0;
+        }
+       turno=aux; 
     }
 }
