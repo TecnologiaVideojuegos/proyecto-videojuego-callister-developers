@@ -20,3 +20,4 @@
     - 30/04 Añadido el avance en el sistema de combate
     - 05/05 Añadidas pruebas de inventario
     - 06/05 Desarrollo inventario y pociones
+    -8/05 Adicion de efectos al uso de las pociones en combate, IA para el combate de los enemigos y la gestion de los turnos, mejoras en la interfaz de combate
