@@ -6,10 +6,16 @@
 package entidades;
 
 import Combate.MagiaAgua1;
+import Combate.MagiaTierra1;
 import chaoschild.Punto;
 import chaoschild.Vector;
 import itemsjuego.Inventario;
 import itemsjuego.Objeto;
+import itemsjuego.PocionMGrande;
+import itemsjuego.PocionMMediana;
+import itemsjuego.PocionMPequeña;
+import itemsjuego.PocionVGrande;
+import itemsjuego.PocionVMediana;
 import itemsjuego.PocionVPequeña;
 import java.util.ArrayList;
 import org.newdawn.slick.Input;
@@ -45,12 +51,19 @@ public class Lucia extends Aliado{
         equipo.add(this);
         equipo.add(new Kato(getPosCombate().getX()-64, getPosCombate().getY()));
         aprenderMagia(new MagiaAgua1());
-        estadisticasb(new int[]{80, 60, 80, 0, 0, 0, 0, 0, 0, 20, 5, 10, 10, 20, 0, 0, 20, 18});
+        aprenderMagia(new MagiaTierra1());
+        estadisticasb(new int[]{80, 60, 80, 0, 0, 0, 0, 0, 1, 20, 5, 10, 10, 20, 0, 0, 20, 18});
         caminar=new Sound("resources/sonido/paso.ogg");
         caminar.loop();
         caminar.stop();
         intven=new Inventario();
         intven.add(new PocionVPequeña());
+        intven.add(new PocionMPequeña());
+        intven.add(new PocionVMediana());
+        intven.add(new PocionMMediana());
+        intven.add(new PocionVGrande());
+        intven.add(new PocionMGrande());
+        setAnimdañar(3);
         
     }
        
@@ -123,6 +136,14 @@ public class Lucia extends Aliado{
     
     public ArrayList<Aliado> getEquipo(){
         return equipo;
+    }
+    
+    public ArrayList<String> getEquipoStrng(){
+        ArrayList<String> a=new ArrayList();
+        for(int i=0;i<equipo.size();i++){
+            a.add(equipo.get(i).toString());   
+        }
+        return a;
     }
     
     

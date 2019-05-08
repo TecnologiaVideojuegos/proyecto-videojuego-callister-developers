@@ -24,7 +24,7 @@ public class Aliado extends EntidadCombate{
     
     
     public void cMana(int m){
-        
+        System.out.println("Mana Curado");
     }
     
     

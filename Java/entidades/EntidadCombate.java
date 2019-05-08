@@ -31,6 +31,7 @@ public class EntidadCombate extends Entidad{
     private int[] luest;
     private Sound daño;
     private Sound dañar;
+    private int animdañar, animbaseco, animest, animmag, SPD;
     
     
     
@@ -41,12 +42,16 @@ public class EntidadCombate extends Entidad{
         lucha=false;
         setAnimacionCombate(0);
         magias=new ArrayList();
-        est=new int[8];
+        est=new int[8];//0:HP,1:MP,2:STR,3:DEF,4:INT,5:AGI,6:SPD
         multiplicadores=new int [8];
         estb=new int [8];
         luest=new int[8];
         daño=new Sound("resources/sonido/HitDamage.ogg");
         dañar=new Sound("resources/sonido/combate/fisica_flecha_o_lanzar.ogg");
+        animdañar=2;
+        animbaseco=1;
+        animest=0;
+        animmag=1;
         
     }
     public EntidadCombate(String ruta,String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre, int a) throws SlickException {
@@ -62,6 +67,10 @@ public class EntidadCombate extends Entidad{
         luest=new int[8];
         daño=new Sound("resources/sonido/HitDamage.ogg");
         dañar=new Sound("resources/sonido/combate/fisica_flecha_o_lanzar.ogg");
+        animdañar=2;
+        animbaseco=1;
+        animest=0;
+        animmag=1;
         
     }
     public EntidadCombate(String ruta,String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre, int wc, int hc) throws SlickException {
@@ -77,6 +86,10 @@ public class EntidadCombate extends Entidad{
         luest=new int[8];
         daño=new Sound("resources/sonido/HitDamage.ogg");
         dañar=new Sound("resources/sonido/combate/fisica_flecha_o_lanzar.ogg");
+        animdañar=2;
+        animbaseco=1;
+        animest=0;
+        animmag=1;
         
     }
     
@@ -84,7 +97,7 @@ public class EntidadCombate extends Entidad{
         if (lucha){
             if(combate.getAnimacion().isStopped()){
                 combate.getAnimacion().restart();
-                combate.setAnimacion(0);
+                combate.setAnimacion(animest);
                 
             }
             combate.drawCombate();
@@ -96,7 +109,7 @@ public class EntidadCombate extends Entidad{
 
             if(combate.getAnimacion().isStopped()){
                 combate.getAnimacion().restart();
-                combate.setAnimacion(0);
+                combate.setAnimacion(animest);
                 
                 
             }
@@ -137,7 +150,7 @@ public class EntidadCombate extends Entidad{
         if(multiplicadores[0]<0){
             multiplicadores[0]=0;
         }
-        combate.setAnimacion(2);
+        combate.setAnimacion(animdañar);
         daño.play(1, (float) 0.1);
     }
     
@@ -145,7 +158,7 @@ public class EntidadCombate extends Entidad{
         int dmg;
         int DMG=(int) (0.9*est[5]+(0.9*LVL*10*0.3));
         dmg=(int) (0.5*est[2]+DMG);
-        combate.setAnimacion(1);
+        combate.setAnimacion(animbaseco);
         dañar.play(1, (float) 0.1);
         return dmg;
     }
@@ -235,4 +248,37 @@ public class EntidadCombate extends Entidad{
         }
         return a;
     }
+    
+    public void usarObjeto(){
+        setAnimacionCombate(1);
+    }
+    public void curarV(int a){
+        System.out.println("Vida Curada");
+            multiplicadores[0]=multiplicadores[0]+a;
+            if(multiplicadores[0]>est[0]) multiplicadores[0]=est[0];
+    }
+    public void curarM(int a){
+        System.out.println("Mana Recuperado");
+        multiplicadores[1]=multiplicadores[1]+a;
+        if(multiplicadores[1]>est[1]) multiplicadores[1]=est[1];
+    }
+
+    public void setAnimdañar(int animdañar) {
+        this.animdañar = animdañar;
+    }
+
+    public void setAnimbaseco(int animbaseco) {
+        this.animbaseco = animbaseco;
+    }
+
+    public void setAnimest(int animest) {
+        this.animest = animest;
+    }
+
+    public void setAnimmag(int animmag) {
+        this.animmag = animmag;
+    }
+    
+    
+    
 }

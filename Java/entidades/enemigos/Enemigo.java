@@ -22,14 +22,18 @@ import org.newdawn.slick.SlickException;
  */
 public class Enemigo extends EntidadCombate{
     private int speed;
+    private int propmagia;
     public Enemigo(String ruta, String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre) throws SlickException {
         super(ruta, rutaC, h, w, numAnimaciones, numC, frames, nombre);
         speed=50;
+        propmagia=30;
     }
 
     public Enemigo(String ruta, String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre, int hc, int wc) throws SlickException {
         super(ruta, rutaC, h, w, numAnimaciones, numC, frames, nombre, hc, wc);
         speed=50;
+        propmagia=30;
+        
     }
     
     
@@ -39,9 +43,9 @@ public class Enemigo extends EntidadCombate{
         Vector v=new Vector(super.getPosicion(), getLucia().getPosicion() );
         int modulo=(int)v.getModulo();
         
-        if(v.getModulo()<500){
+        if(v.getModulo()<50){
             if (modulo!=0){
-                v=new Vector(new Punto(v.getX()/modulo*50, v.getY()/modulo*50));
+                v=new Vector(new Punto(v.getX()/modulo*speed, v.getY()/modulo*speed));
                 super.setVelocidad(v);
             }
         }else v = new Vector(new Punto(0,0));
@@ -131,6 +135,18 @@ public class Enemigo extends EntidadCombate{
     public void actualizar(boolean[] pasar, int a) throws SlickException{
         ia(pasar, calcRuta());
         super.update(a);
+    }
+
+    public int getPropmagia() {
+        return propmagia;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public void setPropmagia(int propmagia) {
+        this.propmagia = propmagia;
     }
     
     
