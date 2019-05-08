@@ -2,14 +2,15 @@ package itemsjuego;
 
 import entidades.Aliado;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public abstract class Pociones extends Objeto {
     
     protected String tipo;
     
     
-    public Pociones(String tipo, Image imagen){
-        super(imagen,"Pocion");
+    public Pociones(String tipo, Image imagen, String ruta) throws SlickException{
+        super(imagen,"Pocion", ruta, "resources/sonido/combate/healing.ogg");
         this.tipo=tipo;
     }
     
