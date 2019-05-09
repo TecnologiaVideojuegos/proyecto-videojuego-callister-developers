@@ -24,3 +24,4 @@
             IA para el combate de los enemigos y la gestion de los turnos
             Mejoras en la interfaz de combate
             Adición de varios mapas
+    - 09/05 Adicion de mapa Catedral
