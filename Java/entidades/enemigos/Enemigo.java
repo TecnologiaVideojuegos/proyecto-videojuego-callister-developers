@@ -5,6 +5,8 @@
  */
 package entidades.enemigos;
 
+import Combate.Elemento;
+import Combate.Normal;
 import chaoschild.Punto;
 import chaoschild.Vector;
 import entidades.Entidad;
@@ -23,18 +25,30 @@ import org.newdawn.slick.SlickException;
 public class Enemigo extends EntidadCombate{
     private int speed;
     private int propmagia;
+    private Elemento elemento;
+    
     public Enemigo(String ruta, String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre) throws SlickException {
         super(ruta, rutaC, h, w, numAnimaciones, numC, frames, nombre);
         speed=50;
         propmagia=30;
+        elemento=new Normal();
     }
 
     public Enemigo(String ruta, String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre, int hc, int wc) throws SlickException {
         super(ruta, rutaC, h, w, numAnimaciones, numC, frames, nombre, hc, wc);
         speed=50;
         propmagia=30;
+        elemento=new Normal();
         
     }
+
+    public Enemigo(String ruta, String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre, int wc, int hc, boolean[] limited) throws SlickException {
+        super(ruta, rutaC, h, w, numAnimaciones, numC, frames, nombre, wc, hc, limited);
+        speed=50;
+        propmagia=30;
+    }
+    
+    
     
     
     
@@ -43,7 +57,7 @@ public class Enemigo extends EntidadCombate{
         Vector v=new Vector(super.getPosicion(), getLucia().getPosicion() );
         int modulo=(int)v.getModulo();
         
-        if(v.getModulo()<50){
+        if(v.getModulo()<100){
             if (modulo!=0){
                 v=new Vector(new Punto(v.getX()/modulo*speed, v.getY()/modulo*speed));
                 super.setVelocidad(v);
@@ -147,6 +161,15 @@ public class Enemigo extends EntidadCombate{
 
     public void setPropmagia(int propmagia) {
         this.propmagia = propmagia;
+    }
+
+    public void setElemento(Elemento elemento) {
+        this.elemento = elemento;
+    }
+
+    @Override
+    public Elemento getElemento() {
+        return elemento;
     }
     
     

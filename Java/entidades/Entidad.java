@@ -95,7 +95,7 @@ public class Entidad {
     
     public void setAnimacion(int a){
        animacion=direcciones[a];
-       animid=a;   
+       animid=a;  
     }
     
     public void genHitboxes(Punto p, int wi,int hi){

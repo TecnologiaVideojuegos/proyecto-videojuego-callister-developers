@@ -9,6 +9,8 @@ import Combate.MagiaAgua1;
 import Combate.MagiaTierra1;
 import chaoschild.Punto;
 import chaoschild.Vector;
+import itemsjuego.GemaAgua1;
+import itemsjuego.GemaAgua2;
 import itemsjuego.Inventario;
 import itemsjuego.Objeto;
 import itemsjuego.PocionMGrande;
@@ -52,7 +54,7 @@ public class Lucia extends Aliado{
         equipo.add(new Kato(getPosCombate().getX()-64, getPosCombate().getY()));
         aprenderMagia(new MagiaAgua1());
         aprenderMagia(new MagiaTierra1());
-        estadisticasb(new int[]{80, 60, 80, 0, 0, 0, 0, 0, 1, 20, 5, 10, 10, 20, 0, 0, 20, 18});
+        estadisticasb(new int[]{80, 60, 80, 10, 20, 0, 0, 0, 2, 20, 5, 10, 10, 20, 0, 0, 20, 18});
         caminar=new Sound("resources/sonido/paso.ogg");
         caminar.loop();
         caminar.stop();
@@ -63,6 +65,8 @@ public class Lucia extends Aliado{
         intven.add(new PocionMMediana());
         intven.add(new PocionVGrande());
         intven.add(new PocionMGrande());
+        intven.add(new GemaAgua1());
+        intven.add(new GemaAgua2());
         setAnimdañar(3);
         
     }
@@ -150,6 +154,7 @@ public class Lucia extends Aliado{
     public ArrayList<String> getInvStrg(){
         ArrayList<String> a=new ArrayList();
         for(int i=0;i<inventario.size();i++){
+            
             a.add(inventario.get(i).toString());
             
         }
