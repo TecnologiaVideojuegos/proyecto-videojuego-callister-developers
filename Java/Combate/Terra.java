@@ -11,10 +11,10 @@ import org.newdawn.slick.SlickException;
  *
  * @author victo
  */
-public class MagiaTierra1 extends Magia{
+public class Terra extends Elemento{
     
-    public MagiaTierra1() throws SlickException {
-        super(5, 20, new Terra(), "resources/Magia/Roca.png", 100, "Lanza Rocas", "resources/sonido/combate/Magia/Falling_Rock.ogg", 0);
+    public Terra() throws SlickException {
+        super(new String[]{"Rayo"}, new String[]{"Agua"}, "resources/Menus/Tipos/ground.png", "Tierra");
     }
     
 }

@@ -46,6 +46,7 @@ public class MenuCombate {
     private int acciones;
     private Aliado selected;
     private IACombate ia;
+    private Sound cant;
             
 
 
@@ -77,6 +78,7 @@ public class MenuCombate {
         acciones=0;
         selected=Lucia.getLucia().getEquipo().get(0);
         ia=new IACombate(enemigos);
+        cant=new Sound("resources/sonido/combate/menu_cant.ogg");
         
     }
     
@@ -185,9 +187,19 @@ public class MenuCombate {
             sonidos.get(0).play(1, (float) 0.2);
         }
          if (entrada.isKeyPressed(Input.KEY_SPACE)){
+             //selmenu: 0 menus texto, 1 seleccion enemigos, 2 seleccion aliados
+             System.out.println("MenuModo= "+menumodo+" SelMenu= "+selmenu);
              if(indicepuntero!=menuss.size()-1){
-                 sonidos.get(1).play(1, (float) 0.2);
-             }else sonidos.get(2).play(1, (float) 0.2);
+                if(selmenu==0&&menumodo==2){
+                     if(Lucia.getLucia().getIntven().get(indicepuntero).isGem()){
+                         cant.play(1, (float) 0.2);
+                     }else sonidos.get(1).play(1, (float) 0.2);
+                }else sonidos.get(1).play(1, (float) 0.2);
+                 
+             }else{
+               
+                sonidos.get(2).play(1, (float) 0.2);
+             }
                 
                 if(selmenu==0){
                     selecionMenu(menumodo, indicepuntero);
@@ -311,7 +323,7 @@ public class MenuCombate {
         
         if(menu.size()<9){
             nR=menu.size();
-        }
+        }else nR=9;
         
         for(int i=0;i<nR;i++){
             g.drawString(menu.get(i+escondidos), paux.getX()+20, paux.getY()+i*20);
@@ -405,11 +417,13 @@ public class MenuCombate {
                     menumodo=0;
                     
                 }else{
-                    selmenu=2;
-                    psel=renderSelector(Lucia.getLucia());
-                    action=2;
-                    indice=indicepuntero;
-                    indicepuntero=0;
+                    if(!Lucia.getLucia().getIntven().get(indicepuntero).isGem()){
+                        selmenu=2;
+                        psel=renderSelector(Lucia.getLucia());
+                        action=2;
+                        indice=indicepuntero;
+                        indicepuntero=0;
+                    }else cant.play(1, (float) 0.5);
                 }
                     //selmenu=1;
                 break;
@@ -422,6 +436,7 @@ public class MenuCombate {
         
         
         }
+    
         public void cambiaMenu(ArrayList<String> a){
             a.add("Atrás");
             menuss=a;

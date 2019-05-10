@@ -59,9 +59,7 @@ public class Magia{
             if(!sonido.playing()){
                 sonido.play((float) 1.01, (float) 0.5);
             } 
-        }
-        
-          
+        }   
     }
 
     public int getCoste() {

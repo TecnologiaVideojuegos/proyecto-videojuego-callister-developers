@@ -11,6 +11,7 @@ import entidades.EntidadCombate;
 import entidades.Lucia;
 import entidades.enemigos.Enemigo;
 import entidades.enemigos.Geobro;
+import entidades.enemigos.Ragebbit;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -183,7 +184,7 @@ public class Combate extends BasicGameState{
         }
         enemigos.add(e); 
         for(int i=1;i<a;i++){
-            enemigos.add(new Geobro(0,0));    
+            enemigos.add(new Ragebbit(0,0));    
         }
         for(int i=0;i<enemigos.size();i++){
             enemigos.get(i).setPosCombate(new Punto(enem.getX()+10*i, enem.getY()+85*i));

@@ -17,7 +17,7 @@ import org.newdawn.slick.SpriteSheet;
 public class MagiaAgua1 extends Magia{
     
     public MagiaAgua1() throws SlickException {
-        super(5, 5, new Elemento(), "resources/Magia/AguaGimp.png", 100, "Burbuja","resources/sonido/combate/Magia/magic_agua.ogg", 0 );
+        super(5, 20, new Agua(), "resources/Magia/AguaGimp.png", 100, "Burbuja","resources/sonido/combate/Magia/magic_agua.ogg", 0 );
     }
     
     

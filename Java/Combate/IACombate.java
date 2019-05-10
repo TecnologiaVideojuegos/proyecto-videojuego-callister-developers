@@ -52,7 +52,6 @@ public class IACombate {
     private void elegirMagia(Enemigo e){
         int a;
         if(!e.getMagias().isEmpty()){
-            
             a=(new Random()).nextInt(e.getMagias().size()); 
             if(e.getMagias().get(a).getCoste()<e.getMultiplicadores()[1]){
                 acion=1;
@@ -66,10 +65,12 @@ public class IACombate {
     private EntidadCombate selecionarObjetivo(Enemigo e){
         EntidadCombate c=enemigos.get((new Random()).nextInt(enemigos.size()));;
         if(acion==1){
+            try{
             if(e.getMagias().get(indice).getTipo()==1){
-                System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                 c=atacante.get((new Random()).nextInt(atacante.size()));
             }
+            }catch(Exception ex){}
+            
         }
         return c;
     }
@@ -78,6 +79,7 @@ public class IACombate {
         for(int i=0;i<atacante.size();i++){
             accion(atacante.get(i));
             acciones.add(new Accion(acion, indice, atacante.get(i), selecionarObjetivo(atacante.get(i))));
+            acion=0;
         }
     }
 
@@ -89,7 +91,6 @@ public class IACombate {
         for(int i=0;i<a;i++){
             aux.add(acciones.remove(0));
         }
-        System.out.println(aux.size());
         return aux;
     }
 

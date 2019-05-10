@@ -33,12 +33,12 @@ public class Accion {
         this.atacante = atacante;
         this.defensor = defensor;
         anima=0;
-        animd=0;
+        animd=defensor.getAnimest();
         reciviendodaño=false;
         mag=null;
         mg=true;
         inventario=Lucia.getLucia().getIntven();
-
+        System.out.println(atacante+" va a hacer la accion "+action+" contra "+defensor);
     }
     public Accion(int action, Objeto objeto, EntidadCombate atacante, EntidadCombate defensor) throws SlickException {
         this.action = action;
@@ -46,7 +46,7 @@ public class Accion {
         this.atacante = atacante;
         this.defensor = defensor;
         anima=0;
-        animd=0;
+        animd=defensor.getAnimest();
         reciviendodaño=false;
         mag=null;
         mg=true;
@@ -76,13 +76,13 @@ public class Accion {
     }
     
     public void actionCalc() throws SlickException{
+                System.out.println("Turno de "+atacante);
         switch(action){
             case 0: 
                 daño=atacante.ataqueBasico();
                 anima=atacante.getAnimId();
                 break;
             case 1: 
-                System.out.println("Magia");
                 daño=atacante.hacerMagia(indice, defensor);
                 anima=atacante.getAnimId();
                 break;
@@ -160,7 +160,7 @@ public class Accion {
         String b="ataque básico en ";
         String c=defensor+".";
         if(action==1){
-            b=atacante.getMagias().get(indice)+" en ";
+            //b=atacante.getMagias().get(0)+" en ";
         }
         if(action==2){
             b=ob.toString()+" en ";
