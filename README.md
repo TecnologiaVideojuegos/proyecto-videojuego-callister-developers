@@ -25,3 +25,5 @@
             Mejoras en la interfaz de combate
             Adición de varios mapas
     - 09/05 Adicion de mapa Catedral
+    - 11/05 Addicion de gemas, clase para gemas de agua, tierra y fuego, correccion de bugs
+            clase de para elemento fuego
