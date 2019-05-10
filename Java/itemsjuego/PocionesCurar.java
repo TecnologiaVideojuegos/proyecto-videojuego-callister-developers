@@ -1,12 +1,14 @@
 package itemsjuego;
 
 import entidades.Aliado;
+import entidades.EntidadCombate;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class PocionesCurar extends Pociones {
     protected int salud;
-    public PocionesCurar(int salud, Image imagen){
-        super("salud", imagen);
+    public PocionesCurar(int salud, Image imagen) throws SlickException{
+        super("salud", imagen, "resources/Magia/Curar.png");
         this.salud=salud;
     }
     
@@ -19,9 +21,11 @@ public class PocionesCurar extends Pociones {
     } 
     
     @Override
-    public void usar(Aliado a){
-        a.cVida(salud);    
+    public void usar(EntidadCombate a){
+        System.out.println("eeeeeee");
+        a.curarV(salud);   
     }
+    
     
     @Override
     public String toString() {

@@ -15,15 +15,13 @@ import org.newdawn.slick.SlickException;
  */
 public class PocionVMediana extends PocionesCurar {
     public PocionVMediana() throws SlickException{
-        super(40,new Image("resources/Menus/PunteroMenu.png"));
+        super(40,new Image("resources/PotiVidaMediana.png"));
     }
     @Override
     public String toString(){
         return "Pocion de vida mediana";
     }
-    @Override
-    public void render(int x, int y, Graphics g){       
-        g.drawString(toString(), x, y);       
-    }
+  
+    
     
 }

@@ -5,21 +5,19 @@
  */
 package itemsjuego;
 
-import org.newdawn.slick.Graphics;
+import Combate.Agua;
+import Combate.Elemento;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 /**
  *
- * @author ceals
+ * @author victo
  */
-public class PocionVGrande extends PocionesCurar {
-    public PocionVGrande() throws SlickException{
-        super(60,new Image("resources/PotiVidaGrande.png"));
-    }
-    @Override
-    public String toString(){
-        return "Pocion de vida grande";
+public class GemaAgua1 extends Gema1{
+    
+    public GemaAgua1() throws SlickException {
+        super(new Image("resources/Gemas/Agua1.png"), "Gema Agua NL1", new Agua());
     }
     
 }

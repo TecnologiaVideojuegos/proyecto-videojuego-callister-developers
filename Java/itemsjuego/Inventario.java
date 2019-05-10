@@ -5,7 +5,9 @@
  */
 package itemsjuego;
 
+import chaoschild.Punto;
 import java.util.ArrayList;
+import org.newdawn.slick.Graphics;
 
 /**
  *
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 public class Inventario {
     public ArrayList<Objeto> items;
     public ArrayList<Integer> numi;
+    
 
     public Inventario() {
         this.items = new ArrayList();
@@ -54,7 +57,40 @@ public class Inventario {
     }
 
    
+    public void render(Punto p, Graphics g){
+        for (int i=0;i<items.size();i++){
+            g.drawString(items.get(i).toString()+"   x"+numi.get(i).toString(),(int)p.getX()+32, (int)p.getY()+i*33+32/2-10);
+            items.get(i).renderImagen(p, i);
+        }
+
+    }
     
+    public ArrayList<String> getInvString(){
+        ArrayList<String> a=new ArrayList();
+        for (int i=0;i<items.size();i++){
+            a.add(items.get(i).toString()+"  x"+numi.get(i).toString());
+        }
+        return a;
+    }
+    
+    public Objeto get(int i){
+        return items.get(i);
+    }
+    
+    public int size(){
+        return items.size();
+    }
+    
+    public Objeto remove(int i){
+        Objeto a=items.get(i);
+        if(numi.get(i)<=1){
+            a=items.remove(i);
+            numi.remove(i);
+        }else{
+            numi.set(i, numi.get(i)-1);
+        }
+        return a;
+    }
     
     
 }

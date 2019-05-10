@@ -1,12 +1,14 @@
 package itemsjuego;
 
 import entidades.Aliado;
+import entidades.EntidadCombate;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 public class PocionesMana extends Pociones {
     protected int mana;
-    public PocionesMana(int mana, Image imagen){
-        super("mana", imagen);
+    public PocionesMana(int mana, Image imagen) throws SlickException{
+        super("mana", imagen, "resources/Magia/CurarM.png");
         this.mana=mana;
     }
 
@@ -23,8 +25,10 @@ public class PocionesMana extends Pociones {
         return "PocionesMana{" + "mana=" + mana + '}';
     }
      
-    @Override 
-    public void usar(Aliado a){
-        a.cMana(mana);
+    
+    @Override
+    public void usar(EntidadCombate a){
+        System.out.println("reee");
+        a.curarM(mana);
     }
 }

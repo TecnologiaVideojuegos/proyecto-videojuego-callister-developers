@@ -5,6 +5,7 @@
  */
 package itemsjuego;
 
+import chaoschild.Punto;
 import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
 import entidades.EntidadCombate;
 import org.newdawn.slick.Animation;
@@ -24,10 +25,12 @@ public abstract class Objeto {
     private Image imagen;
     private Animation animacion;
     private Sound sonido;
+    private boolean gem;
 
     public Objeto(Image imagen, String n) {
         this.imagen = imagen;
         this.nombre=n;
+        gem=false;
     }
     
     public Objeto(Image imagen, String n, String ruta, String sonido) throws SlickException {
@@ -37,6 +40,7 @@ public abstract class Objeto {
         genAnim(ruta);
         animacion.setLooping(false);
         this.sonido=new Sound(sonido);
+        gem=false;
 
     }
     
@@ -59,7 +63,7 @@ public abstract class Objeto {
 
     @Override
     public String toString() {
-        return "Objeto{" + "nombre=" + nombre + '}';
+        return nombre;
     }
 
     public Image getImagen() {
@@ -92,6 +96,18 @@ public abstract class Objeto {
    
     public void usar(EntidadCombate e){
         System.out.println("aaaaaaaaaaaaaaaaa");
+    }
+    
+    public void renderImagen(Punto p, int i){
+        imagen.draw(p.getX(), p.getY()+i*33);  
+    }
+
+    public boolean isGem() {
+        return gem;
+    }
+
+    public void setGem(boolean gem) {
+        this.gem = gem;
     }
     
     
