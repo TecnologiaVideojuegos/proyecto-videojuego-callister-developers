@@ -29,4 +29,7 @@
             clase de para elemento fuego
             Añadido resistencias y debilidades en pelea, mejoras en el menu de combate
             Añadido mapa Pueblo
+    - 11/05 Modificación de la ubcación de las puertas en algunos mapas
+            Actualización de la carpeta mapas
+            Actualización de la carpeta juego
     
