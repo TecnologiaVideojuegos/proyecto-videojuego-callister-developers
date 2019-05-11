@@ -21,10 +21,10 @@ import org.newdawn.slick.geom.Rectangle;
  *
  * @author victo
  */
-public class EntidadCombate extends Entidad{
+public abstract class EntidadCombate extends Entidad{
     private Entidad combate;
     private boolean lucha;
-    ArrayList<Magia> magias;
+    private ArrayList<Magia> magias;
     private int EXPN, EXPA, LVL;
     private int[] est;
     private int[] estb;
@@ -34,6 +34,8 @@ public class EntidadCombate extends Entidad{
     private Sound dañar;
     private int animdañar, animbaseco, animest, animmag, SPD;
     private Elemento elemento;
+    private int tieneGema=0;
+    private int tieneGemaD=0;
     
     
     
@@ -170,7 +172,7 @@ public class EntidadCombate extends Entidad{
         combate.setAnimacion(i);
     }
     
-    public void recivirDañoFisico(int dmg, Elemento elem){
+    public void recivirDañoMagico(int dmg){
         multiplicadores[0]=multiplicadores[0]-(int)((double)dmg+0.7*(double)est[3]);
         if(multiplicadores[0]<0){
             multiplicadores[0]=0;
@@ -216,7 +218,7 @@ public class EntidadCombate extends Entidad{
         calcEst();
     }
     
-        public void calcEst(){
+    public void calcEst(){
             for(int i=0;i<est.length;i++){
                 est[i]=estb[i]+luest[i]+LVL;
                 multiplicadores[i]=1;
@@ -225,7 +227,7 @@ public class EntidadCombate extends Entidad{
             multiplicadores[1]=est[1];
         }
     
-        public int getAnimId(){
+    public int getAnimId(){
             return combate.getAnimid();
         }
 
@@ -248,8 +250,8 @@ public class EntidadCombate extends Entidad{
     public int hacerMagia(int indice, EntidadCombate objetivo){
         setAnimacionCombate(2);
         int da=magias.get(indice).usar(this, objetivo);
-        int ml=(int) (magias.get(indice).getElemento().mult(objetivo.getElemento()));
-        da=(int) (da+est[4]*0.9)*ml;
+        float ml=(int) (magias.get(indice).getElemento().mult(objetivo.getElemento()));
+        da=(int) ((int) (da+est[4]*0.9)*ml);
         return da;
     }
     
@@ -317,7 +319,60 @@ public class EntidadCombate extends Entidad{
     public int getAnimest() {
         return animest;
     }
+
+    public int getAnimdañar() {
+        return animdañar;
+    }
+
+    public int getAnimbaseco() {
+        return animbaseco;
+    }
+
+    public int getAnimmag() {
+        return animmag;
+    }
+    
+    public void playDaño(){
+         daño.play(1, (float) 0.5);
+    }
+    
+    public void setMult(int a, int b){
+        multiplicadores[a]=b;
+    }
     
     
     
-}
+    public void recivirDañoFisico(int dmg, EntidadCombate en){
+        getMultiplicadores()[0]=(int) (getMultiplicadores()[0]-((int)((double)dmg+0.7*(double)getEst()[3])));
+        if(getMultiplicadores()[0]<0){
+            setMult(0, 0);
+        }
+        setAnimacionCombate(getAnimdañar());
+       playDaño();
+    }
+
+    public int getTieneGema() {
+        return tieneGema;
+    }
+
+    public void setTieneGema(int tieneGema) {
+        this.tieneGema = tieneGema;
+    }
+    
+    
+    public Elemento getElementoDef(){
+        return elemento;
+    }
+
+    public void setTieneGemaD(int tieneGemaD) {
+        this.tieneGemaD = tieneGemaD;
+    }
+
+    public int getTieneGemaD() {
+        return tieneGemaD;
+    }
+    
+    
+    
+   }
+

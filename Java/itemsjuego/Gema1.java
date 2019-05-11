@@ -16,6 +16,7 @@ public abstract class Gema1  extends Gema{
     
     public Gema1(Image imagen, String n, Elemento e) {
         super(imagen, n, e, (float)0.3);
+        setNivel(1);
     }
     
 }

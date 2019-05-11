@@ -43,9 +43,7 @@ public abstract class Elemento {
         int a=0;
         if(efuerte.size()<edeviles.size()){
             a=edeviles.size();
-        }else a=efuerte.size();
-        String f="f";
-        String d="d";
+        }else a=efuerte.size();     
         for(int i=0;i<a;i++){
             try{
                 if(efuerte.get(i)==e.toString()){

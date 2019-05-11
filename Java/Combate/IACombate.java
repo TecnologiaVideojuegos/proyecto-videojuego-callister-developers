@@ -80,6 +80,7 @@ public class IACombate {
             accion(atacante.get(i));
             acciones.add(new Accion(acion, indice, atacante.get(i), selecionarObjetivo(atacante.get(i))));
             acion=0;
+            
         }
     }
 

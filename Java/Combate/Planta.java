@@ -11,10 +11,10 @@ import org.newdawn.slick.SlickException;
  *
  * @author victo
  */
-public class Terra extends Elemento{
+public class Planta extends Elemento{
     
-    public Terra() throws SlickException {
-        super(new String[]{"Rayo"}, new String[]{"Agua", "Planta"}, "resources/Menus/Tipos/ground.png", "Tierra");
+    public Planta() throws SlickException {
+        super(new String[]{"Agua"}, new String[]{"Fuego"}, "resources/Menus/Tipos/grass.png", "Planta");
     }
     
 }

@@ -92,7 +92,6 @@ public class MenuCombate {
        
     }
     
-
     public void update(Input entrada) throws SlickException, InterruptedException{
         
         if (entrada.isKeyPressed(Input.KEY_S)){
@@ -188,19 +187,18 @@ public class MenuCombate {
         }
          if (entrada.isKeyPressed(Input.KEY_SPACE)){
              //selmenu: 0 menus texto, 1 seleccion enemigos, 2 seleccion aliados
-             System.out.println("MenuModo= "+menumodo+" SelMenu= "+selmenu);
+//------------------------------GESTION DE SONIDO------------------------------------------------------------------------------------------
              if(indicepuntero!=menuss.size()-1){
                 if(selmenu==0&&menumodo==2){
                      if(Lucia.getLucia().getIntven().get(indicepuntero).isGem()){
                          cant.play(1, (float) 0.2);
                      }else sonidos.get(1).play(1, (float) 0.2);
-                }else sonidos.get(1).play(1, (float) 0.2);
-                 
+                }else sonidos.get(1).play(1, (float) 0.2); 
              }else{
                
                 sonidos.get(2).play(1, (float) 0.2);
              }
-                
+//--------------------------------------------------------------------------------------------------------------------                
                 if(selmenu==0){
                     selecionMenu(menumodo, indicepuntero);
                     
@@ -317,8 +315,6 @@ public class MenuCombate {
         } 
     }
 
-        
-    
     public void rendMenus(ArrayList<String> menu){
         
         if(menu.size()<9){
@@ -340,13 +336,11 @@ public class MenuCombate {
         menuss=a;
     }
     
-    
     private Punto renderSelector(EntidadCombate e){
         Punto p=new Punto(e.getPosCombate().getX()-32, e.getPosCombate().getY()-64-64);
         return p;
     }
-    
-        
+       
     private void cambiarEstadoMenu(int a) throws SlickException{
         
         
@@ -378,8 +372,6 @@ public class MenuCombate {
             
 
         }
-
-
     
     private void selecionMenu(int modo, int sel) throws SlickException{
         switch(modo){
@@ -437,7 +429,7 @@ public class MenuCombate {
         
         }
     
-        public void cambiaMenu(ArrayList<String> a){
+    public void cambiaMenu(ArrayList<String> a){
             a.add("Atrás");
             menuss=a;
             

@@ -71,7 +71,7 @@ public class Combate extends BasicGameState{
         fondo=new Image("resources/Mapas/Cueva_inicio/Cueva_inicio.png");
         lucia=Lucia.getLucia();
         enemigos=new ArrayList();
-        genEnemigos(new Geobro(0,0), 3);
+        genEnemigos(new Geobro(0,0), 2);
         this.sgb=sbg;
         atacando=false;
         menu=new MenuCombate(enemigos,this);
@@ -184,7 +184,7 @@ public class Combate extends BasicGameState{
         }
         enemigos.add(e); 
         for(int i=1;i<a;i++){
-            enemigos.add(new Ragebbit(0,0));    
+            enemigos.add(new Geobro(0,0));    
         }
         for(int i=0;i<enemigos.size();i++){
             enemigos.get(i).setPosCombate(new Punto(enem.getX()+10*i, enem.getY()+85*i));

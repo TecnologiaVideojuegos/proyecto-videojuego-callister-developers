@@ -3,20 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package itemsjuego;
+package Combate;
 
-import Combate.Elemento;
-import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 /**
  *
  * @author victo
  */
-public abstract class Gema2 extends Gema{
+public class Luz extends Elemento{
     
-    public Gema2(Image imagen, String n, Elemento e) {
-        super(imagen, n, e, (float)0.70);
-        setNivel(2);
+    public Luz() throws SlickException {
+        super(new String[]{"Oscuro"}, new String[]{"Oscuro"}, "resources/Menus/Tipos/ground.png", "Tierra");
     }
     
 }

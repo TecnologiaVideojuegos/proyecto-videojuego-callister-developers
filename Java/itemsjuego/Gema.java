@@ -17,6 +17,7 @@ import org.newdawn.slick.Image;
 public abstract class Gema extends Objeto{
     private Elemento elemento;
     private float mult;
+    private int nivel;
 
     public Gema(Image imagen, String n, Elemento e, float mult) {
         super(imagen, n);
@@ -40,5 +41,15 @@ public abstract class Gema extends Objeto{
     public void renderImagen(Punto p, int i){
        getImagen().draw(p.getX()+6, p.getY()+i*33+6);  
     }
+
+    public int getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
+    }
+    
+    
     
 }

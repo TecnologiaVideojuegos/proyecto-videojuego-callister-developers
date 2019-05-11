@@ -5,6 +5,7 @@
  */
 package entidades.enemigos;
 
+import Combate.Oscuro;
 import chaoschild.Punto;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -29,6 +30,7 @@ public class Ragebbit extends Enemigo{
         setAnimbaseco(2);
         setAnimmag(2);
         setAnimdañar(3);
+        setElemento(new Oscuro());
        
     }
     

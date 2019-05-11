@@ -11,6 +11,7 @@ import chaoschild.Punto;
 import chaoschild.Vector;
 import entidades.Entidad;
 import entidades.EntidadCombate;
+import entidades.Lucia;
 import static entidades.Lucia.getLucia;
 import static java.lang.Math.abs;
 import static java.lang.Math.abs;
@@ -172,7 +173,48 @@ public class Enemigo extends EntidadCombate{
         return elemento;
     }
     
+    @Override
+    public void recivirDañoFisico(int dmg, EntidadCombate en){
+        float res=0;
+        if(en.getTieneGema()!=0){
+            switch(en.getTieneGema()){
+                case 1:
+                    res=(float) 0.3;
+                    break;
+                case 2:
+                    res=(float) 0.75;
+                    break;
+            }
+        }
+        int daux=(int) (dmg*res);
+        dmg=dmg-daux;
+        System.out.println("DAUX tiene un valor de "+daux);
+        try {
+            daux=(int) (daux*en.getElemento().mult(getElemento()));
+            System.out.println("DAUX ahora tiene un valor de "+daux);
+        } catch (Exception e) {
+        }
+        dmg=dmg+daux;
+        super.recivirDañoFisico(dmg, en);
+    }
     
-    
+    @Override
+    public int hacerMagia(int indice, EntidadCombate en){
+        setAnimacionCombate(2);
+        int da=getMagias().get(indice).usar(this, en);
+        float ml=(int) (getMagias().get(indice).getElemento().mult(en.getElementoDef()));
+        if(en.getTieneGemaD()!=0){
+            switch(en.getTieneGemaD()){
+                case 1:
+                    ml=(float) 0.80;
+                    break;
+                case 2:
+                    ml=(float) 0.4;
+                    break;
+            }
+        }
+        da=(int) ((int) (da+getEst()[4]*0.9)*ml);
+        return da;
+    }
     
 }

@@ -14,7 +14,7 @@ import org.newdawn.slick.SlickException;
 public class Agua extends Elemento{
     
     public Agua() throws SlickException {
-        super(new String[]{"Tierra"}, new String[]{"Rayo"}, "resources/Menus/Tipos/water.png", "Agua");
+        super(new String[]{"Tierra"}, new String[]{"Rayo", "Planta"}, "resources/Menus/Tipos/water.png", "Agua");
     }
     
 }

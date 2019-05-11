@@ -5,18 +5,20 @@
  */
 package itemsjuego;
 
+import Combate.Agua;
 import Combate.Elemento;
+import Combate.Luz;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 /**
  *
  * @author victo
  */
-public abstract class Gema2 extends Gema{
+public class GemaLuz2 extends Gema2{
     
-    public Gema2(Image imagen, String n, Elemento e) {
-        super(imagen, n, e, (float)0.70);
-        setNivel(2);
+    public GemaLuz2() throws SlickException {
+        super(new Image("resources/Gemas/Luz2.png"), "Gema Luz NL2", new Luz());
     }
     
 }

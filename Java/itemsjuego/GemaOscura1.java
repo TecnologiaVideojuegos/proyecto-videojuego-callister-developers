@@ -5,18 +5,20 @@
  */
 package itemsjuego;
 
+import Combate.Agua;
 import Combate.Elemento;
+import Combate.Oscuro;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 /**
  *
  * @author victo
  */
-public abstract class Gema2 extends Gema{
+public class GemaOscura1 extends Gema1{
     
-    public Gema2(Image imagen, String n, Elemento e) {
-        super(imagen, n, e, (float)0.70);
-        setNivel(2);
+    public GemaOscura1() throws SlickException {
+        super(new Image("resources/Gemas/Osc1.png"), "Gema Oscura NL1", new Oscuro());
     }
     
 }

@@ -116,7 +116,7 @@ public class Accion {
     private boolean fisico(){
         boolean a=false;
         if(!reciviendodaño){
-            defensor.recivirDañoFisico(daño, null);
+            defensor.recivirDañoFisico(daño, atacante);
             animd=defensor.getAnimId();
             reciviendodaño=true;
         }
@@ -131,7 +131,7 @@ public class Accion {
         boolean a = false;
         
         if(atacante.drawMag(indice)&&!reciviendodaño){
-            defensor.recivirDañoFisico(daño, null);
+            defensor.recivirDañoMagico(daño);
             animd=defensor.getAnimId();
             reciviendodaño=true;
         }

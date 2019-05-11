@@ -3,20 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package itemsjuego;
+package Combate;
 
-import Combate.Elemento;
-import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 /**
  *
  * @author victo
  */
-public abstract class Gema2 extends Gema{
+public class Rayo extends Elemento{
     
-    public Gema2(Image imagen, String n, Elemento e) {
-        super(imagen, n, e, (float)0.70);
-        setNivel(2);
+    public Rayo() throws SlickException {
+        super(new String[]{"Agua"}, new String[]{"Tierra"}, "resources/Menus/Tipos/rayo.png", "Rayo");;
     }
     
 }

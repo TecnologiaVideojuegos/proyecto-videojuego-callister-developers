@@ -11,6 +11,9 @@ import chaoschild.Punto;
 import chaoschild.Vector;
 import itemsjuego.GemaAgua1;
 import itemsjuego.GemaAgua2;
+import itemsjuego.GemaLuz1;
+import itemsjuego.GemaOscura1;
+import itemsjuego.GemaRayo1;
 import itemsjuego.Inventario;
 import itemsjuego.Objeto;
 import itemsjuego.PocionMGrande;
@@ -68,6 +71,8 @@ public class Lucia extends Aliado{
         intven.add(new GemaAgua1());
         intven.add(new GemaAgua2());
         setAnimdañar(3);
+        setArma(new GemaAgua1());
+        setArmor(new GemaRayo1());
         
     }
        
