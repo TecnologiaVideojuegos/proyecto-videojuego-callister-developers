@@ -27,3 +27,5 @@
     - 09/05 Adicion de mapa Catedral
     - 11/05 Addicion de gemas, clase para gemas de agua, tierra y fuego, correccion de bugs
             clase de para elemento fuego
+    -11/05 Añadido resistencias y debilidades en pelea, mejoras en el menu de combate
+    
