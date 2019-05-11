@@ -25,11 +25,11 @@
             Mejoras en la interfaz de combate
             Adición de varios mapas
     - 09/05 Adicion de mapa Catedral
-    - 11/05 Addicion de gemas, clase para gemas de agua, tierra y fuego, correccion de bugs
-            clase de para elemento fuego
+    - 11/05 Adicion de gemas, clase para gemas de agua, tierra y fuego, correccion de bugs
+            Clase de para elemento fuego
             Añadido resistencias y debilidades en pelea, mejoras en el menu de combate
             Añadido mapa Pueblo
-    - 11/05 Modificación de la ubicación de las puertas en algunos mapas
+            Modificación de la ubicación de las puertas en algunos mapas
             Actualización de la carpeta mapas: ya se puede pasar de un mapa a otro (de momento solo hay una transición implementada)
             Actualización de la carpeta juego
     
