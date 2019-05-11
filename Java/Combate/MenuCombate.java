@@ -359,7 +359,11 @@ public class MenuCombate {
         switch (a){
             case 0:
                 selmenu=1;
-                psel=renderSelector(enemigos.get(0));  
+                try {
+                   psel=renderSelector(enemigos.get(0));   
+                } catch (Exception e) {
+                }
+                
                 break;
             case 1:
                 menumodo=1;

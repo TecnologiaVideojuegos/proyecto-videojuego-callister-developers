@@ -16,12 +16,14 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import musica.GestorMusica;
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.CombinedTransition;
@@ -38,7 +40,7 @@ public class Combate extends BasicGameState{
     private Image fondo, comv;
     private Lucia lucia;
     private ArrayList<Enemigo> enemigos;
-    private Punto enem;
+    private Punto enem, nivelsubir,nivelstr;
     private MenuCombate menu;
     private Magia rendm;
     private int mid1;
@@ -47,6 +49,20 @@ public class Combate extends BasicGameState{
     private StateBasedGame sgb;
     private int estado;
     private boolean atacando;
+    private boolean contar;
+    private int contador;
+    private Image lvlim;
+    private ArrayList<String> LVLUP;
+    private int EXP;
+    private boolean leveling;
+    private int contador2;
+    private int ultimosubido;
+    private int contexp;
+    private boolean conte;
+    private boolean printturno;
+    private int printcont;
+    private Animation def;
+    private Animation atac;
 
 
     public Combate(int ID) {
@@ -76,7 +92,26 @@ public class Combate extends BasicGameState{
         atacando=false;
         menu=new MenuCombate(enemigos,this);
         comv=new Image("resources/Menus/Dialogos.jpg");
-        }
+        lvlim=new Image("resources/Menus/NivelUp.png");
+        nivelsubir=new Punto(640-lvlim.getWidth(), 640-lvlim.getHeight());
+        nivelstr=new Punto(nivelsubir.getX()+9, nivelsubir.getY()+9);
+        EXP=0;
+        leveling=false;
+        contador2=0;
+        ultimosubido=5;
+        contexp=0;
+        conte=false;
+        printturno=false;
+        printcont=0;
+        SpriteSheet sprite=new SpriteSheet("resources/Menus/Defensor.png", 40, 40);
+        def=new Animation();
+        def.addFrame(sprite.getSprite(0, 0), 300);
+        def.addFrame(sprite.getSprite(1, 0), 300);
+        sprite=new SpriteSheet("resources/Menus/Atacante.png", 40, 40);
+        atac=new Animation();
+        atac.addFrame(sprite.getSprite(0, 0), 300);
+        atac.addFrame(sprite.getSprite(1, 0), 300);
+    }
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
@@ -85,48 +120,84 @@ public class Combate extends BasicGameState{
 
         enemigosRender(grphcs);
         equipoRender(grphcs);
-        switch(estado){
-            case 0:
-                    menu.render(grphcs);
-                break;
-            case 1:
-                   comv.draw(0, 640-comv.getHeight());
-                   grphcs.drawString(turno.get(0).toString(), 200, 640-comv.getHeight()+50);
-                   if(!atacando){
 
-                       turno.get(0).actionCalc();
-                       atacando=true;  
-                   }
-                   if(turno.get(0).comprobar()){
-                        turno.remove(0);
-                        atacando=false;
-                        if(comprobarDebilitados()){
-                           if(enemigos.isEmpty()){
-                               turno.clear();
-                               volverMapa1();
-                           } else{
-                               try{
-                                   if(lucia.getEquipo().contains(turno.get(0).getAtacante())){
-                                       turno.get(0).setDefensor(enemigos.get(0));
-                                   }
-                                   
-                               }catch(Exception e){}
-                                   
-                              
-                               
+            switch(estado){
+                case 0:
+                        menu.render(grphcs);
+                    break;
+                case 1:
+                    
+                       comv.draw(0, 640-comv.getHeight());
+                       grphcs.drawString(turno.get(0).toString(), 200, 640-comv.getHeight()+50);
+                       if(printcont>100 || !printturno){
+                           def.draw(turno.get(0).getDefensor().getPosCombate().getX()+32-20,turno.get(0).getDefensor().getPosCombate().getY()-40 );
+                           atac.draw(turno.get(0).getAtacante().getPosCombate().getX()+32-20,turno.get(0).getAtacante().getPosCombate().getY()-40 );
+                       }
+                       if(!printturno){
+
+
+                           if(!atacando){
+                               turno.get(0).actionCalc();
+                               atacando=true;  
                            }
-                           
+                           if(turno.get(0).comprobar()){
+                                turno.remove(0);
+                                printturno=true;
+                                atacando=false;
+                                if(comprobarDebilitados()){
+                                   if(enemigos.isEmpty()){
+                                       turno.clear();
+                                   }   
+                                   try{
+                                       if(lucia.getEquipo().contains(turno.get(0).getAtacante())){
+                                           turno.get(0).setDefensor(enemigos.get(0));
+                                       }
+                                   }catch(Exception e){}
+                                }
+                                if(turno.isEmpty()){
+                                    estado=2;
+                                }
+
+                           }
+                       
+                       } 
+                    break;
+                case 2:
+                    if(leveling){
+                        repartirEXP(contador2);
+                        if(conte){
+                            comv.draw(0, 640-comv.getHeight());
+                            grphcs.drawString(LVLUP.get(0), 640-comv.getWidth()/2-LVLUP.get(0).length()/2*10, (640-comv.getHeight()/2));
                         }
-                   }
-                   if(turno.isEmpty()){
-                       estado=0;
-                       menu.setAcciones(0);
-                   } 
-                break;
-                
-        }
-        
-         
+                        if(!LVLUP.isEmpty()&&!conte){
+                            renderLVLUP(grphcs);
+                            contar=true;
+                        }
+                        if(contador2==lucia.getEquipo().size()-1 && !contar && !conte){
+                            leveling=false;
+                        }else{
+                            if(!contar&&!conte){
+                                contador2++;
+                            }
+                        }
+                        
+                        
+                    }else{
+                        estado=1;
+                        contador2=0;
+                        if(enemigos.isEmpty()){
+                            turno.clear();
+                            volverMapa1();
+                        } 
+                        if(turno.isEmpty()){
+                               estado=0;
+                               menu.setAcciones(0);
+                           } 
+                    }
+
+                    break;
+
+            }
     }
 
     @Override
@@ -134,7 +205,30 @@ public class Combate extends BasicGameState{
         comprobarInputs(gc, sbg);
         try {
             if(estado==0){
-                menu.update(gc.getInput());
+                menu.update(gc.getInput());  
+            }
+            if(contar){
+                contador=contador+i;
+                if(contador>2500){
+                    contar=false;
+                    LVLUP.clear();
+                    contador=0;
+                }
+            }
+            if(conte){
+                contexp++;
+                if(contexp>1000){
+                    conte=false;
+                    LVLUP.clear();
+                    contexp=0;
+                }
+            }
+            if(printturno){
+                printcont++;
+                if(printcont>500){
+                    printturno=false;
+                    printcont=0;
+                }
             }
             
         } catch (InterruptedException ex) {
@@ -152,9 +246,13 @@ public class Combate extends BasicGameState{
              volverMapa1();
              
         }
-        
-        
-        
+        if(estado!=0){
+            if(input.isKeyPressed(Input.KEY_A)){
+                if(contar){
+                     contar=false;
+                }
+            }   
+        }  
     }
      
     public void volverMapa(StateBasedGame sbg) throws SlickException{
@@ -207,16 +305,21 @@ public class Combate extends BasicGameState{
     
     public void cambiarEstado(int a){
         estado=a;
+        printturno=true;
     }
     
-    public boolean comprobarDebilitados(){
+    public boolean comprobarDebilitados() throws SlickException{
         boolean b=false;
+        int exp=0;
+        ArrayList<String> subir=new ArrayList();
         ArrayList<Enemigo> a=new ArrayList();
         EntidadCombate e;
         for(int i=0;i<enemigos.size();i++){
             if(enemigos.get(i).getMultiplicadores()[0]==0){
                 a.add(enemigos.get(i));
+                exp=exp+a.get(i).getExpg();
                 b=true;
+                leveling=true;
             }
         }
         for(int i=0;i<a.size();i++){
@@ -228,7 +331,9 @@ public class Combate extends BasicGameState{
             }
             enemigos.remove(e);
             
+            
         }
+        this.EXP=this.EXP+exp;
         return b;
     }
     
@@ -253,4 +358,32 @@ public class Combate extends BasicGameState{
         }
        turno=aux; 
     }
+    
+    public void repartirEXP(int i) throws SlickException{
+        if(i!=ultimosubido){
+            int ex=EXP/(lucia.getEquipo().size()-i);
+            EXP=EXP-ex;
+            LVLUP=Lucia.getLucia().getEquipo().get(i).ganarExperiencia(ex);
+            if(LVLUP.isEmpty()){
+                LVLUP.add(lucia.getEquipo().get(i)+" ha obtenido "+ex+ " Puntos de Experiencia");
+                conte=true;
+            }
+            
+            System.out.println(lucia.getEquipo().get(i)+" ha ganado "+ex+" puntos de Experiencia");
+            System.out.println(LVLUP);
+            
+            ultimosubido=i;
+        }
+        
+    }
+    
+    public void renderLVLUP(Graphics g){
+        lvlim.draw(nivelsubir.getX(), nivelsubir.getY());
+        g.drawString(LVLUP.get(LVLUP.size()-1), nivelstr.getX(), nivelstr.getY());
+        for(int i=0;i<LVLUP.size()-1;i++){
+            g.drawString(LVLUP.get(i), nivelstr.getX(), nivelstr.getY()+20+20*i);
+        }
+        
+    }
+    
 }

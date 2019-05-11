@@ -63,6 +63,10 @@ public abstract class Elemento {
     public String toString() {
         return nombre;
     }
+
+    public Image getTipo() {
+        return tipo;
+    }
     
     
 }
