@@ -14,9 +14,11 @@ import java.util.ArrayList;
 public class Zona {
     
     private ArrayList<Mapa> zona; 
+    private ArrayList<Puerta> puertas;
     
     public Zona(Dungeon dungeon, Pueblo pueblo, Ruta ruta){
         zona = new ArrayList();
+        puertas = new ArrayList();
         zona.add(dungeon);
         zona.add(pueblo);
         zona.add(ruta);
@@ -47,13 +49,7 @@ public class Zona {
     }
     
     public void addRuta(Ruta r){
-        try{
-            if(!"mapas.Ruta".equals(this.zona.get(2).getClass().getName()) && this.zona.size() > 2){
-                zona.add(r);
-            }
-        }catch(IndexOutOfBoundsException e){
-            zona.add(r);
-        }
+        zona.add(r);
     }
     
     public void sort(){

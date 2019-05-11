@@ -5,7 +5,6 @@
  */
 package mapas;
 
-import chaoschild.Punto;
 import entidades.Entidad;
 import java.util.ArrayList;
 import org.newdawn.slick.SlickException;
@@ -18,9 +17,11 @@ public class Mundo {
     
     private ArrayList<Zona> mundo;
     private Mapa mapaCargado;
+    private Entidad entidad;
     
-    public Mundo() throws SlickException{
-        mundo = new ArrayList();
+    public Mundo(Entidad entidad) throws SlickException{
+        this.mundo = new ArrayList();
+        this.entidad = entidad;
         genZonas();
         initMapa();
     }
@@ -44,8 +45,8 @@ public class Mundo {
     }
     
     private void genDungeons() throws SlickException{
-        mundo.get(0).addDungeon(new Dungeon("resources/Pruebas_Tuto.tmx"));
-        mundo.get(1).addDungeon(new Dungeon("resources/Mapas/Mirador_Ciudad/Mirador_Ciudad.tmx"));
+        mundo.get(0).addDungeon(new Dungeon("resources/Mapas/Cueva_inicio/Cueva_inicio.tmx"));
+        //mundo.get(1).addDungeon(new Dungeon("resources/Mapas/Prueba.tmx"));
     }
     
     private void genPueblos() throws SlickException{
@@ -55,12 +56,13 @@ public class Mundo {
     
     private void genRutas() throws SlickException{
         mundo.get(0).addRuta(new Ruta("resources/Mapas/Antes_Cueva_Inicio/Antes_Cueva_Inicio.tmx"));
-        mundo.get(1).addRuta(new Ruta("resources/Mapas/Cueva_inicio/Cueva_inicio.tmx"));
+        mundo.get(0).addRuta(new Ruta("resources/Mapas/Mirador_Ciudad/Mirador_Ciudad.tmx"));
+        //mundo.get(1).addRuta(new Ruta("resources/Pruebas_Tuto.tmx"));
     }
     
-    public void cambiarMapa(int z, int m, Entidad e){
+    public void cambiarMapa(int z, int m){
         this.mapaCargado = this.getMapa(z, m);
-        e.setPosicion(new Punto(400, 500));
+        //entidad.setPosicion(new Punto(400, 500));
     }
     
     public void render(){
@@ -68,37 +70,10 @@ public class Mundo {
     }
     
     public Zona getZona(int Nzona){
-        /*
-        Zona z;
-        
-        if(mundo.size() <= Nzona){
-            z = mundo.get(Nzona);
-        } else {
-            z = null;
-        }
-        
-        return z;*/
-        
         return mundo.get(Nzona);
     }
     
     public Mapa getMapa(int Nzona, int Ntipo){
-        /*Mapa m;
-        ArrayList<Mapa> zona;
-        
-        if(mundo.size() <= Nzona){
-            zona = mundo.get(Nzona).getZona();
-            if(zona.size() <= Ntipo){
-                m = zona.get(Ntipo);
-            } else {
-                m = null;
-            }
-        } else {
-            m = null;
-        }
-        
-        return m;*/
-        
         return mundo.get(Nzona).getZona().get(Ntipo);
     }
     
