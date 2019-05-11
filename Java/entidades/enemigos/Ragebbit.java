@@ -31,6 +31,8 @@ public class Ragebbit extends Enemigo{
         setAnimmag(2);
         setAnimdañar(3);
         setElemento(new Oscuro());
+        setExpg(70);
+        setPropobj(20);
        
     }
     

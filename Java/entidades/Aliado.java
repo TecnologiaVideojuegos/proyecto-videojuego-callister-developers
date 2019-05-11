@@ -72,13 +72,13 @@ public class Aliado extends EntidadCombate{
     
     public void recivirDañoFisico(int dmg, EntidadCombate en){
         float mult=1;
-        
-        if(en.getElemento().mult(armor.getElemento())>0){
+        try {
+            if(en.getElemento().mult(armor.getElemento())>0){
             mult=mult+1-armor.getMult();
         }else{
             mult=mult-armor.getMult();
         }
-        
+        } catch (Exception e) {} 
         super.recivirDañoFisico((int) (dmg*mult), en);
     }
     

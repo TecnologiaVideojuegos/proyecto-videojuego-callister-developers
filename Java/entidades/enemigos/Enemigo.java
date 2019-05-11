@@ -27,6 +27,7 @@ public class Enemigo extends EntidadCombate{
     private int speed;
     private int propmagia;
     private Elemento elemento;
+    private int expg, propobj;
     
     public Enemigo(String ruta, String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre) throws SlickException {
         super(ruta, rutaC, h, w, numAnimaciones, numC, frames, nombre);
@@ -216,5 +217,25 @@ public class Enemigo extends EntidadCombate{
         da=(int) ((int) (da+getEst()[4]*0.9)*ml);
         return da;
     }
+
+    public int getExpg() {
+        return expg;
+    }
+
+    public void setExpg(int expg) {
+        this.expg = (int) (expg*1.10*getLVL());
+    }
+
+    public int getPropobj() {
+        return propobj;
+    }
+
+    public void setPropobj(int propobj) {
+        this.propobj = propobj;
+    }
+
+    
+    
+    
     
 }

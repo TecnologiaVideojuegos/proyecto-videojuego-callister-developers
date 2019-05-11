@@ -46,7 +46,7 @@ public abstract class EntidadCombate extends Entidad{
         lucha=false;
         setAnimacionCombate(0);
         magias=new ArrayList();
-        est=new int[8];//0:HP,1:MP,2:STR,3:DEF,4:INT,5:AGI,6:SPD
+        est=new int[8];//0:HP,1:MP,2:STR,3:DEF,4:INT,5:HIT,6:AGI,7:SPD
         multiplicadores=new int [8];
         estb=new int [8];
         luest=new int[8];
@@ -65,7 +65,7 @@ public abstract class EntidadCombate extends Entidad{
         lucha=false;
         magias=new ArrayList();
         setAnimacionCombate(0);
-         est=new int[8];
+        est=new int[8];
         multiplicadores=new int [8];
         estb=new int [8];
         luest=new int[8];
@@ -215,16 +215,18 @@ public abstract class EntidadCombate extends Entidad{
         for(int i=9;i<estb.length+9;i++){
             luest[i-9]=a[i];
         }
+        
         calcEst();
     }
     
     public void calcEst(){
             for(int i=0;i<est.length;i++){
-                est[i]=estb[i]+luest[i]+LVL;
+                est[i]=estb[i]+luest[i]*LVL;
                 multiplicadores[i]=1;
             }
             multiplicadores[0]=est[0];
             multiplicadores[1]=est[1];
+            EXPN=(int) (150*1.33*LVL);
         }
     
     public int getAnimId(){
@@ -371,8 +373,64 @@ public abstract class EntidadCombate extends Entidad{
     public int getTieneGemaD() {
         return tieneGemaD;
     }
+
+    public int getEXPN() {
+        return EXPN;
+    }
+
+    public void setEXPN(int EXPN) {
+        this.EXPN = EXPN;
+    }
+
+    public int getEXPA() {
+        return EXPA;
+    }
+
+    public void setEXPA(int EXPA) {
+        this.EXPA = EXPA;
+    }
     
+    public ArrayList<String> ganarExperiencia(int i){
+        ArrayList<String> a=new ArrayList();
+        EXPA=EXPA+i;
+        if(EXPA>EXPN){
+            a=subirNivel();
+        }
+        return a;
+    }
     
+    public ArrayList<String> subirNivel(){
+        ArrayList<String> a=new ArrayList();
+        ArrayList<String> b=new ArrayList();
+        a=toStringEst();
+        LVL++;
+        calcEst();
+        b=toStringEst();
+        
+        for(int i=0;i<a.size()-1;i++){
+            a.set(i, a.get(i)+"  -->  "+b.get(i));
+        }
+        
+        EXPN=(int)(EXPN*1.33);
+        
+        return a;
+    }
+
+    public int getLVL() {
+        return LVL;
+    }
+    
+    public ArrayList<String> toStringEst(){
+        ArrayList<String> a=new ArrayList();
+        a.add("HP: "+est[0]);
+        a.add("MP: "+est[1]);
+        a.add("STR: "+est[2]);
+        a.add("DEF: "+est[3]);
+        a.add("INT: "+est[4]);
+        a.add("SPD: "+est[7]);
+        a.add(toString());
+        return a;
+    }
     
    }
 

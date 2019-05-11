@@ -5,7 +5,6 @@
  */
 package entidades.enemigos;
 
-import Combate.Agua;
 import Combate.MagiaTierra1;
 import Combate.Terra;
 import chaoschild.Punto;
@@ -26,6 +25,8 @@ public class Geobro extends Enemigo{
         estadisticasb(new int[]{100, 30, 50, 0, 0, 0, 0, 0, 1, 20, 5, 10, 10, 5, 0, 0, 20, 10});
         aprenderMagia(new MagiaTierra1());
         setElemento(new Terra());
+        setExpg(100);
+        setPropobj(20);
         
     }
     
