@@ -101,7 +101,7 @@ public class MenuCombate {
                     
                     if(indicepuntero!=menuss.size()-1){
                         if(indicepuntero!=escondidos+nR-1){
-                            pmenu.setY(pmenu.getY()+20);
+                            pmenu.setY(pmenu.getY()+21);
                             indicepuntero++;
                         }else {
                             indicepuntero++;
@@ -109,7 +109,7 @@ public class MenuCombate {
                         }
 
                     }else{
-                        pmenu.setY(pmenu.getY()-20*(nR-1));
+                        pmenu.setY(pmenu.getY()-21*(nR-1));
                         indicepuntero=0;
                         escondidos=0;
                     }
@@ -145,14 +145,14 @@ public class MenuCombate {
                 case 0:
                     if(indicepuntero!=0){
                        if(indicepuntero!=escondidos){
-                            pmenu.setY(pmenu.getY()-20);
+                            pmenu.setY(pmenu.getY()-21);
                             indicepuntero--;
                        }else{
                            indicepuntero--;
                            escondidos--;
                        }
                     }else{
-                        pmenu.setY(pmenu.getY()+20*(nR-1));
+                        pmenu.setY(pmenu.getY()+21*(nR-1));
                         indicepuntero=menuss.size()-1;
                         escondidos=menuss.size()-nR;
                     }
@@ -316,13 +316,25 @@ public class MenuCombate {
     }
 
     public void rendMenus(ArrayList<String> menu){
+        int aux=0;
         
         if(menu.size()<9){
             nR=menu.size();
         }else nR=9;
         
+        switch (menumodo){
+            case 1:
+                aux=20;
+                for(int i=0;i<nR-1;i++){
+                    selected.getMagias().get(i+escondidos).getElemento().getTipo().draw(paux.getX()+20, paux.getY()+i*21);
+
+
+                }
+                break;
+        }
+        
         for(int i=0;i<nR;i++){
-            g.drawString(menu.get(i+escondidos), paux.getX()+20, paux.getY()+i*20);
+            g.drawString(menu.get(i+escondidos), paux.getX()+20+aux, paux.getY()+i*21);
 
         }
         
