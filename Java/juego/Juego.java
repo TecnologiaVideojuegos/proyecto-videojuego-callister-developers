@@ -75,6 +75,7 @@ public class Juego extends BasicGameState{
         Lucia.draw(); 
         ragebit.draw();
         
+        /*
         for(int i=0;i<4;i++){
             grphcs.draw(ragebit.getHitParedes()[i]);
         }
@@ -89,6 +90,7 @@ public class Juego extends BasicGameState{
         for(int i = 0;i < mapa.getPuertas().size();i++){
             grphcs.draw(mapa.getPuertas().get(i));
         }
+        */
         
         try{
             mapa.render(0, 0, mapa.getLayerIndex("Puente"));
