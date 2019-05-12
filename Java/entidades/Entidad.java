@@ -17,7 +17,7 @@ import org.newdawn.slick.geom.Rectangle;
  *
  * @author victo
  */
-public class Entidad {
+public abstract class Entidad {
     private SpriteSheet sprite;
     private Animation animacion;
     private Punto posicion;
@@ -29,6 +29,9 @@ public class Entidad {
     private boolean par;
     private String nombre;
     private int animid;
+    private Punto objetivo;
+    private boolean cr;//control remoto
+    private int speed;
     
     public Entidad(String ruta, int h, int w, int numAnimaciones, String nombre) throws SlickException{
         direcciones=new Animation[numAnimaciones];
@@ -51,6 +54,15 @@ public class Entidad {
         hitbox.setLocation(x, y);
         if(par){
             genHitboxes(new Punto(posicion.getX()+wp, posicion.getY()+hp), wh, hh);
+        }
+        if(cr){            
+            velocidad=new Vector(posicion, objetivo);     
+            float modulo= velocidad.getModulo();
+            velocidad=new Vector(new Punto(velocidad.getX()/modulo*speed, velocidad.getY()/modulo*speed));
+            if((int)posicion.getX()==(int)objetivo.getX()&&(int)posicion.getY()==(int)objetivo.getY()){
+                velocidad=new Vector(new Punto(0,0));
+                cr=false;
+            }
         }
         
         
@@ -220,7 +232,11 @@ public class Entidad {
         return animid;
     }
     
-    
+    public void irA(Punto p, int speed){
+        cr=true;
+        objetivo=p;
+        this.speed=speed;
+    }
     
     
     }
