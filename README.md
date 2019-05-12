@@ -38,4 +38,5 @@
             Agregados mapas interiores del mapa Pueblo: Casa, Residencia, Ayuntamiento, Hospital, Cueva
             Actualización del mundo: se han añadido todos los mapas
             Agregados mapas: Ruta_Antes_Desierto, Dungeon_Desierto, Ruta_Antes_Dungeon_Final
-    - 13/5 Agregadas clases para gestion de npc y arreglo de un pequeño bug
+    - 13/5  Agregadas clases para gestion de npc y arreglo de un pequeño bug
+            Añadidos mapas: Ruta_Antes_Cueva_Dungeon_Final, Cueva_Antes_Ruta_Dungeon_Final
