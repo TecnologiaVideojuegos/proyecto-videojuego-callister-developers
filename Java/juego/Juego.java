@@ -10,15 +10,11 @@ import chaoschild.ChaosChild;
 import chaoschild.Punto;
 import entidades.Entidad;
 import entidades.Lucia;
-import entidades.enemigos.Geobro;
 import entidades.enemigos.Ragebbit;
 import mapas.Mapa;
 import mapas.Mundo;
 import musica.GestorMusica;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -42,7 +38,6 @@ public class Juego extends BasicGameState{
     private float posiniy;
     private Ragebbit ragebit;
     private ChaosChild chaos;
-    //private Mundo mundo;
     
     @Override
     public int getID() {
@@ -61,8 +56,9 @@ public class Juego extends BasicGameState{
         
         music=GestorMusica.getGestor();
         music.play();
-        Lucia=Lucia.getLucia(); 
-        mundo=new Mundo(Lucia);
+        //Lucia=Lucia.getLucia(); 
+        Lucia = new Lucia(600, 700);
+        mundo=new Mundo();
         mapa = mundo.getMapaCargado();
         posiniy=gc.getHeight()/2;
         posinix=gc.getWidth()/2;
@@ -78,11 +74,16 @@ public class Juego extends BasicGameState{
         mundo.render();
         Lucia.draw(); 
         ragebit.draw();
+        
         for(int i=0;i<4;i++){
             grphcs.draw(ragebit.getHitParedes()[i]);
         }
         for(int i=0;i<mapa.getHitBoxes().size();i++){
             grphcs.draw(mapa.getHitBoxes().get(i));
+        }
+        
+        for(int i = 0;i < Lucia.getHitParedes().length;i++){
+            grphcs.draw(Lucia.getHitParedes()[i]);
         }
         
         for(int i = 0;i < mapa.getPuertas().size();i++){
@@ -91,11 +92,7 @@ public class Juego extends BasicGameState{
         
         try{
             mapa.render(0, 0, mapa.getLayerIndex("Puente"));
-        }catch(Exception e){
-            
-        }
-        
-        
+        }catch(Exception e){  }
     }
 
     @Override
