@@ -1,9 +1,6 @@
 Los mapas deben ser guardados en la siguiente carpeta:
 /resources/Mapas
 
-Para poder ver las hitbox:
-Ir a la clase juego -> buscar el método render -> activar los bucles comentados
-
 Posición de la matriz a la que corresponde cada mapa:
 Zona 0:
 0,0 -> cueva_inicio
@@ -22,6 +19,11 @@ Zona 2:
 2,2 -> dungeon_piso3
 2,3 -> pueblo
 2,4 -> ruta_dungeon
+2,-1 -> ayuntamiento
+2,-2 -> casa_pueblo
+2,-3 -> cueva_pueblo
+2,-4 -> hospital
+2,-5 -> residencia
 
 Para comenzar en un mapa determiando:
 

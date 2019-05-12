@@ -179,7 +179,7 @@ public class Mapa extends TiledMap {
                         setNuevaInfo(1, -1, 639, 2143, 1);
                     } else if(puertas.get(i).intersects(hitboxE[1])){
                         setNuevaInfo(2, 3, 202, 537, 1);
-                    }
+                    } 
                     break;
                 case "Cueva_inicio":
                     if(puertas.get(i).intersects(hitboxE[0])){
@@ -236,6 +236,46 @@ public class Mapa extends TiledMap {
                         } else {
                             setNuevaInfo(2, 4, 327, 519, 1);
                         }
+                    } else if(puertas.get(i).intersects(hitboxE[0])){
+                        int x = (int) e.getPosicion().getX();
+                        int y = (int) e.getPosicion().getY();
+                        
+                        if(x > 2295 && x < 2315){
+                            setNuevaInfo(2, -1, 381, 165, 1);
+                        } else if(x > 890 && x < 900){
+                            setNuevaInfo(2, -2, 110, 259, 1);
+                        } else if(x > 500 && x < 580){
+                            setNuevaInfo(2, -3, 623, 895, 1);
+                        } else if(x > 2170 && x < 2180){
+                            setNuevaInfo(2, -4, 498, 325, 1);
+                        } else if(x > 345 && x < 360){
+                            setNuevaInfo(2, -5, 445, 325, 1);
+                        }
+                    }
+                    break;
+                case "Ayuntamiento_Pueblo":
+                    if(puertas.get(i).intersects(hitboxE[2])){
+                        setNuevaInfo(2, 3, 2303, 284, 1);
+                    }
+                    break;
+                case "Casa_Pueblo":
+                    if(puertas.get(i).intersects(hitboxE[2])){
+                        setNuevaInfo(2, 3, 895, 846, 1);
+                    }
+                    break;
+                case "Cueva_Pueblo":
+                    if(puertas.get(i).intersects(hitboxE[2])){
+                        setNuevaInfo(2, 3, 545, 2579, 1);
+                    }
+                    break;
+                case "Hospital_Pueblo":
+                    if(puertas.get(i).intersects(hitboxE[2])){
+                        setNuevaInfo(2, 3, 2175, 1464, 1);
+                    }
+                    break;
+                case "Residencia_Pueblo":
+                    if(puertas.get(i).intersects(hitboxE[2])){
+                        setNuevaInfo(2, 3, 355, 1758, 1);
                     }
                     break;
             }
@@ -246,7 +286,6 @@ public class Mapa extends TiledMap {
     
     public void addEdificio(Edificio edificio){
         this.edificios.add(edificio);
-        sortEdificios();
     }
    
     public void sortEdificios(){

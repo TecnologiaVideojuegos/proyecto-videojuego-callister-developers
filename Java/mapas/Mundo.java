@@ -24,7 +24,7 @@ public class Mundo {
     }
     
     private void initMapa(){
-        cambiarMapa(1, 0);
+        cambiarMapa(2, -5);
     }
     
     private void genZonas() throws SlickException{
@@ -55,11 +55,21 @@ public class Mundo {
         
         Edificio casa_inicio = new Edificio("resources/Mapas/Casa_inicio/Casa_inicio.tmx");
         Edificio catedral = new Edificio("resources/Mapas/Catedral/Catedral.tmx");
-  
-        //Faltan los edificios del pueblo
+        Edificio ayuntamiento = new Edificio("resources/Mapas/Ayuntamiento_Pueblo/Ayuntamiento_Pueblo.tmx");
+        Edificio casa_pueblo = new Edificio("resources/Mapas/Casa_Pueblo/Casa_Pueblo.tmx");
+        Edificio cueva_pueblo = new Edificio("resources/Mapas/Cueva_Pueblo/Cueva_Pueblo.tmx");
+        Edificio hospital = new Edificio("resources/Mapas/Hospital_Pueblo/Hospital_Pueblo.tmx");
+        Edificio residencia = new Edificio("resources/Mapas/Residencia_Pueblo/Residencia_Pueblo.tmx");
         
         fuera_casa.addEdificio(casa_inicio);
         ciudad.addEdificio(catedral);
+        pueblo.addEdificio(ayuntamiento);
+        pueblo.addEdificio(casa_pueblo);
+        pueblo.addEdificio(cueva_pueblo);
+        pueblo.addEdificio(hospital);
+        pueblo.addEdificio(residencia);
+        
+        pueblo.sortEdificios();
         
         mundo.get(0).addPueblo(fuera_casa);
         mundo.get(1).addPueblo(ciudad);
@@ -84,7 +94,7 @@ public class Mundo {
                     this.mapaCargado = this.getMapa(1, 0).getEdificios().get(0);
                     break;
                 case 2:
-                    this.mapaCargado = this.getMapa(2, 3).getEdificios().get(-m + 1);
+                    this.mapaCargado = this.getMapa(2, 3).getEdificios().get(-m - 1);
                     break;
             }
         }
