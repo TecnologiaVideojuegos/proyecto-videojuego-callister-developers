@@ -11,6 +11,7 @@ import entidades.EntidadCombate;
 import entidades.Lucia;
 import entidades.enemigos.Enemigo;
 import entidades.enemigos.Geobro;
+import entidades.enemigos.Hipograsidi;
 import entidades.enemigos.Ragebbit;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -92,7 +93,7 @@ public class Combate extends BasicGameState{
         lucia=Lucia.getLucia();
         enemigos=new ArrayList();
         aliados=new ArrayList();
-        genEnemigos(new Geobro(0,0), 2);
+        genEnemigos(new Hipograsidi(0,0), 2);
         this.sgb=sbg;
         atacando=false;
         aliados=(ArrayList<Aliado>) lucia.getEquipo().clone();
@@ -364,7 +365,7 @@ public class Combate extends BasicGameState{
         for(int i=0;i<enemigos.size();i++){
             if(enemigos.get(i).getMultiplicadores()[0]==0){
                 a.add(enemigos.get(i));
-                exp=exp+a.get(i).getExpg();
+                exp=exp+enemigos.get(i).getExpg();
                 b=true;
                 leveling=true;
             }
