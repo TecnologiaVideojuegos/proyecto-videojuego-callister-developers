@@ -29,13 +29,7 @@ public class Zona {
     }
     
     public void addDungeon(Dungeon d){
-        try{
-            if(!"mapas.Dungeon".equals(this.zona.get(0).getClass().getName()) && this.zona.size() > 0){
-                zona.add(d);
-            }
-        }catch(IndexOutOfBoundsException e){
-            zona.add(d);
-        }
+        zona.add(d);
     }
     
     public void addPueblo(Pueblo p){
@@ -67,8 +61,8 @@ public class Zona {
     }
 
     public void toStringAll() {
-        System.out.println("Dungeon: " + zona.get(0).getClass().getName() + 
-                " Pueblo: " + zona.get(1).getClass().getName() + 
-                " Ruta: " + zona.get(2).getClass().getName());
+        for(int i = 0;i < zona.size();i++){
+            System.out.println(zona.get(i).getNombre());
+        }
     }
 }

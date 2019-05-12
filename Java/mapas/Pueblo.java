@@ -25,5 +25,4 @@ public class Pueblo extends Mapa{
         super(ref);
         edificios = new ArrayList();
     }
-    
 }
