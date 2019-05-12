@@ -35,6 +35,7 @@ public class MenuCombate {
     private int nR;
     private ArrayList<Sound> sonidos;
     private ArrayList<Enemigo> enemigos;
+    private ArrayList<Aliado> aliados;
     private Animation selector;
     private int selmenu;
     private Graphics g;
@@ -50,7 +51,7 @@ public class MenuCombate {
             
 
 
-    public MenuCombate(ArrayList<Enemigo> enemigos, Combate combat) throws SlickException {
+    public MenuCombate(ArrayList<Enemigo> enemigos, Combate combat, ArrayList<Aliado> aliados) throws SlickException {
         this.menu = new Image("resources/Menus/Combate.png");
         puntero=new Image("resources/Menus/PunteroMenu.png");
         p= new Punto(0, 640-200);
@@ -76,9 +77,14 @@ public class MenuCombate {
         this.combat=combat;
         turnos=new ArrayList();
         acciones=0;
-        selected=Lucia.getLucia().getEquipo().get(0);
+        try {
+            selected=aliados.get(0);
+        } catch (Exception e) {
+        }
+        
         ia=new IACombate(enemigos);
         cant=new Sound("resources/sonido/combate/menu_cant.ogg");
+        this.aliados=aliados;
         
     }
     
@@ -127,13 +133,13 @@ public class MenuCombate {
                     break;
                 case 2:
                    
-                    if(indicepuntero!= Lucia.getLucia().getEquipo().size()-1){
+                    if(indicepuntero!= aliados.size()-1){
                         indicepuntero++;
                         
                     }else{
                         indicepuntero=0;
                     }
-                    psel=renderSelector(Lucia.getLucia().getEquipo().get(indicepuntero));
+                    psel=renderSelector(aliados.get(indicepuntero));
                                    
                     break;
                 
@@ -175,9 +181,9 @@ public class MenuCombate {
                         
                         
                     }else{
-                        indicepuntero=Lucia.getLucia().getEquipo().size()-1;
+                        indicepuntero=aliados.size()-1;
                     }
-                    psel=renderSelector(Lucia.getLucia().getEquipo().get(indicepuntero));
+                    psel=renderSelector(aliados.get(indicepuntero));
                                    
                     
                     break;
@@ -215,14 +221,14 @@ public class MenuCombate {
                         aa();
                         acciones++;
                         try{
-                             selected=Lucia.getLucia().getEquipo().get(acciones);
+                            selected=aliados.get(acciones);
                         }catch(Exception e){
                             
                         }
                        
                         psel=renderSelector(selected);
                         
-                        if(acciones==Lucia.getLucia().getEquipo().size()){
+                        if(acciones==aliados.size()){
                             combat.setTurno(turnos);
                             ia.setEnemigos(enemigos);
                             combat.añadirTurnos(ia.getAcciones());
@@ -233,8 +239,8 @@ public class MenuCombate {
                     }
                     else if(selmenu==2){
                         if(action==2){
-                            turnos.add(new Accion(action, Lucia.getLucia().getIntven().remove(indice), selected, Lucia.getLucia().getEquipo().get(indicepuntero)));
-                        }else turnos.add(new Accion(action, indice, selected, Lucia.getLucia().getEquipo().get(indicepuntero)));
+                            turnos.add(new Accion(action, Lucia.getLucia().getIntven().remove(indice), selected, aliados.get(indicepuntero)));
+                        }else turnos.add(new Accion(action, indice, selected, aliados.get(indicepuntero)));
                         indice=0;
                         selmenu=0;
                         menumodo=0;
@@ -244,14 +250,14 @@ public class MenuCombate {
                         aa();
                         acciones++;
                         try{
-                             selected=Lucia.getLucia().getEquipo().get(acciones);
+                             selected=aliados.get(acciones);
                         }catch(Exception e){
                             
                         }
                        
                         psel=renderSelector(selected);
                         
-                        if(acciones==Lucia.getLucia().getEquipo().size()){
+                        if(acciones==aliados.size()){
                             combat.setTurno(turnos);
                             ia.setEnemigos(enemigos);
                             combat.añadirTurnos(ia.getAcciones());
@@ -427,7 +433,7 @@ public class MenuCombate {
                 }else{
                     if(!Lucia.getLucia().getIntven().get(indicepuntero).isGem()){
                         selmenu=2;
-                        psel=renderSelector(Lucia.getLucia());
+                        psel=renderSelector(aliados.get(0));
                         action=2;
                         indice=indicepuntero;
                         indicepuntero=0;
@@ -452,9 +458,13 @@ public class MenuCombate {
         }
 
     public void setAcciones(int acciones) throws SlickException {
-        this.acciones = acciones;
-        selected=Lucia.getLucia().getEquipo().get(acciones);
-        psel=renderSelector(selected);
+        try {
+            this.acciones = acciones;
+            selected=aliados.get(acciones);
+            psel=renderSelector(selected);
+        } catch (Exception e) {
+        }
+        
         
     }
             

@@ -9,6 +9,7 @@ import entidades.EntidadCombate;
 import entidades.Lucia;
 import itemsjuego.Inventario;
 import itemsjuego.Objeto;
+import java.awt.BorderLayout;
 import org.newdawn.slick.SlickException;
 
 /**
@@ -26,6 +27,7 @@ public class Accion {
     private Magia mag;
     private boolean mg;
     private Objeto ob;
+    private String eficaz;
 
     public Accion(int action, int indice, EntidadCombate atacante, EntidadCombate defensor) throws SlickException {
         this.action = action;
@@ -38,7 +40,7 @@ public class Accion {
         mag=null;
         mg=true;
         inventario=Lucia.getLucia().getIntven();
-        System.out.println(atacante+" va a hacer la accion "+action+" contra "+defensor);
+        eficaz="";
     }
     public Accion(int action, Objeto objeto, EntidadCombate atacante, EntidadCombate defensor) throws SlickException {
         this.action = action;
@@ -76,7 +78,6 @@ public class Accion {
     }
     
     public void actionCalc() throws SlickException{
-                System.out.println("Turno de "+atacante);
         switch(action){
             case 0: 
                 daño=atacante.ataqueBasico();
@@ -91,7 +92,6 @@ public class Accion {
                 atacante.usarObjeto();
                 anima=atacante.getAnimId();
                 ob.restart();
-                //Lucia.getLucia().getIntven().get(indice).restart();
                 break;
         }
     }
@@ -101,7 +101,7 @@ public class Accion {
     }
 
     public void setDefensor(EntidadCombate defensor) {
-        System.out.println("Defensor de "+atacante+" Cambiado a "+ defensor);
+        System.out.println("Defensor cambiado a "+ defensor+ " de " +this.defensor);
         this.defensor = defensor;
     }
 
@@ -160,7 +160,7 @@ public class Accion {
         String b="ataque básico en ";
         String c=defensor+".";
         if(action==1){
-            //b=atacante.getMagias().get(0)+" en ";
+            b=atacante.getMagias().get(0)+" en ";
         }
         if(action==2){
             b=ob.toString()+" en ";
