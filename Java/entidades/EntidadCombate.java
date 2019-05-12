@@ -6,11 +6,14 @@
 package entidades;
 
 import Combate.Elemento;
+import Combate.HealthBar;
 import Combate.Magia;
+import Combate.ManaBar;
 import chaoschild.Punto;
 import java.util.ArrayList;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.ShapeFill;
 import org.newdawn.slick.SlickException;
@@ -36,6 +39,8 @@ public abstract class EntidadCombate extends Entidad{
     private Elemento elemento;
     private int tieneGema=0;
     private int tieneGemaD=0;
+    private HealthBar barraV;
+    private ManaBar barraM;
     
     
     
@@ -56,6 +61,8 @@ public abstract class EntidadCombate extends Entidad{
         animbaseco=1;
         animest=0;
         animmag=1;
+        barraV=new HealthBar(this);
+        barraM=new ManaBar(this);
         
     }
     public EntidadCombate(String ruta,String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre, int a) throws SlickException {
@@ -75,6 +82,8 @@ public abstract class EntidadCombate extends Entidad{
         animbaseco=1;
         animest=0;
         animmag=1;
+        barraV=new HealthBar(this);
+        barraM=new ManaBar(this);
         
     }
 
@@ -95,6 +104,8 @@ public abstract class EntidadCombate extends Entidad{
         animbaseco=1;
         animest=0;
         animmag=1;
+        barraV=new HealthBar(this);
+        barraM=new ManaBar(this);
         
     }
     
@@ -116,6 +127,8 @@ public abstract class EntidadCombate extends Entidad{
         animbaseco=1;
         animest=0;
         animmag=1;
+        barraV=new HealthBar(this);
+        barraM=new ManaBar(this);
     }
     
     
@@ -132,16 +145,16 @@ public abstract class EntidadCombate extends Entidad{
         else super.draw();
     }
     
-    public void drawC(Graphics g){
-
+    public void drawC(GameContainer c,Graphics g){
+        
             if(combate.getAnimacion().isStopped()){
                 combate.getAnimacion().restart();
-                combate.setAnimacion(animest);
-                
-                
+                combate.setAnimacion(animest); 
             }
-            g.draw(new Rectangle( combate.getPosicion().getX()+5, combate.getPosicion().getY()+64, 65,20));
-            g.drawString(multiplicadores[0]+"/"+est[0], combate.getPosicion().getX()+5, combate.getPosicion().getY()+64);
+            barraV.render(c, g);
+            barraM.render(c, g);
+//            g.draw(new Rectangle( combate.getPosicion().getX()+5, combate.getPosicion().getY()+64, 65,20));
+//            g.drawString(multiplicadores[0]+"/"+est[0], combate.getPosicion().getX()+5, combate.getPosicion().getY()+64);
             
             combate.drawCombate();
         
@@ -422,6 +435,7 @@ public abstract class EntidadCombate extends Entidad{
     
     public ArrayList<String> toStringEst(){
         ArrayList<String> a=new ArrayList();
+        a.add("LVL: "+LVL);
         a.add("HP: "+est[0]);
         a.add("MP: "+est[1]);
         a.add("STR: "+est[2]);
