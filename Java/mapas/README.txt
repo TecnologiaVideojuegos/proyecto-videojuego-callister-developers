@@ -1,6 +1,9 @@
 Los mapas deben ser guardados en la siguiente carpeta:
 /resources/Mapas
 
+Para poder ver las hitbox:
+Ir a la clase juego -> buscar el método render -> activar los bucles comentados
+
 Posición de la matriz a la que corresponde cada mapa:
 Zona 0:
 0,0 -> cueva_inicio
