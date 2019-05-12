@@ -33,4 +33,6 @@
             Actualización de la carpeta mapas: ya se puede pasar de un mapa a otro (de momento solo hay una transición implementada)
             Actualización de la carpeta juego
     - 12/05 Arreglo de varios mapas
+    -12/05 Añadias barras de vida y mana, asi como condicion de perder
+            Arreglado bug que no bajaba el mana
     
