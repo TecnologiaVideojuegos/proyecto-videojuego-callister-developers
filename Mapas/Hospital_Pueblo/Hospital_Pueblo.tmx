@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="20" height="14" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="1">
+ <tileset firstgid="1" source="Hospital_Pueblo.tsx"/>
+ <layer id="1" name="Background" width="20" height="14">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACg3DBXAQBAAAwAWwjViPVrpTOkS6G6S7Q1BSRLobJZTullC6u5FOKQNQWkVCGv7uPzAgICDIYOMZ3wSGGGqYCU1kYpMYboSRRhltjLHGmdRkJjeFKU1laj/wQ9OY1nSmN4MZzWRms5jVbGY3hznNZW7zmNePzGd+C1jQQha2iEUtZnE/toSfWNJSlraMZS1neStY0UpWtopVrWZ1a1jTWta2jnX91HrWt4ENbWRjm9jUZja3hS1tZWvb2NZ2treDHe1kZz+zi1393C/sZnd72NNe9vZL+/iVff3afvZ3gAMd5GCHONRhDneEIx3laMc41nGOd4IT/cZvneRkpzjV7/zeaU53hjOd5WznONd5zneBC13kYpe41GUud4U/uNJVrnaNP/qTa13neje40U1udotb3eZ2d7jTXe52j3vd534PeNBDHvaIRz3mzx73hCc95WnPeNZznveCF73kL172ile95nV/9Td/9w9veNNb/ulf3vaOd73nfR/40L/9x3995H8+9olPfeb/PveFL33la9/41ncGBGKQwcYzvgkMMdQwE5rIxCYx3AgjjTLaGGONM6nJTO57P2QpRWAEAAA=
+  </data>
+ </layer>
+ <layer id="2" name="ObjColisionables" width="20" height="14">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACq3TSUtXYRTA4es8z2Oj2mDzoEWDjYSQ2FzbaB6+QvUZap1uIhGRqDZRiEhUm6h1uYlcW5tosrTJnuiALS74X3Tg4ffCuZzdzUqSJJsccskjnwIKKaKYEkopo5wKKqmimhpqqaOeBhqZw1zmMZ8FLKSJZlpYxGKWsJRWlrGcFaxkFatZw1rWsZ422tnAxuTvbGIzW9hKB9vYzg52sovd8f2eaGcyM3vpinc3+9jPAQ5yiMMc4SjHktnnePQEJznFac5wlnOc5wIXM7g321ziMlf+w60/c5VrGX57nR56U3Y3ojfpi3d/dCA6GL0Vvc0d7qbcuxe9z4N4D0WHoyPRh9FHPOZJyr2n0Wc8T9mnzQteMpqyexV9zViG98Z5w9uU3bvoez7wkU98ZoIvfGWSKb7xnR/85BfT/9zLzvL/k0se+RRQSBHFlFBKGeVUUEkV1dRQSx31NNDIb/s8EipgBAAA
+  </data>
+ </layer>
+ <layer id="3" name="Puerta" width="20" height="14">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjYBSMSMAIRIy0tQIAMgAs3mAEAAA=
+  </data>
+ </layer>
+</map>

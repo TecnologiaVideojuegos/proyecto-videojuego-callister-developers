@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="8" height="12" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="1">
+ <tileset firstgid="1" source="Casa_Pueblo.tsx"/>
+ <layer id="1" name="Background" width="8" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACg3DhzZCAQAA0IeMyMiWSMtK2ZVZZM9KIfv/v8K959yuIAi67TFkr332O2DYQYeMOOyIo44ZddwJJ51y2hlnnTPmvHEXXDThkklTps2YddkVV11z3Zwb5i246Zbb7rjrnvsWLVn2wEOPPPbEUytWPfPcmhdeeuW1N956570PPvrks3UbNn2xZdtX33y344effvntj7/++Q9qUZEDgAEAAA==
+  </data>
+ </layer>
+ <layer id="2" name="ObjColisionables" width="8" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACn3LuWqCYRQE0M99TdyXaIrYaaeNaKeddi7gHvX9n8JTWBgw/8Dhwgw3FkKIkyBJijQZsuTIU6DIB5+UKFOhSo06DZq0aPNFhy7f4W9+6IX/02cQsQ8ZvenHzzthGvE/Yx6xL1hG7CvWbNi+9Dv2HDhy4syFX67cuPMADeXB0oABAAA=
+  </data>
+ </layer>
+ <layer id="3" name="Puerta" width="8" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAXUAiFAHEqiHgBUG2G9gAEAAA==
+  </data>
+ </layer>
+</map>
