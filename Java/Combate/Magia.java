@@ -82,6 +82,7 @@ public class Magia{
         int dam;
         anim.restart();
         posicion=recive.getPosCombate();
+        usa.setMult(1, usa.getMultiplicadores()[1]-coste);
         dam=usa.getEst()[5]+daño;
         return dam;
     }
