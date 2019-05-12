@@ -37,4 +37,5 @@
             Arreglado bug que no bajaba el mana
             Agregados mapas interiores del mapa Pueblo: Casa, Residencia, Ayuntamiento, Hospital, Cueva
             Actualización del mundo: se han añadido todos los mapas
+            Agregados mapas: Ruta_Antes_Desierto y Dungeon_Desierto
     
