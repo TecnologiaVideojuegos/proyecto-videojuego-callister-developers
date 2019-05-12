@@ -32,4 +32,5 @@
             Modificación de la ubicación de las puertas en algunos mapas
             Actualización de la carpeta mapas: ya se puede pasar de un mapa a otro (de momento solo hay una transición implementada)
             Actualización de la carpeta juego
+    - 12/05 Arreglo de varios mapas
     
