@@ -43,3 +43,4 @@
             Añadidos mapas: Ruta_Antes_Cueva_Dungeon_Final, Cueva_Antes_Ruta_Dungeon_Final, Cueva_Inicio_Extensión
             Arreglado mapa: Casa_Inicio, Añadido mapa: Dungeon_Final
             ### MAPAS TERMINADOS ###
+            Añadido minimapa del mundo
