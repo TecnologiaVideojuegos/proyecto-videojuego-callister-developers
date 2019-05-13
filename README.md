@@ -41,3 +41,5 @@
             Agregado mapa, sacado de google: Ruta_Antes_Dungeon_Final: (https://boards.fireden.net/tg/last/50/50215120/)
     - 13/5  Agregadas clases para gestion de npc y arreglo de un pequeño bug
             Añadidos mapas: Ruta_Antes_Cueva_Dungeon_Final, Cueva_Antes_Ruta_Dungeon_Final, Cueva_Inicio_Extensión
+            Arreglado mapa: Casa_Inicio, Añadido mapa: Dungeon_Final
+            ### MAPAS TERMINADOS ###
