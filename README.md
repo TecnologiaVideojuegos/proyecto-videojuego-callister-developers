@@ -44,3 +44,4 @@
             Arreglado mapa: Casa_Inicio, Añadido mapa: Dungeon_Final
             ### MAPAS TERMINADOS ###
             Añadido minimapa del mundo
+            Añadido movimiento y Pantalla_Batalla de: Paula
