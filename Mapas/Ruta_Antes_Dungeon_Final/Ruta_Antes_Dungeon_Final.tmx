@@ -1,170 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="25" height="35" tilewidth="32" tileheight="32" infinite="0" nextlayerid="274" nextobjectid="5206">
- <tileset firstgid="1" name="1qh08j" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/1qh08j.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="257" name="2iks46h" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/2iks46h.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="513" name="22b7a0f5c6054204675b8f7af1d59d53" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/22b7a0f5c6054204675b8f7af1d59d53.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="769" name="33vkvfn" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/33vkvfn.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="1025" name="803a415128b5babf613ec26f62845415" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/803a415128b5babf613ec26f62845415.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="1281" name="9076816c1bff2b1ac8e469e25d32f53c" tilewidth="32" tileheight="32" tilecount="120" columns="15">
-  <image source="../../Pictures/Mapa materiales/9076816c1bff2b1ac8e469e25d32f53c.png" width="480" height="256"/>
- </tileset>
- <tileset firstgid="1401" name="A5-CliffVS02-GroundTiles" tilewidth="32" tileheight="32" tilecount="64" columns="8">
-  <image source="../../Pictures/Mapa materiales/A5-CliffVS02-GroundTiles.png" width="256" height="256"/>
- </tileset>
- <tileset firstgid="1465" name="A5-MansionVS01" tilewidth="32" tileheight="32" tilecount="28" columns="7">
-  <image source="../../Pictures/Mapa materiales/A5-MansionVS01.png" width="224" height="128"/>
- </tileset>
- <tileset firstgid="1493" name="29zd1mg" tilewidth="32" tileheight="32" tilecount="1" columns="1">
-  <image source="../../Pictures/Mapa materiales/29zd1mg.png" width="32" height="32"/>
- </tileset>
- <tileset firstgid="1494" name="A5-TownVS01" tilewidth="32" tileheight="32" tilecount="56" columns="8">
-  <image source="../../Pictures/Mapa materiales/A5-TownVS01.png" width="256" height="224"/>
- </tileset>
- <tileset firstgid="1550" name="A5-TownVS02" tilewidth="32" tileheight="32" tilecount="56" columns="8">
-  <image source="../../Pictures/Mapa materiales/A5-TownVS02.png" width="256" height="224"/>
- </tileset>
- <tileset firstgid="1606" name="A5-TownVS03" tilewidth="32" tileheight="32" tilecount="42" columns="7">
-  <image source="../../Pictures/Mapa materiales/A5-TownVS03.png" width="224" height="192"/>
- </tileset>
- <tileset firstgid="1648" name="AT-A2-CliffVS01-GroundTiles" tilewidth="32" tileheight="32" tilecount="12" columns="4">
-  <image source="../../Pictures/Mapa materiales/AT-A2-CliffVS01-GroundTiles.png" width="128" height="96"/>
- </tileset>
- <tileset firstgid="1660" name="AT-A5-CliffVS01-Ground" tilewidth="32" tileheight="32" tilecount="3" columns="3">
-  <image source="../../Pictures/Mapa materiales/AT-A5-CliffVS01-Ground.png" width="96" height="32"/>
- </tileset>
- <tileset firstgid="1663" name="AT-A5-DungeonVX01-Ground" tilewidth="32" tileheight="32" tilecount="2" columns="2">
-  <image source="../../Pictures/Mapa materiales/AT-A5-DungeonVX01-Ground.png" width="64" height="32"/>
- </tileset>
- <tileset firstgid="1665" name="d8c5q6o-3a7230e6-c46e-4986-9962-8fb1e10347a5" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/d8c5q6o-3a7230e6-c46e-4986-9962-8fb1e10347a5.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="1921" name="Hanzo-CliffSet02VS-1" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/Hanzo-CliffSet02VS-1.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="2177" name="chipset" tilewidth="32" tileheight="32" tilecount="120" columns="15">
-  <image source="../../Pictures/Mapa materiales/chipset.png" width="480" height="256"/>
- </tileset>
- <tileset firstgid="2297" name="Hanzo-CliffSet02VS-2" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/Hanzo-CliffSet02VS-2.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="2553" name="Hanzo-RuinsTown01VScopy" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/Hanzo-RuinsTown01VScopy.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="2809" name="Hanzo-Dungeon01VSb" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/Hanzo-Dungeon01VSb.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="3065" name="AT-A2-CliffVS02-GroundTiles" tilewidth="32" tileheight="32" tilecount="12" columns="4">
-  <image source="../../Pictures/Mapa materiales/AT-A2-CliffVS02-GroundTiles.png" width="128" height="96"/>
- </tileset>
- <tileset firstgid="3077" name="AT-A2-DungeonVX01-GroundTiles" tilewidth="32" tileheight="32" tilecount="36" columns="6">
-  <image source="../../Pictures/Mapa materiales/AT-A2-DungeonVX01-GroundTiles.png" width="192" height="192"/>
- </tileset>
- <tileset firstgid="3113" name="AT-A2-DungeonVX02-GroundTiles" tilewidth="32" tileheight="32" tilecount="18" columns="6">
-  <image source="../../Pictures/Mapa materiales/AT-A2-DungeonVX02-GroundTiles.png" width="192" height="96"/>
- </tileset>
- <tileset firstgid="3131" name="Hanzo-Dungeon02VSb" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/Hanzo-Dungeon02VSb.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="3387" name="Hanzo-MansionSetVS01-1" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/Hanzo-MansionSetVS01-1.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="3643" name="Hanzo-SnowfieldSetVS-1" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/Hanzo-SnowfieldSetVS-1.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="3899" name="Hanzo-TownSet01VS-1" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/Hanzo-TownSet01VS-1.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="4155" name="Hanzo-TownSet02VS" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/Hanzo-TownSet02VS.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="4411" name="Hanzo-TownSet03VS" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/Hanzo-TownSet03VS.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="4667" name="hyptosis_tile-art-batch-1_0" tilewidth="32" tileheight="32" tilecount="900" columns="30">
-  <image source="../../Pictures/Mapa materiales/hyptosis_tile-art-batch-1_0.png" width="960" height="960"/>
- </tileset>
- <tileset firstgid="5567" name="image" tilewidth="32" tileheight="32" tilecount="96" columns="12">
-  <image source="../../Pictures/Mapa materiales/image.png" width="384" height="256"/>
- </tileset>
- <tileset firstgid="5663" name="lieQ0oL" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/lieQ0oL.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="5919" name="Outer-Market-02" tilewidth="32" tileheight="32" tilecount="120" columns="15">
-  <image source="../../Pictures/Mapa materiales/Outer-Market-02.png" width="480" height="256"/>
- </tileset>
- <tileset firstgid="6039" name="tilec" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/tilec.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="6295" name="tileb" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/tileb.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="6551" name="tiled" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/tiled.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="6807" name="tilee (1)" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/tilee (1).png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="7063" name="tilee (2)" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/tilee (2).png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="7319" name="tilee (3)" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/tilee (3).png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="7575" name="tilee2" tilewidth="32" tileheight="32" tilecount="336" columns="16">
-  <image source="../../Pictures/Mapa materiales/tilee2.png" width="512" height="672"/>
- </tileset>
- <tileset firstgid="7911" name="tilee3" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/tilee3.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="8167" name="tilee4" tilewidth="32" tileheight="32" tilecount="225" columns="15">
-  <image source="../../Pictures/Mapa materiales/tilee4.png" width="480" height="480"/>
- </tileset>
- <tileset firstgid="8392" name="tilee5" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/tilee5.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="8648" name="vx-plants-tileset1" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/vx-plants-tileset1.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="8904" source="../Ciudad_ciudad/Ciudad_ciudad.tsx"/>
- <tileset firstgid="12584" name="Hanzo-VSTrees03" tilewidth="32" tileheight="32" tilecount="160" columns="20">
-  <image source="../../Pictures/Mapa materiales/Hanzo-VSTrees03.png" width="670" height="275"/>
- </tileset>
- <tileset firstgid="12744" name="celianna_medievalbuildings" tilewidth="32" tileheight="32" tilecount="304" columns="16">
-  <image source="../../Pictures/Mapa materiales/celianna_medievalbuildings.png" width="512" height="627"/>
- </tileset>
- <tileset firstgid="13048" name="dca9534de7531a6d39a9854e970ab3a2" tilewidth="32" tileheight="32" tilecount="576" columns="24">
-  <image source="../../Pictures/Mapa materiales/dca9534de7531a6d39a9854e970ab3a2.png" width="768" height="768"/>
- </tileset>
- <tileset firstgid="13624" name="DesertTileB_zpscb960b4e" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../Pictures/Mapa materiales/DesertTileB_zpscb960b4e.png" width="512" height="512"/>
- </tileset>
- <tileset firstgid="13880" name="1479014662173" tilewidth="32" tileheight="32" tilecount="450" columns="25">
-  <image source="../../Pictures/Mapa materiales/1479014662173.png" width="800" height="586"/>
- </tileset>
- <tileset firstgid="14330" source="Ruta_Antes_Dungeon_Final.tsx"/>
+ <tileset firstgid="1" source="Ruta_Antes_Dungeon_Final.tsx"/>
  <layer id="271" name="Background" width="25" height="35">
   <data encoding="base64" compression="gzip">
-   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
+   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
   </data>
  </layer>
  <layer id="272" name="ObjColisonables" width="25" height="35">
   <data encoding="base64" compression="gzip">
-   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
+   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
   </data>
  </layer>
  <layer id="273" name="Puerta" width="25" height="35">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3Ouw0AIAzE0BsrSs9nR2BXbgpC4Se5twTUWiFtd6L6BACA91pK3Q03s/oGwE8u9lF40qwNAAA=
+   H4sIAAAAAAAACu3OyQ0AIBDDwGjr4+iRpVDSRXh4JP8tAVnHtbvpEQAAAkZJ0y23K30D4CcPYMBuBqwNAAA=
   </data>
  </layer>
 </map>
