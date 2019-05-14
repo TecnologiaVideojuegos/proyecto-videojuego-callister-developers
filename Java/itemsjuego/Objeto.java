@@ -6,7 +6,7 @@
 package itemsjuego;
 
 import chaoschild.Punto;
-import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
+//import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
 import entidades.EntidadCombate;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Graphics;

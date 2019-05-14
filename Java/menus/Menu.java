@@ -41,8 +41,8 @@ public class Menu extends BasicGameState {
         punteroInventario=new Image("resources/Menus/PunteroMenu.png");
 
         indicador=0;
-        p=new Punto(425,35);
-        renderMenu=new Punto(300,10);
+        p=new Punto(80,70);
+        renderMenu=new Punto(90,50);
     }
 
     @Override
