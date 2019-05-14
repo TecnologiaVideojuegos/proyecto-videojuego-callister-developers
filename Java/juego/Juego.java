@@ -38,6 +38,8 @@ public class Juego extends BasicGameState{
     private float posiniy;
     private Ragebbit ragebit;
     private ChaosChild chaos;
+    private boolean cambioMapa;
+    private int contCambioMapa;
     
     @Override
     public int getID() {
@@ -55,9 +57,11 @@ public class Juego extends BasicGameState{
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         
         music=GestorMusica.getGestor();
+        cambioMapa = false;
+        contCambioMapa = 0;
         music.play();
         //Lucia=Lucia.getLucia(); 
-        Lucia = new Lucia(600, 700);
+        Lucia = new Lucia(3000, 841);
         mundo=new Mundo();
         mapa = mundo.getMapaCargado();
         posiniy=gc.getHeight()/2;
@@ -69,55 +73,69 @@ public class Juego extends BasicGameState{
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
-        
-        grphcs.translate(renderx, rendery);
-        mundo.render();
-        Lucia.draw(); 
-        ragebit.draw();
-        
-        /*
-        for(int i=0;i<4;i++){
-            grphcs.draw(ragebit.getHitParedes()[i]);
+        if(!cambioMapa){
+            grphcs.translate(renderx, rendery);
+            mundo.render();
+            Lucia.draw(); 
+            ragebit.draw();
+            
+            for(int i=0;i<4;i++){
+                grphcs.draw(ragebit.getHitParedes()[i]);
+            }
+            for(int i=0;i<mapa.getHitBoxes().size();i++){
+                grphcs.draw(mapa.getHitBoxes().get(i));
+            }
+
+            for(int i = 0;i < Lucia.getHitParedes().length;i++){
+                grphcs.draw(Lucia.getHitParedes()[i]);
+            }
+
+            for(int i = 0;i < mapa.getPuertas().size();i++){
+                grphcs.draw(mapa.getPuertas().get(i));
+            }
+
+            try{
+                mapa.render(0, 0, mapa.getLayerIndex("Puente"));
+            }catch(Exception e){  }
+
+        } else {
+            grphcs.setBackground(Color.black);
         }
-        for(int i=0;i<mapa.getHitBoxes().size();i++){
-            grphcs.draw(mapa.getHitBoxes().get(i));
-        }
         
-        for(int i = 0;i < Lucia.getHitParedes().length;i++){
-            grphcs.draw(Lucia.getHitParedes()[i]);
+        if(contCambioMapa >= 500){
+            cambioMapa = false;
+            contCambioMapa = 0;
         }
-        
-        for(int i = 0;i < mapa.getPuertas().size();i++){
-            grphcs.draw(mapa.getPuertas().get(i));
-        }
-        */
-        
-        try{
-            mapa.render(0, 0, mapa.getLayerIndex("Puente"));
-        }catch(Exception e){  }
     }
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
-        if(!music.playing()){
-            music.resume();
+        if(!cambioMapa){
+            //System.out.println(Lucia.getPosicion().getX() + " - " + Lucia.getPosicion().getY());
+
+            if(!music.playing()){
+                music.play();
+            }
+            ragebit.actualizar(colisionPared(ragebit), i);
+            comprobarInputs(gc,sbg);
+            boolean[] pas={false};
+            Lucia.actualizar(gc.getInput(),colisionPared(Lucia));
+
+            renderx=posinix-Lucia.getPosicion().getX();
+            rendery=posiniy-Lucia.getPosicion().getY();
+            Lucia.update(i);
+            comprobarPuertas();
+            mapa = mundo.getMapaCargado();
+        } else {
+            contCambioMapa += i;
         }
-        ragebit.actualizar(colisionPared(ragebit), i);
-        comprobarInputs(gc,sbg);
-        boolean[] pas={false};
-        Lucia.actualizar(gc.getInput(),colisionPared(Lucia));
-        
-        renderx=posinix-Lucia.getPosicion().getX();
-        rendery=posiniy-Lucia.getPosicion().getY();
-        Lucia.update(i);
-        comprobarPuertas();
-        mapa = mundo.getMapaCargado();
     }
    
     public void comprobarPuertas(){
         int[] info = new int[5];
         info = this.mapa.colisionPuertas(Lucia);
         if(info[4] > 0){
+            this.cambioMapa = true;
             this.mundo.cambiarMapa(info[0], info[1]);
             Lucia.setPosicion(new Punto(info[2], info[3]));
         }
