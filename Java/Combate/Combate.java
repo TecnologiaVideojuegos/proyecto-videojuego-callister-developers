@@ -13,7 +13,14 @@ import entidades.enemigos.Enemigo;
 import entidades.enemigos.Geobro;
 import entidades.enemigos.Hipograsidi;
 import entidades.enemigos.Ragebbit;
+import itemsjuego.GemaFuego1;
+import itemsjuego.*;
+import itemsjuego.Objeto;
+import itemsjuego.PocionVGrande;
+import itemsjuego.PocionVMediana;
+import itemsjuego.PocionVPequeña;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import musica.GestorMusica;
@@ -68,6 +75,9 @@ public class Combate extends BasicGameState{
     private Animation atac;
     private HealthBar barra;
     private boolean turno0;
+    private ArrayList<Objeto> objetos;
+    private boolean prinr;
+    private int rcont;
 
 
     public Combate(int ID) {
@@ -93,7 +103,7 @@ public class Combate extends BasicGameState{
         lucia=Lucia.getLucia();
         enemigos=new ArrayList();
         aliados=new ArrayList();
-        genEnemigos(new Hipograsidi(0,0), 2);
+        genEnemigos(new Hipograsidi(0,0), 1);
         this.sgb=sbg;
         atacando=false;
         aliados=(ArrayList<Aliado>) lucia.getEquipo().clone();
@@ -121,6 +131,9 @@ public class Combate extends BasicGameState{
         barra=new HealthBar(lucia);
         comprobar1();
         turno0=true;
+        prinr=true;
+        rcont=0;
+        objetos=new ArrayList();
         
     }
 
@@ -128,16 +141,13 @@ public class Combate extends BasicGameState{
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
         fondo.draw();
         if(turno0&&aliados.isEmpty()){
-            estado=3;
+            estado=4;
             volverMapa1();
         }
         enemigosRender(gc, grphcs);
         equipoRender(gc, grphcs);
         grphcs.setColor(Color.white);
-        if(turno0&&aliados.isEmpty()){
-            estado=3;
-            volverMapa1();
-        }
+        
         turno0=false;
         
             switch(estado){
@@ -223,20 +233,38 @@ public class Combate extends BasicGameState{
                     }else{
                         estado=1;
                         contador2=0;
-                        if(enemigos.isEmpty()){
-                            turno.clear();
-                            volverMapa1();
-                        } 
+                         
                         if(turno.isEmpty()){
                                estado=0;
                                menu.setAcciones(0);
                         } 
+                        if(enemigos.isEmpty()){
+                            turno.clear();
+                            estado=3;
+                            
+                            repartirR();
+                        }
                         
                     }
 
                     break;
-                case 3:
+                case 3: 
+                    
+                    if(objetos.isEmpty()||aliados.isEmpty())prinr=false;
+                    if(prinr){
+                        
+                        renderRecompensas(grphcs);
+                        
+                    }else{
+                        objetos.clear();
+                        volverMapa(sbg);
+                        estado=4;
+                    }
+                    
                     break;
+                case 4:
+                    break;
+                    
 
             }
     }
@@ -271,6 +299,13 @@ public class Combate extends BasicGameState{
                     printcont=0;
                 }
             }
+            if(prinr&&estado==3){
+                rcont++;
+                if(rcont>800){
+                    prinr=false;
+                    rcont=0;
+                }
+            }
 //            if(nivelsubir.getY()<640-lvlim.getHeight()+50){
 //                nivelsubir.setY(nivelsubir.getY()*1*i);
 //            }else{
@@ -284,8 +319,7 @@ public class Combate extends BasicGameState{
         }
         
     }
-    
-    
+        
      public void comprobarInputs(GameContainer gc, StateBasedGame sbg) throws SlickException{
         Input input=gc.getInput();
         
@@ -317,13 +351,13 @@ public class Combate extends BasicGameState{
             enemigos.get(i).drawC(c, g);   
         }
     }
+    
     public void equipoRender(GameContainer c, Graphics g){
         for (int i=0;i<aliados.size();i++){
             aliados.get(i).drawC(c, g);
         }
     }
-    
-    
+        
     private void genEnemigos(Enemigo e, int a) throws SlickException{
         if (a!=1){
             enem.setY((360-64)/a); 
@@ -368,6 +402,7 @@ public class Combate extends BasicGameState{
                 exp=exp+enemigos.get(i).getExpg();
                 b=true;
                 leveling=true;
+                calcRec(enemigos.get(i));
             }
         }
         for(int i=0;i<a.size();i++){
@@ -459,6 +494,7 @@ public class Combate extends BasicGameState{
         
         return b;
     }
+    
     private void comprobar1(){
         
         for(int i=aliados.size()-1;i>=0;i--){
@@ -470,7 +506,74 @@ public class Combate extends BasicGameState{
         }
     }
     
+    private void calcRec(Enemigo e) throws SlickException{
+        Random m;
+        m=new Random();
+        int r=m.nextInt(101);
+
+        if(e.getPropobj()>r){
+            m=new Random();
+            r=m.nextInt(2);
+            if(r==0){
+                if(e.getLVL()<5){
+                    objetos.add(new PocionVPequeña());
+                }
+                if(5<e.getLVL()&&e.getLVL()<15){
+                    objetos.add(new PocionVMediana());
+                }
+                if(15<e.getLVL()){
+                    objetos.add(new PocionVGrande());
+                }
+            }else{
+                switch(e.getElemento().toString()){
+                    case "Fuego":
+                        objetos.add(new GemaFuego1());
+                        break;
+                    case "Agua":
+                        objetos.add(new GemaAgua1());
+                        break;
+                    case "Rayo":
+                        objetos.add(new GemaRayo1());
+                        break;
+                    case "Planta":
+                        objetos.add(new GemaPlanta1());
+                        break;
+                    case "Tierra":
+                        objetos.add(new GemaTierra1());
+                        break;
+                    case "Oscuro":
+                        objetos.add(new GemaOscura1());
+                        break;
+                    case "Luz":
+                        objetos.add(new GemaLuz1());
+                        break;
+                }
+            }
+            prinr=true;
+
+            System.out.println(objetos.get(objetos.size()-1));
+        }
+        
+    }
     
+    private void renderRecompensas(Graphics g){
+        lvlim.draw(nivelsubir.getX(), nivelsubir.getY());
+        g.drawString("Recompensas: ", nivelstr.getX(), nivelstr.getY());
+        for(int i=0;i<objetos.size();i++){
+            g.drawString(objetos.get(i).toString(), nivelstr.getX()+21, nivelstr.getY()+20+20*i);
+            objetos.get(i).getImagen().draw(nivelstr.getX(), nivelstr.getY()+20+20*i);
+        }
+    }
+    
+    private void repartirR(){
+        try {
+             for(int i=0;i<objetos.size();i++){
+            lucia.getIntven().add(objetos.get(i));
+        }
+        } catch (Exception e) {
+        }
+        
+    }
     
     
 }
