@@ -49,7 +49,7 @@ public class Aliado extends EntidadCombate{
     public void recivirDañoMagia(int dmg, Elemento elem){
         float res=1;
         try {
-            if(armor.getElemento().mult(elem)>0) res=1-armor.getMult();
+            if(armor.getElemento().mult(elem)>0) res=(float) (1-armor.getMult()-0.2);
         } catch (Exception e) {
         }
         getMultiplicadores()[0]=(int) (getMultiplicadores()[0]-((int)((double)dmg+0.7*(double)getEst()[3]))*res);

@@ -30,6 +30,7 @@ public abstract class EntidadCombate extends Entidad{
     private ArrayList<Magia> magias;
     private int EXPN, EXPA, LVL;
     private int[] est;
+    private int DMG;
     private int[] estb;
     private int[] multiplicadores;
     private int[] luest;
@@ -46,7 +47,7 @@ public abstract class EntidadCombate extends Entidad{
     
     public EntidadCombate(String ruta,String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre) throws SlickException {
         super(ruta, h, w, numAnimaciones, nombre);
-        combate=new Entidad(rutaC, 64, 64, numC, nombre+" de Combate");
+        combate=new Entidad(rutaC, 64, 64, numC, nombre+" de Combate") {};
         combate.animaciones(frames, 250, genLimited(numC));
         lucha=false;
         setAnimacionCombate(0);
@@ -63,11 +64,12 @@ public abstract class EntidadCombate extends Entidad{
         animmag=1;
         barraV=new HealthBar(this);
         barraM=new ManaBar(this);
+        DMG=0;
         
     }
     public EntidadCombate(String ruta,String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre, int a) throws SlickException {
         super(ruta, h, w, numAnimaciones, nombre);
-        combate=new Entidad(rutaC, 65, 65, numC, nombre+" de Combate");
+        combate=new Entidad(rutaC, 65, 65, numC, nombre+" de Combate") {};
         combate.animaciones(frames, 250, genLimited(numC));
         lucha=false;
         magias=new ArrayList();
@@ -84,12 +86,13 @@ public abstract class EntidadCombate extends Entidad{
         animmag=1;
         barraV=new HealthBar(this);
         barraM=new ManaBar(this);
+        DMG=0;
         
     }
 
     public EntidadCombate(String ruta,String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre, int wc, int hc) throws SlickException {
         super(ruta, h, w, numAnimaciones, nombre);
-        combate=new Entidad(rutaC, hc, wc, numC, nombre+" de Combate");
+        combate=new Entidad(rutaC, hc, wc, numC, nombre+" de Combate") {};
         combate.animaciones(frames, 250, genLimited(numC));
         lucha=false;
         magias=new ArrayList();
@@ -106,13 +109,14 @@ public abstract class EntidadCombate extends Entidad{
         animmag=1;
         barraV=new HealthBar(this);
         barraM=new ManaBar(this);
+        DMG=0;
         
     }
     
 
     public EntidadCombate(String ruta,String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre, int wc, int hc, boolean[] limited) throws SlickException {
         super(ruta, h, w, numAnimaciones, nombre);
-        combate=new Entidad(rutaC, hc, wc, numC, nombre+" de Combate");
+        combate=new Entidad(rutaC, hc, wc, numC, nombre+" de Combate") {};
         combate.animaciones(frames, 250, limited);
         lucha=false;
         magias=new ArrayList();
@@ -129,6 +133,7 @@ public abstract class EntidadCombate extends Entidad{
         animmag=1;
         barraV=new HealthBar(this);
         barraM=new ManaBar(this);
+        DMG=0;
     }
     
     
@@ -195,12 +200,9 @@ public abstract class EntidadCombate extends Entidad{
     }
     
     public int ataqueBasico(){
-        int dmg;
-        int DMG=(int) (0.9*est[5]+(0.9*LVL*10*0.3));
-        dmg=(int) (0.5*est[2]+DMG);
         combate.setAnimacion(animbaseco);
         dañar.play(1, (float) 0.5 );
-        return dmg;
+        return DMG;
     }
     
     public boolean[] genLimited(int anims){
@@ -233,12 +235,18 @@ public abstract class EntidadCombate extends Entidad{
     }
     
     public void calcEst(){
-            for(int i=0;i<est.length;i++){
+            for(int i=0;i<est.length-1;i++){
                 est[i]=estb[i]+luest[i]*LVL;
                 multiplicadores[i]=1;
             }
+            est[0]=(int) (est[0]+est[2]*0.7);
+            est[5]=(int) (0.7*(est[6]+est[2]));
+            est[4]=est[4]+LVL*10;
+            est[6]=(int) (est[6]+est[4]*0.7);
             multiplicadores[0]=est[0];
             multiplicadores[1]=est[1];
+            est[7]=(int) (estb[7]+0.9*(0.7*est[4]));
+            DMG=(int) (0.9*(0.3*(est[2]+est[4])));
             EXPN=(int) (150*1.33*LVL);
         }
     
@@ -362,7 +370,7 @@ public abstract class EntidadCombate extends Entidad{
         if(getMultiplicadores()[0]<0){
             setMult(0, 0);
         }
-        setAnimacionCombate(getAnimdañar());
+       setAnimacionCombate(getAnimdañar());
        playDaño();
     }
 

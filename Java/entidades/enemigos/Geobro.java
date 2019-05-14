@@ -26,7 +26,7 @@ public class Geobro extends Enemigo{
         aprenderMagia(new MagiaTierra1());
         setElemento(new Terra());
         setExpg(100);
-        setPropobj(20);
+        setPropobj(100);
         
     }
     

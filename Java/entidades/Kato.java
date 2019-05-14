@@ -22,5 +22,11 @@ public class Kato extends Aliado{
         setPosCombate(new Punto(x,y));
         estadisticasb(new int[]{70, 50, 70, 0, 0, 0, 0, 0, 2, 20, 5, 10, 10, 20, 0, 0, 20, 18});
     }
+    @Override
+    public int ataqueBasico(){
+        int dmg=super.ataqueBasico();
+        dmg=(int) ((dmg+getEst()[2]*0.8));
+        return dmg;
+    }
     
 }

@@ -27,8 +27,8 @@ public class Hipograsidi extends Enemigo{
         estadisticasb(new int[]{100, 30, 50, 0, 0, 0, 0, 0, 1, 20, 5, 10, 10, 5, 0, 0, 20, 10});
         aprenderMagia(new MagiaTierra1());
         setElemento(new Planta());
-        setExpg(5000);
-        setPropobj(20);
+        setExpg(100);
+        setPropobj(100);
     }
     
     public void draw(){

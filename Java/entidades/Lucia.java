@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
-import org.newdawn.slick.geom.Rectangle;
+
 
 /**
  *
@@ -57,7 +57,7 @@ public class Lucia extends Aliado{
         equipo.add(new Kato(getPosCombate().getX()-64, getPosCombate().getY()));
         aprenderMagia(new MagiaAgua1());
         aprenderMagia(new MagiaTierra1());
-        estadisticasb(new int[]{80, 60, 80, 10, 20, 0, 0, 0, 2, 20, 5, 10, 10, 20, 0, 0, 20, 18});
+        estadisticasb(new int[]{70, 90, 90, 60, 80, 0, 20,0, 2, 15, 5, 10, 15, 30, 0, 20,18});
         caminar=new Sound("resources/sonido/paso.ogg");
         caminar.loop();
         caminar.stop();
@@ -170,6 +170,11 @@ public class Lucia extends Aliado{
         return intven;
     }
     
-    
+    @Override
+    public int ataqueBasico(){
+        int dmg=super.ataqueBasico();
+        dmg=(int) ((dmg+getEst()[4]*0.8));
+        return dmg;
+    }
     
 }

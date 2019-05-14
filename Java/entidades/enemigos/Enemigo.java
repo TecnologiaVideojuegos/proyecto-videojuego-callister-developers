@@ -28,12 +28,14 @@ public class Enemigo extends EntidadCombate{
     private int propmagia;
     private Elemento elemento;
     private int expg, propobj;
+    private int rango;
     
     public Enemigo(String ruta, String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre) throws SlickException {
         super(ruta, rutaC, h, w, numAnimaciones, numC, frames, nombre);
         speed=50;
         propmagia=30;
         elemento=new Normal();
+        rango=100;
     }
 
     public Enemigo(String ruta, String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre, int hc, int wc) throws SlickException {
@@ -41,12 +43,14 @@ public class Enemigo extends EntidadCombate{
         speed=50;
         propmagia=30;
         elemento=new Normal();
+        rango=100;
         
     }
 
     public Enemigo(String ruta, String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre, int wc, int hc, boolean[] limited) throws SlickException {
         super(ruta, rutaC, h, w, numAnimaciones, numC, frames, nombre, wc, hc, limited);
         speed=50;
+        rango=100;
         propmagia=30;
     }
     
@@ -59,7 +63,7 @@ public class Enemigo extends EntidadCombate{
         Vector v=new Vector(super.getPosicion(), getLucia().getPosicion() );
         int modulo=(int)v.getModulo();
         
-        if(v.getModulo()<100){
+        if(v.getModulo()<rango){
             if (modulo!=0){
                 v=new Vector(new Punto(v.getX()/modulo*speed, v.getY()/modulo*speed));
                 super.setVelocidad(v);
@@ -139,11 +143,7 @@ public class Enemigo extends EntidadCombate{
             } 
         }
     }
-    
- 
-    
 
-    
     public Entidad getEntidad(){
         return super.getEnt();
     }
@@ -183,7 +183,7 @@ public class Enemigo extends EntidadCombate{
                     res=(float) 0.3;
                     break;
                 case 2:
-                    res=(float) 0.75;
+                    res=(float) 0.5;
                     break;
             }
         }
@@ -204,17 +204,19 @@ public class Enemigo extends EntidadCombate{
         setAnimacionCombate(2);
         int da=getMagias().get(indice).usar(this, en);
         float ml=(int) (getMagias().get(indice).getElemento().mult(en.getElementoDef()));
+        float auxm=1;
         if(en.getTieneGemaD()!=0){
             switch(en.getTieneGemaD()){
                 case 1:
-                    ml=(float) 0.80;
+                    auxm=(float) 0.50;
                     break;
                 case 2:
-                    ml=(float) 0.4;
+                    auxm=(float) 0.30;
                     break;
             }
         }
-        da=(int) ((int) (da+getEst()[4]*0.9)*ml);
+        
+        da=(int) (((int)(da-da+auxm ) + (da*auxm)*ml)+getEst()[4]*0.9);
         return da;
     }
 
@@ -234,7 +236,16 @@ public class Enemigo extends EntidadCombate{
         this.propobj = propobj;
     }
 
-    
+    public void setRango(int rango) {
+        this.rango = rango;
+    }
+
+    @Override
+    public int ataqueBasico(){
+        int dmg=super.ataqueBasico();
+        dmg=(int) ((dmg+getEst()[2]*0.5));
+        return dmg;
+    }
     
     
     
