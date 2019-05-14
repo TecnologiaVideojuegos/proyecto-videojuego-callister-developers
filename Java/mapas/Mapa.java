@@ -8,6 +8,7 @@ package mapas;
 import entidades.Entidad;
 import java.util.ArrayList;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.tiled.TiledMap;
 
@@ -25,6 +26,8 @@ public class Mapa extends TiledMap {
     private String nombre;
     private int puertasLayer;
     private int paredesLayer;
+    private Sound abrir_puerta;
+    private Sound cerrar_puerta;
 
     
     public Mapa(String ref, String tileSetsLocation) throws SlickException {
@@ -36,6 +39,8 @@ public class Mapa extends TiledMap {
         edificios = new ArrayList();
         puertas = new ArrayList();
         nuevaInfo = new int[5];
+        this.abrir_puerta = new Sound("/resources/sonido/abrir_puerta.ogg");
+        this.cerrar_puerta = new Sound("/resources/sonido/cerrar_puerta.ogg");
         genPuertas();
         genNombre(ref);
     }
@@ -49,6 +54,8 @@ public class Mapa extends TiledMap {
         edificios = new ArrayList();
         puertas = new ArrayList();
         nuevaInfo = new int[5];
+        this.abrir_puerta = new Sound("/resources/sonido/abrir_puerta.ogg");
+        this.cerrar_puerta = new Sound("/resources/sonido/cerrar_puerta.ogg");
         genPuertas();
         genNombre(ref);
     }
@@ -78,7 +85,7 @@ public class Mapa extends TiledMap {
         boolean puertaIzq;
         boolean puertaUp;
         boolean puertaDown;
-        
+
         for (int i = 0;i < ay;i++){
             for (int j = 0;j < ax;j++){
                 paredCentro = this.getTileId(j, i, paredesLayer) != 0;
@@ -157,35 +164,40 @@ public class Mapa extends TiledMap {
             switch(nombre){
                 case "Antes_Cueva_Inicio":
                     if(puertas.get(i).intersects(hitboxE[2])){
-                        setNuevaInfo(0, 1, 525, 175, 1);
+                        setNuevaInfo(0, 2, 525, 175, 1);
                     } else if(puertas.get(i).intersects(hitboxE[0])){
-                        setNuevaInfo(0, 0, 800, 1193, 1);
+                        setNuevaInfo(0, 1, 800, 1193, 1);
                     }
                     break;
                 case "Casa_inicio":
                     if(puertas.get(i).intersects(hitboxE[0])){
-                        setNuevaInfo(0, 1, 335, 505, 1);
+                        abrir_puerta.play();
+                        setNuevaInfo(0, 2, 335, 505, 1);
                     }
                     break;
                 case "Catedral":
                     if(puertas.get(i).intersects(hitboxE[2])){
-                        setNuevaInfo(1, 0, 670, 238, 1);
+                        setNuevaInfo(1, 1, 670, 238, 1);
                     }
                     break;
                 case "Ciudad_ciudad":
                     if(puertas.get(i).intersects(hitboxE[2])){
-                        setNuevaInfo(1, 1, 392, 473, 1);
+                        setNuevaInfo(1, 2, 392, 473, 1);
                     } else if(puertas.get(i).intersects(hitboxE[0])){
                         setNuevaInfo(1, -1, 639, 2143, 1);
                     } else if(puertas.get(i).intersects(hitboxE[1])){
                         setNuevaInfo(2, 3, 202, 537, 1);
-                    } 
+                    } else if(puertas.get(i).intersects(hitboxE[3])){
+                        setNuevaInfo(1, 3, 1138, 341, 1);
+                    }
                     break;
                 case "Cueva_inicio":
                     if(puertas.get(i).intersects(hitboxE[0])){
-                        setNuevaInfo(1, 1, 591, 479, 1);
+                        setNuevaInfo(1, 2, 591, 479, 1);
                     } else if(puertas.get(i).intersects(hitboxE[2])){
-                        setNuevaInfo(0, 2, 446, 335, 1);
+                        setNuevaInfo(0, 3, 446, 335, 1);
+                    } else if(puertas.get(i).intersects(hitboxE[1])){
+                        setNuevaInfo(0, 0, 360, 507, 1);
                     }
                     break;
                 case "DungeonTorrePlanta1":
@@ -209,16 +221,17 @@ public class Mapa extends TiledMap {
                     break;
                 case "Fuera_casa_inicio":
                     if(puertas.get(i).intersects(hitboxE[0])){
-                        setNuevaInfo(0, 2, 463, 927, 1);
+                        setNuevaInfo(0, 3, 463, 927, 1);
                     } else if(puertas.get(i).intersects(hitboxE[2])){
+                        cerrar_puerta.play();
                         setNuevaInfo(0, -1, 256, 24, 1);
                     }
                     break;
                 case "Mirador_Ciudad":
                     if(puertas.get(i).intersects(hitboxE[2])){
-                        setNuevaInfo(0, 0, 750, 330, 1);
+                        setNuevaInfo(0, 1, 750, 330, 1);
                     } else if(puertas.get(i).intersects(hitboxE[3])){
-                        setNuevaInfo(1, 0, 702, 2623, 1);
+                        setNuevaInfo(1, 1, 702, 2623, 1);
                     }
                     break;
                 case "RutaAntesDungeonTorre":
@@ -230,9 +243,10 @@ public class Mapa extends TiledMap {
                     break;
                 case "Pueblo":
                     if(puertas.get(i).intersects(hitboxE[3])){
-                        setNuevaInfo(1, 0, 950, 571, 1);
+                        setNuevaInfo(1, 1, 950, 571, 1);
                     } else if(puertas.get(i).intersects(hitboxE[1])){
                         if(e.getPosicion().getY() > 730 && e.getPosicion().getY() < 950){
+                            setNuevaInfo(3, 2, 359, 776, 1);
                         } else {
                             setNuevaInfo(2, 4, 327, 519, 1);
                         }
@@ -241,25 +255,31 @@ public class Mapa extends TiledMap {
                         int y = (int) e.getPosicion().getY();
                         
                         if(x > 2295 && x < 2315){
+                            this.abrir_puerta.play();
                             setNuevaInfo(2, -1, 381, 165, 1);
                         } else if(x > 890 && x < 900){
+                            this.abrir_puerta.play();
                             setNuevaInfo(2, -2, 110, 259, 1);
                         } else if(x > 500 && x < 580){
                             setNuevaInfo(2, -3, 623, 895, 1);
                         } else if(x > 2170 && x < 2180){
+                            this.abrir_puerta.play();
                             setNuevaInfo(2, -4, 498, 325, 1);
                         } else if(x > 345 && x < 360){
+                            this.abrir_puerta.play();
                             setNuevaInfo(2, -5, 445, 325, 1);
                         }
                     }
                     break;
                 case "Ayuntamiento_Pueblo":
                     if(puertas.get(i).intersects(hitboxE[2])){
+                        this.cerrar_puerta.play();
                         setNuevaInfo(2, 3, 2303, 284, 1);
                     }
                     break;
                 case "Casa_Pueblo":
                     if(puertas.get(i).intersects(hitboxE[2])){
+                        this.cerrar_puerta.play();
                         setNuevaInfo(2, 3, 895, 846, 1);
                     }
                     break;
@@ -270,12 +290,57 @@ public class Mapa extends TiledMap {
                     break;
                 case "Hospital_Pueblo":
                     if(puertas.get(i).intersects(hitboxE[2])){
+                        this.cerrar_puerta.play();
                         setNuevaInfo(2, 3, 2175, 1464, 1);
                     }
                     break;
                 case "Residencia_Pueblo":
                     if(puertas.get(i).intersects(hitboxE[2])){
+                        this.cerrar_puerta.play();
                         setNuevaInfo(2, 3, 355, 1758, 1);
+                    }
+                    break;
+                case "Cueva_Antes_Ruta_Dungeon_Final":
+                    if(puertas.get(i).intersects(hitboxE[2])){
+                        setNuevaInfo(3, 2, 1917, 761, 1);
+                    } else if(puertas.get(i).intersects(hitboxE[1])){
+                        setNuevaInfo(3, 3, 399, 735, 1);
+                    }
+                    break;
+                case "Cueva_Inicio_Extension":
+                    if(puertas.get(i).intersects(hitboxE[3])){
+                        setNuevaInfo(0, 1, 1302, 550, 1);
+                    }
+                    break;
+                case "Dungeon_Desierto":
+                    if(puertas.get(i).intersects(hitboxE[0])){
+                        setNuevaInfo(1, 3, 668, 4224, 1);
+                    }
+                    break;
+                case "Dungeon_Final":
+                    if(puertas.get(i).intersects(hitboxE[0])){
+                        setNuevaInfo(3, 3, 380, 174, 1);
+                    }
+                    break;
+                case "Ruta_Antes_Cueva_Dungeon_Final":
+                    if(puertas.get(i).intersects(hitboxE[3])){
+                        setNuevaInfo(2, 3, 3032, 841, 1);
+                    } else if(puertas.get(i).intersects(hitboxE[0])){
+                        setNuevaInfo(3, 0, 208, 1859, 1);
+                    }
+                    break;
+                case "Ruta_Antes_Dungeon_Desierto":
+                    if(puertas.get(i).intersects(hitboxE[1])){
+                        setNuevaInfo(1, 1, 265, 605, 1);
+                    } else if(puertas.get(i).intersects(hitboxE[2])){
+                        setNuevaInfo(1, 0, 1537, 338, 1);
+                    }
+                    break;
+                case "Ruta_Antes_Dungeon_Final":
+                    if(puertas.get(i).intersects(hitboxE[2])){
+                        setNuevaInfo(3, 0, 1500, 193, 1);
+                    } else if(puertas.get(i).intersects(hitboxE[0])){
+                        setNuevaInfo(3, 1, 925, 337, 1);
                     }
                     break;
             }

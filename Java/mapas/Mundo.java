@@ -24,11 +24,11 @@ public class Mundo {
     }
     
     private void initMapa(){
-        cambiarMapa(2, -5);
+        cambiarMapa(2, 3);
     }
     
     private void genZonas() throws SlickException{
-        for(int i = 0;i < 3;i++){
+        for(int i = 0;i < 4;i++){
             mundo.add(new Zona());
         }
         
@@ -38,14 +38,19 @@ public class Mundo {
         
         for(Zona zona : mundo){
             zona.sort();
+            //zona.toStringAll();
         }
     }
     
     private void genDungeons() throws SlickException{
         mundo.get(0).addDungeon(new Dungeon("resources/Mapas/Cueva_inicio/Cueva_inicio.tmx"));
+        mundo.get(0).addDungeon(new Dungeon("resources/Mapas/Cueva_Inicio_Extension/Cueva_Inicio_Extension.tmx"));
+        mundo.get(1).addDungeon(new Dungeon("resources/Mapas/Dungeon_Desierto/Dungeon_Desierto.tmx"));
         mundo.get(2).addDungeon(new Dungeon("resources/Mapas/DungeonTorrePlanta1/DungeonTorrePlanta1.tmx"));
         mundo.get(2).addDungeon(new Dungeon("resources/Mapas/DungeonTorrePlanta2/DungeonTorrePlanta2.tmx"));
         mundo.get(2).addDungeon(new Dungeon("resources/Mapas/DungeonTorrePlanta3/DungeonTorrePlanta3.tmx"));
+        mundo.get(3).addDungeon(new Dungeon("resources/Mapas/Dungeon_Final/Dungeon_Final.tmx"));
+        mundo.get(3).addDungeon(new Dungeon("resources/Mapas/Cueva_Antes_Ruta_Dungeon_Final/Cueva_Antes_Ruta_Dungeon_Final.tmx")); 
     }
     
     private void genPueblos() throws SlickException{
@@ -79,7 +84,10 @@ public class Mundo {
     private void genRutas() throws SlickException{
         mundo.get(0).addRuta(new Ruta("resources/Mapas/Antes_Cueva_Inicio/Antes_Cueva_Inicio.tmx"));
         mundo.get(1).addRuta(new Ruta("resources/Mapas/Mirador_Ciudad/Mirador_Ciudad.tmx"));
+        mundo.get(1).addRuta(new Ruta("resources/Mapas/Ruta_Antes_Dungeon_Desierto/Ruta_Antes_Dungeon_Desierto.tmx"));
         mundo.get(2).addRuta(new Ruta("resources/Mapas/RutaAntesDungeonTorre/RutaAntesDungeonTorre.tmx"));
+        mundo.get(3).addRuta(new Ruta("resources/Mapas/Ruta_Antes_Cueva_Dungeon_Final/Ruta_Antes_Cueva_Dungeon_Final.tmx"));
+        mundo.get(3).addRuta(new Ruta("resources/Mapas/Ruta_Antes_Dungeon_Final/Ruta_Antes_Dungeon_Final.tmx"));
     }
     
     public void cambiarMapa(int z, int m){
@@ -88,10 +96,10 @@ public class Mundo {
         } else {
             switch (z) {
                 case 0:
-                    this.mapaCargado = this.getMapa(0, 1).getEdificios().get(0);
+                    this.mapaCargado = this.getMapa(0, 2).getEdificios().get(0);
                     break;
                 case 1:
-                    this.mapaCargado = this.getMapa(1, 0).getEdificios().get(0);
+                    this.mapaCargado = this.getMapa(1, 1).getEdificios().get(0);
                     break;
                 case 2:
                     this.mapaCargado = this.getMapa(2, 3).getEdificios().get(-m - 1);

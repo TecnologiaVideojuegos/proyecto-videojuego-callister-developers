@@ -3,15 +3,18 @@ Los mapas deben ser guardados en la siguiente carpeta:
 
 Posición de la matriz a la que corresponde cada mapa:
 Zona 0:
-0,0 -> cueva_inicio
-0,1 -> fuera_casa_inicio
-0,2 -> antes_cueva_incio
+0,0 -> extensión_cueva
+0,1 -> cueva_inicio
+0,2 -> fuera_casa_inicio
+0,3 -> antes_cueva_incio
 0,-1 -> casa_inicio
 
 Zona 1:
-1,0 -> ciudad
-1,1 -> mirador
-1,-1 -> catedrals
+1,0 -> dungeon_desierto
+1,1 -> ciudad
+1,2 -> mirador
+1,3 -> ruta_desierto
+1,-1 -> catedral
 
 Zona 2:
 2,0 -> dungeon_piso1
@@ -24,6 +27,12 @@ Zona 2:
 2,-3 -> cueva_pueblo
 2,-4 -> hospital
 2,-5 -> residencia
+
+Zona 3:
+3,0 -> cueva_antes_dng_final
+3,1 -> dng_final
+3,2 -> ruta_dng_cueva_final
+3,3 -> ruta_dng_final
 
 Para comenzar en un mapa determiando:
 
