@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="1">
- <tileset firstgid="1" source="Texturas_Casa_inicio.tsx"/>
- <layer id="1" name="Background" width="10" height="10">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="1">
+ <tileset firstgid="1" name="Texturas_Casa_inicio" tilewidth="32" tileheight="32" tilecount="100" columns="10">
+  <image source="Casa_inicio.png" width="320" height="320"/>
+ </tileset>
+ <layer id="1" name="Capa de Patrones 1" width="10" height="10">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAACg3DhzZCAQAA0Eche69IGrYIISMrRGYI2cX/f4N7z7lNQRA0GzJsi622GbHdDjvtstsee+2z3wEHHXLYEUcdc9yoE04ac8q40yZMmjLtjLPOOe+Ciy65bMYVV8265rob5tx0y23z7rjrnvsWPPDQI489seipZ55b8sJLy1557Y233nlvxQcffbLqsy++WvPNdz/89Mtvf6zb8Nc//wGfNE9qkAEAAA==
   </data>
  </layer>
  <layer id="3" name="ObjColisionables" width="10" height="10">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACo3OyUqCYRQG4M8hx5zCYadby1VqEJTtyq2ibpwt7/8afCCFf+EvvvDAgffAOYkQQpIUaR7IkCVHngJFHilRpkKVGk/hP3UaNGmF+LTp3Ogv6fLMC72YnVf6DBjyFuneI/MHn4z4unHzmx/Gd/w3YXqeZ8xZXNlbsmLNhi079hz45Y8jJyMlfFSQAQAA
+   H4sIAAAAAAAACo3PywqCYBCG4els2UkpXbbWVh6CoHJXbYtqo50g7/8aeuFX+BcpDTwwMB/MTENEmmihjQ666MFAHwOYGGKEMSaYwoItqmaYw4Er1fXBomau5zz4WFZkAoSIEGOlzdZav8EWOyQ1O/c44PjHfSeci/6CK24/ciky3PHAEy+8Rf1YyvEF5CGhJJABAAA=
   </data>
  </layer>
  <layer id="4" name="Puerta" width="10" height="10">
