@@ -49,5 +49,6 @@
             Agregado mapa, sacado de google: Ruta_Antes_Dungeon_Final: (https://boards.fireden.net/tg/last/50/50215120/)
             Puntero de asignación de item de inventario a personaje corregido
             Cambios en menu principal
+            Mundo finalizado
     
     
