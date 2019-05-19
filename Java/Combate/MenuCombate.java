@@ -83,7 +83,7 @@ public class MenuCombate {
         }
         
         ia=new IACombate(enemigos);
-        cant=new Sound("resources/sonido/combate/menu_cant.ogg");
+        cant=new Sound("resources/sonido/combate/menu_cance.ogg");
         this.aliados=aliados;
         
     }

@@ -5,7 +5,10 @@
  */
 package mapas;
 
+import chaoschild.Punto;
+import cofres.Cofre;
 import entidades.Entidad;
+import entidades.enemigos.*;
 import java.util.ArrayList;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
@@ -17,11 +20,11 @@ import org.newdawn.slick.tiled.TiledMap;
  * @author victo
  */
 public class Mapa extends TiledMap {
-    
+    private ArrayList<ConjuntoEnemigos> enemigos;
     private ArrayList<Rectangle> hitBoxes;
     private ArrayList<Rectangle> puertas;
-    private ArrayList<Entidad> entidades;
     private ArrayList<Edificio> edificios;
+    private ArrayList<Cofre> cofres;
     private int[] nuevaInfo;
     private String nombre;
     private int puertasLayer;
@@ -34,8 +37,9 @@ public class Mapa extends TiledMap {
         super(ref, tileSetsLocation);
         paredesLayer = this.getLayerIndex("ObjColisionables");
         puertasLayer = this.getLayerIndex("Puerta");
+        this.cofres = new ArrayList();
         hitBoxes = new ArrayList();
-        entidades = new ArrayList();
+        enemigos = new ArrayList();
         edificios = new ArrayList();
         puertas = new ArrayList();
         nuevaInfo = new int[5];
@@ -49,8 +53,9 @@ public class Mapa extends TiledMap {
         super(ref);
         paredesLayer = this.getLayerIndex("ObjColisionables");
         puertasLayer = this.getLayerIndex("Puerta");
+        this.cofres = new ArrayList();
         hitBoxes = new ArrayList();
-        entidades = new ArrayList();
+        enemigos = new ArrayList();
         edificios = new ArrayList();
         puertas = new ArrayList();
         nuevaInfo = new int[5];
@@ -58,6 +63,12 @@ public class Mapa extends TiledMap {
         this.cerrar_puerta = new Sound("/resources/sonido/cerrar_puerta.ogg");
         genPuertas();
         genNombre(ref);
+    }
+    
+    public void drawEnemigos(){
+        for(ConjuntoEnemigos conEnemigos : enemigos){
+            conEnemigos.draw();
+        }
     }
     
     private void genNombre(String ref){
@@ -71,6 +82,94 @@ public class Mapa extends TiledMap {
         this.nombre = ref.substring(pos + 1, ref.length() - 4);
     }
     
+    public void genEnemigos() throws SlickException{
+        switch(nombre){
+                case "Antes_Cueva_Inicio":
+
+                    break;
+                case "Casa_inicio":
+
+                    break;
+                case "Catedral":
+
+                    break;
+                case "Ciudad_ciudad":
+
+                    break;
+                case "Cueva_inicio":
+
+                    break;
+                case "DungeonTorrePlanta1":
+
+                    break;
+                case "DungeonTorrePlanta2":
+
+                    break;
+                case "DungeonTorrePlanta3":
+
+                    break;
+                case "Fuera_casa_inicio":
+
+                    break;
+                case "Mirador_Ciudad":
+
+                    break;
+                case "RutaAntesDungeonTorre":
+
+                    break;
+                case "Pueblo":
+
+                    break;
+                case "Ayuntamiento_Pueblo":
+
+                    break;
+                case "Casa_Pueblo":
+
+                    break;
+                case "Cueva_Pueblo":
+
+                    break;
+                case "Hospital_Pueblo":
+
+                    break;
+                case "Residencia_Pueblo":
+
+                    break;
+                case "Cueva_Antes_Ruta_Dungeon_Final":
+
+                    break;
+                case "Cueva_Inicio_Extension":
+
+                    break;
+                case "Dungeon_Desierto":
+                    int x = 1300, y = 800;
+                    Geobro ene = new Geobro(x, y);
+                    Ragebbit rag = new Ragebbit(x, y);
+                    Hipograsidi hip = new Hipograsidi(x, y);
+                    ArrayList<Enemigo> aux = new ArrayList();
+                    aux.add(ene);
+                    aux.add(rag);
+                    aux.add(hip);
+                    ConjuntoEnemigos conjunto = new ConjuntoEnemigos(aux, new Punto(x, y), this);
+                    
+                    this.enemigos.add(conjunto);
+                    
+                    break;
+                case "Dungeon_Final":
+
+                    break;
+                case "Ruta_Antes_Cueva_Dungeon_Final":
+
+                    break;
+                case "Ruta_Antes_Dungeon_Desierto":
+
+                    break;
+                case "Ruta_Antes_Dungeon_Final":
+
+                    break;
+            }
+    }
+    
     private void genPuertas()throws SlickException{
         int ax  = this.width;
         int ay = this.height;
@@ -78,12 +177,10 @@ public class Mapa extends TiledMap {
         boolean paredIzq;
         boolean paredCentro;
         boolean paredDrch;
-        boolean paredUp;
         boolean paredDown;
         boolean puertaCentro;
         boolean puertaDrch;
         boolean puertaIzq;
-        boolean puertaUp;
         boolean puertaDown;
 
         for (int i = 0;i < ay;i++){
@@ -95,14 +192,6 @@ public class Mapa extends TiledMap {
                 } catch(Exception e){
                     paredIzq = false;
                     puertaIzq = false;
-                }
-                
-                try{
-                    paredUp = this.getTileId(j, i - 1, paredesLayer) != 0;
-                    puertaUp = this.getTileId(j, i - 1, puertasLayer) != 0;
-                } catch(Exception e){
-                    paredUp = false;
-                    puertaUp = false;
                 }
                 
                 try{
@@ -372,12 +461,40 @@ public class Mapa extends TiledMap {
         }
     }
     
+    public void drawCofres(){
+        for(Cofre cofre : cofres){
+            cofre.draw();
+        }
+    }
+    
+    public ArrayList<Cofre> getCofres(){
+        return this.cofres;
+    }
+    
+    public void addCofre(Cofre cofre){
+        this.cofres.add(cofre);
+    }
+    
+    public void delCofre(int pos){
+        this.cofres.remove(pos);
+    }
+    
     public String getNombre(){
         return nombre;
     }
     
-    public ArrayList<Entidad> getEntidades(){
-        return entidades;
+    public ArrayList<ConjuntoEnemigos> getConjuntoEnemigos(){
+        return enemigos;
+    }
+
+    public ArrayList<Enemigo> getEnemigos(){
+        ArrayList<Enemigo> aux = new ArrayList();
+        for (int i = 0;i < enemigos.size();i++){
+            for (Enemigo enemigo : enemigos.get(i).getEnemigos()) {
+                aux.add(enemigo);
+            }
+        }
+        return aux;
     }
     
     public ArrayList<Rectangle> getHitBoxes() {

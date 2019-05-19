@@ -5,7 +5,11 @@
  */
 package mapas;
 
+import chaoschild.Punto;
+import cofres.Cofre;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.newdawn.slick.SlickException;
 
 /**
@@ -20,11 +24,12 @@ public class Mundo {
     public Mundo() throws SlickException{
         this.mundo = new ArrayList();
         genZonas();
+        genCofres();
         initMapa();
     }
     
     private void initMapa(){
-        cambiarMapa(2, 3);
+        cambiarMapa(1, 0);
     }
     
     private void genZonas() throws SlickException{
@@ -40,6 +45,12 @@ public class Mundo {
             zona.sort();
             //zona.toStringAll();
         }
+    }
+    
+    private void genCofres() throws SlickException{
+        Cofre cofre = new Cofre(new Punto(19 * 32, 15 * 32));
+        
+        mundo.get(0).getZona().get(0).addCofre(cofre);
     }
     
     private void genDungeons() throws SlickException{
@@ -106,10 +117,15 @@ public class Mundo {
                     break;
             }
         }
+        
+        try {
+            this.mapaCargado.genEnemigos();
+        } catch (SlickException ex) {}
     }
     
     public void render(){
         this.mapaCargado.render();
+        this.mapaCargado.drawCofres();
     }
     
     public Zona getZona(int Nzona){

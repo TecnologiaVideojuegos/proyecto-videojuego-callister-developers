@@ -8,9 +8,15 @@ package juego;
 import Combate.Combate;
 import chaoschild.ChaosChild;
 import chaoschild.Punto;
+import cofres.Cofre;
 import entidades.Entidad;
 import entidades.Lucia;
+import entidades.enemigos.Enemigo;
+import entidades.enemigos.Hipograsidi;
 import entidades.enemigos.Ragebbit;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mapas.Mapa;
 import mapas.Mundo;
 import musica.GestorMusica;
@@ -37,6 +43,7 @@ public class Juego extends BasicGameState{
     private float posinix;
     private float posiniy;
     private Ragebbit ragebit;
+    private Hipograsidi hipograsidi;
     private ChaosChild chaos;
     private boolean cambioMapa;
     private int contCambioMapa;
@@ -61,7 +68,7 @@ public class Juego extends BasicGameState{
         contCambioMapa = 0;
         music.play();
         //Lucia=Lucia.getLucia(); 
-        Lucia = new Lucia(3000, 841);
+        Lucia = new Lucia(1537, 1000);
         mundo=new Mundo();
         mapa = mundo.getMapaCargado();
         posiniy=gc.getHeight()/2;
@@ -69,6 +76,7 @@ public class Juego extends BasicGameState{
         renderx=0;
         rendery=0;
         ragebit=new Ragebbit((int)Lucia.getPosicion().getX(), (int)Lucia.getPosicion().getY());
+        hipograsidi = new Hipograsidi((int)Lucia.getPosicion().getX() + 64, (int)Lucia.getPosicion().getY() + 64);
     }
 
     @Override
@@ -76,9 +84,12 @@ public class Juego extends BasicGameState{
         if(!cambioMapa){
             grphcs.translate(renderx, rendery);
             mundo.render();
+            mapa.drawEnemigos();
             Lucia.draw(); 
             ragebit.draw();
+            hipograsidi.draw();
             
+            /*
             for(int i=0;i<4;i++){
                 grphcs.draw(ragebit.getHitParedes()[i]);
             }
@@ -93,7 +104,14 @@ public class Juego extends BasicGameState{
             for(int i = 0;i < mapa.getPuertas().size();i++){
                 grphcs.draw(mapa.getPuertas().get(i));
             }
-
+            
+            for(int i = 0;i < mapa.getCofres().size();i++){
+                grphcs.draw(mapa.getCofres().get(i).getHitBox());
+                for(int j = 0;j < mapa.getCofres().get(i).getAreaAccion().size();j++){
+                    grphcs.draw(mapa.getCofres().get(i).getAreaAccion().get(j));
+                }
+            }
+*/
             try{
                 mapa.render(0, 0, mapa.getLayerIndex("Puente"));
             }catch(Exception e){  }
@@ -117,6 +135,8 @@ public class Juego extends BasicGameState{
                 music.play();
             }
             ragebit.actualizar(colisionPared(ragebit), i);
+            hipograsidi.actualizar(colisionPared(hipograsidi), i);
+            actualizarEnemigos(i);
             comprobarInputs(gc,sbg);
             boolean[] pas={false};
             Lucia.actualizar(gc.getInput(),colisionPared(Lucia));
@@ -124,10 +144,19 @@ public class Juego extends BasicGameState{
             renderx=posinix-Lucia.getPosicion().getX();
             rendery=posiniy-Lucia.getPosicion().getY();
             Lucia.update(i);
+            comprobarCofre(gc, Lucia);
             comprobarPuertas();
             mapa = mundo.getMapaCargado();
         } else {
             contCambioMapa += i;
+        }
+    }
+    
+    private void actualizarEnemigos(int n){
+        for (Enemigo enemigo : mapa.getEnemigos()) {
+            try {
+                enemigo.actualizar(colisionPared(enemigo), n);
+            } catch (SlickException ex) {}
         }
     }
    
@@ -138,6 +167,39 @@ public class Juego extends BasicGameState{
             this.cambioMapa = true;
             this.mundo.cambiarMapa(info[0], info[1]);
             Lucia.setPosicion(new Punto(info[2], info[3]));
+        }
+    }
+ 
+    public void comprobarCofre(GameContainer gc, Entidad e){
+        Input input=gc.getInput();
+               
+        if(input.isKeyPressed(Input.KEY_SPACE)){
+            Rectangle[] hitbox = e.getHitParedes();
+            ArrayList<Cofre> cofres = this.mapa.getCofres();
+            ArrayList<Rectangle> areaAccion = new ArrayList();
+            boolean colision = false;
+            Cofre cofre = new Cofre();
+            
+            for(int i = 0;i < cofres.size();i++){
+                if(!cofres.get(i).isAbierto()){
+                    areaAccion = cofres.get(i).getAreaAccion();
+                    for(int j = 0;j < areaAccion.size();j++){
+                        if(hitbox[0].intersects(areaAccion.get(j)) || 
+                           hitbox[1].intersects(areaAccion.get(j)) ||
+                           hitbox[2].intersects(areaAccion.get(j)) ||
+                           hitbox[3].intersects(areaAccion.get(j))){
+                            colision = true;
+                            cofre = cofres.get(i);
+                        }
+                    }
+                }
+            }
+            
+            if(colision){
+                try {
+                    cofre.abrir();
+                } catch (SlickException ex) {}
+            }
         }
     }
     
@@ -161,34 +223,34 @@ public class Juego extends BasicGameState{
             
                 if(mapa.getHitBoxes().get(i).intersects(hitbox[0])){
                     pasar[0]=false;
-                }
-            }
-        
-        for(int i =0;i<mapa.getHitBoxes().size();i++){
-            
-                if(mapa.getHitBoxes().get(i).intersects(hitbox[1])){
+                } else if(mapa.getHitBoxes().get(i).intersects(hitbox[1])){
                     pasar[1]=false;  
-                }
-            }
-        
-        for(int i =0;i<mapa.getHitBoxes().size();i++){
-            
-                if(mapa.getHitBoxes().get(i).intersects(hitbox[2])){
+                } else if(mapa.getHitBoxes().get(i).intersects(hitbox[2])){
                     pasar[2]=false;
-            }
-        }
-        for(int i =0;i<mapa.getHitBoxes().size();i++){
-
-                if(mapa.getHitBoxes().get(i).intersects(hitbox[3])){
+                } else if(mapa.getHitBoxes().get(i).intersects(hitbox[3])){
                     pasar[3]=false;
                 }
+            }
+        
+        for(int i = 0;i < mapa.getCofres().size();i++){
+            if(mapa.getCofres().get(i).getHitBox().intersects(hitbox[0])){
+                pasar[0] = false;
+            } else if(mapa.getCofres().get(i).getHitBox().intersects(hitbox[1])){
+                pasar[1] = false;
+            } else if(mapa.getCofres().get(i).getHitBox().intersects(hitbox[2])){
+                pasar[2] = false;
+            } else if(mapa.getCofres().get(i).getHitBox().intersects(hitbox[3])){
+                pasar[3] = false;
+            }
         }
         
         return pasar;
     }
     
     public void combate(StateBasedGame sbg, GameContainer gc) throws SlickException{
-        sbg.addState(new Combate(2));
+        Combate combate = new Combate(2);
+        combate.genEnemigos(this.mundo.getMapaCargado().getEnemigos());
+        sbg.addState(combate);
         sbg.getState(2).init(gc, sbg);
         music.cambiarM(1);
         music.play();
