@@ -51,5 +51,6 @@
             Cambios en menu principal
             Mundo finalizado
     - 19/05 Agregado conjunto de enemigos. Se han modificado las carpetas: mapas, juego y combate.
+            Agregadas imágenes de los cofres.
     
     
