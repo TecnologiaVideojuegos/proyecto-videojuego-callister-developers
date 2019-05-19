@@ -50,5 +50,6 @@
             Puntero de asignación de item de inventario a personaje corregido
             Cambios en menu principal
             Mundo finalizado
+    - 19/05 Agregado conjunto de enemigos. Se han modificado las carpetas: mapas, juego y combate.
     
     
