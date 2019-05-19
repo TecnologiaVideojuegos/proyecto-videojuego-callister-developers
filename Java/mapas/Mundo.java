@@ -7,9 +7,9 @@ package mapas;
 
 import chaoschild.Punto;
 import cofres.Cofre;
+import itemsjuego.*;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import juego.Juego;
 import org.newdawn.slick.SlickException;
 
 /**
@@ -20,8 +20,10 @@ public class Mundo {
     
     private ArrayList<Zona> mundo;
     private Mapa mapaCargado;
+    private Juego juego;
     
-    public Mundo() throws SlickException{
+    public Mundo(Juego juego) throws SlickException{
+        this.juego = juego;
         this.mundo = new ArrayList();
         genZonas();
         genCofres();
@@ -29,7 +31,7 @@ public class Mundo {
     }
     
     private void initMapa(){
-        cambiarMapa(1, 0);
+        cambiarMapa(2, 3);
     }
     
     private void genZonas() throws SlickException{
@@ -48,9 +50,30 @@ public class Mundo {
     }
     
     private void genCofres() throws SlickException{
-        Cofre cofre = new Cofre(new Punto(19 * 32, 15 * 32));
+        PocionVPequeña Pvp = new PocionVPequeña();
+        PocionVMediana Pvm = new PocionVMediana();
+        PocionVGrande Pvg = new PocionVGrande();
+        PocionMPequeña Pmp = new PocionMPequeña();
+        PocionMMediana Pmm = new PocionMMediana();
+        PocionMGrande Pmg = new PocionMGrande();
         
+        Cofre cofre = new Cofre(new Punto(19 * 32, 15 * 32), Pvp, this.juego);
         mundo.get(0).getZona().get(0).addCofre(cofre);
+        
+        cofre = new Cofre(new Punto(613, 373), Pmp, this.juego);
+        mundo.get(2).getZona().get(3).getEdificios().get(2).addCofre(cofre);
+        
+        cofre = new Cofre(new Punto(32 * 7, 32 * 2), Pvm, this.juego);
+        mundo.get(2).getZona().get(3).getEdificios().get(0).addCofre(cofre);
+        
+        cofre = new Cofre(new Punto(35, 640), Pmm, this.juego);
+        mundo.get(2).getZona().get(0).addCofre(cofre);
+        
+        cofre = new Cofre(new Punto(80, 127), Pmg, this.juego);
+        mundo.get(2).getZona().get(1).addCofre(cofre);
+        
+        cofre = new Cofre(new Punto(1000, 220), Pvg, this.juego);
+        mundo.get(3).getZona().get(0).addCofre(cofre);
     }
     
     private void genDungeons() throws SlickException{

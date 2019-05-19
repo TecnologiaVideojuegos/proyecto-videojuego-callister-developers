@@ -9,23 +9,18 @@ import Combate.Combate;
 import chaoschild.ChaosChild;
 import chaoschild.Punto;
 import cofres.Cofre;
+import dialogo.Dialogo;
 import entidades.Entidad;
 import entidades.Lucia;
-import entidades.enemigos.Enemigo;
-import entidades.enemigos.Hipograsidi;
-import entidades.enemigos.Ragebbit;
+import entidades.enemigos.*;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mapas.Mapa;
 import mapas.Mundo;
 import musica.GestorMusica;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
+import org.newdawn.slick.state.*;
+import org.newdawn.slick.state.transition.*;
 
 
 /**
@@ -47,6 +42,7 @@ public class Juego extends BasicGameState{
     private ChaosChild chaos;
     private boolean cambioMapa;
     private int contCambioMapa;
+    private Dialogo dialogo;
     
     @Override
     public int getID() {
@@ -68,13 +64,14 @@ public class Juego extends BasicGameState{
         contCambioMapa = 0;
         music.play();
         //Lucia=Lucia.getLucia(); 
-        Lucia = new Lucia(1537, 1000);
-        mundo=new Mundo();
+        Lucia = new Lucia(500, 500);
+        mundo=new Mundo(this);
         mapa = mundo.getMapaCargado();
         posiniy=gc.getHeight()/2;
         posinix=gc.getWidth()/2;
         renderx=0;
         rendery=0;
+        this.dialogo = new Dialogo(this);
         ragebit=new Ragebbit((int)Lucia.getPosicion().getX(), (int)Lucia.getPosicion().getY());
         hipograsidi = new Hipograsidi((int)Lucia.getPosicion().getX() + 64, (int)Lucia.getPosicion().getY() + 64);
     }
@@ -88,6 +85,8 @@ public class Juego extends BasicGameState{
             Lucia.draw(); 
             ragebit.draw();
             hipograsidi.draw();
+            this.dialogo.draw(grphcs);
+            
             
             /*
             for(int i=0;i<4;i++){
@@ -128,28 +127,56 @@ public class Juego extends BasicGameState{
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
+        boolean aux;
+        try{
+            aux = mapa.getCofres().get(0).isAbriendo();
+        } catch(Exception e){
+            aux = false;
+        }
         if(!cambioMapa){
-            //System.out.println(Lucia.getPosicion().getX() + " - " + Lucia.getPosicion().getY());
+            if(!aux && !dialogo.isActivo()){
+                //System.out.println(Lucia.getPosicion().getX() + " - " + Lucia.getPosicion().getY());
 
-            if(!music.playing()){
-                music.play();
+                if(!music.playing()){
+                    music.play();
+                }
+                ragebit.actualizar(colisionPared(ragebit), i);
+                hipograsidi.actualizar(colisionPared(hipograsidi), i);
+                actualizarEnemigos(i);
+                comprobarInputs(gc,sbg);
+                boolean[] pas={false};
+                Lucia.actualizar(gc.getInput(),colisionPared(Lucia));
+
+                renderx=posinix-Lucia.getPosicion().getX();
+                rendery=posiniy-Lucia.getPosicion().getY();
+                Lucia.update(i);
+                comprobarCofre(gc, Lucia);
+                comprobarPuertas();
+                mapa = mundo.getMapaCargado();
             }
-            ragebit.actualizar(colisionPared(ragebit), i);
-            hipograsidi.actualizar(colisionPared(hipograsidi), i);
-            actualizarEnemigos(i);
-            comprobarInputs(gc,sbg);
-            boolean[] pas={false};
-            Lucia.actualizar(gc.getInput(),colisionPared(Lucia));
-
-            renderx=posinix-Lucia.getPosicion().getX();
-            rendery=posiniy-Lucia.getPosicion().getY();
-            Lucia.update(i);
-            comprobarCofre(gc, Lucia);
-            comprobarPuertas();
-            mapa = mundo.getMapaCargado();
         } else {
             contCambioMapa += i;
         }
+        
+        comprobarFinDialogo(gc);
+    }
+    
+    private void comprobarFinDialogo(GameContainer gc){
+        if(this.dialogo.isActivo()){
+            Input input=gc.getInput();
+            
+            if(input.isKeyPressed(Input.KEY_SPACE)){
+                this.dialogo.setActivo(false);
+            }
+        }
+    }
+    
+    public void setTextoDialogo(String texto){
+        this.dialogo.setTexto(texto);
+    }
+    
+    public void activarDialogo(){
+        this.dialogo.setActivo(true);
     }
     
     private void actualizarEnemigos(int n){
@@ -197,7 +224,7 @@ public class Juego extends BasicGameState{
             
             if(colision){
                 try {
-                    cofre.abrir();
+                    Lucia.getIntven().add(cofre.abrir());
                 } catch (SlickException ex) {}
             }
         }
@@ -256,6 +283,10 @@ public class Juego extends BasicGameState{
         music.play();
         sbg.enterState(2, new FadeOutTransition(),new FadeInTransition());
         Lucia.combatir();
+    }
+    
+    public Lucia getLucia(){
+        return this.Lucia;
     }
     
 }

@@ -9,6 +9,7 @@ import org.newdawn.slick.Image;
 import chaoschild.Punto;
 import itemsjuego.Objeto;
 import java.util.ArrayList;
+import juego.Juego;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
@@ -29,9 +30,11 @@ public class Cofre {
     private SpriteSheet sprite;
     private Image imagen;
     private Sound abrir;
-    //private Objeto item;
+    private Objeto item;
+    private Juego juego;
     
-    public Cofre(Punto pos/*, Objeto item*/) throws SlickException{
+    public Cofre(Punto pos, Objeto item, Juego juego) throws SlickException{
+        this.juego = juego;
         this.posicion = pos;
         this.abierto = false;
         this.abriendo = false;
@@ -42,16 +45,15 @@ public class Cofre {
         this.imagen = new Image("resources/Cofres/cofre_cerrado.png");
         this.hitbox = new Rectangle(this.posicion.getX(), this.posicion.getY(), imagen.getWidth(), imagen.getHeight());
         this.areaAccion = new ArrayList();
-        //this.item = item;
+        this.item = item;
         genAreaAccion();
     }
     
-    public Cofre(int X, int Y/*, Objeto item*/) throws SlickException{
-        this(new Punto(X, Y)/*, item*/);
+    public Cofre(int X, int Y, Objeto item, Juego juego) throws SlickException{
+        this(new Punto(X, Y), item, juego);
     }
     
-    public Cofre(){
-    }
+    public Cofre(){}
     
     private void genAreaAccion(){
         float w = imagen.getWidth();
@@ -71,14 +73,24 @@ public class Cofre {
         this.areaAccion.add(new Rectangle(x + w * 2, y + h * 2, w, h));
     }
     
-    public void abrir() throws SlickException{
-        this.abierto = true;
-        this.abriendo = true;
-        this.imagen = new Image("resources/Cofres/cofre_abierto.png");
-        this.posicion = new Punto(this.posicion.getX(), this.posicion.getY() - 16);
-        this.abrir.play();
+    public Objeto abrir() throws SlickException{
+        Objeto obj;
+        if(!abierto){
+            this.abierto = true;
+            this.abriendo = true;
+            this.imagen = new Image("resources/Cofres/cofre_abierto.png");
+            this.posicion = new Punto(this.posicion.getX(), this.posicion.getY() - 16);
+            this.abrir.play();
+            obj = this.item;
+            this.juego.setTextoDialogo("Has encontrado " + this.item.toString());
+            this.juego.activarDialogo();
+            
+            this.item = null;
+        } else {
+            obj = this.item;
+        }
         
-        //return this.item;
+        return obj;
     }
     
     public void draw(){
@@ -102,5 +114,9 @@ public class Cofre {
     
     public Rectangle getHitBox(){
         return this.hitbox;
+    }
+    
+    public boolean isAbriendo(){
+        return this.abriendo;
     }
 }

@@ -17,7 +17,7 @@ import org.newdawn.slick.tiled.TiledMap;
 
 /**
  *
- * @author victo
+ * @author victo y carlos
  */
 public class Mapa extends TiledMap {
     private ArrayList<ConjuntoEnemigos> enemigos;
