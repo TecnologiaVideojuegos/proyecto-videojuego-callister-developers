@@ -486,6 +486,10 @@ public class Mapa extends TiledMap {
     public ArrayList<ConjuntoEnemigos> getConjuntoEnemigos(){
         return enemigos;
     }
+    
+    public void delEnemigo(ConjuntoEnemigos conjunto){
+        this.enemigos.remove(conjunto);
+    }
 
     public ArrayList<Enemigo> getEnemigos(){
         ArrayList<Enemigo> aux = new ArrayList();

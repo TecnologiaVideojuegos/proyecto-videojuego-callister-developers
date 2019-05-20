@@ -21,17 +21,27 @@ public class Mundo {
     private ArrayList<Zona> mundo;
     private Mapa mapaCargado;
     private Juego juego;
+    private int[] coord;
     
     public Mundo(Juego juego) throws SlickException{
         this.juego = juego;
         this.mundo = new ArrayList();
+        this.coord = new int[2];
         genZonas();
         genCofres();
+        this.coord = juego.getGMapa().leerMapa();
         initMapa();
     }
     
     private void initMapa(){
-        cambiarMapa(2, 3);
+        /*
+        if(this.coord[1] == -1){
+            cambiarMapa(2, 3);
+        } else {
+            cambiarMapa(this.coord[0], this.coord[1]);
+        }*/
+        
+        cambiarMapa(0, 1);
     }
     
     private void genZonas() throws SlickException{
@@ -125,6 +135,8 @@ public class Mundo {
     }
     
     public void cambiarMapa(int z, int m){
+        this.coord[0] = z;
+        this.coord[1] = m;
         if(m >= 0){
             this.mapaCargado = this.getMapa(z, m);
         } else {
@@ -161,5 +173,30 @@ public class Mundo {
     
     public Mapa getMapaCargado(){
         return this.mapaCargado;
+    }
+    
+    public int[] getCoord(){
+        return this.coord;
+    }
+    
+    public void setCoord(int[] coord){
+        this.coord = coord;
+    }
+    
+    public ArrayList<Mapa> getMapas(){
+        ArrayList<Mapa> mapas = new ArrayList();
+        for(Zona zona : mundo){
+            for(Mapa mapa : zona.getZona()){
+                String nombre = mapa.getNombre();
+                if(nombre.equals("Cueva_inicio") || nombre.equals("Pueblo") ||
+                        nombre.equals("Ciudad_ciudad") || nombre.equals("Fuera_casa_inicio")){
+                    for(Edificio ed : mapa.getEdificios()){
+                            mapas.add(ed);
+                        }
+                }
+                mapas.add(mapa);
+            }
+        }
+        return mapas;
     }
 }
