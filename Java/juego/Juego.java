@@ -14,6 +14,7 @@ import entidades.Entidad;
 import entidades.Lucia;
 import entidades.enemigos.*;
 import java.util.ArrayList;
+import mapas.GuardarMapa;
 import mapas.Mapa;
 import mapas.Mundo;
 import musica.GestorMusica;
@@ -43,6 +44,7 @@ public class Juego extends BasicGameState{
     private boolean cambioMapa;
     private int contCambioMapa;
     private Dialogo dialogo;
+    private GuardarMapa gMapa;
     
     @Override
     public int getID() {
@@ -60,6 +62,7 @@ public class Juego extends BasicGameState{
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         
         music=GestorMusica.getGestor();
+        this.gMapa = new GuardarMapa();
         cambioMapa = false;
         contCambioMapa = 0;
         music.play();
@@ -158,7 +161,19 @@ public class Juego extends BasicGameState{
             contCambioMapa += i;
         }
         
+        aux(gc);
         comprobarFinDialogo(gc);
+    }
+    
+    private void aux(GameContainer gc){
+        Input input=gc.getInput();
+        if(input.isKeyPressed(Input.KEY_O)){
+            guardarMapa();
+        }
+    }
+    
+    private void guardarMapa(){
+        this.gMapa.guardarMapa(this.mundo.getCoord());
     }
     
     private void comprobarFinDialogo(GameContainer gc){
@@ -177,6 +192,10 @@ public class Juego extends BasicGameState{
     
     public void activarDialogo(){
         this.dialogo.setActivo(true);
+    }
+    
+    public GuardarMapa getGMapa(){
+        return this.gMapa;
     }
     
     private void actualizarEnemigos(int n){
