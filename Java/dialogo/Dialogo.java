@@ -3,10 +3,12 @@ package dialogo;
 import chaoschild.Punto;
 import java.util.ArrayList;
 import juego.Juego;
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 /**
  *
@@ -15,7 +17,8 @@ import org.newdawn.slick.SlickException;
 public class Dialogo {
     private String texto;
     private Image imagen;
-    private Image puntero;
+    private Animation puntero;
+    private SpriteSheet sprite;
     private Punto pos;
     private boolean activo;
     private Juego juego;
@@ -28,7 +31,9 @@ public class Dialogo {
             this.juego = juego;
             this.activo = false;
             this.imagen = new Image("resources/Menus/Dialogos.png");
-            this.puntero = new Image("resources/Menus/PunteroMenu.png");
+            sprite = new SpriteSheet("resources/Menus/anim_puntero.png", 19, 19);
+            this.puntero = new Animation(sprite, 700);
+            this.puntero.setLooping(true);
         } catch (SlickException ex) {}
     }
     
