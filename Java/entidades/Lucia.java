@@ -11,7 +11,7 @@ import chaoschild.Punto;
 import chaoschild.Vector;
 import itemsjuego.GemaAgua1;
 import itemsjuego.GemaAgua2;
-import itemsjuego.GemaLuz1;
+import itemsjuego.*;
 import itemsjuego.GemaOscura1;
 import itemsjuego.GemaRayo1;
 import itemsjuego.Inventario;
@@ -77,11 +77,28 @@ public class Lucia extends Aliado implements Externalizable{
         intven.add(new PocionMGrande());
         intven.add(new GemaAgua1());
         intven.add(new GemaAgua2());
+        intven.add(new GemaPlanta1());
+        intven.add(new GemaPlanta2());
+        intven.add(new GemaFuego1());
+        intven.add(new GemaFuego2());
+        intven.add(new GemaRayo1());
+        intven.add(new GemaRayo2());
+        intven.add(new GemaTierra1());
+        intven.add(new GemaTierra2());
+        intven.add(new GemaLuz1());
+        intven.add(new GemaLuz2());
+        intven.add(new GemaOscura1());
+        intven.add(new GemaOscura2());
+        
         setAnimdañar(3);
         setArma(new GemaAgua1());
         setArmor(new GemaRayo1());
         equipo.add(new Antonio(500, 80));
         equipo.add(new Paula(500, 320));
+        aprenderMagia(new MagiaRayo1());
+        aprenderMagia(new MagiaOscura1());
+        aprenderMagia(new MagiaLuz1());
+        aprenderMagia(new MagiaPlanta1());
         
     }
        
