@@ -160,7 +160,7 @@ public class Accion {
         String b="ataque básico en ";
         String c=defensor+".";
         if(action==1){
-            b=atacante.getMagias().get(0)+" en ";
+            b=atacante.getMagias().get(indice)+" en ";
         }
         if(action==2){
             b=ob.toString()+" en ";

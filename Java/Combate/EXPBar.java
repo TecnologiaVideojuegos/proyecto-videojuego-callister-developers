@@ -16,17 +16,17 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.TrueTypeFont;
 
-public class ManaBar extends ProgressBar {
+public class EXPBar extends ProgressBar {
 
     private static final Color[] healthColors = new Color[] {
-            new Color(Color.cyan), new Color(Color.cyan), new Color(Color.cyan)
+            new Color(Color.blue), new Color(Color.blue), new Color(Color.blue)
     };
 
     private final EntidadCombate owner;
     private Font font;
     private  TrueTypeFont ttf;
 
-    public ManaBar(EntidadCombate owner) {
+    public EXPBar(EntidadCombate owner) {
         super(64, 11);
         this.owner = owner;
         font=new Font("Arial", Font.BOLD, 10);
@@ -34,7 +34,7 @@ public class ManaBar extends ProgressBar {
     }
 
     public float getProgress() {
-        return ((float) owner.getMultiplicadores()[1]) / owner.getEst()[1];
+        return ((float) owner.getEXPA() / owner.getEXPN());
     }
 
     protected Color getProgressColor(float progress) {
@@ -52,16 +52,17 @@ public class ManaBar extends ProgressBar {
 
     public void render(GameContainer slickContainer, Graphics g) {
         //if (owner != null && owner.getMultiplicadores()[0] < owner.getEst()[0]) {
-            super.render(slickContainer, g, owner.getPosCombate().getX()+32, owner.getPosCombate().getY()+64+11);
-            ttf.drawString(owner.getPosCombate().getX()+10, owner.getPosCombate().getY()+63+12, owner.getMultiplicadores()[1]+"/"+owner.getEst()[1], Color.black);
+            super.render(slickContainer, g, owner.getPosCombate().getX()+32, owner.getPosCombate().getY()+64);
+            ttf.drawString(owner.getPosCombate().getX()+10, owner.getPosCombate().getY()+63, owner.getMultiplicadores()[0]+"/"+owner.getEst()[0], Color.black);
         //}
     }
+    
     public void render(GameContainer slickContainer, Graphics g, Punto p) {
         //if (owner != null && owner.getMultiplicadores()[0] < owner.getEst()[0]) {
         Color c=Color.black;
-        if(getProgress()<0.50) c=Color.gray;
-            super.render(slickContainer, g, p.getX()+32, p.getY()+11);
-            ttf.drawString(p.getX(), p.getY()+10, owner.getMultiplicadores()[1]+"/"+owner.getEst()[1], c);
+        if(getProgress()<0.50) c=Color.white;
+            super.render(slickContainer, g, p.getX()+32, p.getY()+22);
+            ttf.drawString(p.getX(), p.getY()-2+22, owner.getEXPA()+"/"+owner.getEXPN(), c);
         //}
     }
 }

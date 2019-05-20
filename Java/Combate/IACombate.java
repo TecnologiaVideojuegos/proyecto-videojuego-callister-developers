@@ -34,9 +34,6 @@ public class IACombate {
     }
 
     
-        
-    
-    
     private void accion(Enemigo e){
         Random m;
         m=new Random();
@@ -101,6 +98,10 @@ public class IACombate {
 
     void setEnemigos(ArrayList<Enemigo> enemigos) {
         this.atacante = enemigos;
+    }
+    
+    public void setOmjetivos(ArrayList<Aliado> aliados){
+        enemigos=aliados;
     }
 
     

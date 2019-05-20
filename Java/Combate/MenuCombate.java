@@ -83,7 +83,7 @@ public class MenuCombate {
         }
         
         ia=new IACombate(enemigos);
-        cant=new Sound("resources/sonido/combate/menu_cance.ogg");
+        cant=new Sound("resources/sonido/combate/menu_cant.ogg");
         this.aliados=aliados;
         
     }
@@ -231,6 +231,7 @@ public class MenuCombate {
                         if(acciones==aliados.size()){
                             combat.setTurno(turnos);
                             ia.setEnemigos(enemigos);
+                            ia.setOmjetivos(aliados);
                             combat.añadirTurnos(ia.getAcciones());
                             combat.ordenarTurnos(); 
                             combat.cambiarEstado(1);

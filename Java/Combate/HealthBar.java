@@ -8,6 +8,7 @@
 
 package Combate;
 
+import chaoschild.Punto;
 import entidades.EntidadCombate;
 import java.awt.Font;
 import org.newdawn.slick.Color;
@@ -53,6 +54,15 @@ public class HealthBar extends ProgressBar {
         //if (owner != null && owner.getMultiplicadores()[0] < owner.getEst()[0]) {
             super.render(slickContainer, g, owner.getPosCombate().getX()+32, owner.getPosCombate().getY()+64);
             ttf.drawString(owner.getPosCombate().getX()+10, owner.getPosCombate().getY()+63, owner.getMultiplicadores()[0]+"/"+owner.getEst()[0], Color.black);
+        //}
+    }
+    
+    public void render(GameContainer slickContainer, Graphics g, Punto p) {
+        //if (owner != null && owner.getMultiplicadores()[0] < owner.getEst()[0]) {
+        Color c=Color.black;
+        if(getProgress()<0.50) c=Color.white;
+            super.render(slickContainer, g, p.getX()+32, p.getY());
+            ttf.drawString(p.getX(), p.getY()-2, owner.getMultiplicadores()[0]+"/"+owner.getEst()[0], c);
         //}
     }
 }
