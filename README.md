@@ -53,5 +53,6 @@
     - 19/05 Agregado conjunto de enemigos. Se han modificado las carpetas: mapas, juego y combate.
             Agregadas imágenes de los cofres.
             Agregado de los diálogos.
+            Agregados varios Sprites: Boss_Final y Clerigo
     
     
