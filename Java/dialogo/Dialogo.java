@@ -54,11 +54,11 @@ public class Dialogo {
     private void escribir(Graphics g){
         g.setColor(Color.black);
         
-        if(((cont / 10) < this.texto.length()) && (cont % 10 == 0)){
-            if((cont / 10) % 62 == 0 && cont / 10 != 0){
+        if(((cont / 30) < this.texto.length()) && (cont % 30 == 0)){
+            if((cont / 30) % 62 == 0 && cont / 30 != 0){
                 msg += "\n";
             }
-            msg += this.texto.charAt(cont / 10);
+            msg += this.texto.charAt(cont / 30);
         }
         g.drawString(msg, pos.getX() + 20, pos.getY() + 20);
         g.setColor(Color.white);
