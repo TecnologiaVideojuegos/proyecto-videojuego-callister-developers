@@ -9,6 +9,15 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import chaoschild.Punto;
 import entidades.Lucia;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 
@@ -61,18 +70,22 @@ public class Menu extends BasicGameState {
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         
         Input entrada=container.getInput();
-        cEntrada(entrada, game);
+        try {
+            cEntrada(entrada, game);
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(Menu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     
-    public void cEntrada(Input entrada, StateBasedGame game){
+    public void cEntrada(Input entrada, StateBasedGame game) throws FileNotFoundException, IOException, SlickException, ClassNotFoundException{
         
         if (entrada.isKeyPressed(Input.KEY_S)){
-            if(indicador!=3){
+            if(indicador!=5){
                 p.setY(p.getY()+70);
                 indicador++;
             }else{
-                p.setY(p.getY()-70*3);
+                p.setY(p.getY()-70*5);
                 indicador=0;
             }
               
@@ -82,7 +95,7 @@ public class Menu extends BasicGameState {
                 p.setY(p.getY()-70);
                 indicador--;
             }else{
-                p.setY(p.getY()+70*3);
+                p.setY(p.getY()+70*5);
                 indicador=3;
             }
         }
@@ -98,12 +111,31 @@ public class Menu extends BasicGameState {
                 case 0:
                     game.enterState(3);
                     break;
+                case 1:
+                    game.enterState(4);
+                    break;
                 case 3:
                     game.enterState(0);
+                    break;
+                case 4:
+                    FileOutputStream guardar=new FileOutputStream("Guardado/Lucia.dat");
+                    ObjectOutputStream oo=new ObjectOutputStream(guardar);
+                    Lucia.getLucia().writeExternal(oo);
+                    oo.close();
+                    guardar.close();
+                    break;
+                case 5:
+                    FileInputStream fileInputStream= new FileInputStream("Guardado/Lucia.dat");
+                    ObjectInputStream oi = new ObjectInputStream(fileInputStream);
+                    
+                    Lucia.getLucia().readExternal(oi);
+                    oi.close();
+                    fileInputStream.close();
                     break;
             }
               
         }
+        entrada.clearKeyPressedRecord();
     }
     
     }
