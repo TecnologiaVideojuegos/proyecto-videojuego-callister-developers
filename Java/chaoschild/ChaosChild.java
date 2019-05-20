@@ -8,6 +8,7 @@ package chaoschild;
 
 import Combate.Combate;
 import juego.Juego;
+import menus.Equipo;
 import menus.Menu;
 import menus.EstadoInventario;
 import org.newdawn.slick.AppGameContainer;
@@ -36,7 +37,7 @@ public class ChaosChild extends StateBasedGame{
         this.addState(new Juego(this));
         this.addState(new Menu());
         this.addState(new EstadoInventario());
-        
+        this.addState(new Equipo());
     }
     
 }
