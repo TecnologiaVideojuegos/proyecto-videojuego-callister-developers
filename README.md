@@ -57,6 +57,7 @@
     -20/05  Agregado sispema de guardado
             Ya se pueden usar las gemas sin tocar codigo(Quitar y Poner)
             Ya funciona la parte de equipo en el menu
+            Ya se puede guardar el mapa en el que estás.
             
             
             
