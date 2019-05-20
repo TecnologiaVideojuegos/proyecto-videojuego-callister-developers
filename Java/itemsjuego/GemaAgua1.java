@@ -7,6 +7,7 @@ package itemsjuego;
 
 import Combate.Agua;
 import Combate.Elemento;
+import java.io.Externalizable;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -14,7 +15,7 @@ import org.newdawn.slick.SlickException;
  *
  * @author victo
  */
-public class GemaAgua1 extends Gema1{
+public class GemaAgua1 extends Gema1 implements Externalizable{
     
     public GemaAgua1() throws SlickException {
         super(new Image("resources/Gemas/Agua1.png"), "Gema Agua NL1", new Agua());
