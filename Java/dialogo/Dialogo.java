@@ -1,13 +1,13 @@
 package dialogo;
 
 import chaoschild.Punto;
-import java.util.ArrayList;
 import juego.Juego;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.SpriteSheet;
 
 /**
@@ -24,6 +24,7 @@ public class Dialogo {
     private Juego juego;
     private int cont;
     private String msg;
+    private Sound sonido;
     
     public Dialogo(Juego juego){
         try {
@@ -31,8 +32,9 @@ public class Dialogo {
             this.juego = juego;
             this.activo = false;
             this.imagen = new Image("resources/Menus/Dialogos.png");
-            sprite = new SpriteSheet("resources/Menus/anim_puntero.png", 19, 19);
+            this.sprite = new SpriteSheet("resources/Menus/anim_puntero.png", 19, 19);
             this.puntero = new Animation(sprite, 700);
+            this.sonido = new Sound("resources/sonido/dialogo.ogg");
             this.puntero.setLooping(true);
         } catch (SlickException ex) {}
     }
@@ -64,6 +66,11 @@ public class Dialogo {
                 msg += "\n";
             }
             msg += this.texto.charAt(cont / 30);
+        }
+        if(!sonido.playing() && cont / 30 < this.texto.length()){
+            sonido.play();
+        } else if(cont / 30 > this.texto.length()){
+            sonido.stop();
         }
         g.drawString(msg, pos.getX() + 20, pos.getY() + 20);
         g.setColor(Color.white);
