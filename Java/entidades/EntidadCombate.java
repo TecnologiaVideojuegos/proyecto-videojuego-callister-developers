@@ -6,6 +6,7 @@
 package entidades;
 
 import Combate.Agua;
+import Combate.EXPBar;
 import Combate.Elemento;
 import Combate.Fuego;
 import Combate.HealthBar;
@@ -57,6 +58,7 @@ public abstract class EntidadCombate extends Entidad implements Externalizable{
     private int tieneGemaD=0;
     private HealthBar barraV;
     private ManaBar barraM;
+    private EXPBar barraE;
     
     
     
@@ -80,6 +82,7 @@ public abstract class EntidadCombate extends Entidad implements Externalizable{
         barraV=new HealthBar(this);
         barraM=new ManaBar(this);
         DMG=0;
+        barraE=new EXPBar(this);
         
     }
     public EntidadCombate(String ruta,String rutaC, int h, int w, int numAnimaciones, int numC, int[] frames, String nombre, int a) throws SlickException {
@@ -102,6 +105,7 @@ public abstract class EntidadCombate extends Entidad implements Externalizable{
         barraV=new HealthBar(this);
         barraM=new ManaBar(this);
         DMG=0;
+        barraE=new EXPBar(this);
         
     }
 
@@ -125,6 +129,7 @@ public abstract class EntidadCombate extends Entidad implements Externalizable{
         barraV=new HealthBar(this);
         barraM=new ManaBar(this);
         DMG=0;
+        barraE=new EXPBar(this);
         
     }
     
@@ -149,6 +154,7 @@ public abstract class EntidadCombate extends Entidad implements Externalizable{
         barraV=new HealthBar(this);
         barraM=new ManaBar(this);
         DMG=0;
+        barraE=new EXPBar(this);
     }
 
     public EntidadCombate() {
@@ -269,6 +275,7 @@ public abstract class EntidadCombate extends Entidad implements Externalizable{
             est[7]=(int) (estb[7]+0.9*(0.7*est[4]));
             DMG=(int) (0.9*(0.3*(est[2]+est[4])));
             EXPN=(int) (150*1.33*LVL);
+            System.out.println(toString()+" Experiencia necesaria= "+EXPN);
         }
     
     public int getAnimId(){
@@ -435,6 +442,8 @@ public abstract class EntidadCombate extends Entidad implements Externalizable{
     public ArrayList<String> ganarExperiencia(int i){
         ArrayList<String> a=new ArrayList();
         EXPA=EXPA+i;
+        System.out.println(toString()+ " ha ganado "+i+" puntos de Experiencia");
+        System.out.println("Experiencia Actual: "+EXPA);
         if(EXPA>EXPN){
             a=subirNivel();
         }
@@ -453,13 +462,19 @@ public abstract class EntidadCombate extends Entidad implements Externalizable{
             a.set(i, a.get(i)+"  -->  "+b.get(i));
         }
         
-        EXPN=(int)(EXPN*1.33);
+        
         
         return a;
     }
 
     public int getLVL() {
         return LVL;
+    }
+    
+    public void renderBarras(Punto p, Graphics g, GameContainer gc){
+        barraV.render(gc, g, p);
+        barraM.render(gc, g, p);
+        barraE.render(gc, g, p);
     }
     
     public ArrayList<String> toStringEst(){
@@ -545,6 +560,8 @@ public abstract class EntidadCombate extends Entidad implements Externalizable{
        System.out.println(oi.readUTF());
        barraV=new HealthBar(this);
        barraM=new ManaBar(this);
+       barraE=new EXPBar(this);
+       
         try {
             daño=new Sound("resources/sonido/HitDamage.ogg");
             dañar=new Sound("resources/sonido/combate/fisica_flecha_o_lanzar.ogg");
@@ -552,11 +569,11 @@ public abstract class EntidadCombate extends Entidad implements Externalizable{
             Logger.getLogger(EntidadCombate.class.getName()).log(Level.SEVERE, null, ex);
         }
         combate.setAnimacion(animest);
-       
-       DMG=0;
        calcEst();
 
     }
+}
+
     
-   }
+   
 

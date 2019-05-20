@@ -12,6 +12,12 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+import java.util.ArrayList;
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 /**
@@ -115,6 +121,30 @@ public class Aliado extends EntidadCombate implements Externalizable{
         } catch (Exception e) {
         }
         return el;
+    }
+    
+    public void renderInfo(Punto p, Graphics g, GameContainer gc, Image ata, Image def){
+        Animation ani=getAnimation(0);
+        ani.getImage(0).draw(p.getX(), p.getY(), (float) 1.2);
+        ArrayList<String> esta=toStringEst();
+        g.setColor(Color.black);
+        g.drawString(esta.get(esta.size()-1), p.getX()+100, p.getY());
+        g.setColor(Color.white);
+        for(int i=0;i<esta.size()-1;i++){
+            g.drawString(esta.get(i), p.getX()+100, p.getY()+20*(i+1));
+        }
+        renderBarras(new Punto(p.getX(), (float) (ani.getHeight()*1.2+p.getY())), g, gc);
+        g.setColor(Color.white);
+        ata.draw((int)p.getX()-12, (int) p.getY()+200-20);
+        try {
+            arma.render((int)p.getX()+50, (int) p.getY()+200, g);
+        } catch (Exception e) {
+        }
+        def.draw((int)p.getX()-12, (int) p.getY()+200+30-20);
+        try {
+            armor.render((int)p.getX()+50, (int) p.getY()+200+30, g);
+        } catch (Exception e) {
+        }
     }
     
     @Override

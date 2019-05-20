@@ -80,8 +80,8 @@ public class Lucia extends Aliado implements Externalizable{
         setAnimdañar(3);
         setArma(new GemaAgua1());
         setArmor(new GemaRayo1());
-//        equipo.add(new Antonio(500, 80));
-//        equipo.add(new Paula(500, 320));
+        equipo.add(new Antonio(500, 80));
+        equipo.add(new Paula(500, 320));
         
     }
        
@@ -204,6 +204,7 @@ public class Lucia extends Aliado implements Externalizable{
         oo.writeInt(a);
         System.out.println("Equipo Size "+equipo.size());
         for(int i=1;i<equipo.size();i++){
+            oo.writeUTF(equipo.get(i).getNombre());
             equipo.get(i).writeExternal(oo);
         }
         intven.writeExternal(oo);
@@ -216,7 +217,18 @@ public class Lucia extends Aliado implements Externalizable{
         equipo.add(this);
         int a=oi.readInt();
         for (int i=1;i<a;i++){
-            equipo.add(new Aliado());
+            String n=oi.readUTF();
+            switch(n){
+                case "Kato":
+                    equipo.add(new Kato());
+                    break;
+                case "Paula":
+                    equipo.add(new Paula());
+                    break;
+                case "Antonio":
+                    equipo.add(new Antonio());
+                    break;
+            }
             equipo.get(i).readExternal(oi);
         }
         System.out.println("------------------------Cargar Inventario---------------------------------------");

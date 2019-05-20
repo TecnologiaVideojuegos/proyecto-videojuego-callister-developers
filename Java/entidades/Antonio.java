@@ -26,11 +26,17 @@ public class Antonio extends Aliado{
         int[] frames={3,3,3,3};
         super.animaciones(frames);
     }
+
+    public Antonio() {
+    }
+    
+    
     
     public int ataqueBasico(){
         int dmg= super.ataqueBasico();
         dmg=(int) (0.5*dmg+getEst()[3]);
         return dmg;
     }
+    
     
 }

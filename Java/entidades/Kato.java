@@ -6,13 +6,18 @@
 package entidades;
 
 import chaoschild.Punto;
+import itemsjuego.Gema;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import org.newdawn.slick.SlickException;
 
 /**
  *
  * @author victo
  */
-public class Kato extends Aliado{
+public class Kato extends Aliado implements Externalizable{
     
     
     
@@ -24,11 +29,30 @@ public class Kato extends Aliado{
         int[] frames={8,4,4,8};
         super.animaciones(frames);
     }
+
+    public Kato() {
+    }
+    
+    
+    
     @Override
     public int ataqueBasico(){
         int dmg=super.ataqueBasico();
+        System.out.println("-----------------------------DMG KATO: "+dmg+"---------------------------------");
         dmg=(int) ((dmg+getEst()[2]*0.8));
         return dmg;
     }
-    
+    @Override
+     public void writeExternal(ObjectOutput out) throws IOException {
+         super.writeExternal(out);
+         
+     }
+     
+     
+    @Override
+    public void readExternal(ObjectInput oi) throws IOException, ClassNotFoundException {
+        super.readExternal(oi);
+       
+        
+    }
 }

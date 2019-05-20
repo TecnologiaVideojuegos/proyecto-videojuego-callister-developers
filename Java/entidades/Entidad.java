@@ -259,6 +259,10 @@ public abstract class Entidad implements Externalizable{
         objetivo=p;
         this.speed=speed;
     }
+    
+    public Animation getAnimation(int i){
+        return direcciones[i];
+    }
 
     @Override
     public void writeExternal(ObjectOutput out) throws IOException {

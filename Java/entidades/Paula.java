@@ -26,6 +26,10 @@ public class Paula extends Aliado{
         int[] frames={3,3,3,3};
         super.animaciones(frames);
     }
+
+    public Paula() {
+    }
+    
     
     public int ataqueBasico(){
         int dmg= super.ataqueBasico();
