@@ -83,12 +83,12 @@ public class EstadoInventario extends BasicGameState {
                     break;
                 case 1:
                     
-                    if (indicadoraux != lucia.getEquipo().size() - 1) {
-                        paux2.setY(paux2.getY() - 21);
-                        indicadoraux++;
+                    if (indicador != lucia.getEquipo().size() - 1) {
+                        p.setY(p.getY() + 21);
+                        indicador++;
                     } else {
-                        paux2.setY(paux2.getY() + 21 * (lucia.getEquipo().size() - 1));
-                        indicadoraux = 0;
+                        p.setY(p.getY() - 21 * (lucia.getEquipo().size() - 1));
+                        indicador = 0;
                     }
 
                     break;
@@ -110,12 +110,12 @@ public class EstadoInventario extends BasicGameState {
                     break;
                 case 1:
                     
-                    if (indicadoraux != 0) {
-                        paux2.setY(paux2.getY() + 21);
-                        indicadoraux--;
+                    if (indicador != 0) {
+                        p.setY(p.getY() - 21);
+                        indicador--;
                     } else {
-                        paux2.setY(paux2.getY() - 21 * (lucia.getEquipo().size() - 1));
-                        indicadoraux = lucia.getEquipo().size() - 1;
+                        p.setY(p.getY() + 21 * (lucia.getEquipo().size() - 1));
+                        indicador = lucia.getEquipo().size() - 1;
                     }
 //                    } else {
 //                        
@@ -144,13 +144,32 @@ public class EstadoInventario extends BasicGameState {
                 case 1:
                     inventario.remove(seleccionado).usar(lucia.getEquipo().get(indicador));
                     indicador = 0;
-                    p = new Punto(31, (float) (60 + 32 / 2 - 9.5));
+                    p = new Punto(paux3.getX(), paux3.getY());
                     seleccionado = 0;
                     estado = 0;
                     break;
 
             }
 
+        }
+        if (entrada.isKeyPressed(Input.KEY_B)) {
+            switch(estado){
+                case 0:
+                    estado=0;
+                    indicador = 0;
+                    p = new Punto(paux3.getX(), paux3.getY());
+                    seleccionado = 0;
+
+                    game.enterState(1);
+                    break;
+                case 1:
+                    estado=0;
+                    indicador = 0;
+                    p = new Punto(paux3.getX(), paux3.getY());
+                    seleccionado = 0;;
+                    break;
+            }
+            
         }
     }
 
