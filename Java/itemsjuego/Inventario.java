@@ -34,9 +34,9 @@ public class Inventario implements Externalizable{
         boolean esta=false;
         int indicador=-1;
         for (int i=0;i<items.size();i++){
-            if(items.get(i).toString()==a.toString()){
-                 esta=true;
-                 indicador=i;
+            if(items.get(i).toString().compareTo(a.toString())==0){
+                esta=true;
+                indicador=i;
             }
         }
         if(esta){

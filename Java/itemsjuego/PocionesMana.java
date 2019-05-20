@@ -31,10 +31,7 @@ public class PocionesMana extends Pociones implements Externalizable
         this.mana = mana;
     }
 
-    @Override
-    public String toString() {
-        return "PocionesMana{" + "mana=" + mana + '}';
-    }
+    
      
     
     @Override

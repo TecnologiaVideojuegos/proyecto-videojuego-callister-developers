@@ -16,7 +16,8 @@ import org.newdawn.slick.SlickException;
 public class PocionVPequeña extends PocionesCurar{
 
     public PocionVPequeña() throws SlickException {       
-        super(20, new Image("resources/PotiVidaPequeña.png"));
+        super(80, new Image("resources/PotiVidaPequeña.png"));
+        setNombre("Pocion de vida pequeña");
     }
 
     @Override

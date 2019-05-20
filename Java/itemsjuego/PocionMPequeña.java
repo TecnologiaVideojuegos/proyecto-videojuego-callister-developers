@@ -16,6 +16,7 @@ import org.newdawn.slick.SlickException;
 public class PocionMPequeña extends PocionesMana {
     public PocionMPequeña() throws SlickException{
        super(20, new Image("resources/PotiManaPequeña.png"));
+       setNombre("Pocion de mana pequeña");
     }
 
     @Override

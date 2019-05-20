@@ -39,10 +39,6 @@ public class PocionesCurar extends Pociones implements Externalizable{
     }
     
     
-    @Override
-    public String toString() {
-        return "PocionesCurar{" + "salud=" + salud + '}';
-    }
     
     @Override
     public void writeExternal(ObjectOutput oo) throws IOException {

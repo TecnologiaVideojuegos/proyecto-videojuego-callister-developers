@@ -55,7 +55,6 @@ public abstract class Objeto implements Externalizable{
         this.nombre=n;
         animacion=new Animation();
         genAnim(ruta);
-        animacion.setLooping(false);
         this.sonido=new Sound(sonido);
         gem=false;
         sruta=sonido;
@@ -92,7 +91,7 @@ public abstract class Objeto implements Externalizable{
 
     public void render(int x, int y, Graphics g){
         g.drawString(toString(), x, y);
-        imagen.draw( x-32, y-7);
+        imagen.draw( x-32, y);
     }
 
     public String getDescripcion() {
@@ -104,6 +103,7 @@ public abstract class Objeto implements Externalizable{
        for(int i=0;i<8;i++){
            animacion.addFrame(s.getSprite(i,0), 100);
        }
+       animacion.setLooping(false);
        conanimacion=true;
    }
 
@@ -142,6 +142,13 @@ public abstract class Objeto implements Externalizable{
     public String getClase() {
         return clase;
     }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
+    
+    
     
     
 
