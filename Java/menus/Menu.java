@@ -27,7 +27,7 @@ import java.util.logging.Logger;
  */
 public class Menu extends BasicGameState {
     private Image fondo;
-    private Image botonInventario, botonEquipo, botonFabricacion, botonSalir, punteroInventario, punteroEquipo;
+    private Image botonInventario, botonEquipo, botonFabricacion, botonSalir,botonGuardar, punteroInventario, punteroEquipo;
     private int indicador;
     private Punto p;
     private Punto renderMenu;
@@ -116,15 +116,19 @@ public class Menu extends BasicGameState {
                 case 1:
                     game.enterState(4);
                     break;
-                case 3:
-                    game.enterState(0);
+                case 2:
+                    game.enterState(5);
                     break;
-                case 4:
+                case 3:
                     FileOutputStream guardar=new FileOutputStream("Guardado/Lucia.dat");
                     ObjectOutputStream oo=new ObjectOutputStream(guardar);
                     Lucia.getLucia().writeExternal(oo);
                     oo.close();
                     guardar.close();
+                    break;
+                case 4:
+
+                    game.enterState(0);
                     break;
 
             }
