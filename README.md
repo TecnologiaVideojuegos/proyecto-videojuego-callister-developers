@@ -54,5 +54,11 @@
             Agregadas imágenes de los cofres.
             Agregado de los diálogos.
             Agregados varios Sprites: Boss_Final y Clerigo
+    -20/05  Agregado sispema de guardado
+            Ya se pueden usar las gemas sin tocar codigo(Quitar y Poner)
+            Ya funciona la parte de equipo en el menu
+            
+            
+            
     
     
