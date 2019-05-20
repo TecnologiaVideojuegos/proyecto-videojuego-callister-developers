@@ -6,6 +6,7 @@
 package itemsjuego;
 
 import chaoschild.Punto;
+import entidades.Aliado;
 //import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
 import entidades.EntidadCombate;
 import java.io.Externalizable;
@@ -118,9 +119,12 @@ public abstract class Objeto implements Externalizable{
     public void usar(EntidadCombate e){
         System.out.println("aaaaaaaaaaaaaaaaa");
     }
+    public void usar(int i, Aliado a) throws SlickException{
+        
+    }
     
     public void renderImagen(Punto p, int i){
-        imagen.draw(p.getX(), p.getY()+i*33);  
+        imagen.draw(p.getX(), p.getY()+i*31);  
     }
 
     public boolean isGem() {
@@ -200,6 +204,8 @@ public abstract class Objeto implements Externalizable{
         }
         
     }
+    
+    
     
     
 }

@@ -14,6 +14,7 @@ import Combate.Planta;
 import Combate.Rayo;
 import Combate.Terra;
 import chaoschild.Punto;
+import entidades.Aliado;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
@@ -52,12 +53,22 @@ public class Gema extends Objeto implements Externalizable{
         return mult;
     }
     
-
+    @Override
+    public void usar(int i, Aliado a) throws SlickException{
+        switch(i){
+            case 0:
+                a.setArma(this);
+                break;
+            case 1:
+                a.setArmor(this);
+                break;
+        }
+    }
     
     
     @Override
     public void renderImagen(Punto p, int i){
-       getImagen().draw(p.getX()+6, p.getY()+i*33+6);  
+       getImagen().draw(p.getX()+6, p.getY()+i*31+6);  
     }
 
     public int getNivel() {

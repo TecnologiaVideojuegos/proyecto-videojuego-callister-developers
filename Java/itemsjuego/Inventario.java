@@ -66,7 +66,7 @@ public class Inventario implements Externalizable{
    
     public void render(Punto p, Graphics g){
         for (int i=0;i<items.size();i++){
-            g.drawString(items.get(i).toString()+"   x"+numi.get(i).toString(),(int)p.getX()+32, (int)p.getY()+i*33+32/2-10);
+            g.drawString(items.get(i).toString()+"   x"+numi.get(i).toString(),(int)p.getX()+32, (int)p.getY()+i*31+32/2-10);
             items.get(i).renderImagen(p, i);
         }
 
