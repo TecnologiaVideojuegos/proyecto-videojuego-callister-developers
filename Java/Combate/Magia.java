@@ -8,6 +8,12 @@ package Combate;
 import chaoschild.Punto;
 import entidades.Entidad;
 import entidades.EntidadCombate;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
@@ -17,7 +23,7 @@ import org.newdawn.slick.SpriteSheet;
  *
  * @author victo
  */
-public class Magia{
+public class Magia implements Externalizable{
     private int coste;
     private int daño;
     private Elemento elemento;
@@ -27,6 +33,9 @@ public class Magia{
     private String nombre;
     private Sound sonido;
     private int tipo;
+    private String aruta;
+    private String sruta;
+    
 
     public Magia(int coste, int daño, Elemento elemento, String ruta, int fps, String n, String musica, int tipo) throws SlickException {
         this.coste = coste;
@@ -39,8 +48,13 @@ public class Magia{
         nombre=n;
         sonido=new Sound(musica);
         this.tipo=tipo;
+        aruta=ruta;
+        sruta=musica;
         
         
+    }
+
+    public Magia() {
     }
     
     
@@ -100,6 +114,74 @@ public class Magia{
     public int getTipo() {
         return tipo;
     }
+    
+    private void seleccionarElemento(String a) throws SlickException{
+        switch (a){
+            case "Planta":elemento=new Planta();
+                break;
+            case "Agua":elemento=new Agua();
+                break;
+            case "Fuego":elemento=new Fuego();
+                break;
+            case "Rayo":elemento=new Rayo();
+                break;
+            case "Tierra":elemento=new Terra();
+                break;
+            case "Luz":elemento=new Luz();
+                break;
+            case "Oscuro":elemento=new Oscuro();
+                break;
+            
+        }
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput oo) throws IOException {
+       oo.writeInt(coste);
+       oo.writeInt(daño);
+       oo.writeUTF(elemento.toString());
+       posicion.writeExternal(oo);
+       oo.writeUTF(nombre);
+       oo.writeInt(tipo);
+       oo.writeUTF(aruta);
+       oo.writeUTF(sruta);
+       oo.writeInt(anim.getDuration(1));
+       
+
+    }
+
+    @Override
+    public void readExternal(ObjectInput oi) throws IOException, ClassNotFoundException {
+        coste=oi.readInt();
+        daño=oi.readInt();
+        try {
+            seleccionarElemento(oi.readUTF());
+        } catch (SlickException ex) {
+            Logger.getLogger(Magia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        posicion=new Punto();
+        posicion.readExternal(oi);
+        nombre=oi.readUTF();
+        tipo=oi.readInt();
+        aruta=oi.readUTF();
+        sruta=oi.readUTF();
+        this.anim = new Animation();
+        try {
+            this.sprite = new SpriteSheet(aruta, 64, 64);
+        } catch (SlickException ex) {
+            Logger.getLogger(Magia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            sonido=new Sound(sruta);
+        } catch (SlickException ex) {
+            Logger.getLogger(Magia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        setAnim(oi.readInt());
+        
+        
+    }
+
+   
     
     
    

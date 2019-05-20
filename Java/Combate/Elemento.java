@@ -27,6 +27,10 @@ public abstract class Elemento {
         setEdevil(d);
     }
 
+    public Elemento() {
+    }
+    
+
     private void setEfuerte(String[] a){
         for(int i=0;i<a.length;i++){
             efuerte.add(a[i]);
