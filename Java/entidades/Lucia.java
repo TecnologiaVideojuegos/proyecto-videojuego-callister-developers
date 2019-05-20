@@ -6,7 +6,7 @@
 package entidades;
 
 import Combate.MagiaAgua1;
-import Combate.MagiaTierra1;
+import Combate.*;
 import chaoschild.Punto;
 import chaoschild.Vector;
 import itemsjuego.GemaAgua1;
@@ -22,7 +22,13 @@ import itemsjuego.PocionMPequeña;
 import itemsjuego.PocionVGrande;
 import itemsjuego.PocionVMediana;
 import itemsjuego.PocionVPequeña;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
@@ -32,7 +38,7 @@ import org.newdawn.slick.Sound;
  *
  * @author victo
  */
-public class Lucia extends Aliado{
+public class Lucia extends Aliado implements Externalizable{
     
     private static Lucia Lucia=null;
     private ArrayList<Objeto> inventario;
@@ -57,6 +63,7 @@ public class Lucia extends Aliado{
         equipo.add(new Kato(getPosCombate().getX()-64, getPosCombate().getY()));
         aprenderMagia(new MagiaAgua1());
         aprenderMagia(new MagiaTierra1());
+        aprenderMagia(new MagiaFuego1());
         estadisticasb(new int[]{70, 90, 90, 60, 80, 0, 20,0, 2, 15, 5, 10, 15, 30, 0, 20,18});
         caminar=new Sound("resources/sonido/paso.ogg");
         caminar.loop();
@@ -73,6 +80,8 @@ public class Lucia extends Aliado{
         setAnimdañar(3);
         setArma(new GemaAgua1());
         setArmor(new GemaRayo1());
+//        equipo.add(new Antonio(500, 80));
+//        equipo.add(new Paula(500, 320));
         
     }
        
@@ -83,6 +92,17 @@ public class Lucia extends Aliado{
         }
         return Lucia;
     }
+
+    public Lucia() {
+        super();
+    }
+
+    
+   
+
+    
+
+    
     
     
     public void actualizar(Input entrada, boolean[] pasar){
@@ -175,6 +195,44 @@ public class Lucia extends Aliado{
         int dmg=super.ataqueBasico();
         dmg=(int) ((dmg+getEst()[4]*0.8));
         return dmg;
+    }
+
+    @Override
+    public void writeExternal(ObjectOutput oo) throws IOException {
+        super.writeExternal(oo);
+        int a=equipo.size();
+        oo.writeInt(a);
+        System.out.println("Equipo Size "+equipo.size());
+        for(int i=1;i<equipo.size();i++){
+            equipo.get(i).writeExternal(oo);
+        }
+        intven.writeExternal(oo);
+    }
+
+    @Override
+    public void readExternal(ObjectInput oi) throws IOException, ClassNotFoundException {
+        super.readExternal(oi);
+        equipo=new ArrayList();
+        equipo.add(this);
+        int a=oi.readInt();
+        for (int i=1;i<a;i++){
+            equipo.add(new Aliado());
+            equipo.get(i).readExternal(oi);
+        }
+        System.out.println("------------------------Cargar Inventario---------------------------------------");
+        intven=new Inventario();
+        intven.readExternal(oi);
+        System.out.println("------------------------Inventario Cargado--------------------------------------");
+        try {
+            caminar=new Sound("resources/sonido/paso.ogg");
+        } catch (SlickException ex) {
+            Logger.getLogger(Lucia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        caminar.loop();
+        caminar.stop();
+        super.genHitboxes(new Punto(super.getPosicion().getX()+2, super.getPosicion().getY()+(52-24)), 24, 24);
+        System.out.println("-------------------------------"+toString()+" Completamente Cargado-----------------------------------------------------");
+        Lucia=this;
     }
     
 }

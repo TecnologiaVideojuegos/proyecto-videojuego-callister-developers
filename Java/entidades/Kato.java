@@ -21,6 +21,8 @@ public class Kato extends Aliado{
         combatir();
         setPosCombate(new Punto(x,y));
         estadisticasb(new int[]{70, 50, 70, 0, 0, 0, 0, 0, 2, 20, 5, 10, 10, 20, 0, 0, 20, 18});
+        int[] frames={8,4,4,8};
+        super.animaciones(frames);
     }
     @Override
     public int ataqueBasico(){

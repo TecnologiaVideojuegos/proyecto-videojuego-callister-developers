@@ -7,6 +7,13 @@ package entidades;
 
 import chaoschild.Punto;
 import chaoschild.Vector;
+import java.awt.BorderLayout;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
@@ -17,7 +24,7 @@ import org.newdawn.slick.geom.Rectangle;
  *
  * @author victo
  */
-public abstract class Entidad {
+public abstract class Entidad implements Externalizable{
     private SpriteSheet sprite;
     private Animation animacion;
     private Punto posicion;
@@ -32,10 +39,16 @@ public abstract class Entidad {
     private Punto objetivo;
     private boolean cr;//control remoto
     private int speed;
+    private String ruta1;
+    private boolean[] limitar;
+    private int[] prueba;
     
     public Entidad(String ruta, int h, int w, int numAnimaciones, String nombre) throws SlickException{
+        
+        
         direcciones=new Animation[numAnimaciones];
-
+        this.w=w;
+        this.h=h;
         velocidad=new Vector(new Punto (0, 0));
         sprite=new SpriteSheet(ruta, w, h);
         animacion=new Animation(true);
@@ -45,7 +58,14 @@ public abstract class Entidad {
         par=false;
         this.nombre=nombre;
         animid=0;
+        limitar=new boolean[numAnimaciones];
+        this.ruta1=ruta;
     }
+
+    public Entidad() {
+    }
+    
+    
     
     public void update(int delta) throws SlickException{
         float x = posicion.getX() + velocidad.getX() * ((float) delta / 1000);
@@ -90,6 +110,7 @@ public abstract class Entidad {
         }
         direcciones[direccion]=new Animation();
         direcciones[direccion]=aux;
+        limitar[direccion]=true;
     }
     
     public void animaciones(int[] frames){//Frames es un array con el numero de frames en cada animacion
@@ -184,6 +205,7 @@ public abstract class Entidad {
         aux.setLooping(limited);
         direcciones[direccion]=new Animation();
         direcciones[direccion]=aux;
+        limitar[direccion]=limited;
     }
     
     public void animaciones(int[] frames, int[] espacios, boolean[] limited){//Frames es un array con el numero de frames en cada animacion
@@ -237,6 +259,93 @@ public abstract class Entidad {
         objetivo=p;
         this.speed=speed;
     }
+
+    @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        
+        posicion.writeExternal(out);
+        
+        //velocidad.writeExternal(out);
+        out.writeInt(w);
+        out.writeInt(h);
+        out.writeInt(wh);
+        out.writeInt(hh);
+        out.writeInt(wp);
+        out.writeInt(hp);
+        out.writeBoolean(par);
+        out.writeUTF(nombre);
+        out.writeInt(animid);
+        out.writeBoolean(cr);
+        out.writeInt(speed);
+
+        out.writeUTF(ruta1);    
+        out.writeInt(direcciones.length);
+        out.writeObject(limitar);
+        int[] espacios=new int[direcciones.length];
+        int[] frames=new int[direcciones.length];
+        for(int i = 0; i < direcciones.length; i++) {
+            espacios[i]=direcciones[i].getDuration(1);
+            frames[i]=direcciones[i].getFrameCount();
+        }
+        
+        out.writeObject(frames);
+        out.writeObject(espacios);
+        
+        //int[] frames, int[] espacios, boolean[] limited
+        
+        
+    }
+
+    @Override
+    public void readExternal(ObjectInput oi) throws IOException, ClassNotFoundException {
+        posicion=new Punto();
+        posicion.readExternal(oi);
+        w=oi.readInt();
+        h=oi.readInt();
+        wh=oi.readInt();
+        hh=oi.readInt();
+        wp=oi.readInt();
+        hp=oi.readInt();
+        par=oi.readBoolean();
+        nombre=oi.readUTF();
+        animid=oi.readInt();
+        cr=oi.readBoolean();
+        speed=oi.readInt();
+        ruta1=oi.readUTF();
+        direcciones=new Animation[oi.readInt()];
+        limitar=(boolean[]) oi.readObject();   
+        int[] frames=new int[direcciones.length];
+        frames=(int[]) oi.readObject();
+        int[] espacios=new int[direcciones.length];
+        espacios=(int[]) oi.readObject();
+        try {
+            sprite=new SpriteSheet(ruta1, w, h);
+        } catch (SlickException ex) {
+            Logger.getLogger(Entidad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        animacion=new Animation(true);
+        hitbox=new Rectangle(0,0,0,0);
+        hitParedes=new Rectangle[4];   
+        animaciones(frames, espacios, limitar);
+        animacion.addFrame(sprite.getSprite(0,0), 150);
+        velocidad=new Vector(new Punto(0,0), new Punto(0,0));
+        System.out.println("-----------------------------------------"+toString()+" Cargado con Exito--------------------------------------");
+
+    }
+       
+
+//        velocidad=new Vector();
+//        //velocidad.readExternal(oi);
+
+
+//        ruta1=oi.readUTF();
+
+//        System.out.println(direcciones.length);
+
+//        limitar=new boolean[direcciones.length];
+//        limitar=(boolean[]) oi.readObject();
+
+//    }
     
     
     }

@@ -5,12 +5,26 @@
  */
 package entidades;
 
+import Combate.Agua;
 import Combate.Elemento;
+import Combate.Fuego;
 import Combate.HealthBar;
+import Combate.Luz;
 import Combate.Magia;
 import Combate.ManaBar;
+import Combate.Oscuro;
+import Combate.Planta;
+import Combate.Rayo;
+import Combate.Terra;
 import chaoschild.Punto;
+import chaoschild.Vector;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -18,13 +32,14 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.ShapeFill;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
+import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.geom.Rectangle;
 
 /**
  *
  * @author victo
  */
-public abstract class EntidadCombate extends Entidad{
+public abstract class EntidadCombate extends Entidad implements Externalizable{
     private Entidad combate;
     private boolean lucha;
     private ArrayList<Magia> magias;
@@ -36,7 +51,7 @@ public abstract class EntidadCombate extends Entidad{
     private int[] luest;
     private Sound daño;
     private Sound dañar;
-    private int animdañar, animbaseco, animest, animmag, SPD;
+    private int animdañar, animbaseco, animest, animmag;
     private Elemento elemento;
     private int tieneGema=0;
     private int tieneGemaD=0;
@@ -121,7 +136,7 @@ public abstract class EntidadCombate extends Entidad{
         lucha=false;
         magias=new ArrayList();
         setAnimacionCombate(0);
-         est=new int[8];
+        est=new int[8];
         multiplicadores=new int [8];
         estb=new int [8];
         luest=new int[8];
@@ -135,11 +150,17 @@ public abstract class EntidadCombate extends Entidad{
         barraM=new ManaBar(this);
         DMG=0;
     }
+
+    public EntidadCombate() {
+        super();
+    }
+    
+    
     
     
     
     public void draw(){
-        if (lucha){
+        if (false){
             if(combate.getAnimacion().isStopped()){
                 combate.getAnimacion().restart();
                 combate.setAnimacion(animest);
@@ -452,6 +473,89 @@ public abstract class EntidadCombate extends Entidad{
         a.add("SPD: "+est[7]);
         a.add(toString());
         return a;
+    }
+    
+    private void seleccionarElemento(String a) throws SlickException{
+        switch (a){
+            case "Planta":elemento=new Planta();
+                break;
+            case "Agua":elemento=new Agua();
+                break;
+            case "Fuego":elemento=new Fuego();
+                break;
+            case "Rayo":elemento=new Rayo();
+                break;
+            case "Tierra":elemento=new Terra();
+                break;
+            case "Luz":elemento=new Luz();
+                break;
+            case "Oscuro":elemento=new Oscuro();
+                break;
+            
+        }
+    }
+    
+        @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        super.writeExternal(out);
+        combate.writeExternal(out);
+        out.writeInt(magias.size());
+        for(int i=0;i<magias.size();i++){  
+            magias.get(i).writeExternal(out);    
+        }
+        out.writeInt(EXPA);
+        out.writeInt(LVL);
+        out.writeObject(estb);
+        out.writeObject(luest);
+        out.writeInt(animdañar);
+        out.writeInt(animbaseco);
+        out.writeInt(animest);
+        out.writeInt(animmag);
+        out.writeInt(tieneGema);
+        out.writeInt(tieneGemaD);  
+        out.writeUTF("X");
+    }
+    
+    @Override
+    public void readExternal(ObjectInput oi) throws IOException, ClassNotFoundException {
+       super.readExternal(oi);
+       combate =new Entidad() {};
+       combate.readExternal(oi);
+       lucha=false;
+       int a=oi.readInt();
+       magias=new ArrayList();
+       for(int i=0;i<a;i++){
+           magias.add(new Magia());
+           magias.get(i).readExternal(oi);
+       }
+       EXPA=oi.readInt();
+       LVL=oi.readInt();
+       estb=new int[8];
+       luest=new int[8];
+       estb=(int[]) oi.readObject();
+       luest=(int[]) oi.readObject();
+       animdañar=oi.readInt();
+       animbaseco=oi.readInt();
+       animest=oi.readInt();
+       animmag=oi.readInt();
+       tieneGema=oi.readInt();
+       tieneGemaD=oi.readInt();
+       est=new int[8];
+       multiplicadores=new int[8];
+       System.out.println(oi.readUTF());
+       barraV=new HealthBar(this);
+       barraM=new ManaBar(this);
+        try {
+            daño=new Sound("resources/sonido/HitDamage.ogg");
+            dañar=new Sound("resources/sonido/combate/fisica_flecha_o_lanzar.ogg");
+        } catch (SlickException ex) {
+            Logger.getLogger(EntidadCombate.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        combate.setAnimacion(animest);
+       
+       DMG=0;
+       calcEst();
+
     }
     
    }
