@@ -9,16 +9,36 @@ import chaoschild.Punto;
 import entidades.Aliado;
 import entidades.EntidadCombate;
 import entidades.Lucia;
-import entidades.enemigos.*;
+import entidades.enemigos.Enemigo;
+import entidades.enemigos.Geobro;
+import entidades.enemigos.Hipograsidi;
+import entidades.enemigos.Ragebbit;
+import entidades.enemigos.SlimeRayo;
+import itemsjuego.GemaFuego1;
 import itemsjuego.*;
+import itemsjuego.Objeto;
+import itemsjuego.PocionVGrande;
+import itemsjuego.PocionVMediana;
+import itemsjuego.PocionVPequeña;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import musica.GestorMusica;
-import org.newdawn.slick.*;
-import org.newdawn.slick.state.*;
-import org.newdawn.slick.state.transition.*;
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.CombinedTransition;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 /**
  *
@@ -64,11 +84,17 @@ public class Combate extends BasicGameState{
     public Combate(int ID) {
         this.ID = ID;
     }
+
+    
+    
+    
     
     @Override
     public int getID() {
          return ID;
     }
+    
+    
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
@@ -78,9 +104,7 @@ public class Combate extends BasicGameState{
         lucia=Lucia.getLucia();
         enemigos=new ArrayList();
         aliados=new ArrayList();
-        //------------------------
-        //genEnemigos(new Hipograsidi(0,0), 1);
-        //------------------------
+        genEnemigos(new SlimeRayo(0,0), 1);
         this.sgb=sbg;
         atacando=false;
         aliados=(ArrayList<Aliado>) lucia.getEquipo().clone();
@@ -121,6 +145,9 @@ public class Combate extends BasicGameState{
             estado=4;
             volverMapa1();
         }
+        if(turno0){
+            gc.getInput().clearKeyPressedRecord();
+        }
         enemigosRender(gc, grphcs);
         equipoRender(gc, grphcs);
         grphcs.setColor(Color.white);
@@ -132,7 +159,8 @@ public class Combate extends BasicGameState{
                         menu.render(grphcs);
                     break;
                 case 1:
-                    
+                       
+                       gc.getInput().clearKeyPressedRecord();
                        comv.draw(0, 640-comv.getHeight());
                        grphcs.drawString(turno.get(0).toString(), 200, 640-comv.getHeight()+50);
                        if(printcont>100 || !printturno){
@@ -319,7 +347,8 @@ public class Combate extends BasicGameState{
         musica.cambiarM(0);
         musica.play();
         Lucia.getLucia().caminar();
-      
+         
+         
     }
     
     public void enemigosRender(GameContainer c,Graphics g){
@@ -334,10 +363,7 @@ public class Combate extends BasicGameState{
         }
     }
         
-    //MODIFICAR
-    public void genEnemigos(ArrayList<Enemigo> enes) throws SlickException{
-        int a = 1;
-        Enemigo e = enes.get(0);
+    private void genEnemigos(Enemigo e, int a) throws SlickException{
         if (a!=1){
             enem.setY((360-64)/a); 
         }
