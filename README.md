@@ -1,6 +1,8 @@
 # PROYECTO VIDEOJUEGO 2018/2019
 ## By Callister Developers
 ## Página web: https://sites.google.com/view/hijadelcaos
+## Documento de Diseño:https://www.dropbox.com/s/wotc6nqj253v4ia/Documento%20de%20Dise%C3%B1o.pdf?dl=0
+## Memoria:https://www.dropbox.com/s/kter74cdr731psv/HijaDelCaos.pdf?dl=0
 
 ### Victor Méndez
 ### Osman Mehmed Osman
