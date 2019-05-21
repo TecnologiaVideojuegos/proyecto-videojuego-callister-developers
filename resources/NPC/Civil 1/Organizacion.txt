@@ -1,0 +1,8 @@
+-Movimiento estatico abajo
+-Movimiento abajo
+-Movimiento estatico derecha
+-Movimiento derecha
+-Movimiento estatico izquierda
+-Movimiento izquierda
+-Movimiento estatico arriba
+-Movimiento arriba
