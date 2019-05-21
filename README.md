@@ -1,5 +1,13 @@
 # PROYECTO VIDEOJUEGO 2018/2019
 ## By Callister Developers
+## Página web: https://sites.google.com/view/hijadelcaos
+
+### Victor Méndez
+### Osman Mehmed Osman
+### Alvaro Santander
+### Carlos Golvano
+### David Ramos Fernandez
+### Xiaoshen Li
 
 ### **Registro de cambios:**
     - 13/03 Adición de README.md, LICENSE, .gitignore
