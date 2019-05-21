@@ -3,14 +3,14 @@
  <tileset firstgid="1" name="Texturas_Casa_inicio" tilewidth="32" tileheight="32" tilecount="100" columns="10">
   <image source="Casa_inicio.png" width="320" height="320"/>
  </tileset>
- <layer id="1" name="Capa de Patrones 1" width="10" height="10">
+ <layer id="1" name="Background" width="10" height="10">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACg3DhzZCAQAA0Eche69IGrYIISMrRGYI2cX/f4N7z7lNQRA0GzJsi622GbHdDjvtstsee+2z3wEHHXLYEUcdc9yoE04ac8q40yZMmjLtjLPOOe+Ciy65bMYVV8265rob5tx0y23z7rjrnvsWPPDQI489seipZ55b8sJLy1557Y233nlvxQcffbLqsy++WvPNdz/89Mtvf6zb8Nc//wGfNE9qkAEAAA==
+   H4sIAAAAAAAACi3I1zqCAQAA0J9C9l7RJw1bhJCRFSIzhOzy/s/gXLg4N6cpCIJmQoRpoZU2IrTTQSdddNNDL330M8AgQwwzwihjjBNlgkliJJkizjSJ/0uRZoZZ5phngUWWWCbDCqtkWWOdDXJsssU2eXbYZY99ChxwyBHHnFDklDPOKXHBJWWuuOaGW+64p8IDjzxR5ZkXXqnxxjsffPLFNz/UafDLH7uwIQOQAQAA
   </data>
  </layer>
  <layer id="3" name="ObjColisionables" width="10" height="10">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACo3PywqCYBCG4els2UkpXbbWVh6CoHJXbYtqo50g7/8aeuFX+BcpDTwwMB/MTENEmmihjQ666MFAHwOYGGKEMSaYwoItqmaYw4Er1fXBomau5zz4WFZkAoSIEGOlzdZav8EWOyQ1O/c44PjHfSeci/6CK24/ciky3PHAEy+8Rf1YyvEF5CGhJJABAAA=
+   H4sIAAAAAAAACo3POa+BQRQG4LEv156gVKgula2ydGgJt7nWwv//DR5BovCJN3kyJzlvMjOxEEKcBElSpMmQJUeeHwoUKVGmQpVauOd21mnQDNFp0/qwf+390qEb0enRZ8CQUURvzIQpsw93zlmw/OJ9K9aPecOWvze9f3bsOXDkxDnc//h04QoSEbNqkAEAAA==
   </data>
  </layer>
  <layer id="4" name="Puerta" width="10" height="10">
