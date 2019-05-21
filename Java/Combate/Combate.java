@@ -103,12 +103,11 @@ public class Combate extends BasicGameState{
         lucia=Lucia.getLucia();
         enemigos=new ArrayList();
         aliados=new ArrayList();
-        genEnemigos(new SlimeRayo(0,0), 1);
         this.sgb=sbg;
         atacando=false;
         aliados=(ArrayList<Aliado>) lucia.getEquipo().clone();
         menu=new MenuCombate(enemigos,this, aliados);
-        comv=new Image("resources/Menus/Dialogos.jpg");
+        comv=new Image("resources/Menus/Dialogos.png");
         lvlim=new Image("resources/Menus/NivelUp.png");
         nivelsubir=new Punto(640-lvlim.getWidth(), 640-lvlim.getHeight());
         nivelstr=new Punto(nivelsubir.getX()+9, nivelsubir.getY()+9);
@@ -472,7 +471,7 @@ public class Combate extends BasicGameState{
     }
     
     public void repartirEXP(int i) throws SlickException{
-        if(i!=ultimosubido){
+        if(i!=ultimosubido && !aliados.isEmpty()){
             int ex=EXP/(aliados.size()-i);
             EXP=EXP-ex;
             LVLUP=Lucia.getLucia().getEquipo().get(i).ganarExperiencia(ex);

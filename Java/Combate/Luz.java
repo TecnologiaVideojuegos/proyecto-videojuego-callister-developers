@@ -14,7 +14,7 @@ import org.newdawn.slick.SlickException;
 public class Luz extends Elemento{
     
     public Luz() throws SlickException {
-        super(new String[]{"Oscuro"}, new String[]{"Oscuro"}, "resources/Menus/Tipos/ground.png", "Tierra");
+        super(new String[]{"Oscuro"}, new String[]{}, "resources/Menus/Tipos/ground.png", "Tierra");
     }
     
 }
