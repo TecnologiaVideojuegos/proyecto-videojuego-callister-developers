@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="21" height="9" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="1">
+ <tileset firstgid="1" source="Ayuntamiento_Pueblo.tsx"/>
+ <layer id="4" name="Background" width="21" height="9" visible="0">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACq3M1yIVAAAA0CuENGipkIQi0SAqiYbKrKRoGKUShYYSRUYDRSppSEjhMzsPfUIP5/UEBQKBZQQTQijLCSOcCFYQyUpWsZo1RBHNWtaxng1sJIZNbGYLscQRz1YS2EYi20kimRR2sJNU0thFOrvJIJM97GUf+8kimwPkkMtBDnGYPI6Qz1EKKOQYxznBSYo4xWnOUEwJpZRRTgVnOcd5KrlAFRe5RDU1XOYKV7lGLXXU08B1btDITW5xmybu0EwLd7lHK220c58HPOQRHTzmCZ08pYtunvGcHnp5QR/9DDDIS17xmjcMMcwIb3nHKGO8Z5wPfOQTE3xmki985RvfmeIH0/xkhlnm+MU8v/nDAoss/Xv+t79qWf8b9AIAAA==
+  </data>
+ </layer>
+ <layer id="5" name="ObjColisionables" width="21" height="9">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACq3M9yoGUBwG4GPvvednbyJb2bdAlCsg4gYQcQP2lu0yPeUUf3+89dT763TelBBCKmmkk0EmWWSTQy555FNAIUUUU0IpZZRTQSVVVFNDLXXU00AjCZpopoVW2ming0666KaHXvroZyB8Z5Ch2IcZYZQxxplgkqnwk2lmmGWOeRZYDH/PEsuxr7D6620tyc11NmLfZCv2bXaS2Ntlj/14H3AY+xHHSWyecMoZ51xwyRXX3HDLHfc88Bj/PvHMC6+88c4Hn3Hnv30B+5GXwPQCAAA=
+  </data>
+ </layer>
+ <layer id="6" name="Puerta" width="21" height="9">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgGAWjYGDAggGyFwCsPlHY9AIAAA==
+  </data>
+ </layer>
+</map>

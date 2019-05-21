@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="1">
+ <tileset firstgid="1" name="Texturas_Casa_inicio" tilewidth="32" tileheight="32" tilecount="100" columns="10">
+  <image source="Casa_inicio.png" width="320" height="320"/>
+ </tileset>
+ <layer id="1" name="Background" width="10" height="10">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACi3I1zqCAQAA0J9C9l7RJw1bhJCRFSIzhOzy/s/gXLg4N6cpCIJmQoRpoZU2IrTTQSdddNNDL330M8AgQwwzwihjjBNlgkliJJkizjSJ/0uRZoZZ5phngUWWWCbDCqtkWWOdDXJsssU2eXbYZY99ChxwyBHHnFDklDPOKXHBJWWuuOaGW+64p8IDjzxR5ZkXXqnxxjsffPLFNz/UafDLH7uwIQOQAQAA
+  </data>
+ </layer>
+ <layer id="3" name="ObjColisionables" width="10" height="10">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACo3POa+BQRQG4LEv156gVKgula2ydGgJt7nWwv//DR5BovCJN3kyJzlvMjOxEEKcBElSpMmQJUeeHwoUKVGmQpVauOd21mnQDNFp0/qwf+390qEb0enRZ8CQUURvzIQpsw93zlmw/OJ9K9aPecOWvze9f3bsOXDkxDnc//h04QoSEbNqkAEAAA==
+  </data>
+ </layer>
+ <layer id="4" name="Puerta" width="10" height="10">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACmNgoA4QppI5Ix0AAHAGxH+QAQAA
+  </data>
+ </layer>
+</map>
