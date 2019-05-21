@@ -7,9 +7,12 @@ package mapas;
 
 import chaoschild.Punto;
 import cofres.Cofre;
+import entidades.Civil1;
 import entidades.Entidad;
+import entidades.NPC;
 import entidades.enemigos.*;
 import java.util.ArrayList;
+import juego.Juego;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Rectangle;
@@ -25,15 +28,17 @@ public class Mapa extends TiledMap {
     private ArrayList<Rectangle> puertas;
     private ArrayList<Edificio> edificios;
     private ArrayList<Cofre> cofres;
+    private GestorNPCs gestorNpc;
     private int[] nuevaInfo;
     private String nombre;
     private int puertasLayer;
     private int paredesLayer;
     private Sound abrir_puerta;
     private Sound cerrar_puerta;
+    private boolean descubierto;
 
     
-    public Mapa(String ref, String tileSetsLocation) throws SlickException {
+    public Mapa(String ref, String tileSetsLocation, Juego juego) throws SlickException {
         super(ref, tileSetsLocation);
         paredesLayer = this.getLayerIndex("ObjColisionables");
         puertasLayer = this.getLayerIndex("Puerta");
@@ -45,11 +50,14 @@ public class Mapa extends TiledMap {
         nuevaInfo = new int[5];
         this.abrir_puerta = new Sound("/resources/sonido/abrir_puerta.ogg");
         this.cerrar_puerta = new Sound("/resources/sonido/cerrar_puerta.ogg");
+        this.descubierto = false;
+        this.gestorNpc = new GestorNPCs(juego);
         genPuertas();
         genNombre(ref);
+        genNPCs();
     }
 
-    public Mapa(String ref) throws SlickException {
+    public Mapa(String ref, Juego juego) throws SlickException {
         super(ref);
         paredesLayer = this.getLayerIndex("ObjColisionables");
         puertasLayer = this.getLayerIndex("Puerta");
@@ -61,8 +69,21 @@ public class Mapa extends TiledMap {
         nuevaInfo = new int[5];
         this.abrir_puerta = new Sound("/resources/sonido/abrir_puerta.ogg");
         this.cerrar_puerta = new Sound("/resources/sonido/cerrar_puerta.ogg");
+        this.descubierto = false;
+        this.gestorNpc = new GestorNPCs(juego);
         genPuertas();
         genNombre(ref);
+        genNPCs();
+    }
+    
+    private void genNPCs() throws SlickException{
+        switch(nombre){
+            case "Fuera_casa_inicio":
+                Civil1 c1 = new Civil1("cPrueba", 459, 374);
+                System.out.println("Creado " + c1.getNombre());
+                this.gestorNpc.add(c1);
+                break;
+        }
     }
     
     public void drawEnemigos(){
@@ -148,12 +169,11 @@ public class Mapa extends TiledMap {
                     ce = new ConjuntoEnemigos();
                     aux = new ArrayList();
                     x = 314;
-                    y = 258;
-//                    Paula y Antonio;
-//                    Paula pa = new Paula(x, y);
-//                    Antonio an = new Antionio(x, y);
-//                    aux.add(pa);
-//                    aux.add(an);
+                    y = 0;
+                    PaulaE pa = new PaulaE(x, y);
+                    AntonioE an = new AntonioE(x, y);
+                    aux.add(pa);
+                    aux.add(an);
                     ce = new ConjuntoEnemigos(aux, new Punto(x, y));
                     this.enemigos.add(ce);
                     
@@ -182,7 +202,7 @@ public class Mapa extends TiledMap {
                     x = 2948;
                     y = 871;
                     Hipograsidi hg2 = new Hipograsidi(x, y);
-                    Hipograsidi hg3 = new Hipograsidi(x, y);
+                    Hipograsidi hg3 = new Hipograsidi(-1000, -1000);
                     aux.add(hg2);
                     aux.add(hg3);
 //                    Hipograsidi bajo nivel;
@@ -214,8 +234,8 @@ public class Mapa extends TiledMap {
                 case "Casa_Pueblo":
                     ce = new ConjuntoEnemigos();
                     aux = new ArrayList();
-                    x = 85;
-                    y = 162;
+                    x = 56;
+                    y = 143;
                     Ragebbit rg2 = new Ragebbit(x, y);
                     SlimeOscuro so2 = new SlimeOscuro(-1000, -1000);
                     aux.add(rg2);
@@ -269,6 +289,8 @@ public class Mapa extends TiledMap {
                     y = 900;
                     Geobro g5 = new Geobro(x, y);
                     Geobro g6 = new Geobro(-1000, -1000);
+                    aux.add(g5);
+                    aux.add(g6);
                     ce = new ConjuntoEnemigos(aux, new Punto(x, y));
                     this.enemigos.add(ce);
                     
@@ -299,14 +321,17 @@ public class Mapa extends TiledMap {
                     */
                     break;
                 case "Dungeon_Final":
+                    
                     ce = new ConjuntoEnemigos();
                     aux = new ArrayList();
                     x = 870;
                     y = 729;
                     //Crear bossfinal
                     //BossFinal;
-                    //Crear clérigo
-                    //2 Clérigo;
+                    Clerigo cl2 = new Clerigo(x, y);
+                    Clerigo cl3 = new Clerigo(-1000, -1000);
+                    aux.add(cl3);
+                    aux.add(cl2);
                     ce = new ConjuntoEnemigos(aux, new Punto(x, y));
                     this.enemigos.add(ce);
 
@@ -365,6 +390,7 @@ public class Mapa extends TiledMap {
                     x = 979;
                     y = 3897;
                     Geobro go8 = new Geobro(x, y);
+                    aux.add(go8);
                     ce = new ConjuntoEnemigos(aux, new Punto(x, y));
                     this.enemigos.add(ce);
 
@@ -374,8 +400,8 @@ public class Mapa extends TiledMap {
                     aux = new ArrayList();
                     x = 633;
                     y = 734;
-                    //Crear clérigo
                     Clerigo cl=new Clerigo(x,y);
+                    aux.add(cl);
                     ce = new ConjuntoEnemigos(aux, new Punto(x, y));
                     this.enemigos.add(ce);
             }
@@ -444,7 +470,7 @@ public class Mapa extends TiledMap {
         }
     }
 
-    private void setNuevaInfo(int mapaI, int mapaJ, int posX, int posY, int conf){
+    public void setNuevaInfo(int mapaI, int mapaJ, int posX, int posY, int conf){
         //nuevaInfo[0] y nuevaInfo[1] indican el nuevo mapa a imprimir
         //nuevaInfo[2] y nuevaInfo[3] indican la nueva posición de la entidad 
         //nuevaInfo[4] indica si hay colision: > 0 ha habido, < 0 no ha habido
@@ -464,7 +490,7 @@ public class Mapa extends TiledMap {
             switch(nombre){
                 case "Antes_Cueva_Inicio":
                     if(puertas.get(i).intersects(hitboxE[2])){
-                        setNuevaInfo(0, 2, 525, 175, 1);
+                        setNuevaInfo(0, 2, 690, 343, 1);
                     } else if(puertas.get(i).intersects(hitboxE[0])){
                         setNuevaInfo(0, 1, 800, 1193, 1);
                     }
@@ -472,7 +498,7 @@ public class Mapa extends TiledMap {
                 case "Casa_inicio":
                     if(puertas.get(i).intersects(hitboxE[0])){
                         abrir_puerta.play();
-                        setNuevaInfo(0, 2, 335, 505, 1);
+                        setNuevaInfo(0, 2, 493, 656, 1);
                     }
                     break;
                 case "Catedral":
@@ -677,9 +703,26 @@ public class Mapa extends TiledMap {
             cofre.draw();
         }
     }
+
+    public int[] getNuevaInfo() {
+        return nuevaInfo;
+    }
     
     public ArrayList<Cofre> getCofres(){
         return this.cofres;
+    }
+
+    public ArrayList<NPC> getNpcs() {
+        return gestorNpc.getNpcs();
+    }
+
+    
+    public boolean isDescubierto() {
+        return descubierto;
+    }
+
+    public void setDescubierto(boolean descubierto) {
+        this.descubierto = descubierto;
     }
     
     public void addCofre(Cofre cofre){
@@ -727,4 +770,9 @@ public class Mapa extends TiledMap {
     public void render(){
         this.render(0, 0);
     }
+
+    public GestorNPCs getGestorNpc() {
+        return gestorNpc;
+    }
+    
 }

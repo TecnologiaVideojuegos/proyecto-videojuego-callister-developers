@@ -5,6 +5,7 @@
  */
 package mapas;
 
+import juego.Juego;
 import org.newdawn.slick.SlickException;
 
 /**
@@ -13,11 +14,11 @@ import org.newdawn.slick.SlickException;
  */
 public class Edificio extends Mapa{
     
-    public Edificio(String ref, String tileSetsLocation) throws SlickException {
-        super(ref, tileSetsLocation);
+    public Edificio(String ref, String tileSetsLocation, Juego juego) throws SlickException {
+        super(ref, tileSetsLocation, juego);
     }
     
-    public Edificio(String ref) throws SlickException{
-        super(ref);
+    public Edificio(String ref, Juego juego) throws SlickException{
+        super(ref, juego);
     }
 }

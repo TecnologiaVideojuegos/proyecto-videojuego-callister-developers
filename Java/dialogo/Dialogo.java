@@ -64,7 +64,8 @@ public class Dialogo {
         int num;
         g.setColor(Color.black);
         
-        if(juego.getMundo().getMapaCargado().getNombre().equals("Pueblo")){
+        if(juego.getMundo().getMapaCargado().getNombre().equals("Pueblo") ||
+                juego.getMundo().getMapaCargado().getNombre().equals("Ruta_Antes_Dungeon_Desierto")){
             num = 3;
         } else {
             num = 30;

@@ -6,6 +6,7 @@
 package mapas;
 
 import java.util.ArrayList;
+import juego.Juego;
 import org.newdawn.slick.SlickException;
 
 /**
@@ -16,13 +17,13 @@ public class Pueblo extends Mapa{
     
     private ArrayList<Edificio> edificios;
     
-    public Pueblo(String ref, String tileSetsLocation) throws SlickException {
-        super(ref, tileSetsLocation);
+    public Pueblo(String ref, String tileSetsLocation, Juego juego) throws SlickException {
+        super(ref, tileSetsLocation, juego);
         edificios = new ArrayList();
     }
     
-    public Pueblo(String ref) throws SlickException{
-        super(ref);
+    public Pueblo(String ref, Juego juego) throws SlickException{
+        super(ref, juego);
         edificios = new ArrayList();
     }
 }

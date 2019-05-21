@@ -31,17 +31,28 @@ public class Mundo {
         genCofres();
         this.coord = juego.getGMapa().leerMapa();
         initMapa();
+        try {
+            for(Zona zona : mundo){
+                for(Mapa mapa : zona.getZona()){
+                    mapa.genEnemigos();
+                    if(mapa.getNombre().equals("Pueblo")){
+                        System.out.println(mapa.getEdificios().get(1).getNombre());
+                        mapa.getEdificios().get(1).genEnemigos();
+                    }
+                }
+            }
+        } catch (SlickException ex) {}
     }
     
     private void initMapa(){
         
         if(this.coord[1] == -1){
-            cambiarMapa(2, 3);
+            cambiarMapa(0, -1);
         } else {
             cambiarMapa(this.coord[0], this.coord[1]);
         }
         
-        //cambiarMapa(0, 1);
+        //cambiarMapa(0, 2);
     }
     
     private void genZonas() throws SlickException{
@@ -112,28 +123,28 @@ public class Mundo {
     }
     
     private void genDungeons() throws SlickException{
-        mundo.get(0).addDungeon(new Dungeon("resources/Mapas/Cueva_inicio/Cueva_inicio.tmx"));
-        mundo.get(0).addDungeon(new Dungeon("resources/Mapas/Cueva_Inicio_Extension/Cueva_Inicio_Extension.tmx"));
-        mundo.get(1).addDungeon(new Dungeon("resources/Mapas/Dungeon_Desierto/Dungeon_Desierto.tmx"));
-        mundo.get(2).addDungeon(new Dungeon("resources/Mapas/DungeonTorrePlanta1/DungeonTorrePlanta1.tmx"));
-        mundo.get(2).addDungeon(new Dungeon("resources/Mapas/DungeonTorrePlanta2/DungeonTorrePlanta2.tmx"));
-        mundo.get(2).addDungeon(new Dungeon("resources/Mapas/DungeonTorrePlanta3/DungeonTorrePlanta3.tmx"));
-        mundo.get(3).addDungeon(new Dungeon("resources/Mapas/Dungeon_Final/Dungeon_Final.tmx"));
-        mundo.get(3).addDungeon(new Dungeon("resources/Mapas/Cueva_Antes_Ruta_Dungeon_Final/Cueva_Antes_Ruta_Dungeon_Final.tmx")); 
+        mundo.get(0).addDungeon(new Dungeon("resources/Mapas/Cueva_inicio/Cueva_inicio.tmx", this.juego));
+        mundo.get(0).addDungeon(new Dungeon("resources/Mapas/Cueva_Inicio_Extension/Cueva_Inicio_Extension.tmx", this.juego));
+        mundo.get(1).addDungeon(new Dungeon("resources/Mapas/Dungeon_Desierto/Dungeon_Desierto.tmx", this.juego));
+        mundo.get(2).addDungeon(new Dungeon("resources/Mapas/DungeonTorrePlanta1/DungeonTorrePlanta1.tmx", this.juego));
+        mundo.get(2).addDungeon(new Dungeon("resources/Mapas/DungeonTorrePlanta2/DungeonTorrePlanta2.tmx", this.juego));
+        mundo.get(2).addDungeon(new Dungeon("resources/Mapas/DungeonTorrePlanta3/DungeonTorrePlanta3.tmx", this.juego));
+        mundo.get(3).addDungeon(new Dungeon("resources/Mapas/Dungeon_Final/Dungeon_Final.tmx", this.juego));
+        mundo.get(3).addDungeon(new Dungeon("resources/Mapas/Cueva_Antes_Ruta_Dungeon_Final/Cueva_Antes_Ruta_Dungeon_Final.tmx", this.juego)); 
     }
     
     private void genPueblos() throws SlickException{
-        Pueblo fuera_casa = new Pueblo("resources/Mapas/Fuera_casa_inicio/Fuera_casa_inicio.tmx");
-        Pueblo pueblo = new Pueblo("resources/Mapas/Pueblo/Pueblo.tmx");
-        Pueblo ciudad = new Pueblo("resources/Mapas/Ciudad_ciudad/Ciudad_ciudad.tmx");
+        Pueblo fuera_casa = new Pueblo("resources/Mapas/Fuera_casa_inicio/Fuera_casa_inicio.tmx", this.juego);
+        Pueblo pueblo = new Pueblo("resources/Mapas/Pueblo/Pueblo.tmx", this.juego);
+        Pueblo ciudad = new Pueblo("resources/Mapas/Ciudad_ciudad/Ciudad_ciudad.tmx", this.juego);
         
-        Edificio casa_inicio = new Edificio("resources/Mapas/Casa_inicio/Casa_inicio.tmx");
-        Edificio catedral = new Edificio("resources/Mapas/Catedral/Catedral.tmx");
-        Edificio ayuntamiento = new Edificio("resources/Mapas/Ayuntamiento_Pueblo/Ayuntamiento_Pueblo.tmx");
-        Edificio casa_pueblo = new Edificio("resources/Mapas/Casa_Pueblo/Casa_Pueblo.tmx");
-        Edificio cueva_pueblo = new Edificio("resources/Mapas/Cueva_Pueblo/Cueva_Pueblo.tmx");
-        Edificio hospital = new Edificio("resources/Mapas/Hospital_Pueblo/Hospital_Pueblo.tmx");
-        Edificio residencia = new Edificio("resources/Mapas/Residencia_Pueblo/Residencia_Pueblo.tmx");
+        Edificio casa_inicio = new Edificio("resources/Mapas/Casa_inicio/Casa_inicio.tmx", this.juego);
+        Edificio catedral = new Edificio("resources/Mapas/Catedral/Catedral.tmx", this.juego);
+        Edificio ayuntamiento = new Edificio("resources/Mapas/Ayuntamiento_Pueblo/Ayuntamiento_Pueblo.tmx", this.juego);
+        Edificio casa_pueblo = new Edificio("resources/Mapas/Casa_Pueblo/Casa_Pueblo.tmx", this.juego);
+        Edificio cueva_pueblo = new Edificio("resources/Mapas/Cueva_Pueblo/Cueva_Pueblo.tmx", this.juego);
+        Edificio hospital = new Edificio("resources/Mapas/Hospital_Pueblo/Hospital_Pueblo.tmx", this.juego);
+        Edificio residencia = new Edificio("resources/Mapas/Residencia_Pueblo/Residencia_Pueblo.tmx", this.juego);
         
         fuera_casa.addEdificio(casa_inicio);
         ciudad.addEdificio(catedral);
@@ -151,12 +162,12 @@ public class Mundo {
     }
     
     private void genRutas() throws SlickException{
-        mundo.get(0).addRuta(new Ruta("resources/Mapas/Antes_Cueva_Inicio/Antes_Cueva_Inicio.tmx"));
-        mundo.get(1).addRuta(new Ruta("resources/Mapas/Mirador_Ciudad/Mirador_Ciudad.tmx"));
-        mundo.get(1).addRuta(new Ruta("resources/Mapas/Ruta_Antes_Dungeon_Desierto/Ruta_Antes_Dungeon_Desierto.tmx"));
-        mundo.get(2).addRuta(new Ruta("resources/Mapas/RutaAntesDungeonTorre/RutaAntesDungeonTorre.tmx"));
-        mundo.get(3).addRuta(new Ruta("resources/Mapas/Ruta_Antes_Cueva_Dungeon_Final/Ruta_Antes_Cueva_Dungeon_Final.tmx"));
-        mundo.get(3).addRuta(new Ruta("resources/Mapas/Ruta_Antes_Dungeon_Final/Ruta_Antes_Dungeon_Final.tmx"));
+        mundo.get(0).addRuta(new Ruta("resources/Mapas/Antes_Cueva_Inicio/Antes_Cueva_Inicio.tmx", this.juego));
+        mundo.get(1).addRuta(new Ruta("resources/Mapas/Mirador_Ciudad/Mirador_Ciudad.tmx", this.juego));
+        mundo.get(1).addRuta(new Ruta("resources/Mapas/Ruta_Antes_Dungeon_Desierto/Ruta_Antes_Dungeon_Desierto.tmx", this.juego));
+        mundo.get(2).addRuta(new Ruta("resources/Mapas/RutaAntesDungeonTorre/RutaAntesDungeonTorre.tmx", this.juego));
+        mundo.get(3).addRuta(new Ruta("resources/Mapas/Ruta_Antes_Cueva_Dungeon_Final/Ruta_Antes_Cueva_Dungeon_Final.tmx", this.juego));
+        mundo.get(3).addRuta(new Ruta("resources/Mapas/Ruta_Antes_Dungeon_Final/Ruta_Antes_Dungeon_Final.tmx", this.juego));
     }
     
     public void cambiarMapa(int z, int m){
@@ -164,6 +175,7 @@ public class Mundo {
         this.coord[1] = m;
         if(m >= 0){
             this.mapaCargado = this.getMapa(z, m);
+            
         } else {
             switch (z) {
                 case 0:
@@ -176,11 +188,10 @@ public class Mundo {
                     this.mapaCargado = this.getMapa(2, 3).getEdificios().get(-m - 1);
                     break;
             }
+            if(this.mapaCargado.getNombre().equals("Hospital_Pueblo")){
+                this.mapaCargado.setDescubierto(true);
+            }
         }
-        
-        try {
-            this.mapaCargado.genEnemigos();
-        } catch (SlickException ex) {}
     }
     
     public void render(){
@@ -194,6 +205,10 @@ public class Mundo {
     
     public Mapa getMapa(int Nzona, int Ntipo){
         return mundo.get(Nzona).getZona().get(Ntipo);
+    }
+    
+    public ArrayList<Zona> getMundo(){
+        return this.mundo;
     }
     
     public Mapa getMapaCargado(){
