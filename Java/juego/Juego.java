@@ -326,4 +326,8 @@ public class Juego extends BasicGameState{
         return this.Lucia;
     }
     
+    public Mundo getMundo(){
+        return this.mundo;
+    }
+    
 }
