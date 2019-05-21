@@ -26,7 +26,7 @@ public class Ghostler extends Enemigo{
         super.genHitboxes(new Punto(super.getPosicion().getX(), super.getPosicion().getY()),64, 64);
         int[] frames={4,3,3,4};
         super.animaciones(frames);
-        estadisticasb(new int[]{300, 50, 100,0, 0, 0, 0, 0,1,200, 5, 20, 15, 0, 20, 10, 9});
+        estadisticasb(new int[]{300, 50, 150,0, 0, 0, 0, 0,3,50, 5, 20, 15, 0, 20, 10, 9});
         aprenderMagia(new MagiaOscura1());
         setElemento(new Oscuro());
         setPropmagia(80);

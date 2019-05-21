@@ -24,10 +24,10 @@ public class Hipograsidi extends Enemigo{
         super.genHitboxes(new Punto(super.getPosicion().getX(), super.getPosicion().getY()+(30)), 41, 29);
         int[] frames={4,4,4,4};
         super.animaciones(frames);
-        estadisticasb(new int[]{300, 50, 100,0, 0, 0, 0, 0,1,200, 5, 20, 15, 0, 20, 10, 9});
+        estadisticasb(new int[]{300, 50, 50,0, 0, 0, 0, 0,4,200, 5, 20, 15, 0, 20, 10, 9});
         aprenderMagia(new MagiaTierra1());
         setElemento(new Planta());
-        setExpg(500);
+        setExpg(100);
         setPropobj(100);
     }
     

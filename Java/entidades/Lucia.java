@@ -63,44 +63,14 @@ public class Lucia extends Aliado implements Externalizable{
         setPosCombate(new Punto(500, 200));
         equipo.add(this);
         equipo.add(new Kato(getPosCombate().getX()-64, getPosCombate().getY()));
-        aprenderMagia(new MagiaAgua1());
-        aprenderMagia(new MagiaTierra1());
-        aprenderMagia(new MagiaFuego1());
-        estadisticasb(new int[]{70, 90, 90, 60, 80, 0, 20,0, 2, 15, 5, 10, 15, 30, 0, 20,18});
+        aprenderMagia(new MagiaPlanta1());
+
+        estadisticasb(new int[]{70, 90, 90, 60, 80, 0, 20,0, 1, 15, 5, 10, 15, 30, 0, 20,18});
         caminar=new Sound("resources/sonido/paso.ogg");
         caminar.loop();
         caminar.stop();
-        intven=new Inventario();
-        intven.add(new PocionVPequeña());
-        intven.add(new PocionMPequeña());
-        intven.add(new PocionVMediana());
-        intven.add(new PocionMMediana());
-        intven.add(new PocionVGrande());
-        intven.add(new PocionMGrande());
-        intven.add(new GemaAgua1());
-        intven.add(new GemaAgua2());
-        intven.add(new GemaPlanta1());
-        intven.add(new GemaPlanta2());
-        intven.add(new GemaFuego1());
-        intven.add(new GemaFuego2());
-        intven.add(new GemaRayo1());
-        intven.add(new GemaRayo2());
-        intven.add(new GemaTierra1());
-        intven.add(new GemaTierra2());
-        intven.add(new GemaLuz1());
-        intven.add(new GemaLuz2());
-        intven.add(new GemaOscura1());
-        intven.add(new GemaOscura2());
-        
+        intven=new Inventario();        
         setAnimdañar(3);
-        setArma(new GemaAgua1());
-        setArmor(new GemaRayo1());
-        equipo.add(new Antonio(500, 80));
-        equipo.add(new Paula(500, 320));
-        aprenderMagia(new MagiaRayo1());
-        aprenderMagia(new MagiaOscura1());
-        aprenderMagia(new MagiaLuz1());
-        aprenderMagia(new MagiaPlanta1());
         Lucia=this;
         
     }
@@ -223,6 +193,33 @@ public class Lucia extends Aliado implements Externalizable{
         int dmg=super.ataqueBasico();
         dmg=(int) ((dmg+getEst()[4]*0.8));
         return dmg;
+        
+    }
+    
+    
+
+    @Override
+    public void nuevaMagia(int i) throws SlickException{
+        switch (i){
+            
+            case 2:
+                aprenderMagia(new MagiaAgua1());
+                aprenderMagia(new MagiaFuego1());
+               break;
+            case 6:
+                aprenderMagia(new MagiaTierra1());
+               break;
+            case 5:
+                aprenderMagia(new MagiaRayo1());
+                break;
+            case 10:
+                aprenderMagia(new MagiaOscura1());
+               break;
+            case 14:
+                aprenderMagia(new MagiaLuz1());
+                break;
+                
+        }
     }
 
     @Override
@@ -275,6 +272,10 @@ public class Lucia extends Aliado implements Externalizable{
         Lucia=this;
     }
 
+    
+    
+    
+    
     
     
 }

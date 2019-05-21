@@ -6,6 +6,13 @@
 package entidades;
 
 import Combate.Elemento;
+import Combate.MagiaAgua1;
+import Combate.MagiaFuego1;
+import Combate.MagiaLuz1;
+import Combate.MagiaOscura1;
+import Combate.MagiaPlanta1;
+import Combate.MagiaRayo1;
+import Combate.MagiaTierra1;
 import chaoschild.Punto;
 import itemsjuego.Gema;
 import java.io.Externalizable;
@@ -13,6 +20,8 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -206,6 +215,87 @@ public class Aliado extends EntidadCombate implements Externalizable{
             armor.readExternal(oi);
         }
         
+    }
+    
+     public ArrayList<String> ganarExperiencia(int i){
+        ArrayList<String> a=new ArrayList();
+        setEXPA(getEXPA()+i);
+        System.out.println(toString()+ " ha ganado "+i+" puntos de Experiencia");
+        System.out.println("Experiencia Actual: "+getEXPA());
+        if(getEXPA()>getEXPN()){
+            a=subirNivel();
+            try {
+                nuevaMagia(getLVL()+1);
+            } catch (SlickException ex) {
+                Logger.getLogger(Aliado.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return a;
+    }
+    
+    
+        
+    
+    public void nuevaMagia(int i) throws SlickException{
+        switch (i){
+            
+            case 2:
+                switch (getNombre()){
+                    case "Kato":
+                        aprenderMagia(new MagiaAgua1());
+                        break;
+                    
+                }
+               break;
+            case 6:
+                switch (getNombre()){
+                    case "Kato":
+                        aprenderMagia(new MagiaFuego1());
+                        break;
+                    
+                }
+               break;
+            case 10:
+                switch (getNombre()){
+                    case "Kato":
+                        aprenderMagia(new MagiaOscura1());
+                        break;
+                    case "Paula":
+                        aprenderMagia(new MagiaLuz1());
+                        break;
+                    case "Antonio":
+                        aprenderMagia(new MagiaTierra1());
+                        break;  
+                }
+                break;
+            case 14:
+                switch (getNombre()){
+                    case "Kato":
+                        aprenderMagia(new MagiaOscura1());
+                        break;
+                    case "Paula":
+                        aprenderMagia(new MagiaRayo1());
+                        break;
+                    case "Antonio":
+                        aprenderMagia(new MagiaAgua1());
+                        break;  
+                }
+               break;
+            case 20:
+                switch (getNombre()){
+                    case "Kato":
+                        aprenderMagia(new MagiaRayo1());
+                        break;
+                    case "Paula":
+                        aprenderMagia(new MagiaOscura1());
+                        break;
+                    case "Antonio":
+                        aprenderMagia(new MagiaLuz1());
+                        break;  
+                }
+                break;
+                
+        }
     }
     
 

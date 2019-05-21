@@ -22,7 +22,7 @@ public class Geobro extends Enemigo{
         super.genHitboxes(new Punto(super.getPosicion().getX()+9, super.getPosicion().getY()+(30)), 54-18, 24);
         int[] frames={4,4,4,4};
         super.animaciones(frames);
-        estadisticasb(new int[]{300, 50, 100,0, 0, 0, 0, 0,1,200, 5, 20, 15, 0, 20, 10, 9});
+        estadisticasb(new int[]{300, 20, 100,0, 0, 0, 0, 0,1,200, 5, 10, 15, 0, 20, 10, 9});
         aprenderMagia(new MagiaTierra1());
         setElemento(new Terra());
         setExpg(100);

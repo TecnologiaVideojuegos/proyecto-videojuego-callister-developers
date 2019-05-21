@@ -23,8 +23,8 @@ public class Slime extends Enemigo{
     public Slime(String ruta, String rutaC, String nombre) throws SlickException {
         super(ruta, rutaC, 54, 54, 4, 3, new int[]{4, 3,3}, nombre, 54, 54);
         animaciones(new int[]{4,4,4,4}, 250,new boolean[]{true, true, true, true});
-        estadisticasb(new int[]{300, 50, 100,0, 0, 0, 0, 0,1,200, 5, 20, 15, 0, 20, 10, 9});
-        setExpg(500);
+        estadisticasb(new int[]{200, 50, 100,0, 0, 0, 0, 0,1,200, 5, 10, 15, 0, 20, 10, 9});
+        setExpg(200);
         setPropobj(100);
         setAnimbaseco(1);
         setAnimest(0);
