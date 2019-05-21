@@ -29,6 +29,7 @@ import java.io.ObjectOutput;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import juego.Juego;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
@@ -46,6 +47,7 @@ public class Lucia extends Aliado implements Externalizable{
     private ArrayList<Aliado> equipo;
     private int ancho, alto;
     private Sound caminar;
+    private Juego juego;
     
     public Lucia(int x, int y) throws SlickException {
         super("resources/Personajes/Lucia/Lucia.png","resources/Pantalla de Batalla/Lucia/Batalla_Lucia.png", 52, 34, 4, 4,new int[] {3,2,2,2}, "Lucia");
@@ -99,6 +101,7 @@ public class Lucia extends Aliado implements Externalizable{
         aprenderMagia(new MagiaOscura1());
         aprenderMagia(new MagiaLuz1());
         aprenderMagia(new MagiaPlanta1());
+        Lucia=this;
         
     }
        
@@ -112,6 +115,14 @@ public class Lucia extends Aliado implements Externalizable{
 
     public Lucia() {
         super();
+    }
+
+    public void setJuego(Juego juego) {
+        this.juego = juego;
+    }
+
+    public Juego getJuego() {
+        return juego;
     }
 
     
@@ -263,5 +274,7 @@ public class Lucia extends Aliado implements Externalizable{
         System.out.println("-------------------------------"+toString()+" Completamente Cargado-----------------------------------------------------");
         Lucia=this;
     }
+
+    
     
 }

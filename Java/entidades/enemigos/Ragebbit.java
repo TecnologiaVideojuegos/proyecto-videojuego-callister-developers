@@ -26,7 +26,7 @@ public class Ragebbit extends Enemigo{
         super.genHitboxes(new Punto(super.getPosicion().getX()+15, super.getPosicion().getY()+(30)), 40-11, 20);
         int[] frames={2, 2, 2, 2, 1};
         super.animaciones(frames);
-        estadisticasb(new int[]{300, 50, 100,0, 0, 0, 0, 0,1,200, 5, 20, 15, 0, 20, 10, 9});
+        estadisticasb(new int[]{100, 50, 100,0, 0, 0, 0, 0,1,50, 5, 20, 15, 0, 20, 10, 9});
         setAnimest(1);
         setAnimbaseco(2);
         setAnimmag(2);

@@ -60,7 +60,7 @@ public class Enemigo extends EntidadCombate{
     
     
     public Vector calcRuta() throws SlickException{
-        Vector v=new Vector(super.getPosicion(), getLucia().getPosicion() );
+        Vector v=new Vector(super.getPosicion(), Lucia.getLucia().getPosicion());
         int modulo=(int)v.getModulo();
         
         if(v.getModulo()<rango){

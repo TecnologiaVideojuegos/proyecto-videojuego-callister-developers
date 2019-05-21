@@ -31,7 +31,7 @@ public class Dialogo {
             this.cont = 0;
             this.juego = juego;
             this.activo = false;
-            this.imagen = new Image("resources/Menus/Dialogos.png");
+            this.imagen = new Image("resources/Menus/Dialogos.jpg");
             this.sprite = new SpriteSheet("resources/Menus/anim_puntero.png", 19, 19);
             this.puntero = new Animation(sprite, 700);
             this.sonido = new Sound("resources/sonido/dialogo.ogg");

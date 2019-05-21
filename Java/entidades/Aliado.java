@@ -65,13 +65,19 @@ public class Aliado extends EntidadCombate implements Externalizable{
         return armor;
     }
 
-    public void setArma(Gema arma) {
+    public void setArma(Gema arma) throws SlickException {
+        if(this.arma!=null){
+            Lucia.getLucia().getIntven().add(this.arma);
+        }
         setTieneGema(arma.getNivel());
         this.arma = arma;
     }
 
-    public void setArmor(Gema armor) {
-         setTieneGemaD(armor.getNivel());
+    public void setArmor(Gema armor) throws SlickException {
+        if(this.armor!=null){
+            Lucia.getLucia().getIntven().add(this.armor);
+        }
+        setTieneGemaD(armor.getNivel());
         this.armor = armor;
     }
     
@@ -135,14 +141,14 @@ public class Aliado extends EntidadCombate implements Externalizable{
         }
         renderBarras(new Punto(p.getX(), (float) (ani.getHeight()*1.2+p.getY())), g, gc);
         g.setColor(Color.white);
-        ata.draw((int)p.getX()-12, (int) p.getY()+200-20);
+        ata.draw((int)p.getX()+38, (int) p.getY()+200-20);
         try {
-            arma.render((int)p.getX()+50, (int) p.getY()+200, g);
+            arma.render((int)p.getX()+100, (int) p.getY()+200, g);
         } catch (Exception e) {
         }
-        def.draw((int)p.getX()-12, (int) p.getY()+200+30-20);
+        def.draw((int)p.getX()+38, (int) p.getY()+200+30-20);
         try {
-            armor.render((int)p.getX()+50, (int) p.getY()+200+30, g);
+            armor.render((int)p.getX()+100, (int) p.getY()+200+30, g);
         } catch (Exception e) {
         }
     }
@@ -161,6 +167,27 @@ public class Aliado extends EntidadCombate implements Externalizable{
             armor.writeExternal(out);
          }
      }
+        public void quitarGema(int i) throws SlickException{
+        
+        switch(i){
+            case 0:
+                if(arma!=null){
+                    Lucia.getLucia().getIntven().add(arma);
+                    arma=null;
+                    setTieneGema(0);
+                }
+                break;
+            case 1:
+                if(armor!=null){
+                    Lucia.getLucia().getIntven().add(armor);
+                    armor=null;
+                    setTieneGemaD(0);
+                }
+                
+                break;
+        }
+        
+    }
      
      
     @Override
@@ -180,5 +207,7 @@ public class Aliado extends EntidadCombate implements Externalizable{
         }
         
     }
+    
+
 
 }

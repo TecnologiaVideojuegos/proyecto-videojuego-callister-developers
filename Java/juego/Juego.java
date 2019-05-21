@@ -14,7 +14,16 @@ import entidades.Entidad;
 import entidades.Lucia;
 import entidades.enemigos.*;
 import java.util.ArrayList;
-import Guardado.Guardar;
+import Guardar.Guardar;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mapas.Mapa;
 import mapas.Mundo;
 import musica.GestorMusica;
@@ -38,8 +47,6 @@ public class Juego extends BasicGameState{
     private float rendery;
     private float posinix;
     private float posiniy;
-    private Ragebbit ragebit;
-    private Hipograsidi hipograsidi;
     private ChaosChild chaos;
     private boolean cambioMapa;
     private int contCambioMapa;
@@ -64,7 +71,27 @@ public class Juego extends BasicGameState{
         contCambioMapa = 0;
         music.play();
         //Lucia=Lucia.getLucia(); 
-        Lucia = new Lucia(500, 500);
+//        Lucia = new Lucia(500, 500);
+        Lucia=new Lucia();
+        try{
+            FileInputStream fileInputStream = new FileInputStream("saves/Lucia.dat");
+
+        ObjectInputStream objectInputStream;
+        
+       
+        objectInputStream = new ObjectInputStream(fileInputStream);
+        
+    
+        Lucia.readExternal(objectInputStream);
+    
+        objectInputStream.close();
+        fileInputStream.close();
+        }catch(Exception e){
+            
+        }
+           
+        
+        Lucia.setJuego(this);
         mundo=new Mundo(this);
         mapa = mundo.getMapaCargado();
         posiniy=gc.getHeight()/2;
@@ -72,8 +99,6 @@ public class Juego extends BasicGameState{
         renderx=0;
         rendery=0;
         this.dialogo = new Dialogo(this);
-        ragebit=new Ragebbit((int)Lucia.getPosicion().getX(), (int)Lucia.getPosicion().getY());
-        hipograsidi = new Hipograsidi((int)Lucia.getPosicion().getX() + 64, (int)Lucia.getPosicion().getY() + 64);
     }
 
     @Override
@@ -83,14 +108,11 @@ public class Juego extends BasicGameState{
             mundo.render();
             mapa.drawEnemigos();
             Lucia.draw(); 
-            ragebit.draw();
-            hipograsidi.draw();
             this.dialogo.draw(grphcs);
             
             
             /*
-            for(int i=0;i<4;i++){
-                grphcs.draw(ragebit.getHitParedes()[i]);
+           
             }
             for(int i=0;i<mapa.getHitBoxes().size();i++){
                 grphcs.draw(mapa.getHitBoxes().get(i));
@@ -140,8 +162,7 @@ public class Juego extends BasicGameState{
                 if(!music.playing()){
                     music.play();
                 }
-                ragebit.actualizar(colisionPared(ragebit), i);
-                hipograsidi.actualizar(colisionPared(hipograsidi), i);
+               
                 actualizarEnemigos(i);
                 comprobarInputs(gc,sbg);
                 boolean[] pas={false};
@@ -169,7 +190,7 @@ public class Juego extends BasicGameState{
         }
     }
     
-    private void guardarMapa(){
+    public void guardarMapa(){
         this.gMapa.guardarMapa(this.mundo.getCoord());
     }
     

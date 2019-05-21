@@ -464,9 +464,7 @@ public class MenuCombate {
             selected=aliados.get(acciones);
             psel=renderSelector(selected);
         } catch (Exception e) {
-        }
-        
-        
+        } 
     }
             
             

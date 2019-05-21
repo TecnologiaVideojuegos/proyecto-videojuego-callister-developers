@@ -79,6 +79,8 @@ public class Gema extends Objeto implements Externalizable{
         this.nivel = nivel;
     }
     
+    
+    
     private void seleccionarElemento(String a) throws SlickException{
         switch (a){
             case "Planta":elemento=new Planta();

@@ -362,7 +362,11 @@ public class Combate extends BasicGameState{
             aliados.get(i).drawC(c, g);
         }
     }
-        
+    
+    public void genEnemigos(ArrayList<Enemigo> a){
+        enemigos=a;
+    }
+    
     private void genEnemigos(Enemigo e, int a) throws SlickException{
         if (a!=1){
             enem.setY((360-64)/a); 

@@ -11,6 +11,7 @@ import juego.Juego;
 import menus.Equipo;
 import menus.Menu;
 import menus.EstadoInventario;
+import menus.Fabricacion;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -38,6 +39,7 @@ public class ChaosChild extends StateBasedGame{
         this.addState(new Menu());
         this.addState(new EstadoInventario());
         this.addState(new Equipo());
+        this.addState(new Fabricacion());
     }
     
 }

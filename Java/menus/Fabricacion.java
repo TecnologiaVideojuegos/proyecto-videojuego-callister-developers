@@ -194,6 +194,7 @@ public class Fabricacion extends BasicGameState {
                 gemas.remove(gemas.size()-1);
             } catch (Exception e) {
             }
+            if(gemas.isEmpty()) game.enterState(1);
 //            switch(estado){
 //                case 0:
 //                    estado=0;

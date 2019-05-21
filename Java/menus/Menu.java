@@ -33,6 +33,7 @@ public class Menu extends BasicGameState {
     private Punto renderMenu;
     private Lucia Lucia;
     
+ 
     
     @Override
     public int getID() {
@@ -120,11 +121,12 @@ public class Menu extends BasicGameState {
                     game.enterState(5);
                     break;
                 case 3:
-                    FileOutputStream guardar=new FileOutputStream("Guardado/Lucia.dat");
+                    FileOutputStream guardar=new FileOutputStream("saves/Lucia.dat");
                     ObjectOutputStream oo=new ObjectOutputStream(guardar);
                     Lucia.getLucia().writeExternal(oo);
                     oo.close();
                     guardar.close();
+                    Lucia.getJuego().guardarMapa();                    
                     break;
                 case 4:
 

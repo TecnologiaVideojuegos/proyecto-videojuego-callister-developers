@@ -34,14 +34,14 @@ public class Mundo {
     }
     
     private void initMapa(){
-        /*
+        
         if(this.coord[1] == -1){
             cambiarMapa(2, 3);
         } else {
             cambiarMapa(this.coord[0], this.coord[1]);
-        }*/
+        }
         
-        cambiarMapa(0, 1);
+//        cambiarMapa(0, 1);
     }
     
     private void genZonas() throws SlickException{
