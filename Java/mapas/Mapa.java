@@ -81,58 +81,75 @@ public class Mapa extends TiledMap {
         }
         this.nombre = ref.substring(pos + 1, ref.length() - 4);
     }
-    
+    /*
     public void genEnemigos() throws SlickException{
+        int x, y;
         switch(nombre){
-                case "Antes_Cueva_Inicio":
-
-                    break;
-                case "Casa_inicio":
-
-                    break;
-                case "Catedral":
-
-                    break;
-                case "Ciudad_ciudad":
-
-                    break;
                 case "Cueva_inicio":
-
+                    x = 909; 
+                    y = 1086;
+                    SlimeBasico;
+                    
+                    int x3 = 1028, y3 = 472;
+                    Geobro;
+                    
                     break;
                 case "DungeonTorrePlanta1":
+                    x = 1000;
+                    y = 682;
+                    Ghostler;
 
                     break;
                 case "DungeonTorrePlanta2":
+                    x = 207;
+                    y = 701;
+                    Ghostler;
+                    
+                    x = 653;
+                    y = 359;
+                    Ragebit;
+                    Ghostler;
 
                     break;
                 case "DungeonTorrePlanta3":
-
-                    break;
-                case "Fuera_casa_inicio":
-
-                    break;
-                case "Mirador_Ciudad":
-
+                    x = 314;
+                    y = 258;
+                    Paula o Antonio;
+                    
                     break;
                 case "RutaAntesDungeonTorre":
-
+                    x = 811;
+                    y = 823;
+                    Hipograsidi;
+                    
+                    x = 1814;
+                    y = 659;
+                    EntOscuro;
+                    
+                    x = 2948;
+                    y = 871;
+                    Hipograsidi bajo nivel;
+                    Hipograsidi bajo nivel;
+                    
                     break;
                 case "Pueblo":
-
-                    break;
-                case "Ayuntamiento_Pueblo":
+                    x = 462;
+                    y = 358;
+                    SlimeFuego;
+                    
+                    x = 569;
+                    y = 390;
+                    SlimeFuego;
 
                     break;
                 case "Casa_Pueblo":
+                    x = 85;
+                    y = 162;
+                    Raggebit;
+                    SlimoOscuro;
 
                     break;
                 case "Cueva_Pueblo":
-
-                    break;
-                case "Hospital_Pueblo":
-
-                    break;
-                case "Residencia_Pueblo":
 
                     break;
                 case "Cueva_Antes_Ruta_Dungeon_Final":
@@ -142,7 +159,8 @@ public class Mapa extends TiledMap {
 
                     break;
                 case "Dungeon_Desierto":
-                    int x = 1300, y = 800;
+                    x = 1300;
+                    y = 800;
                     Geobro ene = new Geobro(x, y);
                     Ragebbit rag = new Ragebbit(x, y);
                     Hipograsidi hip = new Hipograsidi(x, y);
@@ -150,7 +168,7 @@ public class Mapa extends TiledMap {
                     aux.add(ene);
                     aux.add(rag);
                     aux.add(hip);
-                    ConjuntoEnemigos conjunto = new ConjuntoEnemigos(aux, new Punto(x, y), this);
+                    ConjuntoEnemigos conjunto = new ConjuntoEnemigos(aux, new Punto(x2, y2), this);
                     
                     this.enemigos.add(conjunto);
                     
@@ -168,7 +186,7 @@ public class Mapa extends TiledMap {
 
                     break;
             }
-    }
+    }*/
     
     private void genPuertas()throws SlickException{
         int ax  = this.width;

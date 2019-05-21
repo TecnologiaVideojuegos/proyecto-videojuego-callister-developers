@@ -82,7 +82,7 @@ public class Cofre {
             this.posicion = new Punto(this.posicion.getX(), this.posicion.getY() - 16);
             this.abrir.play();
             obj = this.item;
-            this.juego.setTextoDialogo("Has encontrado " + this.item.toString());
+            this.juego.setTextoDialogo("Has encontrado " + this.item.toString() + ".");
             this.juego.activarDialogo();
             
             this.item = null;

@@ -41,7 +41,7 @@ public class Mundo {
             cambiarMapa(this.coord[0], this.coord[1]);
         }
         
-//        cambiarMapa(0, 1);
+        //cambiarMapa(0, 1);
     }
     
     private void genZonas() throws SlickException{
@@ -61,11 +61,15 @@ public class Mundo {
     
     private void genCofres() throws SlickException{
         PocionVPequeña Pvp = new PocionVPequeña();
+        PocionVPequeña Pvp2 = new PocionVPequeña();
         PocionVMediana Pvm = new PocionVMediana();
         PocionVGrande Pvg = new PocionVGrande();
         PocionMPequeña Pmp = new PocionMPequeña();
         PocionMMediana Pmm = new PocionMMediana();
         PocionMGrande Pmg = new PocionMGrande();
+        GemaTierra1 gemaTierra = new GemaTierra1();
+        GemaLuz1 gemaLuz = new GemaLuz1();
+        GemaLuz2 gemaLuz2 = new GemaLuz2();
         
         Cofre cofre = new Cofre(new Punto(19 * 32, 15 * 32), Pvp, this.juego);
         mundo.get(0).getZona().get(0).addCofre(cofre);
@@ -79,11 +83,20 @@ public class Mundo {
         cofre = new Cofre(new Punto(35, 640), Pmm, this.juego);
         mundo.get(2).getZona().get(0).addCofre(cofre);
         
-        cofre = new Cofre(new Punto(80, 127), Pmg, this.juego);
+        cofre = new Cofre(new Punto(80, 127), gemaTierra, this.juego);
         mundo.get(2).getZona().get(1).addCofre(cofre);
         
         cofre = new Cofre(new Punto(1000, 220), Pvg, this.juego);
         mundo.get(3).getZona().get(0).addCofre(cofre);
+        
+        cofre = new Cofre(new Punto(445, 303), gemaLuz, this.juego);
+        mundo.get(2).getZona().get(3).addCofre(cofre);
+        
+        cofre = new Cofre(new Punto(137, 105), gemaLuz2, this.juego);
+        mundo.get(2).getZona().get(3).getEdificios().get(1).addCofre(cofre);
+        
+        cofre = new Cofre(new Punto(192, 131), Pvp2, this.juego);
+        mundo.get(2).getZona().get(3).getEdificios().get(4).addCofre(cofre);
     }
     
     private void genDungeons() throws SlickException{
@@ -153,9 +166,9 @@ public class Mundo {
             }
         }
         
-        try {
+        /*try {
             this.mapaCargado.genEnemigos();
-        } catch (SlickException ex) {}
+        } catch (SlickException ex) {}*/
     }
     
     public void render(){

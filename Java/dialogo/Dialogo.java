@@ -4,8 +4,10 @@ import chaoschild.Punto;
 import juego.Juego;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.SpriteSheet;
@@ -31,7 +33,7 @@ public class Dialogo {
             this.cont = 0;
             this.juego = juego;
             this.activo = false;
-            this.imagen = new Image("resources/Menus/Dialogos.jpg");
+            this.imagen = new Image("resources/Menus/Dialogos.png");
             this.sprite = new SpriteSheet("resources/Menus/anim_puntero.png", 19, 19);
             this.puntero = new Animation(sprite, 700);
             this.sonido = new Sound("resources/sonido/dialogo.ogg");
@@ -59,17 +61,25 @@ public class Dialogo {
     }
     
     private void escribir(Graphics g){
+        int num;
         g.setColor(Color.black);
         
-        if(((cont / 30) < this.texto.length()) && (cont % 30 == 0)){
-            if((cont / 30) % 62 == 0 && cont / 30 != 0){
+        if(juego.getMundo().getMapaCargado().getNombre().equals("Pueblo")){
+            num = 3;
+        } else {
+            num = 30;
+        }
+        
+        if(((cont / num) < this.texto.length()) && (cont % num == 0)){
+            if((cont / num) % 62 == 0 && cont / num != 0){
                 msg += "\n";
             }
-            msg += this.texto.charAt(cont / 30);
+            msg += this.texto.charAt(cont / num);
         }
-        if(!sonido.playing() && cont / 30 < this.texto.length()){
+        
+        if(!sonido.playing() && cont / num < this.texto.length()){
             sonido.play();
-        } else if(cont / 30 > this.texto.length()){
+        } else if(cont / num > this.texto.length()){
             sonido.stop();
         }
         g.drawString(msg, pos.getX() + 20, pos.getY() + 20);

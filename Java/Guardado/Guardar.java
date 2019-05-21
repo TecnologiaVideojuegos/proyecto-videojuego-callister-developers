@@ -82,10 +82,11 @@ public class Guardar {
             FileInputStream fis = new FileInputStream(ruta);
             ObjectInputStream leer = new ObjectInputStream(fis);
             
+            
             coordUTF = (String) leer.readObject();
-        } catch (IOException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             System.out.println(ex.toString());
-        } catch (ClassNotFoundException ex) {}
+        } 
         
         try{
             coord[0] = Integer.parseInt(Character.toString(coordUTF.charAt(0)));
@@ -94,7 +95,7 @@ public class Guardar {
             } else {
                 coord[1] = Integer.parseInt(Character.toString(coordUTF.charAt(2)));
             }
-        } catch(NumberFormatException e){
+        } catch(Exception e){
             coord[0] = -1;
             coord[1] = -1;
         }
