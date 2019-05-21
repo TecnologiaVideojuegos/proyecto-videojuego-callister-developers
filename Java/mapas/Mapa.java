@@ -127,8 +127,8 @@ public class Mapa extends TiledMap {
                     aux = new ArrayList();
                     x = 207;
                     y = 701;
-                    Ghostler go = new Ghostler(x, y);
-                    aux.add(go);
+                    Ghostler go1 = new Ghostler(x, y);
+                    aux.add(go1);
                     ce = new ConjuntoEnemigos(aux, new Punto(x, y));
                     this.enemigos.add(ce);
                     
@@ -137,9 +137,9 @@ public class Mapa extends TiledMap {
                     x = 653;
                     y = 359;
                     Ragebbit rg = new Ragebbit(x, y);
-                    Ghostler go = new Ghostler(-1000, -1000);
+                    Ghostler go2 = new Ghostler(-1000, -1000);
                     aux.add(rg);
-                    aux.add(go);
+                    aux.add(go2);
                     ce = new ConjuntoEnemigos(aux, new Punto(x, y));
                     this.enemigos.add(ce);
 
@@ -149,11 +149,11 @@ public class Mapa extends TiledMap {
                     aux = new ArrayList();
                     x = 314;
                     y = 258;
-                    Paula y Antonio;
-                    Paula pa = new Paula(x, y);
-                    Antonio an = new Antionio(x, y);
-                    aux.add(pa);
-                    aux.add(an);
+//                    Paula y Antonio;
+//                    Paula pa = new Paula(x, y);
+//                    Antonio an = new Antionio(x, y);
+//                    aux.add(pa);
+//                    aux.add(an);
                     ce = new ConjuntoEnemigos(aux, new Punto(x, y));
                     this.enemigos.add(ce);
                     
@@ -185,8 +185,8 @@ public class Mapa extends TiledMap {
                     Hipograsidi hg3 = new Hipograsidi(x, y);
                     aux.add(hg2);
                     aux.add(hg3);
-                    Hipograsidi bajo nivel;
-                    Hipograsidi bajo nivel;
+//                    Hipograsidi bajo nivel;
+//                    Hipograsidi bajo nivel;
                     ce = new ConjuntoEnemigos(aux, new Punto(x, y));
                     this.enemigos.add(ce);
                     
@@ -256,8 +256,8 @@ public class Mapa extends TiledMap {
                     aux = new ArrayList();
                     x = 805;
                     y = 1344;
-                    SlimeAgua sa = new SlimeAgua(x, y);
-                    SlimeAgua sa2 = new SlimeAgua(-1000, -1000);
+                    SlimeBase sa = new SlimeBase(x, y);
+                    SlimeBase sa2 = new SlimeBase(-1000, -1000);
                     aux.add(sa);
                     aux.add(sa2);
                     ce = new ConjuntoEnemigos(aux, new Punto(x, y));
@@ -278,7 +278,7 @@ public class Mapa extends TiledMap {
                     y = 1755;
                     Ragebbit rg3 = new Ragebbit(x, y);
                     SlimeFuego sf5 = new SlimeFuego(-1000, -1000);
-                    SlimeAgua sa3 = new SlimeAgua(-1000, -1000);
+                    SlimeBase sa3 = new SlimeBase(-1000, -1000);
                     aux.add(rg3);
                     aux.add(sf5);
                     aux.add(sa3);
@@ -304,9 +304,9 @@ public class Mapa extends TiledMap {
                     x = 870;
                     y = 729;
                     //Crear bossfinal
-                    BossFinal;
+                    //BossFinal;
                     //Crear clérigo
-                    2 Clérigo;
+                    //2 Clérigo;
                     ce = new ConjuntoEnemigos(aux, new Punto(x, y));
                     this.enemigos.add(ce);
 
@@ -317,7 +317,7 @@ public class Mapa extends TiledMap {
                     x = 1338;
                     y = 1066;
                     //Crear trevenant
-                    2 Trevenant;
+                    //2 Trevenant;
                     EntOscuro eo2 = new EntOscuro(x, y);
                     EntOscuro eo3 = new EntOscuro(-1000, -1000);
                     Hipograsidi hg6 = new Hipograsidi(-1000, -1000);
@@ -334,7 +334,7 @@ public class Mapa extends TiledMap {
                     x = 411;
                     y = 1525;
                     SlimeRayo sy = new SlimeRayo(x, y);
-                    SlimeAgua sa9 = new SlimeAgua(-1000, -100);
+                    SlimeBase sa9 = new SlimeBase(-1000, -100);
                     aux.add(sy);
                     aux.add(sa9);
                     ce = new ConjuntoEnemigos(aux, new Punto(x, y));
@@ -355,7 +355,7 @@ public class Mapa extends TiledMap {
                     aux = new ArrayList();
                     x = 507;
                     y = 4029;
-                    SlimeRayo sy2 = SlimRayo(x, y);
+                    SlimeRayo sy2 =new SlimeRayo(x, y);
                     aux.add(sy2);
                     ce = new ConjuntoEnemigos(aux, new Punto(x, y));
                     this.enemigos.add(ce);
@@ -375,7 +375,7 @@ public class Mapa extends TiledMap {
                     x = 633;
                     y = 734;
                     //Crear clérigo
-                    Clérigo;
+                    Clerigo cl=new Clerigo(x,y);
                     ce = new ConjuntoEnemigos(aux, new Punto(x, y));
                     this.enemigos.add(ce);
             }
