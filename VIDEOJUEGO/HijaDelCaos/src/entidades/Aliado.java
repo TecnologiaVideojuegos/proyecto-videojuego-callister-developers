@@ -224,12 +224,13 @@ public class Aliado extends EntidadCombate implements Externalizable{
         System.out.println(toString()+ " ha ganado "+i+" puntos de Experiencia");
         System.out.println("Experiencia Actual: "+getEXPA());
         if(getEXPA()>getEXPN()){
-            a=subirNivel();
+            
             try {
                 nuevaMagia(getLVL()+1);
             } catch (SlickException ex) {
                 Logger.getLogger(Aliado.class.getName()).log(Level.SEVERE, null, ex);
             }
+            a=subirNivel();
         }
         return a;
     }
