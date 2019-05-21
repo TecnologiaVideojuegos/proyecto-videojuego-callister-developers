@@ -8,7 +8,9 @@ package entidades;
 import chaoschild.Punto;
 import chaoschild.Vector;
 import static java.lang.Math.abs;
+import java.util.ArrayList;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 
 /**
  *
@@ -16,6 +18,7 @@ import org.newdawn.slick.SlickException;
  */
 public class NPC extends Entidad{
     private int ultimo;
+    private ArrayList<Rectangle> areaAccion;
     
     public NPC(String ruta, int h, int w, int numAnimaciones, String nombre, int[] frames) throws SlickException {
         super(ruta, h, w, numAnimaciones, nombre);
@@ -77,10 +80,7 @@ public class NPC extends Entidad{
         if(v.getY()<0){
             dirY=false;
         }else dirY=true;
-        
-        
-        
-           
+
         if(abs((int)v.getX())<abs((int)v.getY())){
             if(dirX){
                 if(pasar[1]){
@@ -142,6 +142,8 @@ public class NPC extends Entidad{
         ia(pasar, getVelocidad());
         super.update(i);
     }
-    
-    
+
+    public ArrayList<Rectangle> getAreaAccion() {
+        return areaAccion;
+    }
 }
