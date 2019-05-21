@@ -19,11 +19,8 @@ import entidades.EntidadCombate;
 import entidades.NPC;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
-import static java.lang.Thread.sleep;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mapas.ConjuntoEnemigos;
 import mapas.Mapa;
 import mapas.Mundo;
@@ -53,7 +50,6 @@ public class Juego extends BasicGameState{
     private Dialogo dialogo;
     private Guardar gMapa;
     private boolean acNpc;
-    private boolean contiPartida;
     
     @Override
     public int getID() {
@@ -61,12 +57,12 @@ public class Juego extends BasicGameState{
     }
     
     public Juego() {
+        
     }
     
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         
-        this.contiPartida = true;
         music=GestorMusica.getGestor();
         this.gMapa = new Guardar();
         cambioMapa = false;
@@ -74,12 +70,15 @@ public class Juego extends BasicGameState{
         music.play();
         Lucia=Lucia.getLucia(); 
         
+
+        //Cargado Lucia
+        
+        
+           
+        
         Lucia.setJuego(this);
         mundo=new Mundo(this);
-        try{
-            mapa = mundo.getMapaCargado();
-        } catch(Exception e){}
-        
+        mapa = mundo.getMapaCargado();
         posiniy=gc.getHeight()/2;
         posinix=gc.getWidth()/2;
         renderx=0;
@@ -156,7 +155,7 @@ public class Juego extends BasicGameState{
         */
         if(!cambioMapa){
             if(!dialogo.isActivo()){
-                //System.out.println(Lucia.getPosicion().getX() + " - " + Lucia.getPosicion().getY());
+                System.out.println(Lucia.getPosicion().getX() + " - " + Lucia.getPosicion().getY());
 
                 if(!music.playing()){
                     music.play();
@@ -170,7 +169,9 @@ public class Juego extends BasicGameState{
                 renderx=posinix-Lucia.getPosicion().getX();
                 rendery=posiniy-Lucia.getPosicion().getY();
                 Lucia.update(i);
-                comprobarDialogoNPC(gc, Lucia);
+                for(NPC npc : this.mapa.getGestorNpc().getNpcs()){
+                    comprobarDialogoNPC(gc, Lucia);
+                }
                 this.mapa.getGestorNpc().update(i);
                 comprobarCofre(gc, Lucia);
                 actualizarEnemigos(i);
@@ -184,10 +185,6 @@ public class Juego extends BasicGameState{
         comprobarFinDialogo(gc);
     }
     
-    public void setMapa(int[] coord){
-        this.mundo.setCoord(coord);
-        this.mundo.cambiarMapa(mundo.getCoord()[0], mundo.getCoord()[1]);
-    }
     
     private void colisionEnemigos(StateBasedGame sbg, GameContainer gc){
         ArrayList<Enemigo> ene = this.mapa.getEnemigos();
@@ -272,10 +269,6 @@ public class Juego extends BasicGameState{
  
     public void comprobarDialogoNPC(GameContainer gc, Entidad e){
         Input input=gc.getInput();
-        
-        for(NPC npc : this.mapa.getGestorNpc().getNpcs()){
-            
-        }
         
         if(!this.acNpc){
             Rectangle[] hitbox = e.getHitParedes();
@@ -459,6 +452,11 @@ public class Juego extends BasicGameState{
 
     public void setAcNpc(boolean acNpc) {
         this.acNpc = acNpc;
+    }
+    
+    public void setMapa(int[] coord){
+        this.mundo.setCoord(coord);
+        this.mundo.cambiarMapa(mundo.getCoord()[0], mundo.getCoord()[1]);
     }
     
 }
