@@ -8,6 +8,7 @@ package mapas;
 import chaoschild.Punto;
 import cofres.Cofre;
 import entidades.Civil1;
+import entidades.Civil2;
 import entidades.Entidad;
 import entidades.NPC;
 import entidades.enemigos.*;
@@ -80,8 +81,35 @@ public class Mapa extends TiledMap {
         switch(nombre){
             case "Fuera_casa_inicio":
                 Civil1 c1 = new Civil1("cPrueba", 459, 374);
-                System.out.println("Creado " + c1.getNombre());
                 this.gestorNpc.add(c1);
+                break;
+            case "Hospital_Pueblo":
+                Civil1 medic = new Civil1("medic", 124, 137);
+                this.gestorNpc.add(medic);
+                break;
+            case "Pueblo":
+                Civil2 c2p = new Civil2("c2p", 877, 503);
+                Civil1 c3p = new Civil1("c3p", 760, 919);
+                Civil2 c4p = new Civil2("c4p", 411, 1948);
+                Civil2 c5p = new Civil2("c5p", 1570, 2122);
+                Civil1 c6p = new Civil1("c6p", 2757, 2256);
+                this.gestorNpc.add(c3p);
+                this.gestorNpc.add(c4p);
+                this.gestorNpc.add(c5p);
+                this.gestorNpc.add(c6p);
+                this.gestorNpc.add(c2p);
+                break;
+            case "Cueva_Pueblo":
+                Civil1 ccp = new Civil1("ccp", 563, 598);
+                this.gestorNpc.add(ccp);
+                break;
+            case "Ciudad_ciudad":
+                Civil2 ccc = new Civil2("ccc", 827, 980);
+                this.gestorNpc.add(ccc);
+                break;
+            case "Catedral":
+                Civil1 ccca = new Civil1("ccca", 903, 879);
+                this.gestorNpc.add(ccca);
                 break;
         }
     }

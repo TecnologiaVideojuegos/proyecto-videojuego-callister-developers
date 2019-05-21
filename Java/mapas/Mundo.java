@@ -36,7 +36,6 @@ public class Mundo {
                 for(Mapa mapa : zona.getZona()){
                     mapa.genEnemigos();
                     if(mapa.getNombre().equals("Pueblo")){
-                        System.out.println(mapa.getEdificios().get(1).getNombre());
                         mapa.getEdificios().get(1).genEnemigos();
                     }
                 }

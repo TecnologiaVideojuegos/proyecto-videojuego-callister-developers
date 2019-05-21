@@ -68,7 +68,7 @@ public class Dialogo {
                 juego.getMundo().getMapaCargado().getNombre().equals("Ruta_Antes_Dungeon_Desierto")){
             num = 3;
         } else {
-            num = 30;
+            num = 20;
         }
         
         if(((cont / num) < this.texto.length()) && (cont % num == 0)){
