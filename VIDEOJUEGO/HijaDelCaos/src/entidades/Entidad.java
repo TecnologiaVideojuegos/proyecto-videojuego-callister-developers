@@ -68,13 +68,9 @@ public abstract class Entidad implements Externalizable{
     
     
     public void update(int delta) throws SlickException{
-        float x = posicion.getX() + velocidad.getX() * ((float) delta / 500);
-        float y = posicion.getY() + velocidad.getY() * ((float) delta / 500);
-        
-        /*
         float x = posicion.getX() + velocidad.getX() * ((float) delta / 1000);
         float y = posicion.getY() + velocidad.getY() * ((float) delta / 1000);
-*/
+        
         posicion = new Punto(x, y);
         hitbox.setLocation(x, y);
         if(par){
