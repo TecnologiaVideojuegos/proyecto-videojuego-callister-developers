@@ -8,6 +8,7 @@ package chaoschild;
 
 import Combate.Combate;
 import juego.Juego;
+import juego.PantallaDeInicio;
 import menus.Equipo;
 import menus.Menu;
 import menus.EstadoInventario;
@@ -35,11 +36,8 @@ public class ChaosChild extends StateBasedGame{
 
     @Override
     public void initStatesList(GameContainer gc) throws SlickException {
-        this.addState(new Juego(this));
-        this.addState(new Menu());
-        this.addState(new EstadoInventario());
-        this.addState(new Equipo());
-        this.addState(new Fabricacion());
+        this.addState(new PantallaDeInicio());
+        
     }
     
 }
