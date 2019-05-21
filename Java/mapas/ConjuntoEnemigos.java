@@ -11,13 +11,28 @@ import java.util.ArrayList;
 public class ConjuntoEnemigos {
     private ArrayList<Enemigo> enemigos;
     private Enemigo enemigo;
-    private Punto posicion;
-    private Mapa mapa;
     
-    public ConjuntoEnemigos(ArrayList<Enemigo> enemigos, Punto posicion, Mapa mapa){
-        this.enemigos = new ArrayList();
+    public ConjuntoEnemigos(ArrayList<Enemigo> enemigos, Punto posicion){
+        this.enemigos = enemigos;
         this.enemigo = enemigos.get(0);
-        this.mapa = mapa;
+    }
+    
+    public ConjuntoEnemigos(){
+    }
+    
+    public Enemigo getEnemigo(){
+        return this.enemigo;
+    }
+    
+    public void delete(ArrayList<Enemigo> ene){
+        for(int i = 0;i < ene.size();i++){
+            this.enemigos.remove(ene.get(i));
+        }
+        try{
+            this.enemigo = this.enemigos.get(0);
+        } catch(Exception e){
+            this.enemigo = null;
+        }
     }
     
     public void draw(){

@@ -466,6 +466,10 @@ public class MenuCombate {
         } catch (Exception e) {
         } 
     }
+
+    public void setEnemigos(ArrayList<Enemigo> enemigos) {
+        this.enemigos = enemigos;
+    }
             
             
     }

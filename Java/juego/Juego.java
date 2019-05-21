@@ -16,14 +16,11 @@ import entidades.enemigos.*;
 import java.util.ArrayList;
 import Guardar.Guardar;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import mapas.ConjuntoEnemigos;
 import mapas.Mapa;
 import mapas.Mundo;
 import musica.GestorMusica;
@@ -109,11 +106,7 @@ public class Juego extends BasicGameState{
             mapa.drawEnemigos();
             Lucia.draw(); 
             this.dialogo.draw(grphcs);
-            
-            
-            /*
-           
-            }
+        
             for(int i=0;i<mapa.getHitBoxes().size();i++){
                 grphcs.draw(mapa.getHitBoxes().get(i));
             }
@@ -132,7 +125,10 @@ public class Juego extends BasicGameState{
                     grphcs.draw(mapa.getCofres().get(i).getAreaAccion().get(j));
                 }
             }
-*/
+            
+            drawHitEnemigos(grphcs);
+            
+
             try{
                 mapa.render(0, 0, mapa.getLayerIndex("Puente"));
             }catch(Exception e){  }
@@ -157,7 +153,7 @@ public class Juego extends BasicGameState{
         }
         if(!cambioMapa){
             if(!aux && !dialogo.isActivo()){
-                System.out.println(Lucia.getPosicion().getX() + " - " + Lucia.getPosicion().getY());
+                //System.out.println(Lucia.getPosicion().getX() + " - " + Lucia.getPosicion().getY());
 
                 if(!music.playing()){
                     music.play();
@@ -172,21 +168,47 @@ public class Juego extends BasicGameState{
                 rendery=posiniy-Lucia.getPosicion().getY();
                 Lucia.update(i);
                 comprobarCofre(gc, Lucia);
+                actualizarEnemigos(i);
+                colisionEnemigos(sbg, gc);
                 comprobarPuertas();
                 mapa = mundo.getMapaCargado();
             }
         } else {
             contCambioMapa += i;
         }
-        
-        aux(gc);
         comprobarFinDialogo(gc);
     }
     
-    private void aux(GameContainer gc){
-        Input input=gc.getInput();
-        if(input.isKeyPressed(Input.KEY_O)){
-            guardarMapa();
+    
+    private void colisionEnemigos(StateBasedGame sbg, GameContainer gc){
+        ArrayList<Enemigo> ene = this.mapa.getEnemigos();
+        ArrayList<ConjuntoEnemigos> conjEne = this.mapa.getConjuntoEnemigos();
+        Rectangle[] hitbox = Lucia.getHitParedes();
+        boolean combate = false;
+        ConjuntoEnemigos enemigo = new ConjuntoEnemigos();
+        
+        for(ConjuntoEnemigos conjunto : conjEne){
+            for(Enemigo e : conjunto.getEnemigos()){
+                if(!combate){
+                    for(int i = 0;i < 4;i++){
+                        if(!combate){
+                            if(e.getHitParedes()[i].intersects(hitbox[0]) ||
+                                    e.getHitParedes()[i].intersects(hitbox[1]) ||
+                                    e.getHitParedes()[i].intersects(hitbox[2]) ||
+                                    e.getHitParedes()[i].intersects(hitbox[3])){
+                                enemigo = conjunto;
+                                combate = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        if(combate){
+            try {
+                combate(sbg, gc, enemigo);
+            } catch (SlickException ex) {}
         }
     }
     
@@ -217,9 +239,9 @@ public class Juego extends BasicGameState{
     }
     
     private void actualizarEnemigos(int n){
-        for (Enemigo enemigo : mapa.getEnemigos()) {
+        for(ConjuntoEnemigos enemigo : mapa.getConjuntoEnemigos()){
             try {
-                enemigo.actualizar(colisionPared(enemigo), n);
+                enemigo.getEnemigo().actualizar(colisionPared(enemigo.getEnemigo()), n);
             } catch (SlickException ex) {}
         }
     }
@@ -272,10 +294,10 @@ public class Juego extends BasicGameState{
         if(input.isKeyPressed(Input.KEY_M)){
             music.pause();
             sbg.enterState(1);
-        }
+        }/*
         if(input.isKeyPressed(Input.KEY_C)){
             combate(sbg, gc);
-        }
+        }*/
     }
     
     public boolean[] colisionPared(Entidad e) throws SlickException{
@@ -311,11 +333,38 @@ public class Juego extends BasicGameState{
         return pasar;
     }
     
-    public void combate(StateBasedGame sbg, GameContainer gc) throws SlickException{
+    private void drawHitEnemigos(Graphics grphcs){
+        for(Enemigo enemigo : mapa.getEnemigos()){
+            for(int i = 0;i < enemigo.getHitParedes().length;i++){
+                grphcs.draw(enemigo.getHitParedes()[i]);
+            }
+        }
+    }
+    
+    public void analizarResulCombate(){
+        ArrayList<ConjuntoEnemigos> enemigos = this.mapa.getConjuntoEnemigos();
+        Iterator<ConjuntoEnemigos> iter = enemigos.iterator();
+        int cont;
+        while(iter.hasNext()){
+            ConjuntoEnemigos enes = iter.next();
+            cont = 0;
+            for(Enemigo ene : enes.getEnemigos()){
+                if(ene.getMultiplicadores()[0] <= 0){
+                    this.mapa.getConjuntoEnemigos().remove(ene);
+                    cont++;
+                }
+            }
+            if(enes.getEnemigos().size() == cont){
+                iter.remove();
+            }
+        }
+    }
+    
+    public void combate(StateBasedGame sbg, GameContainer gc, ConjuntoEnemigos enemigos) throws SlickException{
         Combate combate = new Combate(2);
-        combate.genEnemigos(this.mundo.getMapaCargado().getEnemigos());
         sbg.addState(combate);
         sbg.getState(2).init(gc, sbg);
+        combate.genEnemigos(enemigos);
         music.cambiarM(1);
         music.play();
         sbg.enterState(2, new FadeOutTransition(),new FadeInTransition());

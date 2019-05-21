@@ -6,6 +6,7 @@
 package Combate;
 
 import chaoschild.Punto;
+import dialogo.Dialogo;
 import entidades.Aliado;
 import entidades.EntidadCombate;
 import entidades.Lucia;
@@ -24,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import juego.Juego;
+import mapas.ConjuntoEnemigos;
 import musica.GestorMusica;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
@@ -85,10 +88,6 @@ public class Combate extends BasicGameState{
         this.ID = ID;
     }
 
-    
-    
-    
-    
     @Override
     public int getID() {
          return ID;
@@ -135,7 +134,6 @@ public class Combate extends BasicGameState{
         prinr=true;
         rcont=0;
         objetos=new ArrayList();
-        
     }
 
     @Override
@@ -161,8 +159,13 @@ public class Combate extends BasicGameState{
                 case 1:
                        
                        gc.getInput().clearKeyPressedRecord();
+
+                       grphcs.setColor(Color.black);
                        comv.draw(0, 640-comv.getHeight());
                        grphcs.drawString(turno.get(0).toString(), 200, 640-comv.getHeight()+50);
+                       grphcs.setColor(Color.white);
+                       
+                       
                        if(printcont>100 || !printturno){
                            def.draw(turno.get(0).getDefensor().getPosCombate().getX()+32-20,turno.get(0).getDefensor().getPosCombate().getY()-40 );
                            atac.draw(turno.get(0).getAtacante().getPosCombate().getX()+32-20,turno.get(0).getAtacante().getPosCombate().getY()-40 );
@@ -343,6 +346,7 @@ public class Combate extends BasicGameState{
     }
      
     public void volverMapa(StateBasedGame sbg) throws SlickException{
+        Lucia.getLucia().getJuego().analizarResulCombate();
         sbg.enterState(0, new FadeOutTransition(),  new FadeInTransition());     
         musica.cambiarM(0);
         musica.play();
@@ -363,18 +367,34 @@ public class Combate extends BasicGameState{
         }
     }
     
-    public void genEnemigos(ArrayList<Enemigo> a){
-        enemigos=a;
+    public void genEnemigos(ConjuntoEnemigos ene){
+        enemigos = ene.getEnemigos();
+        int a = enemigos.size();
+        
+        System.out.println(a);
+        
+        if (a!=1){
+            enem.setY((360-64)/a); 
+        }
+        
+        for(int i=0;i<enemigos.size();i++){
+            enemigos.get(i).setPosCombate(new Punto(enem.getX()+10*i, enem.getY()+85*i));
+            enemigos.get(i).combatir();
+        }
+        
+        menu.setEnemigos(enemigos);
     }
     
     private void genEnemigos(Enemigo e, int a) throws SlickException{
         if (a!=1){
             enem.setY((360-64)/a); 
         }
+        /*
         enemigos.add(e); 
         for(int i=1;i<a;i++){
             enemigos.add(new Geobro(0,0));    
         }
+        */
         for(int i=0;i<enemigos.size();i++){
             enemigos.get(i).setPosCombate(new Punto(enem.getX()+10*i, enem.getY()+85*i));
             enemigos.get(i).combatir();

@@ -81,112 +81,305 @@ public class Mapa extends TiledMap {
         }
         this.nombre = ref.substring(pos + 1, ref.length() - 4);
     }
-    /*
+    
+    public void deleteConjuntoEnemigos(ConjuntoEnemigos cjene){
+        this.enemigos.remove(cjene);
+    }
+    
     public void genEnemigos() throws SlickException{
         int x, y;
+        ConjuntoEnemigos ce;
+        ArrayList<Enemigo> aux;
         switch(nombre){
                 case "Cueva_inicio":
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
                     x = 909; 
                     y = 1086;
-                    SlimeBasico;
+                    SlimeBase slime = new SlimeBase(x, y);
+                    aux.add(slime);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
                     
-                    int x3 = 1028, y3 = 472;
-                    Geobro;
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
+                    x = 1028;
+                    y = 472;
+                    Geobro geo = new Geobro(x, y);
+                    aux.add(geo);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
                     
                     break;
                 case "DungeonTorrePlanta1":
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
                     x = 1000;
                     y = 682;
-                    Ghostler;
+                    Ghostler go = new Ghostler(x, y);
+                    aux.add(go);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
 
                     break;
                 case "DungeonTorrePlanta2":
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
                     x = 207;
                     y = 701;
-                    Ghostler;
+                    Ghostler go = new Ghostler(x, y);
+                    aux.add(go);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
                     
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
                     x = 653;
                     y = 359;
-                    Ragebit;
-                    Ghostler;
+                    Ragebbit rg = new Ragebbit(x, y);
+                    Ghostler go = new Ghostler(-1000, -1000);
+                    aux.add(rg);
+                    aux.add(go);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
 
                     break;
                 case "DungeonTorrePlanta3":
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
                     x = 314;
                     y = 258;
-                    Paula o Antonio;
+                    Paula y Antonio;
+                    Paula pa = new Paula(x, y);
+                    Antonio an = new Antionio(x, y);
+                    aux.add(pa);
+                    aux.add(an);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
                     
                     break;
                 case "RutaAntesDungeonTorre":
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
                     x = 811;
                     y = 823;
-                    Hipograsidi;
+                    Hipograsidi hg = new Hipograsidi(x, y);
+                    aux.add(hg);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
                     
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
                     x = 1814;
                     y = 659;
-                    EntOscuro;
+                    EntOscuro eo = new EntOscuro(x, y);
+                    aux.add(eo);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
                     
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
                     x = 2948;
                     y = 871;
+                    Hipograsidi hg2 = new Hipograsidi(x, y);
+                    Hipograsidi hg3 = new Hipograsidi(x, y);
+                    aux.add(hg2);
+                    aux.add(hg3);
                     Hipograsidi bajo nivel;
                     Hipograsidi bajo nivel;
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
                     
                     break;
                 case "Pueblo":
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
                     x = 462;
                     y = 358;
-                    SlimeFuego;
+                    SlimeFuego sf = new SlimeFuego(x, y);
+                    aux.add(sf);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
                     
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
                     x = 569;
                     y = 390;
-                    SlimeFuego;
+                    SlimeFuego sf2 = new SlimeFuego(x, y);
+                    aux.add(sf2);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
 
                     break;
                 case "Casa_Pueblo":
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
                     x = 85;
                     y = 162;
-                    Raggebit;
-                    SlimoOscuro;
-
-                    break;
-                case "Cueva_Pueblo":
+                    Ragebbit rg2 = new Ragebbit(x, y);
+                    SlimeOscuro so2 = new SlimeOscuro(-1000, -1000);
+                    aux.add(rg2);
+                    aux.add(so2);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
 
                     break;
                 case "Cueva_Antes_Ruta_Dungeon_Final":
-
-                    break;
-                case "Cueva_Inicio_Extension":
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
+                    x = 461;
+                    y = 1837;
+                    Geobro g1 = new Geobro(x, y);
+                    Geobro g2 = new Geobro(x, y);
+                    Geobro g3 = new Geobro(x, y);
+                    aux.add(g1);
+                    aux.add(g2);
+                    aux.add(g3);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
 
                     break;
                 case "Dungeon_Desierto":
+                    //Aumentar alzance -> setRanto(400);
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
+                    x = 1877;
+                    y = 2102;
+                    SlimeFuego sf3 = new SlimeFuego(x, y);
+                    SlimeFuego sf4 = new SlimeFuego(-1000, -1000);
+                    aux.add(sf3);
+                    aux.add(sf4);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
+                    
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
+                    x = 805;
+                    y = 1344;
+                    SlimeAgua sa = new SlimeAgua(x, y);
+                    SlimeAgua sa2 = new SlimeAgua(-1000, -1000);
+                    aux.add(sa);
+                    aux.add(sa2);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
+                    
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
                     x = 1300;
-                    y = 800;
+                    y = 900;
+                    Geobro g5 = new Geobro(x, y);
+                    Geobro g6 = new Geobro(-1000, -1000);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
+                    
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
+                    x = 2015;
+                    y = 1755;
+                    Ragebbit rg3 = new Ragebbit(x, y);
+                    SlimeFuego sf5 = new SlimeFuego(-1000, -1000);
+                    SlimeAgua sa3 = new SlimeAgua(-1000, -1000);
+                    aux.add(rg3);
+                    aux.add(sf5);
+                    aux.add(sa3);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
+                    
+                    /*
                     Geobro ene = new Geobro(x, y);
-                    Ragebbit rag = new Ragebbit(x, y);
-                    Hipograsidi hip = new Hipograsidi(x, y);
+                    Ragebbit rag = new Ragebbit(-1000, -1000);
+                    Hipograsidi hip = new Hipograsidi(-1000, -1000);
                     ArrayList<Enemigo> aux = new ArrayList();
                     aux.add(ene);
                     aux.add(rag);
                     aux.add(hip);
-                    ConjuntoEnemigos conjunto = new ConjuntoEnemigos(aux, new Punto(x2, y2), this);
+                    ConjuntoEnemigos conjunto = new ConjuntoEnemigos(aux, new Punto(x, y));
                     
                     this.enemigos.add(conjunto);
-                    
+                    */
                     break;
                 case "Dungeon_Final":
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
+                    x = 870;
+                    y = 729;
+                    //Crear bossfinal
+                    BossFinal;
+                    //Crear clérigo
+                    2 Clérigo;
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
 
                     break;
                 case "Ruta_Antes_Cueva_Dungeon_Final":
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
+                    x = 1338;
+                    y = 1066;
+                    //Crear trevenant
+                    2 Trevenant;
+                    EntOscuro eo2 = new EntOscuro(x, y);
+                    EntOscuro eo3 = new EntOscuro(-1000, -1000);
+                    Hipograsidi hg6 = new Hipograsidi(-1000, -1000);
+                    aux.add(eo2);
+                    aux.add(eo3);
+                    aux.add(hg6);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
 
                     break;
                 case "Ruta_Antes_Dungeon_Desierto":
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
+                    x = 411;
+                    y = 1525;
+                    SlimeRayo sy = new SlimeRayo(x, y);
+                    SlimeAgua sa9 = new SlimeAgua(-1000, -100);
+                    aux.add(sy);
+                    aux.add(sa9);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
+                    
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
+                    x = 773;
+                    y = 2212;
+                    EntOscuro eo4 = new EntOscuro(x, y);
+                    Ragebbit rg9 = new Ragebbit(-1000, -1000);
+                    aux.add(eo4);
+                    aux.add(rg9);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
+                    
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
+                    x = 507;
+                    y = 4029;
+                    SlimeRayo sy2 = SlimRayo(x, y);
+                    aux.add(sy2);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
+                    
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
+                    x = 979;
+                    y = 3897;
+                    Geobro go8 = new Geobro(x, y);
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
 
                     break;
-                case "Ruta_Antes_Dungeon_Final":
-
-                    break;
+                case "Catedral":
+                    ce = new ConjuntoEnemigos();
+                    aux = new ArrayList();
+                    x = 633;
+                    y = 734;
+                    //Crear clérigo
+                    Clérigo;
+                    ce = new ConjuntoEnemigos(aux, new Punto(x, y));
+                    this.enemigos.add(ce);
             }
-    }*/
+    }
     
     private void genPuertas()throws SlickException{
         int ax  = this.width;

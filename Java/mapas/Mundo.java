@@ -63,13 +63,16 @@ public class Mundo {
         PocionVPequeña Pvp = new PocionVPequeña();
         PocionVPequeña Pvp2 = new PocionVPequeña();
         PocionVMediana Pvm = new PocionVMediana();
+        PocionVMediana Pvm2 = new PocionVMediana();
         PocionVGrande Pvg = new PocionVGrande();
+        PocionVGrande Pvg2 = new PocionVGrande();
         PocionMPequeña Pmp = new PocionMPequeña();
         PocionMMediana Pmm = new PocionMMediana();
         PocionMGrande Pmg = new PocionMGrande();
         GemaTierra1 gemaTierra = new GemaTierra1();
         GemaLuz1 gemaLuz = new GemaLuz1();
         GemaLuz2 gemaLuz2 = new GemaLuz2();
+        GemaFuego1 gemaFuego = new GemaFuego1();
         
         Cofre cofre = new Cofre(new Punto(19 * 32, 15 * 32), Pvp, this.juego);
         mundo.get(0).getZona().get(0).addCofre(cofre);
@@ -97,6 +100,15 @@ public class Mundo {
         
         cofre = new Cofre(new Punto(192, 131), Pvp2, this.juego);
         mundo.get(2).getZona().get(3).getEdificios().get(4).addCofre(cofre);
+        
+        cofre = new Cofre(new Punto(1117, 909), gemaFuego, this.juego);
+        mundo.get(1).getZona().get(3).addCofre(cofre);
+        
+        cofre = new Cofre(new Punto(1960, 1026), Pvg2, this.juego);
+        mundo.get(1).getZona().get(0).addCofre(cofre);
+        
+        cofre = new Cofre(new Punto(2686, 1984), Pvm2, this.juego);
+        mundo.get(1).getZona().get(0).addCofre(cofre);
     }
     
     private void genDungeons() throws SlickException{
@@ -166,9 +178,9 @@ public class Mundo {
             }
         }
         
-        /*try {
+        try {
             this.mapaCargado.genEnemigos();
-        } catch (SlickException ex) {}*/
+        } catch (SlickException ex) {}
     }
     
     public void render(){
